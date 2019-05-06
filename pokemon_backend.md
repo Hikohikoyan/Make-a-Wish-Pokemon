@@ -76,7 +76,7 @@
 
   
 
-### 第5个request:help_wish.php
+### 第5个request:help_wish.php   √
 
 * 我要助愿，浏览愿望
 
@@ -135,7 +135,7 @@
 
 
 
-### 第8个request：ball_list.php
+### 第8个request：ball_list.php  X
 
 * 查看精灵球
 
@@ -153,7 +153,7 @@
 
 
 
-### 第9个request:fairy_list.php
+### 第9个request:fairy_list.php  X
 
 * 查看精灵
 
@@ -170,7 +170,7 @@
 
   
 
-### 第10个request：open_ball.php
+### 第10个request：open_ball.php   X
 
 * 点击精灵球孵化精灵
 

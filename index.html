@@ -13,22 +13,25 @@
 <body>
     <div id="index">
             <!-- <div class="top-navagition"> -->
-                    <!-- <div id="top"> -->
-                        <input type="image" class="btn1" src="img/精灵border.png" id="btn1" value="精灵">
-                        <span class="btn1">精灵</span>
-                        <input type="image" class="btn2" src="img/精灵球border.png" id="btn2" value="精灵球">
-                        <span class="btn2">精灵球</span>>
+                    <div id="top">
+                        <div class="btn1" src="img/精灵border.png" id="btn1">
+                        <!-- <span class="">精灵</span> -->
+                        <div class="btn2" src="img/精灵球border.png" id="btn2">
+                        <!-- <span class="">精灵球</span> -->
+                        </div>
         <div class="main_contain">
             <img src="img/title.png">
-            <input type="image" src="img/wish.png" id="wish" value="许愿">
-            <input type="image" id="help" src="img/help.png" value="助愿">
-            <input type="image" id="mine" src="img/mine.png" value="我的愿望">
-            <input type="image" id="rule" src="img/rule.png" value="规则">
+            <input class="index" type="image" src="img/wish.png" id="wish" value="许愿">
+            <input class="index" type="image" id="help" src="img/help.png" value="助愿">
+            <input class="index" type="image" id="mine" src="img/mine.png" value="我的愿望">
+            <input class="index" type="image" id="rule" src="img/rule.png" value="规则">
         </div>
     <div class="page" id="rule_page">
+        <p></p>
+        <input type="image" src="img/21.png" id="back">
     </div>
     <div class="page" id="yourwish"><!---点击精灵球-->
-        <ul id="yours">
+        <div id="yours">
             <li>愿望一</li><li></li><li>已领取</li>
             <li></li><li></li><li></li>
             <li>愿望二</li><li></li><li>未领取</li>
@@ -39,7 +42,7 @@
             <li></li><li></li><li></li>
             <li>愿望五</li><li></li><li>已领取</li>
             <li></li><li></li><li></li>
-        </ul>
+        </div>
         <input type="button" id="return">
     </div>
     <div class="page" id="help_page">
@@ -52,9 +55,12 @@
         <input type="image" src="img/next.svg" id="selected">
     </div>
     <div class="page" id="info">
+        <div class="div_info">
         <label for="name" class="aside">姓名：</label>
         <label for="tel" class="aside">手机：</label>
         <label for="wechat" class="aside">微信：</label>
+        </div>
+        <input type="image" src="img/wagada.png" id="ok2">
     </div>
     <div class="success" id="expode_page"></div>
 </body>

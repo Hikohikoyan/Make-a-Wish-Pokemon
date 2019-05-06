@@ -29,12 +29,20 @@ $(function () {
         location.hash=hash;
         history.pushState("","Rule",location.href);
     })//点击规则
+    $("#back").click(function(){
+        allhide();
+        $(".main_contain").show();
+        $("#top").show();
+        $(".btn2").show();
+        $(".btn1").show();
+    })//点击返回主页（规则页）
     $("#btn1").click(function(){
         allhide();
         $("#yourwish").show();
     })
     $("#btn1").click(function(){
         allhide();
+        $(".main_contain").hide();
         $("#yourwish").show();
     })
     $("#help").click(function(){
@@ -57,11 +65,17 @@ $(function () {
             "wisher_id":wishes
         });
         var settings=prepare(5);
-        $.ajax(settings,data,)
+        // $.ajax(settings);//获取信息
+        allhide();
+        $("#info").show();
     })
+    // $(".helpbox").click(function (){
+    // }
+    // )
     $("#mine").click(function(){
         //显示 我的愿望清单  yourwish
         allhide();
+        $(".main_contain").hide();
         $("#yourwish").fadeIn(100);
     });
     $("#next").click(function(){
@@ -93,7 +107,7 @@ $(function () {
         })
         }
         prepare(3,pack);
-        $.ajax(settings);
+        // $.ajax(settings);
         $("#sign_page").animate({opacity:"0.5"},100,function(){
             $("#sign_page").hide();
         });
@@ -155,6 +169,7 @@ $(function () {
     function check(str){
         
     }
+    //
     //getinfo
     function get_all(){
         var elfs=new Array();
@@ -162,16 +177,10 @@ $(function () {
         var balls=new Array();
         var ball;    
         //获取已有的精灵/精灵球
-        prepare(8);
-        $.ajax(settings,function(data){
-            elf=data.fairy_num;
-            elfs=data.path_array;
-        })
-        prepare(7);
-        $.ajax(settings,function(data){
-            ball=data.total_ball;
-            balls=data.path_array;//？？好像不太对 
-        })
+        settings=prepare(8);
+        // $.ajax(settings);
+        settings=prepare(7);
+        $.ajax(settings);
         console.log(elfs);
         console.log(elf);
         console.log(balls);
