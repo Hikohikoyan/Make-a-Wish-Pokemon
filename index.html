@@ -8,24 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, 
     minimum-scale=0.5, maximum-scale=2.0, user-scalable=0" />
     <meta name="description" content="许愿宝可梦">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/wish.css">
+    <link rel="stylesheet" type="text/css" media="screen" id="style1" href="css/index.css">
 </head>
 <body>
-    <div class="page" id="index">
-            <div class="top-navagition">
-                    <ul id="top">
-                        <li>精灵球</li>
-                        <li>精灵</li>
-                    </ul>
-                </div>            
+    <div id="index">
+            <!-- <div class="top-navagition"> -->
+                    <!-- <div id="top"> -->
+                        <input type="image" class="btn1" src="img/精灵border.png" id="btn1" value="精灵">
+                        <span class="btn1">精灵</span>
+                        <input type="image" class="btn2" src="img/精灵球border.png" id="btn2" value="精灵球">
+                        <span class="btn2">精灵球</span>>
         <div class="main_contain">
-            <img alt="精灵球">
-            <input type="button" id="wish">
-            <input type="button" id="help">
-            <input type="button" id="mine">
-            <input type="button" id="rule">
+            <img src="img/title.png">
+            <input type="image" src="img/wish.png" id="wish" value="许愿">
+            <input type="image" id="help" src="img/help.png" value="助愿">
+            <input type="image" id="mine" src="img/mine.png" value="我的愿望">
+            <input type="image" id="rule" src="img/rule.png" value="规则">
         </div>
-    </div>
     <div class="page" id="rule_page">
         <h1>规则</h1>
     </div>
@@ -44,21 +43,6 @@
         </ul>
         <input type="button" id="return">
     </div>
-    <div class="page" id="hope_page"><!---许愿按钮-->
-        <div class="show">
-            <img alt="精灵球">
-            <input type="button" id="custom">
-            <input type="button" id="next">
-        </div>
-        <div class="form" id="sign_page">
-                <h1>填写信息</h1>
-                <input type="text" id="name" placeholder="姓名">
-                <input type="tel" id="tel" placeholder="手机号">
-                <input type="text" id="wechat" placeholder="微信号">
-                <input type="button" id="ok">
-                </div>
-        <div class="success" id="get_page"></div>
-    </div>
     <div class="page" id="help_page">
         <ul id="others">
             <li>愿望一</li>
@@ -70,3 +54,6 @@
     </div>
     <div class="success" id="expode_page"></div>
 </body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/display.js"></script>
+</html>
