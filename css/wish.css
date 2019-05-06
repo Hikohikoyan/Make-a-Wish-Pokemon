@@ -6,16 +6,16 @@ html{
     height:100%;
     background-image: url(../img/background.png);
     background-attachment: fixed;
-    background-size: 100%;
-    /* background-position-x: %; */
+    background-size: 130%;
     background-repeat: repeat-y;
-    background-position: center;
+    overflow: scroll;
+    background-position: bottom;
     background-attachment: fixed;
 }
 body{
     margin: 0%;
     padding: 0%;
-    overflow: hidden;
+    overflow: scroll;
     width: 100%;
     height:100%;
 }
@@ -27,6 +27,12 @@ li{
     /* margin-right: 37.5%; */
     width: -webkit-fill-available;
     /* height: -webkit-fill-available; */
+    background-image: url(../img/填写信息\ 拷贝.png);
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: top;
+    background-size: 100%;
+    height: 500px;
 }
 .top-navagition,#top,#index,#get_page,#rule_page,#yourwish,#expode_page,#sign_page{
     display: none;
@@ -39,7 +45,7 @@ li{
     margin-right: 12.5%;
     /* padding: 12.5%; */
     /* height: -webkit-fill-available; */
-    width: 100%;
+    /* width: 100%; */
 }
 input[type="image"]{
     padding: 0%;
@@ -63,13 +69,29 @@ li{
     margin: 0%;
 }
 #custom{
-    width: 30%;
+    /* width: 30%;
     height: 10%;
     position: relative;
     margin-top: 10%;
-    /* right: 0%; */
+    /* right: 0%;
     margin-left: 60%;
+    margin-right: 0%; */
+    /* margin-left: 60%; */
     margin-right: 0%;
+    position: relative;
+    /* top: -30px; */
+    /* right: -40px; */
+    border: none;
+    color: white;
+    text-decoration-line: underline;
+    /* margin-left: 25vh; */
+    margin-right: 0%;
+    position: absolute;
+    /* top: -5vh; */
+    /* right: -8vh; */
+    /* right: -8vh; */
+    bottom:  16vh;
+    right: 0px;
 }
 #main_contain{
     margin-left: 12.5%;
@@ -81,12 +103,100 @@ li{
 input[type="text"],input[type="tel"]{
     padding-top: 4%;
     padding-bottom: 4%;
-    width: -webkit-fill-available;
-    height: 3vh;
-    margin-bottom: 15%;
-    margin-left: 0%;
-    margin-top: 3%;
+    padding-left: 5px;
+    width: 160px;
+    height: 2vh;
+    /* margin-bottom: 15%; */
+    margin-left: 32%;
+    margin-top: 30px;
+    border-radius: 0.3em 0.3em 0.3em;
+    background-color: white;
+    position: relative;
+    top: 56px;
+    /* box-shadow: 0 0 black; */
+    border-left-color: white;
+    border-style: hidden;
+    opacity: 0.8;
 }
 h2{
     text-align: center;
+    font-family: 微软雅黑;
+    font-weight: 350;
+    margin: 0;
+    color: white;
+    font-size: larger;
+    margin-bottom: 10px;
+}
+#h2{
+    margin-top: 50%;
+}
+#next{
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    margin-top: 25%;
+    margin-top: 500px;
+    margin-left: 20%;
+    border: none;
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    right: 2%;
+}
+.show{
+    background-image: url("../img/middle.png");
+    height: 100%;
+    /* width: 85%; */
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100%;
+    width: 100%;
+    background-attachment: local;
+    margin-top: 0%;
+    /* height: -webkit-fill-available; */
+    height: 500px;
+}
+.aside{
+    white-space: pre-line;
+    float: left;
+    position: absolute;
+    top: 10vh;
+    margin-left: 20px;
+    height: 30vh;
+}
+label{
+    position: relative;
+    font-size: 22px;
+}
+#label2{
+    top: 35px;
+}
+#label3{
+    top: 70px;
+}
+#ok{
+    position: absolute;
+    top: 100%;
+    background-image: url(../img/next.svg);
+    border: none;
+    height: 70px;
+    width: 70px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    right: 2%;
+}
+#again,#gohelp{
+    padding: 0%;
+    margin: 0%;
+    display: block;
+    /* text-align: center; */
+    height: 80%;
+    margin-left: 25%;
+    width: 50%;
+    margin-bottom: 15%;
+}
+#again{
+    margin-top: 40%;
 }

@@ -6,21 +6,33 @@ html{
     height:100%;
     background-image: url(../img/background.png);
     background-attachment: fixed;
-    background-size: 100%;
-    /* background-position-x: %; */
+    background-size: 130%;
     background-repeat: repeat-y;
-    background-position: center;
+    overflow: scroll;
+    background-position: bottom;
     background-attachment: fixed;
 }
 
 body{
     margin: 0%;
     padding: 0%;
-    overflow: hidden;
-    width: 100%;
+    /* overflow: scroll; */
+    width: 100%; 
     height:100%;
 }
-#rule_page,#yourwish,#hope_page,#help_page,#get_page,#expode_page{
+.aside{
+    white-space: pre-line;
+    float: left;
+    position: absolute;
+    top: 10vh;
+    margin-left: 20px;
+    height: 30vh;
+}
+label{
+    position: relative;
+    font-size: 22px;
+}
+#rule_page,#info,#yourwish,#hope_page,#help_page,#get_page,#expode_page{
     display: none;
 }
 input[type="image"]{
@@ -31,8 +43,21 @@ input[type="image"]{
     /* height: 6vh; */
     width: 100%;
     margin-bottom: 10px;
+    width: 80%;
+    /* margin-bottom: 15px; */
+    margin-right: 12.5%;
+    margin-top: 10%;
+    margin-left: 9.5%;
+    
 }
-
+#wish,#help,#rule,#mine{
+    height: 80%;
+    /* margin-left: 25%; */
+    width: 60%;
+    margin: 0%;
+    margin-bottom: 10%;
+    margin-left: 20%;
+}
 .top-navagition{
     position: fixed;
     top: 0%;
@@ -53,12 +78,17 @@ input[type="image"]{
     color: white;
     max-width: 15vw;
     /* float: left; */
+    /* margin-left: 15px; */
+    margin-top: 10%;
     margin-left: 15px;
     margin-top: 10%;
 }
 span.btn1{
     font-size: 10%;
-    margin-left: 16.2%;
+    margin-left: 9.5%;
+    /* margin-left: 16.2%; */
+    margin-top: 11.5%;
+    margin-left: 15.2%;
     margin-top: 11.5%;
 }
 .btn1{
@@ -93,7 +123,7 @@ span.btn2{
     margin-right: 12.5%;
     /* padding: 12.5%; */
     /* height: -webkit-fill-available; */
-    width: -webkit-fill-available;
+    /* width: -webkit-fill-available; */
 }
 .main_contain{
     /* display: grid; */
@@ -132,4 +162,54 @@ h1{
     align-items: center;
     grid-template-rows: 6vh 3vh 6vh 3vh 6vh 3vh 6vh 3vh 6vh;
     margin-bottom: 30%;
+}
+#rule_page{
+    background-image: url(../img/rules.png);
+    height: 500px;
+    width: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    /* margin-top: 25%; */
+}
+.helpbox{
+    background-image: url(../img/2.png);
+    height: 15vh;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    padding-top: 3.5vh;
+    padding-left: 12px;
+    width: 55vw;
+    font-family: SimHei;
+    font-size: 2.4vh;
+}
+ul{
+    margin: 0;
+    -webkit-appearance: none;
+    list-style: none;
+    padding: 0;
+}
+.helpbox:hover,.helpbox::after{
+    background-image: url(../img/2\ 拷贝.png);
+}
+#change{
+    position: relative;
+    width: 80px;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    top: -30px;
+    left: 60%;
+}
+#selected{
+    position: absolute;
+    top: 104%;
+    border: none;
+    height: 70px;
+    width: 70px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    left: 0;
+    left: 85%;
 }

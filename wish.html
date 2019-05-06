@@ -13,24 +13,29 @@
 <body>
     <div class="page" id="hope_page"><!---许愿按钮-->
     <div class="show">
-        <img src="img/middle.png" alt="精灵球">
-        <input type="button" id="custom">
-        <input type="button" id="next">
+        <!-- <img src="img/middle.png" alt="精灵球"> -->
+        <input type="button" id="custom" value="自定义">
+        <input type="image" src="img/next.svg" id="next">
     </div>
     <div class="form" id="sign_page">
-            <h1>填写信息</h1>
+            <!-- <h1>填写信息</h1> -->
             <div class="main_contain">
-                <input type="text" id="name" placeholder="姓名">
-            <input type="tel" id="tel" placeholder="手机号">
-            <input type="text" id="wechat" placeholder="微信号">
+                <div class="aside">
+                    <label id="label1" for="name">姓名：</label>
+                    <label id="label2"for="tel">手机：</label>
+                    <label id="label3" for="wechat">微信：</label>
+                </div>
+            <input type="text" id="name">
+            <input type="tel" id="tel" >
+            <input type="text" id="wechat">
             <input type="button" id="ok">
             </div>
             </div>
     <div class="success" id="get_page">
-        <h2>许愿成功！</h2>
+        <h2 id="h2">许愿成功！</h2>
         <h2>恭喜你获得了一个精灵球!</h2>
-        <input type="button" class="return" placeholder="再许一个">
-        <input type="button" id="gohelo">
+        <input type="image" src="img/again.png" class="fine"class="return" id="again" placeholder="再许一个">
+        <input type="image" src="img/gohelp.png"class="fine" id="gohelp">
     </div>
 </div>
 </body>

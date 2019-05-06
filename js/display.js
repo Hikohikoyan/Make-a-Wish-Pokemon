@@ -6,6 +6,7 @@ $(function () {
     location.hash="";
     
     var hash=location.hash;
+    var collection;
     get_all();
     //主页按钮
     $("#wish").click(function(){
@@ -20,6 +21,7 @@ $(function () {
     })//点击许愿
     $("#rule").click(function(){
         allhide();
+        $(".main_contain").hide();
         $("#rule_page").show();
         document.getElementById("style1").href="css/index.css";
         console.log("into rule_page");
@@ -38,7 +40,24 @@ $(function () {
     $("#help").click(function(){
         //助愿页
         allhide();
+        $(".main_contain").hide();
         $("#help_page").show();
+    })
+    $("#selected").click(function(){
+        var wishes=new Array();
+        for(var i=0;i<$('li').length;i++){
+            $('li')[i].click(function(){
+                console.log(this);
+                console.log(i);
+                wishes.push($('li')[i]);
+                console.log(wishes);
+            });
+        }
+        var data=JSON.stringify({
+            "wisher_id":wishes
+        });
+        var settings=prepare(5);
+        $.ajax(settings,data,)
     })
     $("#mine").click(function(){
         //显示 我的愿望清单  yourwish
@@ -62,14 +81,19 @@ $(function () {
         var msg=$("#wish").val();
         if(check(msg)){
         var pack=JSON.stringify({
-            user,tel,wechat,msg
+            'name':user,
+       'telephone':tel,
+       'weixin':wechat,
         })
         }else{
         var pack=JSON.stringify({
-            user,tel,wechat
+            'name':user,
+       'telephone':tel,
+       'weixin':wechat,
         })
         }
-        $.ajax(settings,pack);
+        prepare(3,pack);
+        $.ajax(settings);
         $("#sign_page").animate({opacity:"0.5"},100,function(){
             $("#sign_page").hide();
         });
@@ -82,11 +106,13 @@ $(function () {
     //隐藏
     function allhide(){
         $(".page").hide();
-        $(".main_contain").hide();
+        $(".btn1").hide();
+        $(".btn2").hide();
+        // $(".main_contain").hide();
         $(".success").hide();
     }
     //请求
-    function prepare(num){
+    function prepare(num,some){
         var request=new Array();
         request[0]="get_pre_wishes";
         request[1]="save_wish";
@@ -100,17 +126,30 @@ $(function () {
         request[9]="open_ball";
         request[10]="my_wishes";
         request[11]="my_help";
-        let url="182.254.161.178/"+request[num];
-        return url;
-    }
-    var settings={
-        "url":url,
-        "method":"POST",
-        "headers": {
-            "Content-Type": "application/json",
-            "Connection": "keep-alive",
-            "cache-control": "no-cache"
-          }
+        var url="182.254.161.178/"+request[num];
+        if(some!=""||some!=undefined){
+        var settings={
+            "url":url,
+            "method":"POST",
+            "data":some,
+            "headers": {
+                "Content-Type": "application/json",
+                "Connection": "keep-alive",
+                "cache-control": "no-cache"
+              },
+        };
+        }else{
+            var settings={
+                "url":url,
+                "method":"POST",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Connection": "keep-alive",
+                    "cache-control": "no-cache"
+                  },
+            };    
+        }
+        return settings; 
     }
     //check
     function check(str){
