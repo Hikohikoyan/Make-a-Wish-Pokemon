@@ -11,16 +11,18 @@
     <link rel="stylesheet" type="text/css" media="screen" id="style1" href="css/wish.css">
 </head>
 <body>
-    <div class="page" id="hope_page"><!---许愿按钮-->
+<div class="page" id="hope_page"><!---许愿按钮-->
     <div class="show">
-        <!-- <img src="img/middle.png" alt="精灵球"> -->
+        <img src="img/middle.png" id="middle" >
+        <p id="wishtext">我想有人和我一起用同一个系列的沙雕微信头像一周</p>
+        <textarea id="customtext" rows="5" cols="14"></textarea>
         <input type="button" id="custom" value="自定义">
         <input type="image" src="img/next.svg" id="next">
     </div>
     <div class="form" id="sign_page">
             <!-- <h1>填写信息</h1> -->
             <div class="main_contain">
-                <div class="aside">
+                <div class="aside1">
                     <label id="label1" for="name">姓名：</label>
                     <label id="label2"for="tel">手机：</label>
                     <label id="label3" for="wechat">微信：</label>
@@ -30,14 +32,39 @@
             <input type="text" id="wechat">
             <input type="button" id="ok">
             </div>
-            </div>
+    </div>
     <div class="success" id="get_page">
-        <h2 id="h2">许愿成功！</h2>
-        <h2>恭喜你获得了一个精灵球!</h2>
+        <h2 class="h2">许愿成功！</h2>
+        <h2 class="h2">恭喜你获得了一个精灵球!</h2>
         <input type="image" src="img/again.png" class="fine"class="return" id="again" placeholder="再许一个">
-        <input type="image" src="img/gohelp.png"class="fine" id="gohelp">
+        <input type="image" src="img/gohelp.png"class="fine" id="help">
     </div>
 </div>
+<div class="page" id="help_page">
+        <input type="image" src="img/换一批.png" id="change">
+        <div id="others">
+            <div class="helpbox">愿望一</div>
+            <div  class="helpbox">愿望二</div>
+            <div  class="helpbox">愿望三</div>
+    </div>
+    <input type="image" src="img/next.svg" id="selected">
+
+<div class="page" id="info">
+        <div class="div_info">
+        <label for="name" class="aside">姓名：</label>
+        <label for="tel" class="aside">手机：</label>
+        <label for="wechat" class="aside">微信：</label>
+        </div>
+        <input type="image" src="img/wagada.png" id="ok2">
+    </div>
+    <div class="success" id="expode_page">
+            <h2>恭喜你获得新的精灵！</h2>
+            <div class="getelf" >
+                <img class="getpic" src="img/423.png">
+            </div>
+    </div>
+</div>
+<input type="image" src="img/21.png" id="back">
 </body>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/display.js"></script>

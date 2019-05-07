@@ -12,13 +12,16 @@
 </head>
 <body>
     <div id="index">
-            <!-- <div class="top-navagition"> -->
-                    <div id="top">
-                        <div class="btn1" src="img/精灵border.png" id="btn1">
-                        <!-- <span class="">精灵</span> -->
-                        <div class="btn2" src="img/精灵球border.png" id="btn2">
-                        <!-- <span class="">精灵球</span> -->
-                        </div>
+        <div id="top">
+        <div class="btn1" id="btn1">
+            <img src="img/elfborder.png">
+            <span>0</span>
+        </div>
+        <div class="btn2" id="btn2">
+            <img src="img/ballborder.png">
+            <span>0</span>
+        </div>
+        </div>
         <div class="main_contain">
             <img src="img/title.png">
             <input class="index" type="image" src="img/wish.png" id="wish" value="许愿">
@@ -27,31 +30,52 @@
             <input class="index" type="image" id="rule" src="img/rule.png" value="规则">
         </div>
     <div class="page" id="rule_page">
-        <p></p>
-        <input type="image" src="img/21.png" id="back">
+        <p>(1)【许愿】:你可以选择或写下一个愿望在精灵球里，当有人帮你实现愿望的时候，点击精灵球就会孵化一只属于你和助愿者的可爱小精灵<br>
+                (2)【助愿】:你可以看到别人的愿望并为ta实现愿望。当许愿者确定愿望已实现后你们都可以拥有一只可爱的小精灵。<br>
+                (3)集齐十只小精灵后可以在“流年车站”摊位领取丰厚奖品！<br>
+                (4)另外，每天许愿次数不得超过五次</p>
     </div>
+    <input type="image" src="img/21.png" id="back">
     <div class="page" id="yourwish"><!---点击精灵球-->
         <div id="yours">
-            <li>愿望一</li><li></li><li>已领取</li>
-            <li></li><li></li><li></li>
-            <li>愿望二</li><li></li><li>未领取</li>
-            <li></li><li></li><li></li>
-            <li>愿望三</li><li></li><li>已领取</li>
-            <li></li><li></li><li></li>
-            <li>愿望四</li><li></li><li>已领取</li>
-            <li></li><li></li><li></li>
-            <li>愿望五</li><li></li><li>已领取</li>
-            <li></li><li></li><li></li>
+            <div class="helpbox">愿望一</div>
+            <div  class="helpbox">愿望二</div>
+            <div  class="helpbox">愿望三</div>
         </div>
-        <input type="button" id="return">
+    </div>
+    <div class="page" id="elfs">
+        <h1>你的精灵(0)</h1>
+        <div class="elfcontain">
+            <div class="elf">
+            <img src="img/bigelfboder.png">
+            <img class="elfpic" src="img/423.png" alt="精灵">
+            </div>
+            <div class="elf">
+            <img src="img/bigelfboder.png">
+            <img class="elfpic" src="img/424.png" alt="精灵">
+            </div>
+        </div>
+    </div>
+    <div class="page" id="balls">
+        <h1>你的精灵球(0)</h1>
+        <div class="elfcontain">
+            <img src="img/6.png">
+            <img src="img/6.png">
+            <img src="img/6.png">
+            <img src="img/6.png">
+            <img src="img/6.png">
+            <img src="img/6.png">
+            <img src="img/6.png">
+
+        </div>
     </div>
     <div class="page" id="help_page">
         <input type="image" src="img/换一批.png" id="change">
-        <ul id="others">
-            <li class="helpbox">愿望一</li>
-            <li  class="helpbox">愿望二</li>
-            <li  class="helpbox">愿望三</li>
-        </ul>
+        <div id="others">
+            <div class="helpbox">愿望一</div>
+            <div  class="helpbox">愿望二</div>
+            <div  class="helpbox">愿望三</div>
+    </div>
         <input type="image" src="img/next.svg" id="selected">
     </div>
     <div class="page" id="info">
@@ -62,7 +86,12 @@
         </div>
         <input type="image" src="img/wagada.png" id="ok2">
     </div>
-    <div class="success" id="expode_page"></div>
+    <div class="success" id="expode_page">
+        <h2>恭喜你获得新的精灵！</h2>
+        <div class="getelf" >
+            <img class="getpic" src="img/423.png">
+        </div>
+    </div>
 </body>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/display.js"></script>

@@ -11,7 +11,6 @@ html{
     overflow: hidden;
     background-position: bottom;
     background-attachment: fixed;
-    background-position-y: 90%;
 }
 body{
     margin: 0%;
@@ -33,9 +32,9 @@ li{
     background-attachment: local;
     background-position: top;
     background-size: 100%;
-    height: 500px;
+    height: 55vh;
 }
-.top-navagition,#top,#index,#get_page,#rule_page,#yourwish,#expode_page,#sign_page{
+#help_page,#top,#index,#get_page,#rule_page,#yourwish,#expode_page,#sign_page{
     display: none;
 }
 .page,div#index{
@@ -45,7 +44,7 @@ li{
     margin-left: 12.5%;
     margin-right: 12.5%;
     /* padding: 12.5%; */
-    /* height: -webkit-fill-available; */
+    height: max-content;
     /* width: 100%; */
 }
 input[type="image"]{
@@ -70,29 +69,16 @@ li{
     margin: 0%;
 }
 #custom{
-    /* width: 30%;
-    height: 10%;
-    position: relative;
-    margin-top: 10%;
-    /* right: 0%;
-    margin-left: 60%;
-    margin-right: 0%; */
-    /* margin-left: 60%; */
     margin-right: 0%;
     position: relative;
-    /* top: -30px; */
-    /* right: -40px; */
     border: none;
     color: white;
     text-decoration-line: underline;
-    /* margin-left: 25vh; */
     margin-right: 0%;
     position: absolute;
-    /* top: -5vh; */
-    /* right: -8vh; */
-    /* right: -8vh; */
-    bottom: 20.5vh;
     right: 0px;
+    right: 0px;
+    bottom: 5px;
 }
 #main_contain{
     margin-left: 12.5%;
@@ -125,41 +111,43 @@ h2{
     font-weight: 350;
     margin: 0;
     color: white;
-    font-size: larger;
+    font-size: 28px;
+    white-space: pre;
     margin-bottom: 10px;
+    /* padding-left: 35px; */
+    /* margin-top: 35px; */
 }
-#h2{
-    margin-top: 50%;
+.h2{
+    margin: 0%;
+    padding: 0;
+    overflow: scroll;
+    font-size: 20px;
 }
 #next{
     position: fixed;
-    margin: 0;
-    padding: 0;
-    margin-top: 25%;
-    margin-top: 500px;
-    margin-left: 20%;
-    border: none;
-    position: absolute;
+    /* margin: 0; */
+    /* padding: 0; */
+    /* margin-top: 25%; */
+    /* margin-top: 500px; */
+    /* margin-left: 20%; */
+    /* border: none; */
+    /* position: absolute; */
     height: 70px;
     width: 70px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    right: 2%;
+    /* background-repeat: no-repeat; */
+    /* background-size: 100%; */
+    /* right: 2%; */
+    bottom: 0;
+    right: 20px;
 }
 .show{
-    background-image: url("../img/middle.png");
     height: 100%;
     /* width: 85%; */
-    background-repeat: no-repeat;
-    background-position: top;
-    background-size: 100%;
     width: 100%;
-    background-attachment: local;
     margin-top: 0%;
     /* height: -webkit-fill-available; */
-    height: 500px;
 }
-.aside{
+.aside1{
     white-space: pre-line;
     float: left;
     position: absolute;
@@ -187,8 +175,9 @@ label{
     background-repeat: no-repeat;
     background-size: 100%;
     right: 2%;
+    margin-top: 20%;
 }
-#again,#gohelp{
+#again,#help{
     padding: 0%;
     margin: 0%;
     display: block;
@@ -200,4 +189,160 @@ label{
 }
 #again{
     margin-top: 40%;
+}
+.helpbox{
+    background-image: url(../img/2.png);
+    height: 15vh;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    padding-top: 3.5vh;
+    padding-left: 12px;
+    width: 55vw;
+    font-family: SimHei;
+    font-size: 2.4vh;
+}
+.helpbox:hover,.helpbox::after{
+    background-image: url(../img/2\ 拷贝.png);
+}
+#change{
+    position: relative;
+    width: 80px;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    top: -30px;
+    left: 60%;
+    height: unset;
+}
+#selected{
+    position: absolute;
+    /* top: 200%; */
+    border: none;
+    height: 70px;
+    width: 70px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    left: 0;
+    left: 85%;
+}
+
+.aside{
+    display: grid;
+}
+#info{
+    background-image: url(../img/132143.png);
+    background-repeat: round;
+    height: 300px;
+    width: 100%;
+    margin: 0;
+    display: none;
+}
+.div_info{
+    margin-left: 20px;
+    margin-top: 40px;
+    position: absolute;
+}
+label{
+    font-size: 22px;
+    margin-top: 10%;
+}
+label.aside{
+    margin-top: 40%;
+}
+#others{
+    margin-left: 12.5%;
+}
+#info{
+    background-image: url(../img/132143.png);
+    background-repeat: round;
+    height: 300px;
+    width: 100%;
+    margin: 0;
+    display: none;
+}
+.div_info{
+    margin-left: 20px;
+    margin-top: 40px;
+    position: absolute;
+}
+#ok2{
+    max-width: 65%;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    bottom: -30%;
+    left: 0;
+    left: 18%;
+}
+#expode_page{
+    display: block;
+    height: max-content;
+    /* padding-left: 25%; */
+    /* padding-right: 25%; */
+    text-align: -webkit-center;
+    padding-top: 25%;
+}
+#expode_page:first-child{
+    padding-left: 28px;
+}
+.getelf{
+    background-image: url(../img/bigelfboder.png);
+    margin: 0;
+    padding: 0;
+    height: 200px;
+    width: 200px;
+    background-size: contain;
+    /* margin: 0; */
+    background-repeat: round;
+    margin-top: 5vh;
+}
+p{
+    margin: 0;
+    white-space: normal;
+    overflow: scroll;
+    /* height: 251px; */
+    font-size: 4vh;
+    /* padding-top: 35%; */
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 180px;
+    /* padding-bottom: 20px; */
+    top: 0;
+    position: absolute;
+    /* top: 15%; */
+    margin-top: 35%;
+}
+img#middle{
+    max-width: 100%;
+    /* margin-top: 12%; */
+    z-index: -1;
+    position: relative;
+    margin: 0%;
+}
+#customtext{
+    position: absolute;
+    top: 0;
+    margin-left: 15px;
+    margin-top: 35%;
+    border: none;
+    /* background-color: white; */
+    opacity: 0.8;
+    padding-right: 10px;
+    color: steelblue;
+    font-size: 5vh;
+    font-family: Simhei;
+    display: none;
+    border-style: dotted;
+    border-radius: 0.3em;
+}
+#back{
+    max-width: 20%;
+    position: absolute;
+    /* top: 100%; */
+    bottom: 0;
+    margin-left: 15px;
+}
+.getpic{
+    margin-top: 0%;
 }

@@ -4,9 +4,14 @@ $(function () {
     // $("#index").show();//主页
     url=location.href.split("#")[0];
     location.hash="";
-    
+    var clicktime=0;
     var hash=location.hash;
+    var user,tel,wechat,msg;
     var collection;
+    $("#top").show();
+    $(".btn2").show();
+    $(".btn1").show();
+    $(".main_contain").show();
     get_all();
     //主页按钮
     $("#wish").click(function(){
@@ -22,6 +27,7 @@ $(function () {
     $("#rule").click(function(){
         allhide();
         $(".main_contain").hide();
+        $("#back").show();
         $("#rule_page").show();
         document.getElementById("style1").href="css/index.css";
         console.log("into rule_page");
@@ -30,26 +36,26 @@ $(function () {
         history.pushState("","Rule",location.href);
     })//点击规则
     $("#back").click(function(){
-        allhide();
-        $(".main_contain").show();
-        $("#top").show();
-        $(".btn2").show();
-        $(".btn1").show();
+        window.location.href="index.html";
     })//点击返回主页（规则页）
     $("#btn1").click(function(){
         allhide();
-        $("#yourwish").show();
+        $(".main_contain").hide();
+        $("#elfs").show();
+        $("#back").show();
     })
-    $("#btn1").click(function(){
+    $("#btn2").click(function(){
         allhide();
         $(".main_contain").hide();
-        $("#yourwish").show();
+        $("#balls").show();
+        $("#back").show();
     })
     $("#help").click(function(){
         //助愿页
         allhide();
         $(".main_contain").hide();
         $("#help_page").show();
+        $("#selected").show();
     })
     $("#selected").click(function(){
         var wishes=new Array();
@@ -64,10 +70,20 @@ $(function () {
         var data=JSON.stringify({
             "wisher_id":wishes
         });
-        var settings=prepare(5);
+        var settings=prepare(5,data);
         // $.ajax(settings);//获取信息
         allhide();
+        $("#help_page").show();
+        $("#change").hide();
+        $("#others").hide();
         $("#info").show();
+        $("#selected").hide();
+    })
+    $("#ok2").click(function(){
+        allhide();
+        $("#help_page").show();
+        $(".success").show();
+        $("#back").show();
     })
     // $(".helpbox").click(function (){
     // }
@@ -75,24 +91,36 @@ $(function () {
     $("#mine").click(function(){
         //显示 我的愿望清单  yourwish
         allhide();
+        $("#back").show();
         $(".main_contain").hide();
         $("#yourwish").fadeIn(100);
     });
+    //wish.html 许愿页
     $("#next").click(function(){
-        allhide();
+        clicktime=clicktime+1;
+        console.log(clicktime);
+        allhide();//包含hope page
         $(".show").hide();
         $("#hope_page").show();
+        if(clicktime==1){
         $("#sign_page").show();
         console.log("into form_page");
         hash="#Next,fill-in-the-box";
         location.hash=hash;
         history.pushState("","Next",location.href);
+        }else if(clicktime==5){
+            //不能太贪心的提示
+            console.log("不能太贪心了");
+        }
+        else{
+            $(".success").fadeIn(1200);
+        }
     })//点击下一步填写信息
     $("#ok").click(function(){//填写完毕 提交信息
-        var user=$("#name").val();
-        var tel=$("#tel").val();
-        var wechat=$("#wechat").val();
-        var msg=$("#wish").val();
+        user=$("#name").val();
+        tel=$("#tel").val();
+        wechat=$("#wechat").val();
+        msg=$("#wish").val();
         if(check(msg)){
         var pack=JSON.stringify({
             'name':user,
@@ -108,11 +136,16 @@ $(function () {
         }
         prepare(3,pack);
         // $.ajax(settings);
-        $("#sign_page").animate({opacity:"0.5"},100,function(){
-            $("#sign_page").hide();
-        });
-        $("#get_page").fadeIn(1200);
+        $("#sign_page").hide();
+        $(".success").fadeIn(1200);
+
     })
+    $("#again").click(function(){
+        $(".success").hide();
+        $("#back").fadeIn(500);
+        $(".show").fadeIn(500);
+    })
+
     $(".return").click(function(){
         history.back();//返回按钮
     })
@@ -124,6 +157,8 @@ $(function () {
         $(".btn2").hide();
         // $(".main_contain").hide();
         $(".success").hide();
+        $("#back").hide();
+        $("#expode.page").hide();
     }
     //请求
     function prepare(num,some){
@@ -180,10 +215,32 @@ $(function () {
         settings=prepare(8);
         // $.ajax(settings);
         settings=prepare(7);
-        $.ajax(settings);
-        console.log(elfs);
-        console.log(elf);
-        console.log(balls);
-        console.log(ball);
+        // $.ajax(settings);
+        // console.log(elfs);
+        // console.log(elf);
+        // console.log(balls);
+        // console.log(ball);
     }
+    $(".show").mousemove(function(e){
+        // console.log(e.clientY+"~~~~~~"+e.clientX);
+        var nowX=e.clientX;
+        var nowY=e.clientY;
+        if(nowX>=160&&nowX<=210&&nowY>=60&&nowY<=120){
+            $("#wishtext").text("就是点那换愿望");
+            $("#customtext").hide();
+            $("#wishtext").show();
+        }else if(nowX>=68&&nowX<=303&&nowY>=160&&nowY<=344){
+            console.log("Writing!OR NOTHING");
+        }else{
+            $("#customtext").hide();
+            $("#wishtext").show();
+            }
+    })
+    $("#custom").click(function(){
+        $("#wishtext").hide();
+        $("#customtext").show();
+    })
+    $("#top").mousemove(function(e){
+        console.log(e.pageY+"~~~~~~"+e.pageX);
+    })
 })
