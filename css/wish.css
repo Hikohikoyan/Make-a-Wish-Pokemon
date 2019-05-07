@@ -72,13 +72,14 @@ li{
     margin-right: 0%;
     position: relative;
     border: none;
-    color: white;
+    color: #444444;
     text-decoration-line: underline;
     margin-right: 0%;
     position: absolute;
     right: 0px;
     right: 0px;
     bottom: 5px;
+    font-size: 16px;
 }
 #main_contain{
     margin-left: 12.5%;
@@ -121,8 +122,7 @@ h2{
     margin: 0%;
     padding: 0;
     overflow: scroll;
-    font-size: 20px;
-}
+    font-size: 145%;}
 #next{
     position: fixed;
     /* margin: 0; */
@@ -214,6 +214,7 @@ label{
     top: -30px;
     left: 60%;
     height: unset;
+    margin-top: 80px;
 }
 #selected{
     position: absolute;
@@ -230,19 +231,8 @@ label{
 .aside{
     display: grid;
 }
-#info{
-    background-image: url(../img/132143.png);
-    background-repeat: round;
-    height: 300px;
-    width: 100%;
-    margin: 0;
-    display: none;
-}
-.div_info{
-    margin-left: 20px;
-    margin-top: 40px;
-    position: absolute;
-}
+
+
 label{
     font-size: 22px;
     margin-top: 10%;
@@ -254,26 +244,43 @@ label.aside{
     margin-left: 12.5%;
 }
 #info{
-    background-image: url(../img/132143.png);
-    background-repeat: round;
+    /* background-image: url(../img/132143.png);
+    background-repeat: round; */
     height: 300px;
     width: 100%;
     margin: 0;
-    display: none;
 }
 .div_info{
-    margin-left: 20px;
-    margin-top: 40px;
-    position: absolute;
+    background-image: url(../img/132143.png);
+    background-repeat: round;
+    /* margin-left: 20px; */
+    margin-top: 30px;
+    /* position: absolute; */
+    /* padding-left: 28px; */
+    padding-bottom: 10px;
+    /* width: max-content; */
+    /* padding-right: 115px; */
+    height: max-content;
+    /* padding-top: 12.5%; */
+    padding-left: 25px;
+}
+.info{
+    display: grid;
+    padding-top: 15px;
+    margin-bottom: 25px;
+    margin-top: 0%;
 }
 #ok2{
-    max-width: 65%;
     margin: 0;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
-    bottom: -30%;
-    left: 0;
-    left: 18%;
+    display: flex;
+    /* margin: 20px; */
+    margin-left: 62.5px;
+    margin-top: 48px;
+    width: 185px;
+    height: 45px;
+    margin-left: 15vw;
 }
 #expode_page{
     display: block;
@@ -282,6 +289,7 @@ label.aside{
     /* padding-right: 25%; */
     text-align: -webkit-center;
     padding-top: 25%;
+
 }
 #expode_page:first-child{
     padding-left: 28px;
@@ -340,9 +348,10 @@ img#middle{
     max-width: 20%;
     position: absolute;
     /* top: 100%; */
-    bottom: 0;
+    bottom: 2%;
     margin-left: 15px;
+    opacity: 0.2;
 }
 .getpic{
-    margin-top: 0%;
+    margin-top: 10%;
 }

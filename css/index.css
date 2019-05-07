@@ -25,16 +25,31 @@ body{
     display: grid;
 }
 #info{
-    background-image: url(../img/132143.png);
-    background-repeat: round;
+    /* background-image: url(../img/132143.png);
+    background-repeat: round; */
     height: 300px;
     width: 100%;
     margin: 0;
 }
 .div_info{
-    margin-left: 20px;
-    margin-top: 40px;
-    position: absolute;
+    background-image: url(../img/132143.png);
+    background-repeat: round;
+    /* margin-left: 20px; */
+    margin-top: 30px;
+    /* position: absolute; */
+    /* padding-left: 28px; */
+    padding-bottom: 10px;
+    /* width: max-content; */
+    /* padding-right: 115px; */
+    height: max-content;
+    /* padding-top: 12.5%; */
+    padding-left: 25px;
+}
+.info{
+    display: grid;
+    padding-top: 15px;
+    margin-bottom: 25px;
+    margin-top: 0%;
 }
 label{
     font-size: 22px;
@@ -110,7 +125,7 @@ label.aside{
     /* height: -webkit-fill-available; */
 }
 img{
-    margin-bottom: 10%;
+    margin-bottom: 20%;
     max-width: 100%;
     margin-top: 12.5%;
 }
@@ -214,13 +229,16 @@ ul{
     display:none;
 }
 #ok2{
-    max-width: 65%;
     margin: 0;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
-    bottom: -30%;
-    left: 0;
-    left: 18%;
+    display: flex;
+    /* margin: 20px; */
+    margin-left: 62.5px;
+    margin-top: 48px;
+    width: 185px;
+    height: 45px;
+    margin-left: 15vw;
 }
 h2{
     text-align: center;
@@ -274,4 +292,21 @@ h2{
 }
 .getpic{
     margin-top: 0%;
+}
+.span1{
+    position: absolute;
+    left: 0;
+    margin-top: 10px;
+    margin-left: 25px;
+    font-size: 150%;
+    font-weight: 348;
+}
+.span2{
+    position: absolute;
+    /* right: 0; */
+    left: 0;
+    margin-left: 124px;
+    margin-top: 10px;
+    font-size: 150%;
+    font-weight: 348;
 }

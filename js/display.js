@@ -7,6 +7,10 @@ $(function () {
     var clicktime=0;
     var hash=location.hash;
     var user,tel,wechat,msg;
+    var elfs=new Array();
+    var elf;
+    var balls=new Array();
+    var ball;    
     var collection;
     $("#top").show();
     $(".btn2").show();
@@ -43,12 +47,14 @@ $(function () {
         $(".main_contain").hide();
         $("#elfs").show();
         $("#back").show();
+        $("h1").text("你的精灵("+elf+")");
     })
     $("#btn2").click(function(){
         allhide();
         $(".main_contain").hide();
         $("#balls").show();
         $("#back").show();
+        $("h1").text("你的精灵球("+ball+")");
     })
     $("#help").click(function(){
         //助愿页
@@ -71,7 +77,11 @@ $(function () {
             "wisher_id":wishes
         });
         var settings=prepare(5,data);
-        // $.ajax(settings);//获取信息
+        $.ajax(settings).done(function(){
+            $("#name").text("姓名：成功先生");
+            $("#tel").text("手机：200 200");
+            $("#wechat").text("微信：总之是好了");
+        });//获取信息
         allhide();
         $("#help_page").show();
         $("#change").hide();
@@ -84,6 +94,12 @@ $(function () {
         $("#help_page").show();
         $(".success").show();
         $("#back").show();
+    })
+    $("#change").click(function(){
+        $('.helpbox').remove();
+        $("#others").append("<div class='helpbox'>"+"反正我咸鱼一条"+"</div>");
+        $("#others").append("<div class='helpbox'>"+"梦想还是要有的"+"</div>");
+        $("#others").append("<div class='helpbox'>"+"该睡觉了"+"</div>");
     })
     // $(".helpbox").click(function (){
     // }
@@ -207,19 +223,20 @@ $(function () {
     //
     //getinfo
     function get_all(){
-        var elfs=new Array();
-        var elf;
-        var balls=new Array();
-        var ball;    
         //获取已有的精灵/精灵球
         settings=prepare(8);
         // $.ajax(settings);
         settings=prepare(7);
         // $.ajax(settings);
+        elf=18;
+        ball=1;
+        $(".span1").text(elf);
+        $(".span2").text(ball);
         // console.log(elfs);
         // console.log(elf);
         // console.log(balls);
         // console.log(ball);
+        return elf,elfs,balls,ball;
     }
     $(".show").mousemove(function(e){
         // console.log(e.clientY+"~~~~~~"+e.clientX);
@@ -241,6 +258,6 @@ $(function () {
         $("#customtext").show();
     })
     $("#top").mousemove(function(e){
-        console.log(e.pageY+"~~~~~~"+e.pageX);
+        // console.log(e.pageY+"~~~~~~"+e.pageX);
     })
 })
