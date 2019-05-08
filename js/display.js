@@ -151,7 +151,7 @@ $(function () {
         })
         }
         prepare(3,pack);
-        // $.ajax(settings);
+        $.ajax(settings);
         $("#sign_page").hide();
         $(".success").fadeIn(1200);
 
@@ -225,11 +225,13 @@ $(function () {
     function get_all(){
         //获取已有的精灵/精灵球
         settings=prepare(8);
-        // $.ajax(settings);
+        $.ajax(settings);
+        console.log("请求精灵列表");
         settings=prepare(7);
-        // $.ajax(settings);
-        elf=18;
-        ball=1;
+        console.log("请求精灵ball列表");
+        $.ajax(settings);
+        elf=15;
+        ball=78;
         $(".span1").text(elf);
         $(".span2").text(ball);
         // console.log(elfs);
