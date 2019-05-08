@@ -296,8 +296,8 @@ h2{
 .span1{
     position: absolute;
     left: 0;
-    margin-top: 10px;
-    margin-left: 25px;
+    margin-top: 13px;
+    margin-left: 24px;
     font-size: 150%;
     font-weight: 348;
 }
@@ -305,8 +305,8 @@ h2{
     position: absolute;
     /* right: 0; */
     left: 0;
-    margin-left: 124px;
-    margin-top: 10px;
+    margin-left: 120px;
+    margin-top: 13px;
     font-size: 150%;
     font-weight: 348;
 }
