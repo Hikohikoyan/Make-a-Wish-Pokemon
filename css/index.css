@@ -8,7 +8,6 @@ html{
     background-attachment: fixed;
     background-size: 130%;
     background-repeat: repeat-y;
-    overflow: hidden;
     background-position: bottom;
     background-attachment: fixed;
     background-position-y: 90%;
@@ -17,7 +16,7 @@ html{
 body{
     margin: 0%;
     padding: 0%;
-    /* overflow: scroll; */
+    overflow: hidden;
     width: 100%; 
     height:100%;
 }

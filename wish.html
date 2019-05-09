@@ -23,12 +23,15 @@
             <div class="main_contain">
                 <div class="aside1">
                     <label id="label1" for="name">姓名：</label>
+                    <p class="attention1">请输入姓名</p>
                     <label id="label2"for="tel">手机：</label>
+                    <p class="attention2">请输入手机</p>
                     <label id="label3" for="wechat">微信：</label>
+                    <p class="attention3">请输入微信</p>
                 </div>
-            <input type="text" id="name">
-            <input type="tel" id="tel" >
-            <input type="text" id="wechat">
+            <input required="required" type="text" id="name">
+            <input required="required" maxlength="11" type="tel" id="tel" >
+            <input required="required" type="text" id="wechat">
             <input type="button" id="ok">
             </div>
     </div>
