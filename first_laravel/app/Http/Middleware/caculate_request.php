@@ -14,7 +14,6 @@ class caculate_request
      * @return mixed
      */
     public function handle($request, Closure $next){
-        session_start();
         if(isset($_SESSION['request_times'])){
             $_SESSION['request_times']=$_SESSION['request_times']+1;
         }else{

@@ -15,7 +15,7 @@ class user_exist
      * @return mixed
      */
     public function handle($request, Closure $next){
-        session_start();
+        
         $_SESSION['openid']=4;
         $exist=DB::table('user')->where('user_id', $_SESSION['openid'])->exists();
         if($exist==false){
