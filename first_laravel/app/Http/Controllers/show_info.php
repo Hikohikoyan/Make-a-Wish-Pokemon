@@ -9,7 +9,7 @@ use Illuminate\Database\Connection;
 class show_info extends Controller
 {
     public function index(){
-        $exist_code=$request->get('exist_code');
+        $exist_code=0;//$request->get('exist_code');
         if($exist_code!=0){
             $name="";
             $telephone="";

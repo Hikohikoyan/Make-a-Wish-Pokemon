@@ -7,11 +7,13 @@ $(function () {
     var clicktime=0;
     var hash=location.hash;
     var user,tel,wechat,msg;
-    var elfs=new Array();
+    var elfs=new Array();//path elf
     var elf;
     var balls=new Array();
     var ball;    
     var collection;
+    var wishText;//愿望文本公用存储
+    var wishes;//愿望ID公用存储
     $("#top").show();
     $(".btn2").show();
     $(".btn1").show();
@@ -48,31 +50,21 @@ $(function () {
         $("#elfs").show();
         $("#back").show();
         $("h1").text("你的精灵("+elf+")");
-    })
+    })//查看精灵
     $("#btn2").click(function(){
         allhide();
         $(".main_contain").hide();
         $("#balls").show();
         $("#back").show();
         $("h1").text("你的精灵球("+ball+")");
-    })
+    })//查看精灵球
     $("#help").click(function(){
-        //助愿页
         allhide();
         $(".main_contain").hide();
         $("#help_page").show();
         $("#selected").show();
-    })
+    })//助愿页
     $("#selected").click(function(){
-        var wishes=new Array();
-        for(var i=0;i<$('li').length;i++){
-            $('li')[i].click(function(){
-                console.log(this);
-                console.log(i);
-                wishes.push($('li')[i]);
-                console.log(wishes);
-            });
-        }
         var data=JSON.stringify({
             "wisher_id":wishes
         });
@@ -88,22 +80,24 @@ $(function () {
         $("#others").hide();
         $("#info").show();
         $("#selected").hide();
-    })
+    })//助愿页信息的确认按钮
     $("#ok2").click(function(){
         allhide();
         $("#help_page").show();
         $(".success").show();
         $("#back").show();
-    })
+    })//助愿的确认按钮
     $("#change").click(function(){
         $('.helpbox').remove();
+
         $("#others").append("<div class='helpbox'>"+"反正我咸鱼一条"+"</div>");
         $("#others").append("<div class='helpbox'>"+"梦想还是要有的"+"</div>");
         $("#others").append("<div class='helpbox'>"+"该睡觉了"+"</div>");
-    })
-    // $(".helpbox").click(function (){
-    // }
-    // )
+    })//换一批
+    $(".helpbox").click(function (){
+        alert(this.innerText)
+        wishText=this.innerText;
+    })//确认帮助愿望
     $("#mine").click(function(){
         //显示 我的愿望清单  yourwish
         allhide();
@@ -144,14 +138,18 @@ $(function () {
        'weixin':wechat,
         })
         }else{
+            //发送记录愿望请求
+            var pack2=JSON.stringify({
+                "wish_text":$("#wishtext").text()
+            })
+            $.ajax(prepare(1,pack2));
         var pack=JSON.stringify({
             'name':user,
        'telephone':tel,
        'weixin':wechat,
         })
         }
-        prepare(3,pack);
-        $.ajax(settings);
+        $.ajax(prepare(3,pack));
         $("#sign_page").hide();
         $(".success").fadeIn(1200);
 
@@ -160,12 +158,10 @@ $(function () {
         $(".success").hide();
         $("#back").fadeIn(500);
         $(".show").fadeIn(500);
-    })
-
+    })//再次许愿
     $(".return").click(function(){
         history.back();//返回按钮
-    })
-
+    })//失败的返回按钮 我是说 这个按钮失败了
     //隐藏
     function allhide(){
         $(".page").hide();
@@ -218,28 +214,44 @@ $(function () {
     }
     //check
     function check(str){
-        
+        function isBlank(str) {
+            return (!str || /^\s*$/.test(str));
+        }
+        function check_uni(str) {
+            var patt_illegal = new RegExp(/[\#\$\%\^\&\*{\}\:\\L\<\>\?}\'\"\\\/\b\f\n\r\t]/g);
+            return patt_illegal.test(str);
+        }
+        if(isBlank(str)||check_uni(str)){
+            return false;
+        }else{
+            return true;
+        }
     }
     //
     //getinfo
     function get_all(){
         //获取已有的精灵/精灵球
         settings=prepare(8);
-        $.ajax(settings);
+        $.ajax(settings).done(function(data){
+            elf=data.fairy_num;
+            for(var i=0;i<=data.fairy_path.length;i++){
+                elfs.push(data.fairy_path[i]);
+            }
+        });
         console.log("请求精灵列表");
         settings=prepare(7);
         console.log("请求精灵ball列表");
-        $.ajax(settings);
-        elf=15;
-        ball=78;
+        $.ajax(settings).done(function(data){
+            ball=data.total_ball;
+        });
+        console.log(elfs);
+        console.log(elf);
+        console.log(ball);
         $(".span1").text(elf);
         $(".span2").text(ball);
-        // console.log(elfs);
-        // console.log(elf);
-        // console.log(balls);
-        // console.log(ball);
-        return elf,elfs,balls,ball;
+        return elf,elfs,ball;
     }
+    //许愿页的换愿望
     $(".show").mousemove(function(e){
         // console.log(e.clientY+"~~~~~~"+e.clientX);
         var nowX=e.clientX;
@@ -255,11 +267,22 @@ $(function () {
             $("#wishtext").show();
             }
     })
+    //许愿页定制
     $("#custom").click(function(){
         $("#wishtext").hide();
         $("#customtext").show();
     })
+    //测试定位
     $("#top").mousemove(function(e){
         // console.log(e.pageY+"~~~~~~"+e.pageX);
     })
+    //适配focus
+    $("input").focus(function(){
+        console.log("hey");//改了值才调用
+    })
+    //点击精灵球 随机获取精灵 球-1
+    function ball_dele(){
+        $(".ballcontain").click(function(){
+        })
+    }
 })
