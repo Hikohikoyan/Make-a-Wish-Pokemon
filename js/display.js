@@ -136,6 +136,7 @@ $(function () {
             'name':user,
        'telephone':tel,
        'weixin':wechat,
+       'wish_content':wishText
         })
         }else{
             //发送记录愿望请求
@@ -305,5 +306,17 @@ $(function () {
     function ball_dele(){
         $(".ballcontain").click(function(){
         })
+    }
+    function changesrc(str){
+        if(str!=26){
+            for(var i=str;i<=26;i++){
+                str=str+1;
+            }
+            }else{
+                for(var i=str;i>=0;i--){
+                    str=str-1;
+                }
+            }
+        var src="img/"+str+".png";
     }
 })

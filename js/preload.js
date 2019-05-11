@@ -1,8 +1,22 @@
 $(function(){
     var imgdownload = new createjs.LoadQueue(true);
-    imgdownload.on("fileload", handleFileLoad, this);
+    function handleFileLoad(){
+
+    }
+    function handleComplete(){
+        var src=$("#rotate").attr("src");
+        src=src.replace("img/rotate/","");
+        src=src.replace(".png","");
+        console.log("complete");
+        console.log(src);
+        anime(src);
+
+    }
+    // imgdownload.on("fileload", handleFileLoad, this);
     imgdownload.on("complete", handleComplete, this);
-    imgdownload.LoadFileManifest([
+    console.log(imgdownload);
+    console.log(imgdownload.loadManifest);
+    imgdownload.loadManifest([
         "img/elfborder.png",//index.html
         "img/ballborder.png",
         "img/title.png",
@@ -19,11 +33,74 @@ $(function(){
         "img/gohelp.png",
         "img/换一批.png",
         "img/wagada.png",
-        "img/423.png",
-        "img/21.png",
+        // "img/423.png",
+        "img/21.png",//rotate
+        "img/rotate/1.png",
+        "img/rotate/2.png",
+        "img/rotate/3.png",
+        "img/rotate/4.png",
+        "img/rotate/5.png",
+        "img/rotate/6.png",
+        "img/rotate/7.png",
+        "img/rotate/8.png",
+        "img/rotate/9.png",
+        "img/rotate/10.png",
+        "img/rotate/11.png",
+        "img/rotate/12.png",
+        "img/rotate/13.png",
+        "img/rotate/14.png",
+        "img/rotate/15.png",
+        "img/rotate/16.png",
+        "img/rotate/17.png",
+        "img/rotate/18.png",
+        "img/rotate/19.png",
+        "img/rotate/20.png",
+        "img/rotate/21.png",
     ]);
-    var res=imgdownload.load();
-    if(!res){
-        console.log("imgdownload not ok");
+    imgdownload.load();
+    // console.log(res);
+    // if(!res){
+    //     console.log("imgdownload not ok");
+    // }else{
+    // }
+
+    function anime(str){
+        var interval=setInterval(function(){
+            $("#rotate").css({
+                // "height":"118px",
+                // "width":"100%",
+                "transform":"scale(0.8)",
+                "animation":" a",
+                "margin-left": "-32.8px",
+                "-webkit-animation":"a ",
+                "-moz-animation":"a",
+                "-o-animation": "a",
+            });
+            console.log("changesrc:"+str);
+            if(str!=21){
+                str = Number(str)
+                //for(var i=str;i<21;i++){
+                    console.log(str)
+                    str=str+1;
+                    console.log(str)
+                //}
+            }
+            var src="img/rotate/"+str+".png";
+            $("#rotate").attr("src",src);
+        },70);
+        setTimeout(function(){
+            clearInterval(interval);
+            $("#loadingtext").text("Completed!");
+            $(".outborder").children()[2].remove();
+            $("#loadingtext").css({
+                "animation":" a",
+                // "margin-left": "-12.8px",
+                "-webkit-animation":"a ",
+                "-moz-animation":"a",
+                "-o-animation": "a",
+            });
+            $("#loading").fadeOut(1800);//上一动画
+        },1000)
     }
+
 })

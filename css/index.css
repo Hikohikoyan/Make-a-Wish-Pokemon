@@ -8,6 +8,7 @@
     background-repeat: round;
 }
 #rotate{
+    height:  78px;
     margin: 0;
     position: absolute;
     top: 50%;
