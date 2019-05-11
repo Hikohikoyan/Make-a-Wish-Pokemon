@@ -23,6 +23,8 @@ Route::post('/fairy_list/','show_list@fairy_list')->middleware('caculate_ball');
 Route::post('/open_ball/','open_ball@index');
 Route::post('/my_wishes/','show_wishes@my_wishes');
 Route::post('/my_help/','show_wishes@my_help');
+Route::post('/conclude_page_four/','conclusion@individual')->middleware('caculate_ball');
+Route::post('/conclude_page_five/','conclusion@game_statistics')->middleware('caculate_ball');
 
 
 

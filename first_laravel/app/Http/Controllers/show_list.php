@@ -12,7 +12,7 @@ class show_list extends Controller
     public function ball_list( Request $request){
         $total_ball=$request->session()->get('total_ball');//一共拥有的精灵球数
         $total_had_fetched=$request->session()->get('total_had_fetched');//已打开的精灵球数
-        $ball_path="../first_laravel/public/photo/pokeball.jpg";
+        $ball_path="../first_laravel/public/photo/pokeball.png";
         return response()->json(['total_ball'=>$total_ball,'total_had_fetched'=>$total_had_fetched,'ball_path'=>$ball_path]);
     }
     public function fairy_list( Request $request){

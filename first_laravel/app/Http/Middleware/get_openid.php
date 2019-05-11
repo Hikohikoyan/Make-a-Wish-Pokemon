@@ -17,8 +17,8 @@ class get_openid
         session_start();
         if(isset($_SESSION['openid'])){
             $_SESSION['openid']=45;
-            //$openid=$_SESSION['openid];
-            //$request->attributes->add(['openid'=>$openid]);
+            /*$openid=$_SESSION['openid];
+            $request->attributes->add(['openid'=>$openid]);*/
             return $next($request);
         }else{
             $_SESSION['openid']=45;

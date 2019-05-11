@@ -9,8 +9,7 @@ use Illuminate\Database\Connection;
 class open_ball extends Controller
 {
     public function index( Request $request){
-        session_start();
-        $openid=45;//$_SESSION['openid'];
+        $openid=89;//$_SESSION['openid'];
         $open_ball_object=DB::table('custom_wish')
         ->where('wisher_id',$openid)
         ->where('situation',"已领取")
@@ -33,7 +32,10 @@ class open_ball extends Controller
                 ->where('id',$id)
                 ->update(['helper_open'=>"已打开"]);
             }
-            return response()->json(['errcode'=>0,'errmsg'=>"孵化成功",'detailed_msg'=>$open_ball_object]);
+            $fairy_path=DB::table('custom_wish')
+            ->where('id',$id)
+            ->value('fairy_path');
+            return response()->json(['errcode'=>0,'errmsg'=>"孵化成功",'detailed_msg'=>$open_ball_object,'fairy_path'=>$fairy_path]);
         }
     }
 }

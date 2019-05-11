@@ -8,7 +8,6 @@ use Illuminate\Database\Connection;
 class caculate_ball
 {
     public function handle($request, Closure $next){
-        session()->put('total_ball', "4");
         $openid=45;//$_SESSION['openid'];
         $ball_number1=DB::table('custom_wish')
         ->where('wisher_id',$openid)
@@ -18,6 +17,7 @@ class caculate_ball
         ->where('helper_id',$openid)
         ->count();
         $total_ball=$ball_number1+$ball_number2;
+        
         $had_fetched1=DB::table('custom_wish')
         ->where('wisher_id',$openid)
         ->where('wisher_open',"已打开")
@@ -28,6 +28,8 @@ class caculate_ball
         ->count();
         $total_had_fetched=$had_fetched1+$had_fetched2;
         //$request->attributes->add(['total_ball'=>$total_ball]);
+        session()->put('had_fetched1', "$had_fetched1");
+        session()->put('ball_number2', "$ball_number2");
         session()->put('total_ball', "$total_ball");
         session()->put('total_had_fetched', "$total_had_fetched");
         //$request->attributes->add(['total_had_fetched'=>$total_had_fetched]);
