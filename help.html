@@ -13,14 +13,20 @@
     <link rel="stylesheet" type="text/css" media="screen" id="style1" href="css/index.css">
 </head>
 <body>
+    <div id="loading">
+    <div class="outborder">
+        <img id="rotate" src="img/rotate/1.png">
+        <h3 id="loadingtext">loading</h3><span class="loadspan">.</span>
+    </div>
+    </div>
+    <div class="major">
     <div class="page" id="help_page">
-        <input type="image" src="img/换一批.png" id="change">
+        <input type="image" src="img/change.png" id="change">
         <div id="others">
             <div class="helpbox">愿望一</div>
             <div  class="helpbox">愿望二</div>
             <div  class="helpbox">愿望三</div>
     </div>
-        <input type="image" src="img/next.svg" id="selected">
     </div>
     <div class="page" id="info">
             <h2>这是TA的信息，</h2>
@@ -37,14 +43,16 @@
         <div class="getelf" >
             <img class="getpic" src="img/423.png">
         </div>
+        <img src="img/return.png" id="back">
     </div>
-
+    <input type="image" src="img/next.png" id="selected">
+    </div>
 </body>
 <script src="js/preload.js"></script>
 <script src="js/display.js"></script>
-<script src="js/vconsole.js"></script>
- <script>
+<!-- <script src="js/vconsole.js"></script> -->
+ <!-- <script>
     // init vConsole
     var vConsole = new VConsole();
-  </script>
+  </script> -->
 </html>

@@ -147,15 +147,14 @@ body{
     display: grid;
 }
 #info{
-    /* background-image: url(../img/132143.png);
-    background-repeat: round; */
-    height: 300px;
-    width: 100%;
-    margin: 0;
+    display: grid;
+    padding-top: 15px;
+    margin-bottom: 25px;
+    margin-top: 0%;
+    margin-left: 28px;
+    color: white;
 }
 .div_info{
-    background-image: url(../img/132143.png);
-    background-repeat: round;
     /* margin-left: 20px; */
     margin-top: 30px;
     /* position: absolute; */
@@ -247,7 +246,7 @@ label.aside{
     /* height: -webkit-fill-available; */
 }
 img{
-    margin-bottom: 20%;
+    margin-bottom: 15%;
     max-width: 100%;
     margin-top: 12.5%;
 }
@@ -299,16 +298,22 @@ p{
     font-size: 20px;
 }
 .helpbox{
-    background-image: url(../img/2.png);
+    /* background-image: url(../img/2.png); */
     height: 15vh;
     background-size: 100%;
     background-repeat: no-repeat;
     background-clip: border-box;
     padding-top: 3.5vh;
     padding-left: 12px;
-    width: 55vw;
+    width: auto;
+    height: 55px;
+    padding-bottom: 3.5vh;
     font-family: SimHei;
-    font-size: 2.4vh;
+    font-size: 3vh;
+    border: solid #d2b634 3px;
+    color: white;
+    margin-bottom: 15px;
+    border-radius: 0.9em;
 }
 ul{
     margin: 0;
@@ -324,20 +329,17 @@ ul{
     width: 80px;
     margin: 0;
     padding: 0;
-    top: 0;
-    top: -30px;
+    top: -20px;
+    margin-top: 15px;
     left: 60%;
 }
 #selected{
     position: absolute;
-    top: 104%;
-    border: none;
-    height: 70px;
-    width: 70px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    left: 0;
-    left: 85%;
+    bottom: 0;
+    width: 45%;
+    margin-bottom: 28%;
+    left: 50%;
+    margin-left: -82.5px;
 }
 #btn1,#btn2{
     margin: 0;
@@ -356,16 +358,12 @@ ul{
     display:none;
 }
 #ok2{
-    margin: 0;
-    /* position: absolute; */
+    position: absolute;
     bottom: 0;
-    display: flex;
-    /* margin: 20px; */
-    margin-left: 62.5px;
-    margin-top: 48px;
-    width: 185px;
-    height: 45px;
-    margin-left: 15vw;
+    margin-bottom: -40%;
+    width: 45%;
+    left: 50%;
+    margin-left: -82.5px;
 }
 h2{
     text-align: center;
@@ -373,7 +371,7 @@ h2{
     font-weight: 350;
     margin: 0;
     color: white;
-    font-size: larger;
+    font-size: 25px;;
     margin-bottom: 10px;
 }
 #expode_page{

@@ -31,7 +31,7 @@ $(function () {
     $("#rule").click(function(){
         allhide();
         $(".main_contain").hide();
-        $("#back").show();
+        // $("#back").show();
         $("#rule_page").show();
         document.getElementById("style1").href="css/index.css";
         console.log("into rule_page");
@@ -307,16 +307,5 @@ $(function () {
         $(".ballcontain").click(function(){
         })
     }
-    function changesrc(str){
-        if(str!=26){
-            for(var i=str;i<=26;i++){
-                str=str+1;
-            }
-            }else{
-                for(var i=str;i>=0;i--){
-                    str=str-1;
-                }
-            }
-        var src="img/"+str+".png";
-    }
+
 })

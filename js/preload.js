@@ -1,21 +1,29 @@
 $(function(){
-    var imgdownload = new createjs.LoadQueue(true);
-    function handleFileLoad(){
-
+    if(location.href.indexOf("wish")!=0){
+        $("#hope_page").hide();
+        console.log("wish page");
     }
+    if(location.href.indexOf("help")!=0){
+        $(".major").hide();
+        console.log("help page");
+    }
+    if(location.href.indexOf("index")!=0){
+        $("#index").hide();
+        console.log("index page");
+    }
+    var imgdownload = new createjs.LoadQueue(true);
     function handleComplete(){
         var src=$("#rotate").attr("src");
         src=src.replace("img/rotate/","");
         src=src.replace(".png","");
-        console.log("complete");
+        console.log("completed");
         console.log(src);
         anime(src);
-
     }
     // imgdownload.on("fileload", handleFileLoad, this);
     imgdownload.on("complete", handleComplete, this);
-    console.log(imgdownload);
-    console.log(imgdownload.loadManifest);
+    // console.log(imgdownload);
+    // console.log(imgdownload.loadManifest);
     imgdownload.loadManifest([
         "img/smallback.jpg",
         "img/background.png",
@@ -27,14 +35,19 @@ $(function(){
         "img/mine.png",
         "img/rule.png",
         "img/49.png",
+        "img/41.png",
         "img/21.png",
         "img/bigelfboder.png",
         "img/middle.png",//wsih.html
-        "img/next.svg",
+        "img/next.png",
         "img/again.png",
         "img/gohelp.png",
-        "img/换一批.png",
+        "img/change.png",
         "img/wagada.png",
+        "img/cancel.png",//new
+        "img/back.png",
+        "img/return.png",
+        "img/welcome.png",
         // "img/423.png",
         "img/21.png",//rotate
         "img/rotate/1.png",
@@ -78,13 +91,13 @@ $(function(){
                 "-moz-animation":"a",
                 "-o-animation": "a",
             });
-            console.log("changesrc:"+str);
+            // console.log("changesrc:"+str);
             if(str!=21){
                 str = Number(str)
                 //for(var i=str;i<21;i++){
-                    console.log(str)
+                    // console.log(str)
                     str=str+1;
-                    console.log(str)
+                    // console.log(str)
                 //}
             }
             var src="img/rotate/"+str+".png";
@@ -101,7 +114,17 @@ $(function(){
                 "-moz-animation":"a",
                 "-o-animation": "a",
             });
-            $("#loading").fadeOut(1800);//上一动画
+            $("#loading").fadeOut(400);//上一动画
+            if(location.href.indexOf("wish")!=0){
+            $("#hope_page").fadeIn(2000);}
+            if(location.href.indexOf("help")!=0){
+                $("#help_page").fadeIn(2000);
+                $(".major").fadeIn(2500);
+            }
+            if(location.href.indexOf("index")!=0){
+                $("#index").show();
+                console.log("index page");
+            }        
         },1000)
     }
 
