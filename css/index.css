@@ -11,7 +11,7 @@
     margin: 0;
     position: absolute;
     top: 50%;
-    margin-top: -46.8px;
+    margin-top: -56.8px;
     left: 50%;
     margin-left: -46.8px;
     animation:   rotate 1.2s linear infinite;
@@ -262,6 +262,19 @@ img{
     align-items: center;
     grid-template-rows: 6vh 3vh 6vh 3vh 6vh 3vh 6vh 3vh 6vh;
     margin-bottom: 30%;
+}
+#rule{
+    width: 100px;
+}
+#pika{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 85px;
+    /* top: 0; */
+    bottom: 0;
+    margin-left: -15px;
+    margin-bottom: -50px;
 }
 #rule_page{
     background-image: url(../img/rules.png);

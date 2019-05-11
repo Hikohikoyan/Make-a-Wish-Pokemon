@@ -2,8 +2,6 @@ $(function () {
     //变换页面 和传递数据
     // $(".page").hide();
     // $("#index").show();//主页
-    url=location.href.split("#")[0];
-    location.hash="";
     var clicktime=0;
     var hash=location.hash;
     var user,tel,wechat,msg;
@@ -59,8 +57,10 @@ $(function () {
         $("h1").text("你的精灵球("+ball+")");
     })//查看精灵球
     $("#help").click(function(){
-        allhide();
-        $(".main_contain").hide();
+        // allhide();
+        // $(".main_contain").hide();
+        window.location.href="help.html";
+        console.log("into help");
         $("#help_page").show();
         $("#selected").show();
     })//助愿页
@@ -220,6 +220,10 @@ $(function () {
                       collection=data;
                   },
                   "fail":function(){
+                      if(data.errcode==456){
+                          console.log("未授权");
+                          location.href="之后会给我们的"+"#BBT微信后台#/Home/Index/index?state="+location.href;
+                      }
                       console.log("不知什么原因失败了哭");
                   },
                   "error":function(response){
