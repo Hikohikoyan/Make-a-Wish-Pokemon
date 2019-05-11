@@ -11,7 +11,7 @@ $(function () {
     var elf;
     var balls=new Array();
     var ball;    
-    var collection;
+    var collection;//什么都往里面存 没问题的（
     var wishText;//愿望文本公用存储
     var wishes;//愿望ID公用存储
     $("#top").show();
@@ -195,9 +195,18 @@ $(function () {
             "data":some,
             "headers": {
                 "Content-Type": "application/json",
-                "Connection": "keep-alive",
                 "cache-control": "no-cache"
               },
+              "success":function(data){
+                collection=data;
+            },
+            "fail":function(){
+                console.log("不知什么原因失败了哭");
+            },
+            "error":function(response){
+                console.log(response);
+            }
+
         };
         }else{
             var settings={
@@ -205,9 +214,17 @@ $(function () {
                 "method":"POST",
                 "headers": {
                     "Content-Type": "application/json",
-                    "Connection": "keep-alive",
                     "cache-control": "no-cache"
                   },
+                  "success":function(data){
+                      collection=data;
+                  },
+                  "fail":function(){
+                      console.log("不知什么原因失败了哭");
+                  },
+                  "error":function(response){
+                      console.log(response);
+                  }
             };    
         }
         return settings; 
