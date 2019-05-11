@@ -17,6 +17,8 @@ $(function(){
     console.log(imgdownload);
     console.log(imgdownload.loadManifest);
     imgdownload.loadManifest([
+        "img/smallback.jpg",
+        "img/background.png",
         "img/elfborder.png",//index.html
         "img/ballborder.png",
         "img/title.png",
