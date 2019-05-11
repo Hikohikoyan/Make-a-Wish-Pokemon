@@ -184,6 +184,7 @@
       'errcode'=>xxx,//value:0,235
       'errmsg'=>xxx,//value:"已经没有空的精灵球了"，"孵化成功"
       'detailed_msg'=>xxx // 后台调试时可以查看，前端不用理会
+      'fairy_path'=>xxx
   ]
   ```
 

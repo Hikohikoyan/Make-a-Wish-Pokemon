@@ -16,10 +16,12 @@ class get_openid
     public function handle($request, Closure $next){
         session_start();
         if(isset($_SESSION['openid'])){
-            $openid=45;//$_SESSION['openid];
-            $request->attributes->add(['openid'=>$openid]);
+            $_SESSION['openid']=45;
+            /*$openid=$_SESSION['openid];
+            $request->attributes->add(['openid'=>$openid]);*/
             return $next($request);
         }else{
+            $_SESSION['openid']=45;
             return response()->json(['errcode'=>456,'errmsg'=>'未授权']);
         }
     }
