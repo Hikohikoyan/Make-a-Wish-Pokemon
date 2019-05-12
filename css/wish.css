@@ -336,9 +336,9 @@ label{
     font-family: SimHei;
     font-size: 2.4vh;
 }
-.helpbox:hover,.helpbox::after{
-    /* background-image: url(../img/2\ 拷贝.png); */
-}
+/* .helpbox:hover,.helpbox::after{
+    /* background-image: url(../img/2\ 拷贝.png); 
+} */
 #change{
     position: relative;
     width: 80px;

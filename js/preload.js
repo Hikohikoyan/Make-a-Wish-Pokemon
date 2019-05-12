@@ -102,7 +102,7 @@ $(function(){
                     // console.log(str)
                 //}
             }
-            var src="img/rotate/"+str+".png";
+            var src="http://182.254.161.178/test/img/rotate/"+str+".png";
             $("#rotate").attr("src",src);
         },70);
         setTimeout(function(){
