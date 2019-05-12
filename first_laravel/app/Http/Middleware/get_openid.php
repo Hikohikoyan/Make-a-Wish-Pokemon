@@ -15,6 +15,7 @@ class get_openid
      */
     public function handle($request, Closure $next){
         session_start();
+        $_SESSION['openid']=45;
         if(isset($_SESSION['openid'])){
             $_SESSION['openid']=45;
             /*$openid=$_SESSION['openid];
