@@ -188,7 +188,7 @@ $(function () {
         request[9]="open_ball";
         request[10]="my_wishes";
         request[11]="my_help";
-        var url="/"+request[num];
+        var url="http://182.254.161.178/test/laravel/public/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
