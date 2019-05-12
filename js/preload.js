@@ -1,13 +1,15 @@
 $(function(){
-    if(location.href.indexOf("wish")!=0){
+    var nowpage=location.href.split("/");
+    if(nowpage[4].indexOf("wish")==0){
         $("#hope_page").hide();
         console.log("wish page");
     }
-    if(location.href.indexOf("help")!=0){
+    if(nowpage[4].indexOf("help")==0){
         $(".major").hide();
+        $("#selected").hide();
         console.log("help page");
     }
-    if(location.href.indexOf("index")!=0){
+    if(nowpage[4].indexOf("index")==0){
         $("#index").hide();
         console.log("index page");
     }
@@ -38,7 +40,7 @@ $(function(){
         "img/41.png",
         "img/21.png",
         "img/bigelfboder.png",
-        "img/middle.png",//wsih.html
+        // "img/middle.png",//wsih.html
         "img/next.png",
         "img/again.png",
         "img/gohelp.png",
@@ -48,7 +50,7 @@ $(function(){
         "img/back.png",
         "img/return.png",
         "img/welcome.png",
-        // "img/423.png",
+        "img/cunstom.png",
         "img/21.png",//rotate
         "img/rotate/1.png",
         "img/rotate/2.png",
@@ -115,16 +117,19 @@ $(function(){
                 "-o-animation": "a",
             });
             $("#loading").fadeOut(400);//上一动画
-            if(location.href.indexOf("wish")!=0){
+            var nowpage=location.href.split("/");
+            
+            if(nowpage[4].indexOf("wish")==0){
             $("#hope_page").fadeIn(2000);}
-            if(location.href.indexOf("help")!=0){
+            if(nowpage[4].indexOf("help")==0){
                 $("#help_page").fadeIn(2000);
                 $(".major").fadeIn(2500);
+                $("#selected").fadeIn(2500);
             }
-            if(location.href.indexOf("index")!=0){
+            if(nowpage[4].indexOf("index")==0){
                 $("#index").show();
                 console.log("index page");
-            }        
+            }
         },1000)
     }
 

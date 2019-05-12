@@ -33,7 +33,7 @@
         </div>
         </div>
         <div class="main_contain">
-            <img src="img/title.png">
+            <img src="img/title.png" class="title">
             <img class="index" src="img/wish.png" id="wish" value="许愿">
             <img class="index" id="help" src="img/help.png" value="助愿">
             <img class="index" id="mine" src="img/mine.png" value="我的愿望">
@@ -41,12 +41,14 @@
             <img id="pika" src="img/49.png">
         </div>
     <div class="page" id="rule_page">
-        <p>(1)【许愿】:你可以选择或写下一个愿望在精灵球里，当有人帮你实现愿望的时候，点击精灵球就会孵化一只属于你和助愿者的可爱小精灵<br>
-                (2)【助愿】:你可以看到别人的愿望并为ta实现愿望。当许愿者确定愿望已实现后你们都可以拥有一只可爱的小精灵。<br>
-                (3)集齐十只小精灵后可以在“流年车站”摊位领取丰厚奖品！<br>
-                (4)另外，每天许愿次数不得超过五次</p>
+        <h1>规则</h1>
+                <p>(1)【许愿】:你可以选择或写下一个愿望在精灵球里，当有人帮你实现愿望的时候，点击精灵球就会孵化一只属于你和助愿者的可爱小精灵<br>
+                    (2)【助愿】:你可以看到别人的愿望并为ta实现愿望。当许愿者确定愿望已实现后你们都可以拥有一只可爱的小精灵。<br>
+                    (3)集齐十只小精灵后可以在“流年车站”摊位领取丰厚奖品！<br>
+                    (4)另外，每天许愿次数不得超过五次
+                </p>
     </div>
-    <input type="image" src="img/21.png" id="back">
+    <img src="img/back.png" class="return" id="back_index">
     <div class="page" id="yourwish"><!---点击精灵球-->
         <div id="yours">
             <div class="helpbox">愿望一</div>
@@ -59,11 +61,11 @@
         <div class="elfcontain">
             <div class="elf">
             <img src="img/bigelfboder.png">
-            <img class="elfpic" src="img/423.png" alt="精灵">
+            <img class="elfpic" src="img/fairy1.png" alt="精灵">
             </div>
             <div class="elf">
             <img src="img/bigelfboder.png">
-            <img class="elfpic" src="img/424.png" alt="精灵">
+            <img class="elfpic" src="img/fairy2.png" alt="精灵">
             </div>
         </div>
     </div>
@@ -85,8 +87,12 @@
     <div class="success" id="expode_page">
         <h2>恭喜你获得新的精灵！</h2>
         <div class="getelf" >
-            <img class="getpic" src="img/423.png">
+            <div class="getpic">
+                <canvas width="200px" height="200px" id="canvas"></canvas>
+            </div>
+            <!-- <img id="elf123" style="display:none"> -->
         </div>
+        <img src="img/back.png" id="back">
     </div>
 </body>
 <script src="js/preload.js"></script>

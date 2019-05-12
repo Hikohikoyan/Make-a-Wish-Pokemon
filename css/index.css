@@ -129,12 +129,38 @@ html{
     background-attachment: fixed;
     background-position-y: 90%;
 }
+img{
+    margin-bottom: 28px;
+    max-width: 100%;
+    margin-top: 8px;
+    /* text-align: center; */
+    /* left: 50%; */
+    margin-left: 8%;
+}
 h1{
     font-family: "Microsoft YaHei";
     color: rgba(253, 218, 56, 0.929);
     text-align: center;
     margin: 0;
     padding: 0;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke: rgb(62,99,164);
+    -webkit-text-stroke-width: 1.3px;
+    margin-top: 10%;
+    /* height: 0px; */
+    font-size: 35px;
+}
+.title{
+    max-width: 80%;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    left: 50%;
+    margin-left: -112px;
+    margin-bottom: 30px;
+    margin-top: 18px;
 }
 body{
     margin: 0%;
@@ -182,6 +208,9 @@ label.aside{
 #rule_page,#info,#yourwish,#hope_page,#help_page,#get_page,#expode_page{
     display: none;
 }
+#help_page{
+    margin-top: 15%;
+}
 .index,.btn1,.btn2{
     padding: 0%;
     margin: 0%;
@@ -197,12 +226,12 @@ label.aside{
     margin-left: 9.5%;
 }
 #wish,#help,#rule,#mine{
-    height: 80%;
+    /*height: 80%; */
     /* margin-left: 25%; */
-    width: 72%;
+    width: 60%;
     margin: 0%;
     margin-bottom: 5%;
-    margin-left: 13.5%;
+    margin-left: 20%;
 }
 /* .top-navagition{
     position: fixed;
@@ -227,7 +256,7 @@ label.aside{
 }
 .page,div#index{
     position: relative;
-    margin-top: 8vh;
+    margin-top: 12px;
     margin-bottom: 12.5%;
     margin-left: 12.5%;
     margin-right: 12.5%;
@@ -245,11 +274,7 @@ label.aside{
     margin-top: 10%;
     /* height: -webkit-fill-available; */
 }
-img{
-    margin-bottom: 15%;
-    max-width: 100%;
-    margin-top: 12.5%;
-}
+
 
 #yours{
     margin: 0%;
@@ -264,7 +289,9 @@ img{
     margin-bottom: 30%;
 }
 #rule{
-    width: 100px;
+    width: 128px;
+    left: 0;
+    margin-left: 20px;
 }
 #pika{
     margin: 0;
@@ -277,8 +304,8 @@ img{
     margin-bottom: -50px;
 }
 #rule_page{
-    background-image: url(../img/rules.png);
-    height: 365px;
+    /* background-image: url(../img/rules.png); */
+    height: 450px;
     width: 100%;
     margin: 0;
     background-repeat: no-repeat;
@@ -288,14 +315,19 @@ img{
 }
 p{
     margin: 0;
-    margin-top: 45px;
+    margin-top: 20px;
     margin-bottom: 35px;
-    padding: 15px;
+    padding: 35px;
     /* padding-bottom: 95px; */
     white-space: normal;
     overflow: scroll;
-    height: 251px;
+    height: 235px;
     font-size: 20px;
+    color: white;
+    border: solid rgba(253, 218, 56, 0.929) 4px;
+    font-family: SimHei;
+    font-weight: 100;
+    border-radius: 0.4em;
 }
 .helpbox{
     /* background-image: url(../img/2.png); */
@@ -315,14 +347,9 @@ p{
     margin-bottom: 15px;
     border-radius: 0.9em;
 }
-ul{
-    margin: 0;
-    -webkit-appearance: none;
-    list-style: none;
-    padding: 0;
-}
+
 .helpbox:hover,.helpbox::after{
-    background-image: url(../img/2\ 拷贝.png);
+    /* background-image: url(../img/2\ 拷贝.png); */
 }
 #change{
     position: relative;
@@ -352,16 +379,21 @@ ul{
     margin-right: 5%;
 }
 #back{
-    max-width: 20%;
+    display: none;
+    max-width: 65%;
     position: absolute;
-    top: 120%;
-    display:none;
+    width: 45%;
+    bottom: 0;
+    /* top: 100%; */
+    /* left: 50%; */
+    margin-left: -86px;
+    margin-bottom: 20%;
 }
 #ok2{
     position: absolute;
     bottom: 0;
     margin-bottom: -40%;
-    width: 45%;
+    width: 55%;
     left: 50%;
     margin-left: -82.5px;
 }
@@ -373,6 +405,16 @@ h2{
     color: white;
     font-size: 25px;;
     margin-bottom: 10px;
+}
+#back_index{
+    max-width: 65%;
+    position: absolute;
+    width: 60%;
+    bottom: 0;
+    top: 100%;
+    left: 50%;
+    margin-left: -86px;
+    display: none;
 }
 #expode_page{
     display: block;
@@ -386,7 +428,7 @@ h2{
     padding-left: 28px;
 }
 .getelf{
-    background-image: url(../img/bigelfboder.png);
+    /* background-image: url(../img/bigelfboder.png); */
     margin: 0;
     padding: 0;
     height: 200px;
@@ -398,12 +440,19 @@ h2{
 }
 .elfcontain{
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 70px 70px 70px;
     /* margin: 15px; */
     justify-content: start;
-    align-content: center;
-    width: 100%;
-    grid-column-gap: 3vw;
+    position: relative;
+    align-content: start;
+    height: 300px;
+    grid-column-gap: 30px;
+    margin-top: 27px;
+    overflow: scroll;
+    width: 350px;
+    height: 300px;
+    /* margin-left: -15px; */
+    padding-left: 0;
 }
 .page,#expode_page{
     display: none;
@@ -416,13 +465,21 @@ h2{
     margin-top: 8%;
 }
 .getpic{
-    margin-top: 0%;
+    margin-bottom: 28px;
+    max-width: 100%;
+    margin-top: 8px;
+    /* text-align: center; */
+    /* left: 50%; */
+    margin-left: 8%;
+    height: 100%;
+    width: 100%;
+    margin: 0%;
 }
 .span1{
     position: absolute;
     left: 0;
-    margin-top: 13px;
-    margin-left: 24px;
+    margin-top: 10px;
+    margin-left: 30px;
     font-size: 150%;
     font-weight: 348;
 }
@@ -430,8 +487,8 @@ h2{
     position: absolute;
     /* right: 0; */
     left: 0;
-    margin-left: 120px;
-    margin-top: 13px;
+    margin-left:  125px;
+    margin-top: 10px;
     font-size: 150%;
     font-weight: 348;
 }

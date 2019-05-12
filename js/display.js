@@ -3,6 +3,7 @@ $(function () {
     // $(".page").hide();
     // $("#index").show();//主页
     var clicktime=0;
+    var click=0;
     var hash=location.hash;
     var user,tel,wechat,msg;
     var elfs=new Array();//path elf
@@ -12,6 +13,8 @@ $(function () {
     var collection;//什么都往里面存 没问题的（
     var wishText;//愿望文本公用存储
     var wishes;//愿望ID公用存储
+    // allhide();
+    // $("#index").show();
     $("#top").show();
     $(".btn2").show();
     $(".btn1").show();
@@ -29,19 +32,17 @@ $(function () {
         window.location.href="wish.html";
     })//点击许愿
     $("#rule").click(function(){
-        allhide();
-        $(".main_contain").hide();
-        // $("#back").show();
-        $("#rule_page").show();
-        document.getElementById("style1").href="css/index.css";
-        console.log("into rule_page");
-        hash="#rules";
-        location.hash=hash;
-        history.pushState("","Rule",location.href);
+        show_rule();
+    })
+    $("#pika").click(function(){
+        show_rule();
     })//点击规则
-    $("#back").click(function(){
+    $(".return").click(function(){
         window.location.href="index.html";
-    })//点击返回主页（规则页）
+    })//点击返回主页（规则页）return.png
+    $("#back").click(function(){
+        console.log(location.href);
+    })
     $("#btn1").click(function(){
         allhide();
         $(".main_contain").hide();
@@ -61,8 +62,6 @@ $(function () {
         // $(".main_contain").hide();
         window.location.href="help.html";
         console.log("into help");
-        $("#help_page").show();
-        $("#selected").show();
     })//助愿页
     $("#selected").click(function(){
         var data=JSON.stringify({
@@ -86,6 +85,8 @@ $(function () {
         $("#help_page").show();
         $(".success").show();
         $("#back").show();
+        show_elf();
+        console.log("画elf图！")
     })//助愿的确认按钮
     $("#change").click(function(){
         $('.helpbox').remove();
@@ -107,24 +108,24 @@ $(function () {
     });
     //wish.html 许愿页
     $("#next").click(function(){
-        clicktime=clicktime+1;
-        console.log(clicktime);
-        allhide();//包含hope page
-        $(".show").hide();
-        $("#hope_page").show();
-        if(clicktime==1){
-        $("#sign_page").show();
-        console.log("into form_page");
-        hash="#Next,fill-in-the-box";
-        location.hash=hash;
-        history.pushState("","Next",location.href);
-        }else if(clicktime==5){
-            //不能太贪心的提示
-            console.log("不能太贪心了");
+        if("")
+        console.log(wishText);
+        if(check(wishText)){
+            var pack_wish=JSON.stringify({
+                'wish_content':wishText
+            })
+            $.ajax(prepare(1,wishText));
+            console.log("愿望发送给后台了！");
+            allhide();//包含hope page
+            $(".show").hide();
+            $("#hope_page").show();
+            $("#sign_page").show();
+            console.log("into form_page");
+            hash="#Next,fill-in-the-box";    
+        }else{
+            console.log("愿望文本检验"+check(wishText));
         }
-        else{
-            $(".success").fadeIn(1200);
-        }
+        // location.hash=hash;
     })//点击下一步填写信息
     $("#ok").click(function(){//填写完毕 提交信息
         user=$("#name").val();
@@ -136,7 +137,6 @@ $(function () {
             'name':user,
        'telephone':tel,
        'weixin':wechat,
-       'wish_content':wishText
         })
         }else{
             //发送记录愿望请求
@@ -160,9 +160,9 @@ $(function () {
         $("#back").fadeIn(500);
         $(".show").fadeIn(500);
     })//再次许愿
-    $(".return").click(function(){
-        history.back();//返回按钮
-    })//失败的返回按钮 我是说 这个按钮失败了
+    // $(".return").click(function(){
+    //     history.back();//返回按钮
+    // })//失败的返回按钮 我是说 这个按钮失败了
     //隐藏
     function allhide(){
         $(".page").hide();
@@ -170,7 +170,9 @@ $(function () {
         $(".btn2").hide();
         // $(".main_contain").hide();
         $(".success").hide();
+        $("#selected").hide();
         $("#back").hide();
+        $(".return").hide();
         $("#expode.page").hide();
     }
     //请求
@@ -200,12 +202,13 @@ $(function () {
               },
               "success":function(data){
                 collection=data;
+                translate();
             },
             "fail":function(){
                 console.log("不知什么原因失败了哭");
             },
             "error":function(response){
-                console.log(response);
+                console.log(response.statusText);
             }
 
         };
@@ -266,7 +269,7 @@ $(function () {
         $.ajax(settings).done(function(data){
             ball=data.total_ball;
         });
-        console.log(elfs);
+        console.log(elfs[0]);
         console.log(elf);
         console.log(ball);
         $(".span1").text(elf);
@@ -274,26 +277,91 @@ $(function () {
         return elf,elfs,ball;
     }
     //许愿页的换愿望
-    $(".show").mousemove(function(e){
-        // console.log(e.clientY+"~~~~~~"+e.clientX);
-        var nowX=e.clientX;
-        var nowY=e.clientY;
-        if(nowX>=160&&nowX<=210&&nowY>=60&&nowY<=120){
-            $("#wishtext").text("就是点那换愿望");
-            $("#customtext").hide();
-            $("#wishtext").show();
-        }else if(nowX>=68&&nowX<=303&&nowY>=160&&nowY<=344){
-            console.log("Writing!OR NOTHING");
-        }else{
-            $("#customtext").hide();
-            $("#wishtext").show();
-            }
+    $(".getpic").mousemove(function(e){
+        console.log(e.clientY+"~~~~~~"+e.clientX);
+        var nowX=e.clientX;//217 88
+        var nowY=e.clientY;//420 288
+
     })
+    function show_elf(id){
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        //暂时写死
+        var Img = new Image();
+        var src=elfs[id];
+        src="img/fairy2.png";
+        Img.src = src;
+        console.log("drawelf"+src);
+        Img.onload=function(){
+            console.log("开始画了")
+            ctx.drawImage(Img,0,0,200,200);
+            ctx.shadowColor = "white";
+            ctx.shadowBlur = 15;
+            ctx.save();
+            var usecache=1;
+            // ctx.closePath();
+            var bling=setInterval(() => {
+                if(shadownum==1){
+                    ctx.shadowColor = "white";
+                    ctx.shadowBlur=0;
+                    shadownum=0;
+                }else{
+                    ctx.shadowColor = "white";
+                    ctx.shadowBlur = 15;
+                }
+            }, 200);
+            setTimeout(function(){
+                clearInterval(bling);
+                
+            },1000*4);
+            }
+        function canvas_cache(ctx){
+            var ctx0 = document.createElement("canvas");
+            ctx0 = canvas.getContext("2d");
+            ctx0.width= ctx.width;
+            ctx0.height =ctx.height;
+            console.log("开始画了_cache")
+            ctx0.drawImage(Img,0,0,200,200);
+            ctx0.save();
+        }
+    }
+    $("#middle").click(function(){
+        //发送请求换愿望
+        console.log("第"+click+"次愿望");
+        click=click+1;
+        if(click<=5){
+        var setting=prepare(0);
+        $.ajax(setting).done(function(data){
+            wishText=data.errmsg;
+            console.log(click+":"+wishText);
+            $("#wishtext").text(wishText);
+        })}
+        if(click==5){
+            $("#middle").attr("disabled","disabled");
+            $("#attention0").text("不可以频繁更换愿望哦")
+            setTimeout(() => {
+            $("#middle").removeAttr("disabled");
+            $("#attention0").text("");
+            click=0;
+        }, 5000);
+        }
+})
+
     //许愿页定制
     $("#custom").click(function(){
-        $("#wishtext").hide();
-        $("#customtext").show();
-    })
+            $("#wishtext").hide();
+            $("#customtext").show();
+            $("#custom").hide();
+            $("#cancel").show();
+            clicktime=666;
+        })
+    $("#cancel").click(function(){
+        $("#wishtext").show();
+        $("#customtext").hide();
+        $("#cancel").hide();
+        $("#custom").show();
+        clicktime=0;
+})
     //测试定位
     $("#top").mousemove(function(e){
         // console.log(e.pageY+"~~~~~~"+e.pageX);
@@ -307,5 +375,38 @@ $(function () {
         $(".ballcontain").click(function(){
         })
     }
-
+    function show_rule(){
+        allhide();
+        $(".main_contain").hide();
+        $("#back").hide();
+        $("#back_index").show();
+        $("#rule_page").show();
+        document.getElementById("style1").href="css/index.css";
+        console.log("into rule_page");
+        hash="#rules";
+        location.hash=hash;
+        history.pushState("","Rule",location.href);
+    }
+    function translate(){
+        console.log(collection);
+        if(collection!=undefined||collection!=""){
+            var name=new Array();//存数据名
+            var result=new Array();
+            name[0]="errcode";
+            name[1]="errmsg";
+            name[2]="name";
+            name[3]="telephone";
+            name[4]="weixin";
+            for(var i=0;i<=name.length;i++){
+                if(collection.name[i]!=undefined||collection.name[i]!=null){
+                    result.push(collection.name[i]);
+                    console.log(result);
+                }else{
+                    console.log("我获取不到诶");
+                }
+            }
+            }else{
+                console.log("我获取不到诶");
+            }
+    }
 })
