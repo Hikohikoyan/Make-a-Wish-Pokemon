@@ -9,7 +9,7 @@ $(function(){
         $("#selected").hide();
         console.log("help page");
     }
-    if(nowpage[4].indexOf("index")==0){
+    if(nowpage[4].indexOf("major")==0){
         $("#index").hide();
         console.log("index page");
     }
@@ -126,7 +126,7 @@ $(function(){
                 $(".major").fadeIn(2500);
                 $("#selected").fadeIn(2500);
             }
-            if(nowpage[4].indexOf("index")==0){
+            if(nowpage[4].indexOf("major")==0){
                 $("#index").show();
                 console.log("index page");
             }

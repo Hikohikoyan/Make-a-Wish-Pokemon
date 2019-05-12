@@ -38,7 +38,7 @@ $(function () {
         show_rule();
     })//点击规则
     $(".return").click(function(){
-        window.location.href="index.html";
+        window.location.href="major.html";
     })//点击返回主页（规则页）return.png
     $("#back").click(function(){
         console.log(location.href);
@@ -375,7 +375,6 @@ $(function () {
         $(".ballcontain").click(function(){
         })
     }
-<<<<<<< HEAD
     function show_rule(){
         allhide();
         $(".main_contain").hide();
@@ -411,7 +410,3 @@ $(function () {
             }
     }
 })
-=======
-
-})
->>>>>>> 723a4c2e4ae558b879277f0ff48834b234e7bd11
