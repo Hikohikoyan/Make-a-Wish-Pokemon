@@ -16,7 +16,7 @@ $(function(){
     var imgdownload = new createjs.LoadQueue(true);
     function handleComplete(){
         var src=$("#rotate").attr("src");
-        src=src.replace("img/rotate/","");
+        src=src.replace("http://182.254.161.178/laravel/public/img/rotate/","");
         src=src.replace(".png","");
         console.log("completed");
         console.log(src);
@@ -72,7 +72,7 @@ $(function(){
         "img/rotate/18.png",
         "img/rotate/19.png",
         "img/rotate/20.png",
-        "img/rotate/21.png",
+        "img/rotate/21.png",//http://182.254.161.178/laravel/public/
     ]);
     imgdownload.load();
     // console.log(res);
@@ -102,7 +102,7 @@ $(function(){
                     // console.log(str)
                 //}
             }
-            var src="http://182.254.161.178/test/img/rotate/"+str+".png";
+            var src="http://182.254.161.178/laravel/public/img/rotate/"+str+".png";
             $("#rotate").attr("src",src);
         },70);
         setTimeout(function(){
