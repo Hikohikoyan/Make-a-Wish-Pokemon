@@ -16,7 +16,7 @@ $(function(){
     var imgdownload = new createjs.LoadQueue(true);
     function handleComplete(){
         var src=$("#rotate").attr("src");
-        src=src.replace("http://182.254.161.178/laravel/public/img/rotate/","");
+        src=src.replace("img/rotate/","");
         src=src.replace(".png","");
         console.log("completed");
         console.log(src);
