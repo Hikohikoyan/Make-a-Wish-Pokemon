@@ -107,7 +107,7 @@ $(function(){
         },70);
         setTimeout(function(){
             clearInterval(interval);
-            $("#loadingtext").text("Completed!");
+            // $("#loadingtext").text("Completed!");
             $(".outborder").children()[2].remove();
             $("#loadingtext").css({
                 "animation":" a",
@@ -116,18 +116,26 @@ $(function(){
                 "-moz-animation":"a",
                 "-o-animation": "a",
             });
-            $("#loading").fadeOut(400);//上一动画
+            // $("#loading").fadeOut(400);//上一动画
             var nowpage=location.href.split("/");
             
             if(nowpage[4].indexOf("wish")==0){
-            $("#hope_page").fadeIn(2000);}
+            $("#loading").hide();//上一动画
+            $("#hope_page").show();}
             if(nowpage[4].indexOf("help")==0){
-                $("#help_page").fadeIn(2000);
-                $(".major").fadeIn(2500);
-                $("#selected").fadeIn(2500);
+                $("#loading").hide();//上一动画
+                $("#help_page").show();
+                $(".major").show();
+                $("#selected").show();
             }
             if(nowpage[4].indexOf("major")==0){
-                $("#index").show();
+                $("#index").hide();
+                $(".outborder").fadeOut(300);
+                $(".welcome").css({
+                    "display":"flex",
+                    "animation": "punch 0.85s",
+                    "animation-fill-mode": "forwards"
+                });
                 console.log("index page");
             }
         },1000)

@@ -15,6 +15,10 @@ $(function () {
     var wishes;//愿望ID公用存储
     // allhide();
     // $("#index").show();
+    $("#img41").click(function(){
+        $("#loading").remove();
+        $("#index").show();
+    })
     $("#top").show();
     $(".btn2").show();
     $(".btn1").show();
@@ -40,20 +44,30 @@ $(function () {
     $(".return").click(function(){
         window.location.href="major.html";
     })//点击返回主页（规则页）return.png
-    $("#back").click(function(){
+    $("img#back").click(function(){
         console.log(location.href);
+        if(location.href.split("/")[4].indexOf("help")==0||location.href.split("/")[4].indexOf("wish")==0){
+            //现在是助愿页/许愿
+            window.location.href="major.html";
+        }else{
+            console.log("返回了");
+            $("#elfs").hide();
+            $("#balls").hide();
+            $("#top").show();
+            $(".main_contain").show();
+        }
     })
     $("#btn1").click(function(){
-        allhide();
         $(".main_contain").hide();
-        $("#elfs").show();
+        $("#top").hide();
+        show1("#elfs");
         $("#back").show();
         $("h1").text("你的精灵("+elf+")");
     })//查看精灵
     $("#btn2").click(function(){
-        allhide();
         $(".main_contain").hide();
-        $("#balls").show();
+        $("#top").hide();
+        show1("#balls");
         $("#back").show();
         $("h1").text("你的精灵球("+ball+")");
     })//查看精灵球
@@ -77,13 +91,13 @@ $(function () {
         $("#help_page").show();
         $("#change").hide();
         $("#others").hide();
-        $("#info").show();
+        show1("#info");
         $("#selected").hide();
     })//助愿页信息的确认按钮
     $("#ok2").click(function(){
         allhide();
         $("#help_page").show();
-        $(".success").show();
+        show1(".success")
         $("#back").show();
         show_elf();
         console.log("画elf图！")
@@ -104,7 +118,7 @@ $(function () {
         allhide();
         $("#back").show();
         $(".main_contain").hide();
-        $("#yourwish").fadeIn(100);
+        $("#yourwish").show();
     });
     //wish.html 许愿页
     $("#next").click(function(){
@@ -167,17 +181,16 @@ $(function () {
         }
         $.ajax(prepare(3,pack));
         $("#sign_page").hide();
-        $(".success").fadeIn(1200);
-
+        show1(".success");
     })
     $("#again").click(function(){
         $(".success").hide();
-        $("#back").fadeIn(500);
-        $(".show").fadeIn(500);
+        $("#back").show();
+        $(".show").show();
     })//再次许愿
-    // $(".return").click(function(){
-    //     history.back();//返回按钮
-    // })//失败的返回按钮 我是说 这个按钮失败了
+    $("#return").click(function(){
+       window.location.href="major.html";//返回按钮
+    })//失败的返回按钮 我是说 这个按钮失败了
     //隐藏
     function allhide(){
         $(".page").hide();
@@ -311,33 +324,34 @@ $(function () {
             console.log("开始画了")
             ctx.drawImage(Img,0,0,200,200);
             ctx.shadowColor = "white";
-            ctx.shadowBlur = 15;
+            ctx.shadowBlur = 0;
             ctx.save();
             var usecache=1;
             // ctx.closePath();
-            var bling=setInterval(() => {
-                if(shadownum==1){
-                    ctx.shadowColor = "white";
-                    ctx.shadowBlur=0;
-                    shadownum=0;
-                }else{
-                    ctx.shadowColor = "white";
-                    ctx.shadowBlur = 15;
-                }
-            }, 200);
+            // var bling=setInterval(() => {
+            //     if(shadownum==1){
+            //         ctx.shadowColor = "white";
+            //         ctx.shadowBlur=0;
+            //         shadownum=0;
+            //     }else{
+            //         ctx.shadowColor = "white";
+            //         ctx.shadowBlur = 15;
+            //     }
+            // }, 200);
             setTimeout(function(){
-                clearInterval(bling);
-                
+                // clearInterval(bling);
+                ctx.clip();
+                console.log("清除画板");
             },1000*4);
             }
         function canvas_cache(ctx){
-            var ctx0 = document.createElement("canvas");
-            ctx0 = canvas.getContext("2d");
-            ctx0.width= ctx.width;
-            ctx0.height =ctx.height;
-            console.log("开始画了_cache")
-            ctx0.drawImage(Img,0,0,200,200);
-            ctx0.save();
+            // var ctx0 = document.createElement("canvas");
+            // ctx0 = canvas.getContext("2d");
+            // ctx0.width= ctx.width;
+            // ctx0.height =ctx.height;
+            // console.log("开始画了_cache")
+            // ctx0.drawImage(Img,0,0,200,200);
+            // ctx0.save();
         }
     }
     $("#middle").click(function(){
@@ -395,14 +409,14 @@ $(function () {
         $(".main_contain").hide();
         $("#back").hide();
         $("#back_index").show();
-        $("#rule_page").show();
+        show1("#rule_page");
         document.getElementById("style1").href="css/index.css";
         console.log("into rule_page");
         hash="#rules";
         location.hash=hash;
         history.pushState("","Rule",location.href);
     }
-    function translate(){
+    function translate(collection){
         console.log(collection);
         if(collection!=undefined||collection!=""){
             var name=new Array();//存数据名
@@ -416,6 +430,7 @@ $(function () {
                 if(collection.name[i]!=undefined||collection.name[i]!=null){
                     result.push(collection.name[i]);
                     console.log(result);
+                    return result;
                 }else{
                     console.log("我获取不到诶");
                 }
@@ -423,5 +438,13 @@ $(function () {
             }else{
                 console.log("我获取不到诶");
             }
+    }
+    function show1(str){
+        $(str).show();
+        $(str).css({
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center"
+        });
     }
 })

@@ -155,25 +155,25 @@ html{
     background-position: bottom;
     background-attachment: fixed;
     background-position-y: 90%;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 body{
     margin: 0%;
     padding: 0%;
-    overflow: hidden;
-    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%; 
     height:100%;
 }
-li{
-    list-style: none;
-    margin-left: 25%;
-}
+
 .form{
     color: white;
-    /* margin-right: 37.5%; */
-    width: -webkit-fill-available;
-    /* height: -webkit-fill-available; */
-    height: 60vh;
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #help_page,#top,#index,#get_page,#rule_page,#yourwish,#expode_page,#sign_page{
     display: none;
@@ -192,12 +192,9 @@ input[type="image"]{
     padding: 0%;
     margin: 0%;
     display: block;
-    /* text-align: center; */
     height: 6vh;
     width: 100%;
     margin-bottom: 10%;
-    /* margin-left: 5%;
-    margin-right: 5%; */
 }
 img{
     max-width: 75%;
@@ -210,19 +207,16 @@ li{
     margin: 0%;
 }
 #custom,#cancel{
-    /*position: fixed; */
-    /* height: 70px; */
     width: 70px;
     bottom: 0;
     width: 160px;
-    /* margin-bottom: 80px; */
-    /* left: 50%; */
-    /* margin-left: -80px; */
-    /* margin-top: 10px;*/
+    margin-top: 15px;
+    transform: scale(0.8);
 }
 #cancel{
     display:none;
 }
+
 #main_contain{
     margin-left: 12.5%;
     margin-right: 12.5%;
@@ -231,22 +225,22 @@ li{
     padding: 5.5%;
 }
 input[type="text"],input[type="tel"]{
-    padding-top: 4%;
-    padding-bottom: 4%;
-    padding-left: 5px;
-    width: 160px;
-    height: 2vh;
-    /* margin-bottom: 15%; */
-    margin-left: 32%;
-    margin-top: 30px;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    width: 55%;
+    /* height: 30px; */
     border-radius: 0.3em 0.3em 0.3em;
     background-color: white;
     position: relative;
-    top: 56px;
-    /* box-shadow: 0 0 black; */
     border-left-color: white;
     border-style: hidden;
-    opacity: 0.8;
+    opacity: 0.9;
+    font-size: 23px;
+    font-family: SimHei;
+}
+#get_page{
+    display: flex;
 }
 h2{
     text-align: center;
@@ -257,38 +251,23 @@ h2{
     font-size: 28px;
     white-space: pre;
     margin-bottom: 10px;
-    /* padding-left: 35px; */
-    /* margin-top: 35px; */
 }
 .h2{
     margin: 0%;
     padding: 0;
-    overflow: scroll;
-    font-size: 145%;}
+    margin-bottom: 8px;
+    overflow: hidden;
+}
 #next{
-    /*position: fixed; */
-    /* height: 12%; */
-    /* width: 70px; */
     bottom: 0;
-    /* width: 55%; */
-    /* margin-bottom: 35%; */
-    /* left: 50%; */
-    /* margin-left: -66px; */
     position: relative;
     top: 0;
-    bottom: 0;
-    /* bottom: -70px; */
     height: 70px;
-    /* width: 70px; */
-    bottom: 0;
     width: 160px;
-    /* width: 100%; */
-    /* height: 100%; */
-    /* margin-bottom: -80px; */
-    /* left: 50%; */
-    /* margin-left: -80px; */
-    top: 0;
     margin: 0;
+    margin-top: 15px;
+    transform: scale(0.8);
+    margin-top: -80px;
 }
 .show{
     height: 3100%;
@@ -310,43 +289,38 @@ h2{
     height: 30vh;
 }
 .aside {
-    display: grid;
-    grid-auto-flow: dense;
-    grid-template-rows: 30px 15px 30px 15px 30px 15px;
-    grid-template-columns: 150px auto;
-    grid-row-gap: 5px;
-}
-label{
-    position: relative;
-    font-size: 22px;
-}
-#label1,#label2,#label3{
-    margin-top: 10px;
-    position: unset;
+    margin-top: 40px;
 }
 #ok{
-    position: absolute;
-    top: 100%;
-    border: none;
+    bottom: 0;
+    position: relative;
+    top: 0;
     height: 70px;
-    width: 70px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    right: 2%;
-    margin-top: 20%;
+    width: 160px;
+    margin: 0;
+    margin-top: 15px;
+    transform: scale(0.8);
+    margin-top: 60px;
+    margin-left: 56px;
 }
-#again,#help{
+#again,#help,.fine{
     padding: 0%;
     margin: 0%;
     display: block;
-    /* text-align: center; */
     height: 80%;
-    margin-left: 25%;
+    /* margin-left: 25%; */
     width: 50%;
-    margin-bottom: 15%;
+    position: relative;
+    /* margin-bottom: 15%; */
+    height: 70px;
+    width: 160px;
+    margin: 0;
+    /* margin-top: 15px; */
+    transform: scale(0.8);
+    margin-bottom: 10px;
 }
 #again{
-    margin-top: 40%;
+    margin-top: 40px;
 }
 .helpbox{
     /* background-image: url(../img/2.png); */
@@ -360,9 +334,6 @@ label{
     font-family: SimHei;
     font-size: 2.4vh;
 }
-/* .helpbox:hover,.helpbox::after{
-    /* background-image: url(../img/2\ 拷贝.png); 
-} */
 #change{
     position: relative;
     width: 80px;
@@ -385,41 +356,23 @@ label{
     left: 0;
     left: 85%;
 }
-
-.aside{
-    display: grid;
-}
-
-
 label{
     font-size: 22px;
     margin-top: 10%;
-}
-label.aside{
-    margin-top: 40%;
 }
 #others{
     margin-left: 12.5%;
 }
 #info{
-    /* background-image: url(../img/132143.png);
-    background-repeat: round; */
     height: 300px;
     width: 100%;
     margin: 0;
 }
 .div_info{
-    /* background-image: url(../img/132143.png); */
     background-repeat: round;
-    /* margin-left: 20px; */
     margin-top: 30px;
-    /* position: absolute; */
-    /* padding-left: 28px; */
     padding-bottom: 10px;
-    /* width: max-content; */
-    /* padding-right: 115px; */
     height: max-content;
-    /* padding-top: 12.5%; */
     padding-left: 25px;
 }
 .info{
@@ -467,32 +420,26 @@ p{
     margin: 0;
     white-space: normal;
     overflow: scroll;
-    /* height: 251px; */
-    font-size: 4vh;
-    /* padding-top: 35%; */
+    height: 251px;
+    font-size: 20px;
     padding-left: 15px;
     padding-right: 15px;
-    height: 180px;
     border: solid #d2b634 4px;
     border-radius: 0.9em;
-    /* padding-bottom: 20px; */
-    top: 0;
-    position: absolute;
-    /* top: 15%; */
-    margin-top: 35%;
+    padding-bottom: 10%;
+    position: relative;
+    padding-top: 40px;
+    width: 80%;
+    top: -88px;
 }
 img#middle{
     transform: scale(0.7);
-    /* margin-top: 12%; */
     z-index: 3;
-    /* position: relative; */
     margin: 0%;
     position: relative;
     top: 0;
     top: -43.3px;
     left: 0;
-    /* left: 50%; */
-    /* margin-left: -37.8px; */
 }
 #middle:hover{
     width: 54.6px;
@@ -509,20 +456,23 @@ img#middle{
     outline: none;
     color: white;
     -webkit-appearance: none;
-    /* border: black 0.01px; */
     border-style: none;
-    position: absolute;
+    white-space: normal;
+    overflow: scroll;
+    height: 251px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: solid #d2b634 4px;
+    border-radius: 0.9em;
+    padding-bottom: 10%;
+    position: relative;
     top: 0;
-    left: 0;
-    height: 66%;
-    top: 5%;
-    margin-top: 15px;
-    left: 5%;
-    margin-left: 15px;
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 22px;
-    /* color: white; */}
+    top: -88px;
+    padding-top: 40px;
+    margin: 0;
+    width: 80%;
+}
 #back_index{
     max-width: 20%;
     position: absolute;
@@ -538,57 +488,38 @@ img#middle{
 }
 #attention0{
     margin: 0;
+    white-space: pre-line;
+    overflow: unset;
+    height: unset;
+    font-size: 20px;
     padding: 0;
+    border: 0;
     color: red;
     position: relative;
-    /* bottom: 0; */
-    top: -10%;
-    /* left: 45%; */
     font-size: 18px;
     border: 0;
-    /* margin-left: 0px; */
     text-align: center;
+    width: 80%;
+    height: 20px;
+    display: block;
+    position: relative;
+    top: -120px;
 }
-.attention1{
-    margin: 0%;
-    padding: 0;
-    font-size: unset;
-    position: absolute;
-    top: 0;
-    /* float: right; */
-    right: 0;
-    top: 50px;
+.attention{
     color: red;
-    opacity: 0.7;
-    font-family: SimHei;
+    width: 80px;
+    height: 20px;
+    position: relative;
+    left: 50%;
+    margin-left: -65px;
+    top: 3px;
+    margin-bottom: 0;
 }
-.attention2{
-    margin: 0%;
-    padding: 0;
-    font-size: unset;
-    position: absolute;
-    top: 0px;
-    top: 88px;
-    color: red;
-    opacity: 0.7;
-    font-family: SimHei;
-    padding-top: 3px;
-    top: 110px;
-    color: red;
-    opacity: 0.7;
-    font-family: SimHei;
-    right: 0;
+#get_page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.attention3{
-    margin: 0%;
-    padding: 0;
-    font-size: unset;
-    position: absolute;
-    top: 0px;
-    top: 175px;
-    color: red;
-    opacity: 0.7;
-    font-family: SimHei;
-    /* padding-top: 3px; */
-    right: 0;
+.success{
+    display: none;
 }

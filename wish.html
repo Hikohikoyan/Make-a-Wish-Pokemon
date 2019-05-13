@@ -24,7 +24,7 @@
     <div class="show">
         <img src="img/rotate/1.png" id="middle" >
         <p id="wishtext">我想有人和我一起用同一个系列的沙雕微信头像一周</p>
-        <textarea id="customtext" rows="5" cols="14" placeholder="点击输入愿望"></textarea>
+        <textarea id="customtext" rows="5" cols="14" placeholder="点击开始编辑"></textarea>
         <p id="attention0"></p>
         <img src="img/next.png" id="next">
         <img src="img/cunstom.png" id="custom" value="自定义">
@@ -32,26 +32,35 @@
     </div>
     <div class="form" id="sign_page">
             <div class="main_contain">
-                <h2 class="h2">填写信息</h2>
+                <h2 class="h2">填 写 信 息</h2>
                 <div class="aside">
-                    <label  for="name">姓名：</label>
+                    <label  for="name">昵称：</label>
                     <input required="required" type="text" id="name">
-                    <p class="attention">请输入姓名</p>
+                </div>
+                    <span class="attention">请输入姓名</span>
+                <div class="aside">
                     <label for="tel">手机：</label>
                     <input required="required" maxlength="11" type="tel" id="tel" >
-                    <p class="attention">请输入手机</p>
+                </div>
+                    <span class="attention">请输入手机</span>
+                <div class="aside">
                     <label for="wechat">微信：</label>
                     <input required="required" type="text" id="wechat">
-                    <p class="attention">请输入微信</p>
                 </div>
+                    <span class="attention">请输入微信</span>
+                </div>
+                <img src="img/next.png" id="ok">
             </div>
-            <img src="img/next.png" id="ok">
     </div>
-    <div class="success" id="get_page" style="padding-top: 25%;">
+    <div class="success">
+        <div  id="get_page" >
         <h2 class="h2">许愿成功！</h2>
-        <h2 class="h2">恭喜你获得了一个精灵球!</h2>
-        <img src="img/again.png" class="fine"class="return" id="again" placeholder="再许一个">
+        <h2 class="h2">愿望被领取之后</h2>
+        <h2 class="h2">就可以获得精灵球喔！</h2>
+        <img src="img/again.png" class="fine" id="again" placeholder="再许一个">
         <img src="img/gohelp.png"class="fine" id="help">
+        <img src="img/return.png" class="fine" id="return">
+    </div>
     </div>
 </div>
 <!-- <img src="img/back.png" id="back"> -->
