@@ -150,10 +150,12 @@ html{
     height:100%;
     background-image: url(../img/background.png);
     background-attachment: fixed;
-    background-size: 130%;
+    background-size: 150%;
     background-repeat: repeat-y;
     background-position: bottom;
     background-attachment: fixed;
+    background-position-y: 90%;
+    overflow: hidden;
 }
 body{
     margin: 0%;
@@ -209,13 +211,14 @@ li{
 }
 #custom,#cancel{
     position: fixed;
-    height: 70px;
+    /* height: 70px; */
     width: 70px;
     bottom: 0;
-    width: 45%;
-    margin-bottom: 12%;
+    width: 160px;
+    margin-bottom: 80px;
     left: 50%;
-    margin-left: -82.5px;
+    margin-left: -80px;
+    margin-top: 10px;
 }
 #cancel{
     display:none;
@@ -264,17 +267,27 @@ h2{
     font-size: 145%;}
 #next{
     position: fixed;
-
-    height: 70px;
-    width: 70px;
+    /* height: 12%; */
+    /* width: 70px; */
     bottom: 0;
-    width: 45%;
-    margin-bottom: 35%;
+    /* width: 55%; */
+    /* margin-bottom: 35%; */
     left: 50%;
-    margin-left: -82.5px;
+    margin-left: -66px;
+    /* top: 10px; */
+    position: fixed;
+    /* height: 70px; */
+    /* width: 70px; */
+    bottom: 0;
+    width: 160px;
+    /* width: 100%; */
+    /* height: 100%; */
+    margin-bottom: 180px;
+    left: 50%;
+    margin-left: -80px;
 }
 .show{
-    height: 370px;
+    height: 300px;
     /* width: 85%; */
     border: solid #d2b634 4px;
     border-radius: 0.9em;
@@ -290,6 +303,13 @@ h2{
     top: 12vh;
     margin-left: 20px;
     height: 30vh;
+}
+.aside {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-rows: 30px 15px 30px 15px 30px 15px;
+    grid-template-columns: 150px auto;
+    grid-row-gap: 5px;
 }
 label{
     position: relative;
@@ -474,7 +494,7 @@ img#middle{
     margin-left: -27.3px;
     animation:   rotate2 1.2s linear infinite;
     -webkit-animation:   rotate2 1.2s linear infinite;
-    -webkit-transform-origin:center;
+    -webkit-transform-origin: center;
     -moz-animation:    rotate2 1.2s linear infinite;
     -o-animation:     rotate2 1.2s linear infinite; 
 }

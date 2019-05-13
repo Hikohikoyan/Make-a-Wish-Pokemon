@@ -25,32 +25,33 @@
         <img src="img/rotate/1.png" id="middle" >
         <p id="wishtext">我想有人和我一起用同一个系列的沙雕微信头像一周</p>
         <textarea id="customtext" rows="5" cols="14" placeholder="点击输入愿望"></textarea>
-        <p id="attention0">!!</p>
-        <input type="image" src="img/next.png" id="next">
-        <input type="image" src="img/cunstom.png" id="custom" value="自定义">
-        <input type="image" src="img/cancel.png" id="cancel" value="取消">
+        <p id="attention0"></p>
+        <img src="img/next.png" id="next">
+        <img src="img/cunstom.png" id="custom" value="自定义">
+        <img src="img/cancel.png" id="cancel" value="取消">
     </div>
     <div class="form" id="sign_page">
             <div class="main_contain">
-                <div class="aside1">
-                    <label id="label1" for="name">姓名：</label>
-                    <p class="attention1">请输入姓名</p>
-                    <label id="label2"for="tel">手机：</label>
-                    <p class="attention2">请输入手机</p>
-                    <label id="label3" for="wechat">微信：</label>
-                    <p class="attention3">请输入微信</p>
+                <h2 class="h2">填写信息</h2>
+                <div class="aside">
+                    <label  for="name">姓名：</label>
+                    <input required="required" type="text" id="name">
+                    <p class="attention">请输入姓名</p>
+                    <label for="tel">手机：</label>
+                    <input required="required" maxlength="11" type="tel" id="tel" >
+                    <p class="attention">请输入手机</p>
+                    <label for="wechat">微信：</label>
+                    <input required="required" type="text" id="wechat">
+                    <p class="attention">请输入微信</p>
                 </div>
-            <input required="required" type="text" id="name">
-            <input required="required" maxlength="11" type="tel" id="tel" >
-            <input required="required" type="text" id="wechat">
-            <input type="button" id="ok">
             </div>
+            <input type="button" id="ok">
     </div>
     <div class="success" id="get_page" style="padding-top: 25%;">
         <h2 class="h2">许愿成功！</h2>
         <h2 class="h2">恭喜你获得了一个精灵球!</h2>
-        <input type="image" src="img/again.png" class="fine"class="return" id="again" placeholder="再许一个">
-        <input type="image" src="img/gohelp.png"class="fine" id="help">
+        <img src="img/again.png" class="fine"class="return" id="again" placeholder="再许一个">
+        <img src="img/gohelp.png"class="fine" id="help">
     </div>
 </div>
 <!-- <img src="img/back.png" id="back"> -->

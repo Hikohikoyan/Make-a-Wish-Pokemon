@@ -108,23 +108,38 @@ $(function () {
     });
     //wish.html 许愿页
     $("#next").click(function(){
-        if("")
-        console.log(wishText);
-        if(check(wishText)){
-            var pack_wish=JSON.stringify({
-                'wish_content':wishText
-            })
-            $.ajax(prepare(1,wishText));
-            console.log("愿望发送给后台了！");
-            allhide();//包含hope page
-            $(".show").hide();
-            $("#hope_page").show();
-            $("#sign_page").show();
-            console.log("into form_page");
-            hash="#Next,fill-in-the-box";    
-        }else{
-            console.log("愿望文本检验"+check(wishText));
+        if(clicktime==666){
+            if(check(wishText)){
+                var pack_wish=JSON.stringify({
+                    'wish_content':wishText
+                })
+                $.ajax(prepare(1,pack_wish));
+                console.log("愿望发送给后台了！");
+                allhide();//包含hope page
+                $(".show").hide();
+                $("#hope_page").show();
+                $("#sign_page").show();
+                console.log("into form_page");
+                hash="#Next,fill-in-the-box";    
+            }else{
+                $("#attention0").text("有问题！");
+                console.log(check(wishText));
+            }
+            return;
         }
+        wishText=$("#wishtext").text();
+        var pack_wish=JSON.stringify({
+            'wish_content':wishText
+        })
+        $.ajax(prepare(1,pack_wish));
+        console.log("愿望发送给后台了！");
+        allhide();//包含hope page
+        $(".show").hide();
+        $("#hope_page").show();
+        $("#sign_page").show();
+        console.log("into form_page");
+        hash="#Next,fill-in-the-box";    
+        console.log(wishText);
         // location.hash=hash;
     })//点击下一步填写信息
     $("#ok").click(function(){//填写完毕 提交信息

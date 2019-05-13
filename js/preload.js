@@ -38,7 +38,7 @@ $(function(){
         "img/rule.png",
         "img/49.png",
         "img/41.png",
-        "img/21.png",
+        // "img/21.png",
         "img/bigelfboder.png",
         // "img/middle.png",//wsih.html
         "img/next.png",
@@ -51,7 +51,7 @@ $(function(){
         "img/return.png",
         "img/welcome.png",
         "img/cunstom.png",
-        "img/21.png",//rotate
+        // "img/21.png",//rotate
         "img/rotate/1.png",
         "img/rotate/2.png",
         "img/rotate/3.png",

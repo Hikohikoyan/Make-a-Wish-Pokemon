@@ -123,11 +123,12 @@ html{
     height:100%;
     background-image: url(../img/background.png);
     background-attachment: fixed;
-    background-size: 130%;
+    background-size: 150%;
     background-repeat: repeat-y;
     background-position: bottom;
     background-attachment: fixed;
     background-position-y: 90%;
+    overflow: hidden;
 }
 img{
     margin-bottom: 28px;
@@ -147,18 +148,20 @@ h1{
     -webkit-text-stroke: rgb(62,99,164);
     -webkit-text-stroke-width: 1.3px;
     margin-top: 10%;
+    white-space: nowrap;
     /* height: 0px; */
     font-size: 35px;
 }
 .title{
-    max-width: 80%;
+    /* max-width: 80%;  */
     position: relative;
     top: 0;
     left: 0;
     margin: 0;
     padding: 0;
     left: 50%;
-    margin-left: -112px;
+    width: 280px;
+    margin-left: -140px;
     margin-bottom: 30px;
     margin-top: 18px;
 }
@@ -226,12 +229,15 @@ label.aside{
     margin-left: 9.5%;
 }
 #wish,#help,#rule,#mine{
-    /*height: 80%; */
+    height: 72px;
+    margin: 0;
+    padding: 0;
     /* margin-left: 25%; */
-    width: 60%;
-    margin: 0%;
-    margin-bottom: 5%;
-    margin-left: 20%;
+    position: relative;
+    width: 160px;
+    left: 50%;
+    margin-bottom: 9%;
+    margin-left: -80px;
 }
 /* .top-navagition{
     position: fixed;
@@ -247,8 +253,9 @@ label.aside{
     display: flex;
     white-space: nowrap;
     float: left;
-    margin-left: -15px;
-    margin-top: -20px;
+    margin-left: 0px;
+    margin-top: 10px;
+    height: 52px;
 }
 
 #yourwish{
@@ -258,8 +265,10 @@ label.aside{
     position: relative;
     margin-top: 12px;
     margin-bottom: 12.5%;
-    margin-left: 12.5%;
-    margin-right: 12.5%;
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-left: 12.5%;
+    margin-right: 12.5%; */
     /* padding: 12.5%; */
     /* height: -webkit-fill-available; */
     /* width: -webkit-fill-available; */
@@ -271,7 +280,7 @@ label.aside{
     grid-template-columns: auto;
     grid-gap: 3.5vh;
     grid-template-rows: 45vh 7.4vh 7.4vh 7.4vh 7.4vh;
-    margin-top: 10%;
+    margin-top: 3%;
     /* height: -webkit-fill-available; */
 }
 
@@ -290,18 +299,22 @@ label.aside{
 }
 #rule{
     width: 128px;
+    margin: 0;
     left: 0;
-    margin-left: 20px;
+    /* margin-top: 12px; */
+    position: relative;
+    margin-left: 40px;
+    bottom: 0;
 }
 #pika{
     margin: 0;
     padding: 0;
-    position: absolute;
+    position: relative;
     width: 85px;
     /* top: 0; */
     bottom: 0;
-    margin-left: -15px;
-    margin-bottom: -50px;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }
 #rule_page{
     /* background-image: url(../img/rules.png); */
@@ -380,14 +393,16 @@ p{
 }
 #back{
     display: none;
-    max-width: 65%;
-    position: absolute;
-    width: 45%;
-    bottom: 0;
-    /* top: 100%; */
-    /* left: 50%; */
-    margin-left: -86px;
-    margin-bottom: 20%;
+    margin: 0;
+    padding: 0;
+    /* max-width: 65%; */
+    position: relative;
+    width: 180px;
+    /* bottom: 0; */
+    top: 0;
+    left: 50%;
+    margin-left: -90px;
+    /* margin-bottom: 20%; */
 }
 #ok2{
     position: absolute;
@@ -440,7 +455,7 @@ h2{
 }
 .elfcontain{
     display: grid;
-    grid-template-columns: 70px 70px 70px;
+    grid-template-columns: 1fr 1fr 1fr;
     /* margin: 15px; */
     justify-content: start;
     position: relative;
@@ -449,10 +464,14 @@ h2{
     grid-column-gap: 30px;
     margin-top: 27px;
     overflow: scroll;
-    width: 350px;
-    height: 300px;
-    /* margin-left: -15px; */
-    padding-left: 0;
+    /* width: 90%; */
+    padding: 8px;
+    height: 350px;
+    /* left: 30%; */
+    margin-bottom: 40px;
+    /* left: 10%; */
+    /* right: 10%; */
+    /* padding-left: 0; */
 }
 .page,#expode_page{
     display: none;
@@ -479,7 +498,7 @@ h2{
     position: absolute;
     left: 0;
     margin-top: 10px;
-    margin-left: 30px;
+    margin-left: 50px;
     font-size: 150%;
     font-weight: 348;
 }
@@ -487,7 +506,7 @@ h2{
     position: absolute;
     /* right: 0; */
     left: 0;
-    margin-left:  125px;
+    margin-left:  145px;
     margin-top: 10px;
     font-size: 150%;
     font-weight: 348;
