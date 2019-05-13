@@ -210,15 +210,15 @@ li{
     margin: 0%;
 }
 #custom,#cancel{
-    position: fixed;
+    /*position: fixed; */
     /* height: 70px; */
     width: 70px;
     bottom: 0;
     width: 160px;
-    margin-bottom: 80px;
-    left: 50%;
-    margin-left: -80px;
-    margin-top: 10px;
+    /* margin-bottom: 80px; */
+    /* left: 50%; */
+    /* margin-left: -80px; */
+    /* margin-top: 10px;*/
 }
 #cancel{
     display:none;
@@ -266,35 +266,40 @@ h2{
     overflow: scroll;
     font-size: 145%;}
 #next{
-    position: fixed;
+    /*position: fixed; */
     /* height: 12%; */
     /* width: 70px; */
     bottom: 0;
     /* width: 55%; */
     /* margin-bottom: 35%; */
-    left: 50%;
-    margin-left: -66px;
-    /* top: 10px; */
-    position: fixed;
-    /* height: 70px; */
+    /* left: 50%; */
+    /* margin-left: -66px; */
+    position: relative;
+    top: 0;
+    bottom: 0;
+    /* bottom: -70px; */
+    height: 70px;
     /* width: 70px; */
     bottom: 0;
     width: 160px;
     /* width: 100%; */
     /* height: 100%; */
-    margin-bottom: 180px;
-    left: 50%;
-    margin-left: -80px;
+    /* margin-bottom: -80px; */
+    /* left: 50%; */
+    /* margin-left: -80px; */
+    top: 0;
+    margin: 0;
 }
 .show{
-    height: 300px;
+    height: 3100%;
     /* width: 85%; */
-    border: solid #d2b634 4px;
-    border-radius: 0.9em;
     width: 100%;
     margin-top: 0%;
     /* height: -webkit-fill-available; */
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .aside1{
     white-space: pre-line;
@@ -322,7 +327,6 @@ label{
 #ok{
     position: absolute;
     top: 100%;
-    background-image: url(../img/next.svg);
     border: none;
     height: 70px;
     width: 70px;
@@ -469,6 +473,8 @@ p{
     padding-left: 15px;
     padding-right: 15px;
     height: 180px;
+    border: solid #d2b634 4px;
+    border-radius: 0.9em;
     /* padding-bottom: 20px; */
     top: 0;
     position: absolute;
@@ -485,8 +491,8 @@ img#middle{
     top: 0;
     top: -43.3px;
     left: 0;
-    left: 50%;
-    margin-left: -37.8px;
+    /* left: 50%; */
+    /* margin-left: -37.8px; */
 }
 #middle:hover{
     width: 54.6px;
@@ -536,9 +542,10 @@ img#middle{
     color: red;
     position: relative;
     /* bottom: 0; */
-    top: 60%;
+    top: -10%;
     /* left: 45%; */
     font-size: 18px;
+    border: 0;
     /* margin-left: 0px; */
     text-align: center;
 }
