@@ -48,7 +48,7 @@ $(function () {
         console.log(location.href);
         if(location.href.split("/")[4].indexOf("help")==0||location.href.split("/")[4].indexOf("wish")==0){
             //现在是助愿页/许愿
-            window.location.href="major.html";
+            window.history.back();
         }else{
             console.log("返回了");
             $("#elfs").hide();
@@ -122,7 +122,7 @@ $(function () {
     });
     //wish.html 许愿页
     $("#next").click(function(){
-        if(clicktime==666){
+        if(clicktime==666){//custom
             if(check(wishText)){
                 var pack_wish=JSON.stringify({
                     'wish_content':wishText
@@ -136,12 +136,12 @@ $(function () {
                 console.log("into form_page");
                 hash="#Next,fill-in-the-box";    
             }else{
+                console.log(clicktime);
                 $("#attention0").text("有问题！");
                 console.log(check(wishText));
             }
-            return;
         }
-        wishText=$("#wishtext").text();
+        wishText=$("#wishtext").text();//预定义
         var pack_wish=JSON.stringify({
             'wish_content':wishText
         })
@@ -189,7 +189,7 @@ $(function () {
         $(".show").show();
     })//再次许愿
     $("#return").click(function(){
-       window.location.href="major.html";//返回按钮
+       window.history.back();//返回按钮
     })//失败的返回按钮 我是说 这个按钮失败了
     //隐藏
     function allhide(){
