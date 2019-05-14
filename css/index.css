@@ -1,5 +1,6 @@
 *{
     background: none;
+    outline: none;
 }
 #loading{
     background-image: url(../img/smallback.jpg);
@@ -521,7 +522,7 @@ h2{
     position: absolute;
     left: 0;
     margin-top: 10px;
-    margin-left: 50px;
+    margin-left: 45px;
     font-size: 150%;
     font-weight: 348;
 }
@@ -529,7 +530,7 @@ h2{
     position: absolute;
     /* right: 0; */
     left: 0;
-    margin-left:  145px;
+    margin-left:  140px;
     margin-top: 10px;
     font-size: 150%;
     font-weight: 348;

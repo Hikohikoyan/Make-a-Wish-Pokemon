@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 53029c1b1a3cab98379bcfc9e4f4fc2741e42dcf
 ### 第1个 request get_pre_wishes.php
 
 * 获取事先既定愿望

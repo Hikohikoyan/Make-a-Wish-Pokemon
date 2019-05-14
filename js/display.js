@@ -8,12 +8,12 @@ $(function () {
     var elfs=new Array();//path elf
     var elf;
     var ball;    
-    var collection;//什么都往里面存 没问题的（
+    var collection=new Object;//什么都往里面存 没问题的（
     var wishText;//愿望文本公用存储
-    var wishes;//愿望ID公用存储
-    var wisher_id;
+    var wishes=new Array();//愿望ID公用存储
+    var wisher_id=new Array();
     var sql=new Array();
-    var res;
+    var res=new Array();
     // allhide();
     // $("#index").show();
     $("#img41").click(function(){
@@ -29,6 +29,7 @@ $(function () {
         console.log("wish page");
     }
     if(nowpage[4].indexOf("help")==0){
+        get_help_wishes();
         console.log("help page");
     }
     if(nowpage[4].indexOf("major")==0){
@@ -92,11 +93,11 @@ $(function () {
         var data=JSON.stringify({
             "wisher_id":wishes
         });
-        var settings=prepare(5,data);
-        $.ajax(settings).done(function(){
-            $("#name").text("姓名：成功先生");
-            $("#tel").text("手机：200 200");
-            $("#wechat").text("微信：总之是好了");
+        var settings=prepare(4,data);
+        $.ajax(settings).done(function(data){
+            $("#name").text("昵称："+String(data.name));
+            $("#tel").text("手机："+String(data.telephone));
+            $("#wechat").text("微信："+String(data.weixin));
         });//获取信息
         allhide();
         $("#help_page").show();
@@ -114,22 +115,27 @@ $(function () {
         console.log("画elf图！")
     })//助愿的确认s按钮
     $("#change").click(function(){
-        $('.helpbox').remove();
-        var collection=$.ajax(prepare(4));
-        var result=translate(4,collection);
-        for(var i=0;i<=result.length;i++){
-            wishes[i]=result[i].id;
-            wishText[i]=result[i].wish_content;
-            wisher_id[i]=result[i].wisher_id;
-            bindwishes(wish[i],wishText[i],wisher_id[i]);
-        }
-        $("#others").append("<div class='helpbox' id='help1'>"+wishText[0]+"</div>");
-        $("#others").append("<div class='helpbox' id='help2'>"+wishText[1]+"</div>");
-        $("#others").append("<div class='helpbox' id='help3'>"+wishText[2]+"</div>");
-        $("#help1").attr("wishid",wishes[0]);
-        $("#help2").attr("wishid",wishes[1]);
-        $("#help2").attr("wishid",wishes[2]);
+        get_help_wishes();
     })//换一批
+    function get_help_wishes(){
+        var wishText=new Array();
+        $.ajax(prepare(3)).done(function(data){
+            for(var i=0;i<=2;i++){
+                wishes[i]=data[i].id;
+                wishText[i]=data[i].wish_content;
+                wisher_id[i]=data[i].wisher_id;
+                bindwishes(wishes[i],wishText[i],wisher_id[i]);
+            }
+            $('.helpbox').remove();
+            $("#others").append("<div class='helpbox' id='help1'>"+wishText[0]+"</div>");
+            $("#others").append("<div class='helpbox' id='help2'>"+wishText[1]+"</div>");
+            $("#others").append("<div class='helpbox' id='help3'>"+wishText[2]+"</div>");
+            $("#help1").attr("wishid",String(wishes[0]));
+            $("#help2").attr("wishid",String(wishes[1]));
+            $("#help2").attr("wishid",String(wishes[2]));
+            select();
+            });
+    }
     // $(".helpbox").click(function (){
     //     alert(this.innerText)
     //     wishText=this.innerText;
@@ -144,8 +150,9 @@ $(function () {
     //wish.html 许愿页
     $("#next").click(function(){
         if(clicktime==666){//custom
-            if(check(wishText)){
-                console.log("许愿："+wishText);
+            wishText=$("#customtext").val();
+            if(/^\s*$/.test(wishText)==false){
+                console.log(clicktime+"许愿："+wishText);
                 var pack_wish=JSON.stringify({
                     'wish_content':wishText
                 })
@@ -156,36 +163,55 @@ $(function () {
                 $("#hope_page").show();
                 $("#sign_page").show();
                 console.log("into form_page");
-                hash="#Next,fill-in-the-box";    
             }else{
-                console.log(clicktime);
-                $("#attention0").text("有问题！");
-                console.log(check(wishText));
+                $("#attention0").text("许个愿吧~");
+                setTimeout(() => {
+                    $("#attention0").hide();
+                }, 1000);
+                $("#next").attr("disabled","disabled");
+                console.log(/^\s*$/.test(wishText));
             }
-        }
+        }else{
+        console.log(clicktime);
         wishText=$("#wishtext").text();//预定义
         console.log("许愿："+wishText);
         var pack_wish=JSON.stringify({
             'wish_content':wishText
         })
-        $.ajax(prepare(1,pack_wish));
-        console.log("愿望发送给后台了！");
-        allhide();//包含hope page
-        $(".show").hide();
-        $("#hope_page").show();
-        $("#sign_page").show();
-        console.log("into form_page");
-        hash="#Next,fill-in-the-box";    
-        console.log(wishText);
-        // location.hash=hash;
+        $.ajax(prepare(1,pack_wish)).done(function(data){
+            if(data.errcode==0){
+                console.log("愿望发送给后台了！");
+                allhide();//包含hope page
+                $(".show").hide();
+                $("#name").val(data.name);
+                $("#tel").val(data.telephone);
+                $("#wechat").val(data.weixin);
+                $("#hope_page").show();
+                $("#sign_page").show();
+                console.log("into form_page");
+                console.log(wishText);
+            }else if(data.errcode==1|data.errcode==2){
+            $("#attention0").text(data.errmsg);
+        }
+        });
+    }   // location.hash=hash;
     })//点击下一步填写信息
-    $("#name").bind('input propertychange', function () {
 
+    $("#name").bind('input propertychange', function () {
+        prevent();
+        name_check();
     });
     $("#tel").bind('input propertychange', function () {
+        prevent();
+        tel_check();
     })
     $("#wechat").bind('input propertychange', function () {
+        prevent();
+        vx_check();
     })
+    if(name_check()==true&&tel_check()==true&&vx_check()==true){
+        $("#ok").removeAttr("disabled");
+    }
     function prevent(){
         $("#ok").attr("disabled","disabled");
         $("#ok").mousemove(function(e){
@@ -194,56 +220,91 @@ $(function () {
                 $("#vxalert").show();
                 setTimeout(() => {
                     $("#vxalert").hide();
+                    $("#vxalert").text("请输入微信");
                 }, 1000);
             }
-        })
-        var vx=$("#wechat").val();
+        });
+        if(name_check()==true&&tel_check()==true&&vx_check()==true){
+            $("#ok").removeAttr("disabled");
+            // console.log(vx_check());
+            // console.log("tel"+check(tel));
+        }
+
     }
     function name_check(){
         var name=$("#name").val();
-        if(!check(name)){
+        setTimeout(() => {
+            $("#namealert").hide();
+        }, 1800);
+        if(/^\s*$/.test(name)==true){
             $("#namealert").show();
-        };
+            $("#ok").attr("disabled","disabled");
+            return false;
+        }else{
+            return true;
+        }
     }
     function tel_check(){
-        var tel=$("#wechat").val();
-        if(!check(tel)){
+        var tel=$("#tel").val();
+        setTimeout(() => {
+            $("#telalert").hide();
+        }, 1800);
+        if(/^\s*$/.test(tel)==false&&checkPhone(tel)==true){
+            return true;
+        }else{
             $("#telalert").show();
-        };
+            $("#ok").attr("disabled","disabled");
+            return false;
+        }
+        function checkPhone(num){ 
+            if(num==undefined){
+                return;
+            }
+            if(num.length!=11){
+                return false;
+            }else if(/^1[3|4|5|8|9][0-9]\d{4,8}$/.test(num)==false){
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
     function vx_check(){
-        var name=$("#wechat").val();
-        if(!check(name)){
+        var vx=$("#wechat").val();
+        setTimeout(() => {
+            $("#vxalert").hide();
+        }, 1800);
+        if(/^\s*$/.test(vx)==false&&vx.length<=20){
+            return true;
+        }else{
             $("#vxalert").show();
-        };
+            $("#ok").attr("disabled","disabled");
+            return false;
+        }
     }
 
     $("#ok").click(function(){//填写完毕 提交信息
+        prevent();
         user=$("#name").val();
         tel=$("#tel").val();
         wechat=$("#wechat").val();
-        msg=$("#wish").val();
-        if(check(msg)){
         var pack=JSON.stringify({
             'name':user,
        'telephone':tel,
        'weixin':wechat,
         })
-        }else{
-            //发送记录愿望请求
-            var pack2=JSON.stringify({
-                "wish_text":$("#wishtext").text()
-            })
-            $.ajax(prepare(1,pack2));
-        var pack=JSON.stringify({
-            'name':user,
-       'telephone':tel,
-       'weixin':wechat,
-        })
-        }
-        $.ajax(prepare(3,pack));
-        $("#sign_page").hide();
-        show1(".success");
+        $.ajax(prepare(2,pack)).done(function(data){
+            if(data.errcode==0||data.errcode==1){
+                $("#sign_page").hide();
+                show1(".success");
+            }else{
+                $("#vxalert").text(data.errmsg);
+                $("#vxalert").show();
+                setTimeout(() => {
+                    $("#vxalert").hide();
+                }, 1800);        
+            }
+        });
     })
     $("#again").click(function(){
         $(".success").hide();
@@ -252,7 +313,7 @@ $(function () {
     })//再次许愿
     $("#return").click(function(){
        window.history.back();//返回按钮
-    })//失败的返回按钮 我是说 这个按钮失败了
+    })
     //隐藏
     function allhide(){
         $(".page").hide();
@@ -270,17 +331,21 @@ $(function () {
         var request=new Array();
         request[0]="get_pre_wishes";
         request[1]="save_wish";
-        request[2]="show_info";
-        request[3]="commit_info";
-        request[4]="help_wish";
-        request[5]="after_help_show_info";
-        request[6]="commit_help";
-        request[7]="ball_list";
-        request[8]="fairy_list";
-        request[9]="open_ball";
-        request[10]="my_wishes";
-        request[11]="my_help";
+        request[2]="commit_info";
+        request[3]="help_wish";
+        request[4]="after_help_show_info";
+        request[5]="commit_help";
+        request[6]="ball_list";
+        request[7]="fairy_list";
+        request[8]="open_ball";
+        request[9]="my_wishes";
+        request[10]="my_help";
         var url="js/errmsg.json";
+        if(num!=3){
+            url="js/test.json"
+        }else if(num==5){
+            url="js/5.json"
+        }
         // var url="http://182.254.161.178/test/laravel/public/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
@@ -291,13 +356,6 @@ $(function () {
                 "Content-Type": "application/json",
                 "cache-control": "no-cache"
               },
-              "success":function(data){
-                collection=data;
-                console.log("success!");
-                console.log(collection);
-                res=translate(num,collection);
-                console.log(res);
-            },
             "fail":function(){
                 console.log("不知什么原因失败了哭");
             },
@@ -313,12 +371,6 @@ $(function () {
                     "Content-Type": "application/json",
                     "cache-control": "no-cache"
                   },
-                  "success":function(data){
-                    collection=data;
-                    console.log(collection);
-                    res=translate(num,collection);
-                    console.log(res);
-                        },
                   "fail":function(){
                       if(data.errcode==456){
                           console.log("未授权");
@@ -333,39 +385,25 @@ $(function () {
         }
         return settings; 
     }
-    //check
-    function check(str){
-        function isBlank(str) {
-            return (!str || /^\s*$/.test(str));
-        }
-        function check_uni(str) {
-            var patt_illegal = new RegExp(/[\#\$\%\^\&\*{\}\:\\L\<\>\?}\'\"\\\/\b\f\n\r\t]/g);
-            return patt_illegal.test(str);
-        }
-        if(isBlank(str)||check_uni(str)){
-            return false;
-        }else{
-            return true;
-        }
-    }
-    //
+
     //getinfo
     function get_all(){
         //获取已有的精灵/精灵球
-        settings=prepare(8);
-        $.ajax(settings);
-        // res=translate(8,collection);
-        elfs=res.path_array;
-        elf=res.fairy_num;
-        console.log("请求精灵列表");
         settings=prepare(7);
+        $.ajax(settings).done(function(data){
+            console.log("请求精灵列表");
+            var res=translate(7,data);
+            elfs=res.path_array;
+            elf=res.fairy_num;    
+            $(".span1").text(elf);
+        });
+        settings=prepare(6);
         console.log("请求精灵ball列表");
-        $.ajax(settings);
-        // res=translate(7,collection);
-        ball=res.total_ball;
-        $(".span1").text(elf);
-        $(".span2").text(ball);
-        return elf,elfs,ball;
+        $.ajax(settings).done(function(data){
+            var res=translate(6,data);
+            ball=res.now_total_ball;
+            $(".span2").text(ball);
+        });
     }
     //许愿页的换愿望
     $(".getpic").mousemove(function(e){
@@ -423,10 +461,12 @@ $(function () {
         click=click+1;
         if(click<=5){
         var setting=prepare(0);
-        $.ajax(setting);
+        $.ajax(setting).done(function(data){
+            console.log(data);
+            $("#wishtext").text(data.errmsg);
+        });
         // res=translate(0,collection);
-        console.log(res);
-        $("#wishtext").text(res.errmsg);
+        // console.log(res);
     }
         if(click==5){
             $("#middle").attr("disabled","disabled");
@@ -452,44 +492,51 @@ $(function () {
         $("#customtext").hide();
         $("#cancel").hide();
         $("#custom").show();
+        $("#next").removeAttr("disabled");
         clicktime=0;
 })
     //测试定位
-    $("#help1").click(function(e){
-        console.log(e.clientY+"~~~~~~"+e.offsetX);
+    function select(){
+        $("#help1").click(function(e){
+        // console.log(e.clientY+"~~~~~~"+e.offsetX);
         var guiY=Number(e.clientY-40);
         $(".select").css({
             'top':guiY
         })
-        wishText=$("#help1").innerHTML;
+        wishText=$("#help1").text();
+        console.log(wishText);
         num=$("#help1").attr("wishid");
         choose(num);
     })
     $("#help2").click(function(e){
-        console.log(e.clientY+"~~~~~~"+e.offsetX);
+        // console.log(e.clientY+"~~~~~~"+e.offsetX);
         var guiY=Number(e.clientY-40);
         $(".select").css({
             'top':guiY
         })
-        wishText=$("#help2").innerHTML;
+        wishText=$("#help2").text();
         num=$("#help2").attr("wishid");
         choose(num);
     })
     $("#help3").click(function(e){
-        console.log(e.clientY+"~~~~~~"+e.offsetX);
+        // console.log(e.clientY+"~~~~~~"+e.offsetX);
         var guiY=Number(e.clientY-40);
         $(".select").css({
             'top':guiY
         })
-        wishText=$("#help3").innerHTML;
+        wishText=$("#help3").text();
         num=$("#help3").attr("wishid");
         choose(num);
     })
+}
 
     //适配focus
-    $("input").focus(function(){
-        console.log("hey");//改了值才调用
-    })
+    // $("input").focus(function(){
+    //     // console.log("hey");//改了值才调用
+    //     name_check();
+    //     tel_check();
+    //     vx_check();
+    // })
     //点击精灵球 随机获取精灵 球-1
     function ball_dele(){
         $(".ballcontain").click(function(){
@@ -526,26 +573,20 @@ $(function () {
                 result['telephon'].push(collection.telephone);
                 result['weixin'].push(collection.weixin);
                 break;
-                case 4:
-                result.push(collection[0]);//result[i].id/wish_content/wisher_id
-                result.push(collection[1]);
-                result.push(collection[3]);
-                result.push(collection[4]);
-                break;
                 case 5:
                 result.push(collection[0].id);
                 // result.push(collection[0].user_id);
                 result.push(collection[0].telephone);
                 result.push(collection[0].weixin);
-                case 7:
-                result['total_ball'].push(collection.total_ball); 
+                case 6:
+                result['now_total_ball']=collection.now_total_ball; 
                 break;
-                case 8:
-                result['path_array'].push(collection.path_array);
-                result['fairy_num'].push(collection.fairy_num);
+                case 7:
+                result['path_array']=collection.path_array;
+                result['fairy_num']=collection.fairy_num;
                 break; 
                 case 9:
-                result['errmsg'].push(collection.errmsg);
+                result['errmsg']=collection.errmsg;
                 //追加一个精灵路径
                 break;
                 case 10:
@@ -553,20 +594,15 @@ $(function () {
                     result.push(collection[i]);
                 }
                 case 0://0 1 3 6
-                result['errmsg'].push(collection.errmsg);      
+                result['errmsg']=collection.errmsg;   
                 break;        
                 case 1://0 1 3 6
-                result['errmsg'].push(collection.errmsg);      
-                break;        
-                case 3://0 1 3 6
-                result['errmsg'].push(collection.errmsg);      
-                break;        
+                result['errmsg']=collection.errmsg;      
+                break;            
                 case 6://0 1 3 6
-                result['errmsg'].push(collection.errmsg);      
+                result['errmsg']=collection.errmsg;      
                 break;        
             }
-        console.log(collection);
-        console.log(result);
         return result;
         }
     function show1(str){
@@ -579,12 +615,18 @@ $(function () {
     }
     function choose(num){
         var pack=JSON.stringify({
-            "wisher_id":num
+            "id":num
         })
-        $.ajax(prepare(5,pack));
+        $.ajax(prepare(5,pack)).done(function(data){
+            if(data.errcode==0){
+                $("#selected").removeAttr("disabled");
+            }else{
+                console.log(data.errmsg);
+                $("#selected").removeAttr("disabled");//有弹窗以后删掉
+            }
+        });
         // var res=translate(5,collection);
         // $(".info#name").text(res[[]])
-        console.log(res);
     }
     function bindwishes(a,b,c,){
         sql[a]=[{

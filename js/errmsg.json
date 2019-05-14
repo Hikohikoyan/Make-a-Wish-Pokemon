@@ -1,3 +1,40 @@
+[{
+    "id":1,
+    "wish_content":"damnit",
+    "wisher_id":99,
+    "errcode":0,
+    "errmsg":"nothing",
+    "name":"JSON先生",
+    "telephone":"120",
+    "weixin":"荆州锅盔",
+    "now_total_ball":99,
+    "path_array":"img/rotate.png",
+    "fairy_num":11
+},
 {
-    "errmsg":"一条愿望"
+    "id":1,
+    "wish_content":"damnit",
+    "wisher_id":99,
+    "errcode":0,
+    "errmsg":"nothing",
+    "name":"JSON先生",
+    "telephone":"120",
+    "weixin":"荆州锅盔",
+    "now_total_ball":99,
+    "path_array":"img/rotate.png",
+    "fairy_num":11
+},
+{
+    "id":1,
+    "wish_content":"damnit",
+    "wisher_id":99,
+    "errcode":0,
+    "errmsg":"nothing",
+    "name":"JSON先生",
+    "telephone":"120",
+    "weixin":"荆州锅盔",
+    "now_total_ball":99,
+    "path_array":"img/rotate.png",
+    "fairy_num":11
 }
+]
