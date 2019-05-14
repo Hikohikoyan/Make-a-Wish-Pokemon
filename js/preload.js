@@ -19,8 +19,12 @@ $(function(){
         src=src.replace("img/rotate/","");
         src=src.replace(".png","");
         console.log("completed");
+        complete();
+        // $(".outborder").children()[2].remove();
+        // $("#loadingtext").text("Completed!");
         console.log(src);
         anime(src);
+
     }
     // imgdownload.on("fileload", handleFileLoad, this);
     imgdownload.on("complete", handleComplete, this);
@@ -73,6 +77,27 @@ $(function(){
         "img/rotate/19.png",
         "img/rotate/20.png",
         "img/rotate/21.png",//http://182.254.161.178/laravel/public/
+        "img/rotate/22.png",
+        "img/rotate/23.png",
+        "img/rotate/24.png",
+        "img/rotate/25.png",
+        "img/rotate/26.png",
+        "img/rotate/27.png",
+        "img/rotate/28.png",
+        "img/rotate/29.png",
+        "img/rotate/30.png",
+        "img/rotate/31.png",
+        "img/rotate/32.png",
+        "img/rotate/33.png",
+        "img/rotate/34.png",
+        "img/rotate/35.png",
+        "img/rotate/36.png",
+        "img/rotate/37.png",
+        "img/rotate/38.png",
+        "img/rotate/39.png",
+        "img/rotate/40.png",
+        "img/rotate/41.png",
+        "img/rotate/42.png",
     ]);
     imgdownload.load();
     // console.log(res);
@@ -86,15 +111,14 @@ $(function(){
             $("#rotate").css({
                 // "height":"118px",
                 // "width":"100%",
-                "transform":"scale(0.8)",
+                // "transform":"scale(0.8)",
                 "animation":" a",
-                "margin-left": "-32.8px",
                 "-webkit-animation":"a ",
                 "-moz-animation":"a",
                 "-o-animation": "a",
             });
             // console.log("changesrc:"+str);
-            if(str!=21){
+            if(str<=66){
                 str = Number(str)
                 //for(var i=str;i<21;i++){
                     // console.log(str)
@@ -104,21 +128,11 @@ $(function(){
             }
             var src="img/rotate/"+str+".png";
             $("#rotate").attr("src",src);
-        },70);
+        },45);
         setTimeout(function(){
             clearInterval(interval);
-            // $("#loadingtext").text("Completed!");
-            $(".outborder").children()[2].remove();
-            $("#loadingtext").css({
-                "animation":" a",
-                // "margin-left": "-12.8px",
-                "-webkit-animation":"a ",
-                "-moz-animation":"a",
-                "-o-animation": "a",
-            });
-            // $("#loading").fadeOut(400);//上一动画
+            $(".outborder").hide();
             var nowpage=location.href.split("/");
-            
             if(nowpage[4].indexOf("wish")==0){
             $("#loading").hide();//上一动画
             $("#hope_page").show();}
@@ -129,16 +143,25 @@ $(function(){
                 $("#selected").show();
             }
             if(nowpage[4].indexOf("major")==0){
-                $("#index").hide();
-                $(".outborder").fadeOut(300);
+                // $("#index").hide();
+
                 $(".welcome").css({
                     "display":"flex",
-                    "animation": "punch 0.85s",
+                    "animation": "punch 0.35s",
                     "animation-fill-mode": "forwards"
                 });
                 console.log("index page");
             }
-        },1000)
+        },3830);
     }
+    function complete(){
+        $("#loadingtext").css({
+            "animation":" a",
+            // "margin-left": "-12.8px",
+            "-webkit-animation":"a ",
+            "-moz-animation":"a",
+            "-o-animation": "a",
+        });
 
+    }
 })
