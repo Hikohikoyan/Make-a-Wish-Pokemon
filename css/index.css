@@ -8,13 +8,13 @@
     background-repeat: round;
 }
 #rotate{
-    height:  78px;
+    width: auto;
     margin: 0;
     position: absolute;
     top: 50%;
     margin-top: -56.8px;
     left: 50%;
-    margin-left: -46.8px;
+    margin-left: -30px;
     animation:   rotate 1.2s linear infinite;
     -webkit-animation:   rotate 1.2s linear infinite;
     -webkit-transform-origin:center;
@@ -70,24 +70,24 @@ h3,.loadspan{
 }
 @keyframes rotate {
     0% { 
-        transform:rotate(0) scale(0.4);
+        transform:rotate(0) scale(1);
     }
     50% {
-        transform:rotate(180deg) scale(0.6);
+        transform:rotate(180deg) scale(0.8);
        } 
    100% {
-       transform:rotate(360deg) scale(0.4);
+       transform:rotate(360deg) scale(1);
    }
 }
 @-webkit-keyframes rotate {
     0% { 
-        transform:rotate(0) scale(0.4);
+        transform:rotate(0) scale(1);
     }
     50% {
-        transform:rotate(180deg) scale(0.6);
+        transform:rotate(180deg) scale(0.8);
        } 
    100% {
-       transform:rotate(360deg) scale(0.4);
+       transform:rotate(360deg) scale(1);
    }
 }
 @keyframes shan{
@@ -267,7 +267,7 @@ label{
 }
 
 #yourwish{
-    visibility: visible;
+    align-items: center;
 }
 .page,div#index{
     position: relative;
@@ -615,4 +615,10 @@ h2{
     /* width: 80%; */
     border-radius: 0.4em;
     padding-bottom: 30px;
+}
+#done{
+    color: white;
+    position: relative;
+    top: -112px;
+    left: 220px;
 }

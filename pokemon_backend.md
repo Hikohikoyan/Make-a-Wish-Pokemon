@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 53029c1b1a3cab98379bcfc9e4f4fc2741e42dcf
 ### 第1个 request get_pre_wishes.php
 
 * 获取事先既定愿望
@@ -201,3 +204,7 @@
 
 * 后台返回领取的愿望数组，response的显示与第11个的一样
 
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 53029c1b1a3cab98379bcfc9e4f4fc2741e42dcf

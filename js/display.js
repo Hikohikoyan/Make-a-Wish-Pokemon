@@ -4,15 +4,16 @@ $(function () {
     // $("#index").show();//主页
     var clicktime=0;
     var click=0;
-    var hash=location.hash;
     var user,tel,wechat,msg;
     var elfs=new Array();//path elf
     var elf;
-    var balls=new Array();
     var ball;    
     var collection;//什么都往里面存 没问题的（
     var wishText;//愿望文本公用存储
     var wishes;//愿望ID公用存储
+    var wisher_id;
+    var sql=new Array();
+    var res;
     // allhide();
     // $("#index").show();
     $("#img41").click(function(){
@@ -23,7 +24,17 @@ $(function () {
     $(".btn2").show();
     $(".btn1").show();
     $(".main_contain").show();
-    get_all();
+    var nowpage=location.href.split("/");
+    if(nowpage[4].indexOf("wish")==0){
+        console.log("wish page");
+    }
+    if(nowpage[4].indexOf("help")==0){
+        console.log("help page");
+    }
+    if(nowpage[4].indexOf("major")==0){
+        get_all();
+        console.log("index page");
+    }
     //主页按钮
     $("#wish").click(function(){
         // allhide();
@@ -101,29 +112,40 @@ $(function () {
         $("#back").show();
         show_elf();
         console.log("画elf图！")
-    })//助愿的确认按钮
+    })//助愿的确认s按钮
     $("#change").click(function(){
         $('.helpbox').remove();
-
-        $("#others").append("<div class='helpbox'>"+"反正我咸鱼一条"+"</div>");
-        $("#others").append("<div class='helpbox'>"+"梦想还是要有的"+"</div>");
-        $("#others").append("<div class='helpbox'>"+"该睡觉了"+"</div>");
+        var collection=$.ajax(prepare(4));
+        var result=translate(4,collection);
+        for(var i=0;i<=result.length;i++){
+            wishes[i]=result[i].id;
+            wishText[i]=result[i].wish_content;
+            wisher_id[i]=result[i].wisher_id;
+            bindwishes(wish[i],wishText[i],wisher_id[i]);
+        }
+        $("#others").append("<div class='helpbox' id='help1'>"+wishText[0]+"</div>");
+        $("#others").append("<div class='helpbox' id='help2'>"+wishText[1]+"</div>");
+        $("#others").append("<div class='helpbox' id='help3'>"+wishText[2]+"</div>");
+        $("#help1").attr("wishid",wishes[0]);
+        $("#help2").attr("wishid",wishes[1]);
+        $("#help2").attr("wishid",wishes[2]);
     })//换一批
-    $(".helpbox").click(function (){
-        alert(this.innerText)
-        wishText=this.innerText;
-    })//确认帮助愿望
+    // $(".helpbox").click(function (){
+    //     alert(this.innerText)
+    //     wishText=this.innerText;
+    // })//确认帮助愿望
     $("#mine").click(function(){
         //显示 我的愿望清单  yourwish
         allhide();
         $("#back").show();
         $(".main_contain").hide();
-        $("#yourwish").show();
+        show1("#yourwish");
     });
     //wish.html 许愿页
     $("#next").click(function(){
         if(clicktime==666){//custom
             if(check(wishText)){
+                console.log("许愿："+wishText);
                 var pack_wish=JSON.stringify({
                     'wish_content':wishText
                 })
@@ -142,6 +164,7 @@ $(function () {
             }
         }
         wishText=$("#wishtext").text();//预定义
+        console.log("许愿："+wishText);
         var pack_wish=JSON.stringify({
             'wish_content':wishText
         })
@@ -156,6 +179,45 @@ $(function () {
         console.log(wishText);
         // location.hash=hash;
     })//点击下一步填写信息
+    $("#name").bind('input propertychange', function () {
+
+    });
+    $("#tel").bind('input propertychange', function () {
+    })
+    $("#wechat").bind('input propertychange', function () {
+    })
+    function prevent(){
+        $("#ok").attr("disabled","disabled");
+        $("#ok").mousemove(function(e){
+            if(e.offsetX>=0&&e.offsetY>=0){
+                $("#vxalert").text("你还没输信息");
+                $("#vxalert").show();
+                setTimeout(() => {
+                    $("#vxalert").hide();
+                }, 1000);
+            }
+        })
+        var vx=$("#wechat").val();
+    }
+    function name_check(){
+        var name=$("#name").val();
+        if(!check(name)){
+            $("#namealert").show();
+        };
+    }
+    function tel_check(){
+        var tel=$("#wechat").val();
+        if(!check(tel)){
+            $("#telalert").show();
+        };
+    }
+    function vx_check(){
+        var name=$("#wechat").val();
+        if(!check(name)){
+            $("#vxalert").show();
+        };
+    }
+
     $("#ok").click(function(){//填写完毕 提交信息
         user=$("#name").val();
         tel=$("#tel").val();
@@ -218,7 +280,8 @@ $(function () {
         request[9]="open_ball";
         request[10]="my_wishes";
         request[11]="my_help";
-        var url="http://182.254.161.178/test/laravel/public/"+request[num];
+        var url="js/errmsg.json";
+        // var url="http://182.254.161.178/test/laravel/public/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
@@ -230,7 +293,10 @@ $(function () {
               },
               "success":function(data){
                 collection=data;
-                translate();
+                console.log("success!");
+                console.log(collection);
+                res=translate(num,collection);
+                console.log(res);
             },
             "fail":function(){
                 console.log("不知什么原因失败了哭");
@@ -238,7 +304,6 @@ $(function () {
             "error":function(response){
                 console.log(response.statusText);
             }
-
         };
         }else{
             var settings={
@@ -249,17 +314,20 @@ $(function () {
                     "cache-control": "no-cache"
                   },
                   "success":function(data){
-                      collection=data;
-                  },
+                    collection=data;
+                    console.log(collection);
+                    res=translate(num,collection);
+                    console.log(res);
+                        },
                   "fail":function(){
                       if(data.errcode==456){
                           console.log("未授权");
                           location.href="之后会给我们的"+"#BBT微信后台#/Home/Index/index?state="+location.href;
                       }
                       console.log("不知什么原因失败了哭");
-                  },
+                    },
                   "error":function(response){
-                      console.log(response);
+                      console.log(response.statusText);
                   }
             };    
         }
@@ -285,21 +353,16 @@ $(function () {
     function get_all(){
         //获取已有的精灵/精灵球
         settings=prepare(8);
-        $.ajax(settings).done(function(data){
-            elf=data.fairy_num;
-            for(var i=0;i<=data.fairy_path.length;i++){
-                elfs.push(data.fairy_path[i]);
-            }
-        });
+        $.ajax(settings);
+        // res=translate(8,collection);
+        elfs=res.path_array;
+        elf=res.fairy_num;
         console.log("请求精灵列表");
         settings=prepare(7);
         console.log("请求精灵ball列表");
-        $.ajax(settings).done(function(data){
-            ball=data.total_ball;
-        });
-        console.log(elfs[0]);
-        console.log(elf);
-        console.log(ball);
+        $.ajax(settings);
+        // res=translate(7,collection);
+        ball=res.total_ball;
         $(".span1").text(elf);
         $(".span2").text(ball);
         return elf,elfs,ball;
@@ -360,11 +423,11 @@ $(function () {
         click=click+1;
         if(click<=5){
         var setting=prepare(0);
-        $.ajax(setting).done(function(data){
-            wishText=data.errmsg;
-            console.log(click+":"+wishText);
-            $("#wishtext").text(wishText);
-        })}
+        $.ajax(setting);
+        // res=translate(0,collection);
+        console.log(res);
+        $("#wishtext").text(res.errmsg);
+    }
         if(click==5){
             $("#middle").attr("disabled","disabled");
             $("#attention0").text("不可以频繁更换愿望哦")
@@ -392,9 +455,37 @@ $(function () {
         clicktime=0;
 })
     //测试定位
-    $("#top").mousemove(function(e){
-        // console.log(e.pageY+"~~~~~~"+e.pageX);
+    $("#help1").click(function(e){
+        console.log(e.clientY+"~~~~~~"+e.offsetX);
+        var guiY=Number(e.clientY-40);
+        $(".select").css({
+            'top':guiY
+        })
+        wishText=$("#help1").innerHTML;
+        num=$("#help1").attr("wishid");
+        choose(num);
     })
+    $("#help2").click(function(e){
+        console.log(e.clientY+"~~~~~~"+e.offsetX);
+        var guiY=Number(e.clientY-40);
+        $(".select").css({
+            'top':guiY
+        })
+        wishText=$("#help2").innerHTML;
+        num=$("#help2").attr("wishid");
+        choose(num);
+    })
+    $("#help3").click(function(e){
+        console.log(e.clientY+"~~~~~~"+e.offsetX);
+        var guiY=Number(e.clientY-40);
+        $(".select").css({
+            'top':guiY
+        })
+        wishText=$("#help3").innerHTML;
+        num=$("#help3").attr("wishid");
+        choose(num);
+    })
+
     //适配focus
     $("input").focus(function(){
         console.log("hey");//改了值才调用
@@ -402,6 +493,13 @@ $(function () {
     //点击精灵球 随机获取精灵 球-1
     function ball_dele(){
         $(".ballcontain").click(function(){
+            //这里是那个动画
+            $(this).remove();
+            $.ajax(prepare(11)).done(function(){
+                console.log("OK,你打开了一个精灵球");
+                console.log("状态："+pack.errcode);
+                //弹窗 没有空的精灵球了
+            })
         })
     }
     function show_rule(){
@@ -412,33 +510,65 @@ $(function () {
         show1("#rule_page");
         document.getElementById("style1").href="css/index.css";
         console.log("into rule_page");
-        hash="#rules";
-        location.hash=hash;
-        history.pushState("","Rule",location.href);
     }
-    function translate(collection){
-        console.log(collection);
-        if(collection!=undefined||collection!=""){
-            var name=new Array();//存数据名
-            var result=new Array();
-            name[0]="errcode";
-            name[1]="errmsg";
-            name[2]="name";
-            name[3]="telephone";
-            name[4]="weixin";
-            for(var i=0;i<=name.length;i++){
-                if(collection.name[i]!=undefined||collection.name[i]!=null){
-                    result.push(collection.name[i]);
-                    console.log(result);
-                    return result;
-                }else{
-                    console.log("我获取不到诶");
+    function translate(num,collection){
+        var result=new Array();
+        if(collection==undefined||collection==""||collection==null){
+            console.log("收不到！");
+            console.log(collection);
+            result.push("Nothing at all");
+            return result[0];
+        }
+        console.log("收到了！开始转换---dididi");
+        switch (num) {
+                case 2:
+                result['name'].push(collection.name);
+                result['telephon'].push(collection.telephone);
+                result['weixin'].push(collection.weixin);
+                break;
+                case 4:
+                result.push(collection[0]);//result[i].id/wish_content/wisher_id
+                result.push(collection[1]);
+                result.push(collection[3]);
+                result.push(collection[4]);
+                break;
+                case 5:
+                result.push(collection[0].id);
+                // result.push(collection[0].user_id);
+                result.push(collection[0].telephone);
+                result.push(collection[0].weixin);
+                case 7:
+                result['total_ball'].push(collection.total_ball); 
+                break;
+                case 8:
+                result['path_array'].push(collection.path_array);
+                result['fairy_num'].push(collection.fairy_num);
+                break; 
+                case 9:
+                result['errmsg'].push(collection.errmsg);
+                //追加一个精灵路径
+                break;
+                case 10:
+                for(var i=0;i++;i<=collection.length){
+                    result.push(collection[i]);
                 }
+                case 0://0 1 3 6
+                result['errmsg'].push(collection.errmsg);      
+                break;        
+                case 1://0 1 3 6
+                result['errmsg'].push(collection.errmsg);      
+                break;        
+                case 3://0 1 3 6
+                result['errmsg'].push(collection.errmsg);      
+                break;        
+                case 6://0 1 3 6
+                result['errmsg'].push(collection.errmsg);      
+                break;        
             }
-            }else{
-                console.log("我获取不到诶");
-            }
-    }
+        console.log(collection);
+        console.log(result);
+        return result;
+        }
     function show1(str){
         $(str).show();
         $(str).css({
@@ -446,5 +576,20 @@ $(function () {
             "flex-direction": "column",
             "align-items": "center"
         });
+    }
+    function choose(num){
+        var pack=JSON.stringify({
+            "wisher_id":num
+        })
+        $.ajax(prepare(5,pack));
+        // var res=translate(5,collection);
+        // $(".info#name").text(res[[]])
+        console.log(res);
+    }
+    function bindwishes(a,b,c,){
+        sql[a]=[{
+            wish_content:b,
+            wisher_id:c
+        }];
     }
 })

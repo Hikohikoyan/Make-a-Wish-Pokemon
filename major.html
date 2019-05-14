@@ -15,7 +15,7 @@
 <body>
     <div id="loading">
         <div class="outborder">
-            <img id="rotate" src="img/rotate/1.png">
+            <img id="rotate"  height="62.4px" src="img/rotate/1.png">
             <h3 id="loadingtext">loading</h3><span class="loadspan">.</span>
         </div>
         <div class="welcome">
@@ -52,10 +52,17 @@
             <img src="img/back.png" class="return" id="back_index">
     </div>
     <div class="page" id="yourwish"><!---点击精灵球-->
-        <div id="yours">
-            <div class="helpbox">愿望一</div>
-            <div  class="helpbox">愿望二</div>
-            <div  class="helpbox">愿望三</div>
+        <div id="yours" style="align-items: center;">
+            <div class="mine">
+                    <div class="helpbox">愿望一</div><span id="done" >未领取</span>
+            </div>
+            <div class="mine">
+                    <div  class="helpbox">愿望二</div><span id="done" >未领取</span>
+            </div>
+            <div class="mine">
+                    <div  class="helpbox">愿望三</div><span id="done" >未领取</span>
+            </div>
+            <img src="img/back.png" id="back">
         </div>
     </div>
     <div class="page" id="elfs">
