@@ -16,7 +16,6 @@ class get_openid
     public function handle($request, Closure $next){
         $request->session()->put('openid', "45");//部署时删除这一行
         if($request->session()->has('openid')){
-        
             return $next($request);
         }else{
             
