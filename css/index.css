@@ -332,7 +332,7 @@ label{
 }
 #rule_page{
     /* background-image: url(../img/rules.png); */
-    height: 450px;
+    height: 100%;
     width: 100%;
     margin: 0;
     background-repeat: no-repeat;
