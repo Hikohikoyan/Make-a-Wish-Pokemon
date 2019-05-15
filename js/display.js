@@ -149,31 +149,48 @@ $(function () {
     });
     //wish.html 许愿页
     $("#next").click(function(){
-        if(clicktime==666){//custom
+        setTimeout(() => {
+            $("#next").attr("disabled","disabled");
+            $("#attention0").text("请稍候……");
+            $("attention0").show();
+        }, 1800);
+        var open=setInterval(() => {
+            $("attention0").show();
+            $("#next").removeAttr("disabled");
+        }, 5000);
+        if(clicktime==666){//自定义愿望
+            clearInterval(open);
             wishText=$("#customtext").val();
-            if(/^\s*$/.test(wishText)==false){
+            if(/^\s*$/.test(wishText)==false){//自定义文本不为空
                 console.log(clicktime+"许愿："+wishText);
                 var pack_wish=JSON.stringify({
                     'wish_content':wishText
                 })
-                $.ajax(prepare(1,pack_wish));
-                console.log("愿望发送给后台了！");
-                allhide();//包含hope page
-                $(".show").hide();
-                $("#hope_page").show();
-                $("#sign_page").show();
-                console.log("into form_page");
+                $.ajax(prepare(1,pack_wish)).done(function(data){
+                    if(data.errcode==0){//允许填写信息
+                        console.log("愿望发送给后台了！");
+                        allhide();//包含hope page
+                        $(".show").hide();
+                        $("#name").val(data.name);
+                        $("#tel").val(data.telephone);
+                        $("#wechat").val(data.weixin);
+                        $("#hope_page").show();
+                        $("#sign_page").show();
+                        console.log("into form_page");
+                    }else if(data.errcode==1|data.errcode==2){
+                    $("#attention0").text(data.errmsg);
+                    }});
             }else{
+                $("#next").attr("disabled","disabled");
                 $("#attention0").text("许个愿吧~");
                 setTimeout(() => {
                     $("#attention0").hide();
+                    $("#next").removeAttr("disabled");
                 }, 1000);
-                $("#next").attr("disabled","disabled");
-                console.log(/^\s*$/.test(wishText));
             }
-        }else{
-        console.log(clicktime);
-        wishText=$("#wishtext").text();//预定义
+        }else if(clicktime==0){
+        console.log(clicktime);//预定义
+        wishText=$("#wishtext").text();
         console.log("许愿："+wishText);
         var pack_wish=JSON.stringify({
             'wish_content':wishText
@@ -194,7 +211,14 @@ $(function () {
             $("#attention0").text(data.errmsg);
         }
         });
-    }   // location.hash=hash;
+    }else{
+        $("#next").attr("disabled","disabled");
+        $("#attention0").text("出了点小差错TAT");
+        setTimeout(() => {
+            $("#attention0").hide();
+            $("#next").removeAttr("disabled");
+        }, 1000);
+}   // location.hash=hash;
     })//点击下一步填写信息
 
     $("#name").bind('input propertychange', function () {
@@ -343,7 +367,7 @@ $(function () {
         var url="js/errmsg.json";
         if(num!=3){
             url="js/test.json"
-        }else if(num==5){
+        }else if(num==5||num==1){
             url="js/5.json"
         }
         // var url="http://182.254.161.178/test/laravel/public/"+request[num];
@@ -457,6 +481,7 @@ $(function () {
     }
     $("#middle").click(function(){
         //发送请求换愿望
+        $("#attention0").hide();
         console.log("第"+click+"次愿望");
         click=click+1;
         if(click<=5){
@@ -475,24 +500,29 @@ $(function () {
             $("#middle").removeAttr("disabled");
             $("#attention0").text("");
             click=0;
-        }, 5000);
+        }, 3000);
         }
 })
 
     //许愿页定制
     $("#custom").click(function(){
-            $("#wishtext").hide();
-            $("#customtext").show();
-            $("#custom").hide();
-            $("#cancel").show();
-            clicktime=666;
+        $("#attention0").show();
+        $("#wishtext").hide();
+        $("#customtext").show();
+        $("#custom").hide();
+        $("#cancel").show();
+        clicktime=666;
         })
     $("#cancel").click(function(){
+        $("#attention0").hide();
         $("#wishtext").show();
         $("#customtext").hide();
         $("#cancel").hide();
         $("#custom").show();
         $("#next").removeAttr("disabled");
+        setTimeout(() => {
+            $("#attention0").show();
+        }, 1000);
         clicktime=0;
 })
     //测试定位
@@ -596,8 +626,12 @@ $(function () {
                 case 0://0 1 3 6
                 result['errmsg']=collection.errmsg;   
                 break;        
-                case 1://0 1 3 6
-                result['errmsg']=collection.errmsg;      
+                case 1://确认许愿
+                result['errcode']=collection.errcode;
+                result['errmsg']=collection.errmsg; 
+                result['name']=collection.name;
+                result['telephone']=collection.telephone;
+                result['weixin']=collection.weixin;     
                 break;            
                 case 6://0 1 3 6
                 result['errmsg']=collection.errmsg;      

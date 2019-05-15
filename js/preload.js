@@ -77,27 +77,27 @@ $(function(){
         "img/rotate/19.png",
         "img/rotate/20.png",
         "img/rotate/21.png",//http://182.254.161.178/laravel/public/
-        "img/rotate/22.png",
-        "img/rotate/23.png",
-        "img/rotate/24.png",
-        "img/rotate/25.png",
-        "img/rotate/26.png",
-        "img/rotate/27.png",
-        "img/rotate/28.png",
-        "img/rotate/29.png",
-        "img/rotate/30.png",
-        "img/rotate/31.png",
-        "img/rotate/32.png",
-        "img/rotate/33.png",
-        "img/rotate/34.png",
-        "img/rotate/35.png",
-        "img/rotate/36.png",
-        "img/rotate/37.png",
-        "img/rotate/38.png",
-        "img/rotate/39.png",
-        "img/rotate/40.png",
-        "img/rotate/41.png",
-        "img/rotate/42.png",
+        // "img/rotate/22.png",
+        // "img/rotate/23.png",
+        // "img/rotate/24.png",
+        // "img/rotate/25.png",
+        // "img/rotate/26.png",
+        // "img/rotate/27.png",
+        // "img/rotate/28.png",
+        // "img/rotate/29.png",
+        // "img/rotate/30.png",
+        // "img/rotate/31.png",
+        // "img/rotate/32.png",
+        // "img/rotate/33.png",
+        // "img/rotate/34.png",
+        // "img/rotate/35.png",
+        // "img/rotate/36.png",
+        // "img/rotate/37.png",
+        // "img/rotate/38.png",
+        // "img/rotate/39.png",
+        // "img/rotate/40.png",
+        // "img/rotate/41.png",
+        // "img/rotate/42.png",
     ]);
     imgdownload.load();
     // console.log(res);
@@ -118,7 +118,7 @@ $(function(){
                 "-o-animation": "a",
             });
             // console.log("changesrc:"+str);
-            if(str<=66){
+            if(str<21){
                 str = Number(str)
                 //for(var i=str;i<21;i++){
                     // console.log(str)
@@ -152,7 +152,7 @@ $(function(){
                 });
                 console.log("index page");
             }
-        },3830);
+        },900);
     }
     function complete(){
         $("#loadingtext").css({
