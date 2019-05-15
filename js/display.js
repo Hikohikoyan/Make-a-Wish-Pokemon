@@ -51,9 +51,10 @@ $(function () {
         show_rule();
     })//点击规则
     $(".return").click(function(){
-        window.location.href="major.html";
+        $("#rule_page").hide();
+        goback();
     })//点击返回主页（规则页）return.png
-    $("img#back").click(function(){
+    function goback(){
         var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
         if(nowpage.indexOf("help")==0||nowpage.indexOf("wish")==0){
             //现在是助愿页/许愿
@@ -64,16 +65,27 @@ $(function () {
             $("#balls").hide();
             $("#yourwish").hide();
             $("#top").show();
+            $("#btn1").show();
+            $("#btn2").show();
             $(".main_contain").show();
         }
+    }
+    $("img#back").click(function(){
+        goback();
     })
     $("#btn1").click(function(){
         $(".main_contain").hide();
         $("#top").hide();
         show1("#elfs");
         $("#back").show();
+        elf=sessionStorage.getItem('elf_num');
+        //path elfs[i]
         $("h1").text("你的精灵("+elf+")");
-
+        for(var i=0;i<elf;i++){
+            $(".elfcontain1").append("<div class='elf'><img id='elf"+i
+            +"' src='img/bigelfboder.png'>"
+            +"<img class='elfpic' src='img/fairy2.png'></div>");
+        }
     })//查看精灵
     $("#btn2").click(function(){
         $(".main_contain").hide();
@@ -81,6 +93,16 @@ $(function () {
         show1("#balls");
         $("#back").show();
         $("h1").text("你的精灵球("+ball+")");
+        ball=sessionStorage.getItem('ball_num');
+        if(ball==0){
+            return;
+        }
+        for(var i=0;i<ball;i++){
+            $("#ball99").append("<div class='ball'><img class='ballcontain'"+i
+            +"' src='img/6.png'></div>");
+            // +"<img class='elfpic' src='img/fairy2.png'></div>");
+        }
+
     })//查看精灵球
     $("#help").click(function(){
         // allhide();
@@ -89,6 +111,8 @@ $(function () {
         console.log("into help");
     })//助愿页
     $("#selected").click(function(id,wisher_id){
+        var id=sessionStorage.getItem('id');
+        choose(id);
         var data=JSON.stringify({
             "wisher_id":wisher_id
         });
@@ -107,41 +131,38 @@ $(function () {
     })
     //助愿页信息的确认按钮
     $("#ok2").click(function(){
-        allhide();
-        $("#help_page").show();
-        show1(".success")
-        $("#back").show();
-        show_elf();
-        console.log("画elf图！")
+        goback();
+        // allhide();
+        // $("#help_page").show();
+        // show1(".success")
+        // $("#back").show();
+        // show_elf();
+        // console.log("画elf图！")
     })//助愿的确认s按钮
     $("#change").bind("click", function () {
         $("#change").attr("disabled","disabled");
-        var wish1=new Object();
-        var wish2=new Object();
-        var wish3=new Object();    
-        get_help_wishes(wish1,wish2,wish3);
-        var finalwish=select(wish1,wish2,wish3);
+        get_help_wishes();
         setTimeout(() => {
+            console.log("换一批 解除");
             $("#change").removeAttr("disabled")
-        }, 1000);
-        console.log("---bibibi换一批按钮care服务启动--");
-        console.log("好好考虑 别老换（");
+        }, 300);
     })//换一批
     function get_help_wishes(){
         var wishText=new Array();
         $.ajax(prepare(3)).done(function(data){
-            for(var i=0;i<=2;i++){
+            console.log(data);
+            for(var i=0;i<2;i++){
                 wishes[i]=data[i].id;
                 wishText[i]=data[i].wish_content;
-                wisher_id[i]=data[i].wisher_id;                //愿望id 愿望文本 许愿人
+                wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
+                var str1='help'+(i+1);
+                var str2='id:'+wishes[i]+"/"+"wisher:"+wisher_id[i];
+                sessionStorage.setItem(str1,str2);
             }
             $('.helpbox').remove();
-            $("#others").append("<div class='helpbox' id='"+wisher_id[0]+"'>"+wishText[0]+"</div>");
-            $("#others").append("<div class='helpbox' id='"+wisher_id[1]+"'>"+wishText[1]+"</div>");
-            $("#others").append("<div class='helpbox' id='"+wisher_id[2]+"'>"+wishText[2]+"</div>");
-            wish1=bindwishes(wishes[0],wishText[0],wisher_id[0]);
-            wish2=bindwishes(wishes[1],wishText[1],wisher_id[1]);
-            wish3=bindwishes(wishes[2],wishText[2],wisher_id[2]);
+            $("#others").append("<div class='helpbox' id='help"+wisher_id[0]+"'>"+wishText[0]+"</div>");
+            $("#others").append("<div class='helpbox' id='help"+wisher_id[1]+"'>"+wishText[1]+"</div>");
+            $("#others").append("<div class='helpbox' id='help"+wisher_id[2]+"'>"+wishText[2]+"</div>");
             });
     }
     $("#mine").click(function(){
@@ -149,6 +170,21 @@ $(function () {
         allhide();
         $("#back").show();
         $(".main_contain").hide();
+        $.ajax(prepare(9)).done(function(data){
+            if(data[0]!=undefined||data[0]!=null){
+                $(".nowish").remove();
+                $(".dream").show();
+                for(var i=0;i<data.length;i++){
+                    console.log(i);
+                    if(data[i].wish_content==undefined){
+                        console.log(data);
+                    }else{
+                    $(".dream").append("<div class='mine'><div class='helpbox'>"
+                    +String(data[i].wish_content)+"</div><span id='done'>"
+                    +String(data[i].situation)+"</span></div>");
+                }
+            }}
+        })
         show1("#yourwish");
     });
     //wish.html 许愿页
@@ -289,7 +325,7 @@ $(function () {
             }
             if(num.length!=11){
                 return false;
-            }else if(/^1[3|4|5|8|9][0-9]\d{4,8}$/.test(num)==false){
+            }else if(/^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/.test(num)==false){
                 return false;
             }else{
                 return true;
@@ -373,7 +409,7 @@ $(function () {
             method="POST";
             console.log("change method"+method);
         }
-        if(num!=3){
+        if(num!=3&&num!=9){
             url="js/test.json"
         }else if(num==5||num==1){
             url="js/5.json"
@@ -428,6 +464,7 @@ $(function () {
             elfs=res.path_array;
             elf=res.fairy_num;    
             $(".span1").text(elf);
+            sessionStorage.setItem("elf_num",elf);
         });
         settings=prepare(6);
         console.log("请求精灵ball列表");
@@ -435,6 +472,7 @@ $(function () {
             var res=translate(6,data);
             ball=res.now_total_ball;
             $(".span2").text(ball);
+            sessionStorage.setItem("ball_num",ball);
         });
     }
     //成功页画精灵
@@ -502,14 +540,6 @@ $(function () {
         }, 1000);
         clicktime=0;
 })
-    //用绑定好的对象 取值 助愿页
-    function select(wish1,wish2,wish3){
-        var exact_wish=new Object();
-        exact_wish.id=-1;
-        exact_wish.wisher_id=-1;
-        var wishText;
-    return exact_wish;
-}
     //点击精灵球 随机获取精灵 球-1
     function ball_dele(){
         $(".ballcontain").click(function(){
@@ -560,6 +590,7 @@ $(function () {
         return result;
         }
     function show1(str){
+        console.log(str+"<====flex");
         $(str).show();
         $(str).css({
             "display": "flex",
@@ -567,7 +598,7 @@ $(function () {
             "align-items": "center"
         });
     }
-    function choose(id,wisher_id){
+    function choose(id){
         var pack=JSON.stringify({
             "id":id
         })
@@ -580,18 +611,9 @@ $(function () {
             }
         });
     }
-    function bindwishes(a,b,c){
-        var obj=new Object();
-        obj.wishid=a;
-        if(b!=undefined||b!=null){
-            obj.wishText=b;
-        }
-        obj.wisher_id=c;
-        return obj;
-    }
     $("#others").delegate("div", "click", function () {
         var id=$(this).attr("id");
-        alert(id);
+        sessionStorage.setItem('id',id);
         $("#selected").removeAttr("disabled");
     });
 })
