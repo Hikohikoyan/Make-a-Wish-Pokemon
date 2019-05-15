@@ -14,16 +14,13 @@ class get_openid
      * @return mixed
      */
     public function handle($request, Closure $next){
-        session_start();
-        $_SESSION['openid']=45;
-        if(isset($_SESSION['openid'])){
-            $_SESSION['openid']=45;
-            /*$openid=$_SESSION['openid];
-            $request->attributes->add(['openid'=>$openid]);*/
+        $request->session()->put('openid', "45");//部署时删除这一行
+        if($request->session()->has('openid')){
+        
             return $next($request);
         }else{
-            $_SESSION['openid']=45;
-            return response()->json(['errcode'=>456,'errmsg'=>'未授权']);
+            
+           return response()->json(['errcode'=>456,'errmsg'=>'未授权']);
         }
     }
 }

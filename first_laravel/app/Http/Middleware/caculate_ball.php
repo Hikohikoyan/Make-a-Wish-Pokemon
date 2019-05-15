@@ -8,11 +8,12 @@ use Illuminate\Database\Connection;
 class caculate_ball
 {
     public function handle($request, Closure $next){
-        $openid=45;//$_SESSION['openid'];
+        $openid=$request->session()->get('openid');
         $ball_number1=DB::table('custom_wish')
         ->where('wisher_id',$openid)
         ->where('situation',"已领取")
         ->count();
+        
         $ball_number2=DB::table('custom_wish')
         ->where('helper_id',$openid)
         ->count();

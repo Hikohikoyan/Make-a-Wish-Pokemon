@@ -16,8 +16,8 @@ class user_exist
      */
     public function handle($request, Closure $next){
         
-        $_SESSION['openid']=4;
-        $exist=DB::table('user')->where('user_id', $_SESSION['openid'])->exists();
+        $openid=$request->session()->get('openid');
+        $exist=DB::table('user')->where('user_id', $openid)->exists();
         if($exist==false){
             $exist_code=123;
         }else{

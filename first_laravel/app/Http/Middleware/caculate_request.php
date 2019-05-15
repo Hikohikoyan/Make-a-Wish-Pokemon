@@ -14,10 +14,12 @@ class caculate_request
      * @return mixed
      */
     public function handle($request, Closure $next){
-        if(isset($_SESSION['request_times'])){
-            $_SESSION['request_times']=$_SESSION['request_times']+1;
+        if($request->session()->has('request_times')){
+            $request_times=$request->session()->get('request_times');
+            $request_times=$request_times[0]+1;
+            $request->session()->put('request_times', "$request_times");
         }else{
-            $_SESSION['request_times']=1;
+            $request->session()->put('request_times','1');
         }
         return $next($request);
     }
