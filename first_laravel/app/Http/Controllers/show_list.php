@@ -12,13 +12,13 @@ class show_list extends Controller
     public function ball_list( Request $request){
         $total_ball=$request->session()->get('total_ball');//一共拥有的精灵球数
         $total_had_fetched=$request->session()->get('total_had_fetched');//已打开的精灵球数
-        $ball_path="../first_laravel/public/photo/pokeball.png";
-        return response()->json(['total_ball'=>$total_ball,'total_had_fetched'=>$total_had_fetched,'ball_path'=>$ball_path]);
+        $now_total_ball=$total_ball-$total_had_fetched;
+        return response()->json(['now_total_ball'=>$now_total_ball]);
     }
     public function fairy_list( Request $request){
         $fairy_num=$request->session()->get('total_had_fetched');
         $path_array=array();
-        $openid=45;
+        $openid=$request->session()->get('openid');
         $fairy_photo_path1=DB::table('custom_wish')
         ->where('wisher_id',"$openid")
         ->where('wisher_open','已打开')
@@ -29,6 +29,6 @@ class show_list extends Controller
         ->pluck('fairy_path');
         $collection=collect([$fairy_photo_path1,$fairy_photo_path2]);
         $collapsed=$collection->collapse();
-        return response()->json(['fairy_path'=>$collapsed,'fairy_num'=>$fairy_num]);
+        return response()->json(['path_array'=>$collapsed,'fairy_num'=>$fairy_num]);
     }
 }

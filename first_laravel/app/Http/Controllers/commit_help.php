@@ -9,9 +9,9 @@ use Illuminate\Database\Connection;
 class commit_help extends Controller
 {
     public function index( Request $request){
-        $help_times=1;//$request->get('help_times');正式上线时，用//后的值
-        $id=9;//$request->id;正式上线时，用//后的值
-        $helper_id=36;//$_SESSION['openid'];正式上线时，用//后的值
+        $help_times=$request->get('help_times');//正式上线时，用//后的值
+        $id=$request->id;//可写死
+        $helper_id=$request->session()->get('openid');
         if($help_times==2){
             return response()->json(['errcode'=>1,'errmsg'=>"今天祝愿次数已满，请明天再来"]);
         }else{

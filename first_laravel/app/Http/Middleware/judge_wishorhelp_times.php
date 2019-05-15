@@ -15,14 +15,14 @@ class judge_wishorhelp_times
      * @return mixed
      */
     public function handle($request, Closure $next){
-        //session_start();
+        $openid=$request->session()->get('openid');
         $date=date("m.d");
         $wish_times=DB::table('custom_wish')
-        ->where('wisher_id',$_SESSION['openid'])
+        ->where('wisher_id',"$openid")
         ->where('time',$date)
         ->count();
         $help_times=DB::table('custom_wish')
-        ->where('helper_id',$_SESSION['openid'])
+        ->where('helper_id',"$openid")
         ->where('time',$date)
         ->count();
         $request->attributes->add(['wish_times'=>$wish_times]);
