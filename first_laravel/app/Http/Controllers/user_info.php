@@ -9,45 +9,25 @@ use Illuminate\Database\Connection;
 class user_info extends Controller
 {
     public function commit_info(Request $request){
-        $exist_code=1;//$request->get('exist_code');
+        $exist_code=$request->get('exist_code');
         $name=$request->name;
         $telephone=$request->telephone;
         $weixin=$request->weixin;
+        $openid=$request->session()->get('openid');
         if($name!=null && $telephone!=null && $weixin!=null){
             if($exist_code==0){
                 DB::table('user')
-                ->where('user_id', $_SESSION['openid'])
+                ->where('user_id', $openid)
                 ->update(['name' => "$name",'telephone'=>"$telephone",'weixin'=>"$weixin"]);
                 return response()->json(['errcode'=>0,'errmsg'=>"修改成功"]);
             }else{
-                DB::insert('insert into user (id, user_id,name,telephone,weixin) values (?,?,?,?,?)', [null, $_SESSION['openid'],$name,$telephone,$weixin]);
+                DB::insert('insert into user (id, user_id,name,telephone,weixin) values (?,?,?,?,?)', [null, $openid,$name,$telephone,$weixin]);
                 return response()->json(['errcode'=>1,'errmsg'=>"添加信息成功"]);
 
             }
         }else{
             return response()->json(['errcode'=>2,'errmsg'=>"信息不能为空"]);
         }
-    }
-
-    public function show_info(){
-        $exist_code=0;//$request->get('exist_code');
-        if($exist_code!=0){
-            $name="";
-            $telephone="";
-            $weixin="";
-        }else{
-            $get_openid_info=DB::table('user')->where('user_id', 2/*$openid */)->first();
-            $name=$get_openid_info->name;
-            $telephone=$get_openid_info->telephone;
-            $weixin=$get_openid_info->weixin;
-        }
-        $info_array=[
-            'name'=>$name,
-            'telephone'=>$telephone,
-            'weixin'=>$weixin
-        ];
-        return response()->json($info_array);
-        
     }
 
     public function after_help_show_info( Request $request){

@@ -9,7 +9,7 @@ use Illuminate\Database\Connection;
 class open_ball extends Controller
 {
     public function index( Request $request){
-        $openid=89;//$_SESSION['openid'];
+        $openid=$request->session()->get('openid');
         $open_ball_object=DB::table('custom_wish')
         ->where('wisher_id',$openid)
         ->where('situation',"已领取")

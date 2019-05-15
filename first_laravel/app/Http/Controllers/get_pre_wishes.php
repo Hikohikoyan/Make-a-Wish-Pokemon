@@ -8,16 +8,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Connection;
 class get_pre_wishes extends Controller{
     public function index( Request $request){
-        $request_times=$_SESSION['request_times'];
-        $get_id=$request_times%11;
+        $total_pre_wishes=5;
+        $request_times=$request->session()->get('request_times');
+        $get_id=$request_times[0]%$total_pre_wishes;
         if($get_id==0){
-            $random_wish=DB::table('pre_wish')->where('id','11')->first();
+            $random_wish=DB::table('pre_wish')->where('id',"$total_pre_wishes")->first();
         }else{
             $random_wish=DB::table('pre_wish')->where('id',"$get_id")->first();
         }
         $array_random=[
             'errmsg'=>$random_wish,
-            'request'=>$request_times,
+            'request'=>$request_times[0],
             'get_id'=>$get_id
         ];
         return response()->json($array_random);

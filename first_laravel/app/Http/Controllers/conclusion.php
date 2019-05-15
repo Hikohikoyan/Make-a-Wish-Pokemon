@@ -9,7 +9,7 @@ use Illuminate\Database\Connection;
 class conclusion extends Controller
 {
     public function individual(Request $request){
-        $openid=45;//$_SESSION['openid'];
+        $openid=$request->session()->get('openid');
         $total_help_wish=$request->session()->get('ball_number2');
 
         $friends1=DB::table('custom_wish')
@@ -28,7 +28,7 @@ class conclusion extends Controller
         $come_ture=$request->session()->get('had_fetched1');
 
         return response()->json(['total_help_wish'=>$total_help_wish,'friends_num'=>$friends_num,
-        'get_fairy_num'=>$get_fairy_num,'total_wish'=>$total_wish]);
+        'get_fairy_num'=>$get_fairy_num,'total_wish'=>$total_wish]);//顺序与策推给的文案相对应
     }
     public function game_statistics(Request $request){
         $fairy_fetched1=DB::table('custom_wish')
@@ -54,7 +54,7 @@ class conclusion extends Controller
         ->count();
         
         return response()->json(['fairy_fetched'=>$fairy_fetched,'wish_cometure_num'=>$wish_cometure_num,
-        'write_wish_user_num'=>$write_wish_user_num,'helper_num'=>$helper_num]);
+        'write_wish_user_num'=>$write_wish_user_num,'helper_num'=>$helper_num]);//顺序与策推给的文案相对应
 
 
 

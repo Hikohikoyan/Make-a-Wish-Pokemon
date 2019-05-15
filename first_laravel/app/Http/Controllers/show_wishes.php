@@ -10,14 +10,14 @@ class show_wishes extends Controller
 {
 
     public function my_help( Request $request){
-        $openid=$_SESSION['openid'];
+        $openid=$request->session()->get('openid');
         $all_my_help=DB::table('custom_wish')
         ->where('helper_id',$openid)
         ->get();
         return response()->json($all_my_help);
     }
     public function my_wishes( Request $request){
-        $openid=$_SESSION['openid'];
+        $openid=$request->session()->get('openid');           
         $all_my_wishes=DB::table('custom_wish')
         ->where('wisher_id',$openid)
         ->get();
@@ -27,7 +27,7 @@ class show_wishes extends Controller
         $fetch_wish=DB::table('custom_wish')
                     ->where("situation","未领取")
                     ->inRandomOrder()
-                    ->take(4)
+                    ->take(3)
                     ->get();
         
         return response()->json($fetch_wish);
