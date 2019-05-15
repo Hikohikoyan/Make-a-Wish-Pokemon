@@ -1,4 +1,4 @@
-### 第1个 request get_pre_wishes.php
+### 第1个 request(get) get_pre_wishes.php
 
 * 获取事先既定愿望
 
@@ -67,13 +67,13 @@
 
   
 
-### 第4个request:help_wish.php
+### 第4个request(get):help_wish.php
 
 * 我要助愿，浏览愿望
 
 * 无需前端发送数据
 
-* 后台将随机传送愿望，一次4条,response显示为
+* 后台将随机传送愿望，一次3条,response显示为
 
   ```
   [{"id":1,"wish_content":"xxxx","wisher_id":"xxx"},{"id":2,"wish_content":"xxxx","wisher_id":"xxx"},{"id":3,"wish_content":"xxxx","wisher_id":"xxx"}，{相同}]
@@ -126,7 +126,7 @@
 
 
 
-### 第7个request：ball_list.php
+### 第7个request(get)：ball_list.php
 
 * 查看精灵球
 
@@ -142,7 +142,7 @@
 
 
 
-### 第8个request:fairy_list.php
+### 第8个request(get):fairy_list.php
 
 * 查看精灵
 
@@ -159,7 +159,7 @@
 
   
 
-### 第9个request：open_ball.php
+### 第9个request(get)：open_ball.php
 
 * 点击精灵球孵化精灵
 
@@ -178,7 +178,7 @@
 
   
 
-### 第10个request:my_wishes.php
+### 第10个request(get):my_wishes.php
 
 * 查看我的许愿
 
@@ -192,7 +192,7 @@
 
   
 
-### 第11个request:my_help.php
+### 第11个request(get):my_help.php
 
 * 查看我的祝愿
 
