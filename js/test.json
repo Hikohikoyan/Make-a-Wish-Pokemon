@@ -2,7 +2,7 @@
     "id":1,
     "wish_content":"damnit",
     "wisher_id":99,
-    "errcode":1,
+    "errcode":0,
     "errmsg":"nothing",
     "name":"JSON先生",
     "telephone":"120",

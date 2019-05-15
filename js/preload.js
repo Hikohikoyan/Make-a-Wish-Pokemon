@@ -1,15 +1,15 @@
 $(function(){
-    var nowpage=location.href.split("/");
-    if(nowpage[4].indexOf("wish")==0){
+    var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
+    if(nowpage.indexOf("wish")==0){
         $("#hope_page").hide();
         console.log("wish page");
     }
-    if(nowpage[4].indexOf("help")==0){
+    if(nowpage.indexOf("help")==0){
         $(".major").hide();
         $("#selected").hide();
         console.log("help page");
     }
-    if(nowpage[4].indexOf("major")==0){
+    if(nowpage.indexOf("major")==0){
         $("#index").hide();
         console.log("index page");
     }
@@ -20,16 +20,12 @@ $(function(){
         src=src.replace(".png","");
         console.log("completed");
         complete();
-        // $(".outborder").children()[2].remove();
-        // $("#loadingtext").text("Completed!");
         console.log(src);
         anime(src);
 
     }
     // imgdownload.on("fileload", handleFileLoad, this);
     imgdownload.on("complete", handleComplete, this);
-    // console.log(imgdownload);
-    // console.log(imgdownload.loadManifest);
     imgdownload.loadManifest([
         "img/smallback.jpg",
         "img/background.png",
@@ -77,54 +73,19 @@ $(function(){
         "img/rotate/19.png",
         "img/rotate/20.png",
         "img/rotate/21.png",//http://182.254.161.178/laravel/public/
-        // "img/rotate/22.png",
-        // "img/rotate/23.png",
-        // "img/rotate/24.png",
-        // "img/rotate/25.png",
-        // "img/rotate/26.png",
-        // "img/rotate/27.png",
-        // "img/rotate/28.png",
-        // "img/rotate/29.png",
-        // "img/rotate/30.png",
-        // "img/rotate/31.png",
-        // "img/rotate/32.png",
-        // "img/rotate/33.png",
-        // "img/rotate/34.png",
-        // "img/rotate/35.png",
-        // "img/rotate/36.png",
-        // "img/rotate/37.png",
-        // "img/rotate/38.png",
-        // "img/rotate/39.png",
-        // "img/rotate/40.png",
-        // "img/rotate/41.png",
-        // "img/rotate/42.png",
     ]);
     imgdownload.load();
-    // console.log(res);
-    // if(!res){
-    //     console.log("imgdownload not ok");
-    // }else{
-    // }
-
     function anime(str){
         var interval=setInterval(function(){
             $("#rotate").css({
-                // "height":"118px",
-                // "width":"100%",
-                // "transform":"scale(0.8)",
                 "animation":" a",
                 "-webkit-animation":"a ",
                 "-moz-animation":"a",
                 "-o-animation": "a",
             });
-            // console.log("changesrc:"+str);
             if(str<21){
                 str = Number(str)
-                //for(var i=str;i<21;i++){
-                    // console.log(str)
                     str=str+1;
-                    // console.log(str)
-                //}
             }
             var src="img/rotate/"+str+".png";
             $("#rotate").attr("src",src);
@@ -132,19 +93,17 @@ $(function(){
         setTimeout(function(){
             clearInterval(interval);
             $(".outborder").hide();
-            var nowpage=location.href.split("/");
-            if(nowpage[4].indexOf("wish")==0){
+            var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
+            if(nowpage.indexOf("wish")==0){
             $("#loading").hide();//上一动画
             $("#hope_page").show();}
-            if(nowpage[4].indexOf("help")==0){
+            if(nowpage.indexOf("help")==0){
                 $("#loading").hide();//上一动画
                 $("#help_page").show();
                 $(".major").show();
                 $("#selected").show();
             }
-            if(nowpage[4].indexOf("major")==0){
-                // $("#index").hide();
-
+            if(nowpage.indexOf("major")==0){
                 $(".welcome").css({
                     "display":"flex",
                     "animation": "punch 0.35s",
@@ -157,7 +116,6 @@ $(function(){
     function complete(){
         $("#loadingtext").css({
             "animation":" a",
-            // "margin-left": "-12.8px",
             "-webkit-animation":"a ",
             "-moz-animation":"a",
             "-o-animation": "a",

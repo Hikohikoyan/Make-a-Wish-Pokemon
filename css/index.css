@@ -356,7 +356,7 @@ p{
     font-weight: 100;
     border-radius: 0.4em;
 }
-.helpbox{
+.helpbox,#help1,#help2,#help3{
     /* background-image: url(../img/2.png); */
     height: 15vh;
     background-size: 100%;
@@ -376,9 +376,6 @@ p{
     /* float: left; */
 }
 
-.helpbox:hover,.helpbox::after{
-    /* background-image: url(../img/2\ 拷贝.png); */
-}
 #change{
     position: relative;
     width: 25%;
@@ -488,26 +485,42 @@ h2{
     grid-column-gap: 30px;
     margin-top: 27px;
     overflow: scroll;
-    /* width: 90%; */
     padding: 8px;
     height: 350px;
-    /* left: 30%; */
     margin-bottom: 40px;
-    /* left: 10%; */
-    /* right: 10%; */
-    /* padding-left: 0; */
 }
 .page,#expode_page{
     display: none;
 }
 .elfpic{
-    position: relative;
+    /* position: relative;
     margin: 0;
     padding: 0;
     top: -50%;
     left: 0;
     margin-top: -20px;
+    margin-left: 5px; */
+    position: relative;
+    margin: 0;
+    padding: 0;
+    top: -120px;
+    left: 0;
+    margin-top: 0;
     margin-left: 5px;
+}
+.elfcontain1{
+    display: grid;
+    grid-template-columns: 90px 90px 90px;
+    grid-template-rows: 120px 120px 120px;
+    justify-content: start;
+    position: relative;
+    align-content: space-between;
+    /* height: 300px; */
+    grid-column-gap: 30px;
+    margin-top: 27px;
+    overflow: scroll;
+    /* width: 90%; */
+    padding: 8px;
 }
 .getpic{
     margin-bottom: 28px;

@@ -4,16 +4,13 @@ $(function () {
     // $("#index").show();//主页
     var clicktime=0;
     var click=0;
-    var user,tel,wechat,msg;
+    var user,tel,wechat;
     var elfs=new Array();//path elf
     var elf;
     var ball;    
-    var collection=new Object;//什么都往里面存 没问题的（
     var wishText;//愿望文本公用存储
     var wishes=new Array();//愿望ID公用存储
     var wisher_id=new Array();
-    var sql=new Array();
-    var res=new Array();
     // allhide();
     // $("#index").show();
     $("#img41").click(function(){
@@ -24,15 +21,15 @@ $(function () {
     $(".btn2").show();
     $(".btn1").show();
     $(".main_contain").show();
-    var nowpage=location.href.split("/");
-    if(nowpage[4].indexOf("wish")==0){
+    var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
+    if(nowpage.indexOf("wish")==0){
         console.log("wish page");
     }
-    if(nowpage[4].indexOf("help")==0){
+    if(nowpage.indexOf("help")==0){
         get_help_wishes();
         console.log("help page");
     }
-    if(nowpage[4].indexOf("major")==0){
+    if(nowpage.indexOf("major")==0){
         get_all();
         console.log("index page");
     }
@@ -57,14 +54,15 @@ $(function () {
         window.location.href="major.html";
     })//点击返回主页（规则页）return.png
     $("img#back").click(function(){
-        console.log(location.href);
-        if(location.href.split("/")[4].indexOf("help")==0||location.href.split("/")[4].indexOf("wish")==0){
+        var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
+        if(nowpage.indexOf("help")==0||nowpage.indexOf("wish")==0){
             //现在是助愿页/许愿
             window.history.back();
         }else{
             console.log("返回了");
             $("#elfs").hide();
             $("#balls").hide();
+            $("#yourwish").hide();
             $("#top").show();
             $(".main_contain").show();
         }
@@ -75,6 +73,7 @@ $(function () {
         show1("#elfs");
         $("#back").show();
         $("h1").text("你的精灵("+elf+")");
+
     })//查看精灵
     $("#btn2").click(function(){
         $(".main_contain").hide();
@@ -89,9 +88,9 @@ $(function () {
         window.location.href="help.html";
         console.log("into help");
     })//助愿页
-    $("#selected").click(function(){
+    $("#selected").click(function(id,wisher_id){
         var data=JSON.stringify({
-            "wisher_id":wishes
+            "wisher_id":wisher_id
         });
         var settings=prepare(4,data);
         $.ajax(settings).done(function(data){
@@ -105,7 +104,8 @@ $(function () {
         $("#others").hide();
         show1("#info");
         $("#selected").hide();
-    })//助愿页信息的确认按钮
+    })
+    //助愿页信息的确认按钮
     $("#ok2").click(function(){
         allhide();
         $("#help_page").show();
@@ -114,8 +114,18 @@ $(function () {
         show_elf();
         console.log("画elf图！")
     })//助愿的确认s按钮
-    $("#change").click(function(){
-        get_help_wishes();
+    $("#change").bind("click", function () {
+        $("#change").attr("disabled","disabled");
+        var wish1=new Object();
+        var wish2=new Object();
+        var wish3=new Object();    
+        get_help_wishes(wish1,wish2,wish3);
+        var finalwish=select(wish1,wish2,wish3);
+        setTimeout(() => {
+            $("#change").removeAttr("disabled")
+        }, 1000);
+        console.log("---bibibi换一批按钮care服务启动--");
+        console.log("好好考虑 别老换（");
     })//换一批
     function get_help_wishes(){
         var wishText=new Array();
@@ -123,23 +133,17 @@ $(function () {
             for(var i=0;i<=2;i++){
                 wishes[i]=data[i].id;
                 wishText[i]=data[i].wish_content;
-                wisher_id[i]=data[i].wisher_id;
-                bindwishes(wishes[i],wishText[i],wisher_id[i]);
+                wisher_id[i]=data[i].wisher_id;                //愿望id 愿望文本 许愿人
             }
             $('.helpbox').remove();
-            $("#others").append("<div class='helpbox' id='help1'>"+wishText[0]+"</div>");
-            $("#others").append("<div class='helpbox' id='help2'>"+wishText[1]+"</div>");
-            $("#others").append("<div class='helpbox' id='help3'>"+wishText[2]+"</div>");
-            $("#help1").attr("wishid",String(wishes[0]));
-            $("#help2").attr("wishid",String(wishes[1]));
-            $("#help2").attr("wishid",String(wishes[2]));
-            select();
+            $("#others").append("<div class='helpbox' id='"+wisher_id[0]+"'>"+wishText[0]+"</div>");
+            $("#others").append("<div class='helpbox' id='"+wisher_id[1]+"'>"+wishText[1]+"</div>");
+            $("#others").append("<div class='helpbox' id='"+wisher_id[2]+"'>"+wishText[2]+"</div>");
+            wish1=bindwishes(wishes[0],wishText[0],wisher_id[0]);
+            wish2=bindwishes(wishes[1],wishText[1],wisher_id[1]);
+            wish3=bindwishes(wishes[2],wishText[2],wisher_id[2]);
             });
     }
-    // $(".helpbox").click(function (){
-    //     alert(this.innerText)
-    //     wishText=this.innerText;
-    // })//确认帮助愿望
     $("#mine").click(function(){
         //显示 我的愿望清单  yourwish
         allhide();
@@ -220,7 +224,6 @@ $(function () {
         }, 1000);
 }   // location.hash=hash;
     })//点击下一步填写信息
-
     $("#name").bind('input propertychange', function () {
         prevent();
         name_check();
@@ -354,27 +357,32 @@ $(function () {
     function prepare(num,some){
         var request=new Array();
         request[0]="get_pre_wishes";
-        request[1]="save_wish";
-        request[2]="commit_info";
+        request[1]="save_wish";//post
+        request[2]="commit_info";//post
         request[3]="help_wish";
-        request[4]="after_help_show_info";
-        request[5]="commit_help";
+        request[4]="after_help_show_info";//post
+        request[5]="commit_help";//post
         request[6]="ball_list";
         request[7]="fairy_list";
         request[8]="open_ball";
         request[9]="my_wishes";
         request[10]="my_help";
         var url="js/errmsg.json";
+        var method="GET";
+        if(num==1||num==2||num==4||num==5){
+            method="POST";
+            console.log("change method"+method);
+        }
         if(num!=3){
             url="js/test.json"
         }else if(num==5||num==1){
             url="js/5.json"
         }
-         var url="/"+request[num];
+        //  var url="/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
-            "method":"POST",
+            "method":method,
             "data":some,
             "headers": {
                 "Content-Type": "application/json",
@@ -410,7 +418,7 @@ $(function () {
         return settings; 
     }
 
-    //getinfo
+    //获得精灵精灵球
     function get_all(){
         //获取已有的精灵/精灵球
         settings=prepare(7);
@@ -429,13 +437,7 @@ $(function () {
             $(".span2").text(ball);
         });
     }
-    //许愿页的换愿望
-    $(".getpic").mousemove(function(e){
-        console.log(e.clientY+"~~~~~~"+e.clientX);
-        var nowX=e.clientX;//217 88
-        var nowY=e.clientY;//420 288
-
-    })
+    //成功页画精灵
     function show_elf(id){
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
@@ -452,36 +454,14 @@ $(function () {
             ctx.shadowBlur = 0;
             ctx.save();
             var usecache=1;
-            // ctx.closePath();
-            // var bling=setInterval(() => {
-            //     if(shadownum==1){
-            //         ctx.shadowColor = "white";
-            //         ctx.shadowBlur=0;
-            //         shadownum=0;
-            //     }else{
-            //         ctx.shadowColor = "white";
-            //         ctx.shadowBlur = 15;
-            //     }
-            // }, 200);
             setTimeout(function(){
-                // clearInterval(bling);
                 ctx.clip();
                 console.log("清除画板");
             },1000*4);
             }
-        function canvas_cache(ctx){
-            // var ctx0 = document.createElement("canvas");
-            // ctx0 = canvas.getContext("2d");
-            // ctx0.width= ctx.width;
-            // ctx0.height =ctx.height;
-            // console.log("开始画了_cache")
-            // ctx0.drawImage(Img,0,0,200,200);
-            // ctx0.save();
-        }
     }
     $("#middle").click(function(){
         //发送请求换愿望
-        $("#attention0").hide();
         console.log("第"+click+"次愿望");
         click=click+1;
         if(click<=5){
@@ -490,8 +470,6 @@ $(function () {
             console.log(data);
             $("#wishtext").text(data.errmsg);
         });
-        // res=translate(0,collection);
-        // console.log(res);
     }
         if(click==5){
             $("#middle").attr("disabled","disabled");
@@ -503,7 +481,6 @@ $(function () {
         }, 3000);
         }
 })
-
     //许愿页定制
     $("#custom").click(function(){
         $("#attention0").show();
@@ -525,48 +502,14 @@ $(function () {
         }, 1000);
         clicktime=0;
 })
-    //测试定位
-    function select(){
-        $("#help1").click(function(e){
-        // console.log(e.clientY+"~~~~~~"+e.offsetX);
-        var guiY=Number(e.clientY-40);
-        $(".select").css({
-            'top':guiY
-        })
-        wishText=$("#help1").text();
-        console.log(wishText);
-        num=$("#help1").attr("wishid");
-        choose(num);
-    })
-    $("#help2").click(function(e){
-        // console.log(e.clientY+"~~~~~~"+e.offsetX);
-        var guiY=Number(e.clientY-40);
-        $(".select").css({
-            'top':guiY
-        })
-        wishText=$("#help2").text();
-        num=$("#help2").attr("wishid");
-        choose(num);
-    })
-    $("#help3").click(function(e){
-        // console.log(e.clientY+"~~~~~~"+e.offsetX);
-        var guiY=Number(e.clientY-40);
-        $(".select").css({
-            'top':guiY
-        })
-        wishText=$("#help3").text();
-        num=$("#help3").attr("wishid");
-        choose(num);
-    })
+    //用绑定好的对象 取值 助愿页
+    function select(wish1,wish2,wish3){
+        var exact_wish=new Object();
+        exact_wish.id=-1;
+        exact_wish.wisher_id=-1;
+        var wishText;
+    return exact_wish;
 }
-
-    //适配focus
-    // $("input").focus(function(){
-    //     // console.log("hey");//改了值才调用
-    //     name_check();
-    //     tel_check();
-    //     vx_check();
-    // })
     //点击精灵球 随机获取精灵 球-1
     function ball_dele(){
         $(".ballcontain").click(function(){
@@ -588,6 +531,7 @@ $(function () {
         document.getElementById("style1").href="css/index.css";
         console.log("into rule_page");
     }
+    var collection=new Object();//什么都往里面存 没问题的（
     function translate(num,collection){
         var result=new Array();
         if(collection==undefined||collection==""||collection==null){
@@ -598,16 +542,6 @@ $(function () {
         }
         console.log("收到了！开始转换---dididi");
         switch (num) {
-                case 2:
-                result['name'].push(collection.name);
-                result['telephon'].push(collection.telephone);
-                result['weixin'].push(collection.weixin);
-                break;
-                case 5:
-                result.push(collection[0].id);
-                // result.push(collection[0].user_id);
-                result.push(collection[0].telephone);
-                result.push(collection[0].weixin);
                 case 6:
                 result['now_total_ball']=collection.now_total_ball; 
                 break;
@@ -619,22 +553,8 @@ $(function () {
                 result['errmsg']=collection.errmsg;
                 //追加一个精灵路径
                 break;
-                case 10:
-                for(var i=0;i++;i<=collection.length){
-                    result.push(collection[i]);
-                }
                 case 0://0 1 3 6
                 result['errmsg']=collection.errmsg;   
-                break;        
-                case 1://确认许愿
-                result['errcode']=collection.errcode;
-                result['errmsg']=collection.errmsg; 
-                result['name']=collection.name;
-                result['telephone']=collection.telephone;
-                result['weixin']=collection.weixin;     
-                break;            
-                case 6://0 1 3 6
-                result['errmsg']=collection.errmsg;      
                 break;        
             }
         return result;
@@ -647,9 +567,9 @@ $(function () {
             "align-items": "center"
         });
     }
-    function choose(num){
+    function choose(id,wisher_id){
         var pack=JSON.stringify({
-            "id":num
+            "id":id
         })
         $.ajax(prepare(5,pack)).done(function(data){
             if(data.errcode==0){
@@ -659,13 +579,19 @@ $(function () {
                 $("#selected").removeAttr("disabled");//有弹窗以后删掉
             }
         });
-        // var res=translate(5,collection);
-        // $(".info#name").text(res[[]])
     }
-    function bindwishes(a,b,c,){
-        sql[a]=[{
-            wish_content:b,
-            wisher_id:c
-        }];
+    function bindwishes(a,b,c){
+        var obj=new Object();
+        obj.wishid=a;
+        if(b!=undefined||b!=null){
+            obj.wishText=b;
+        }
+        obj.wisher_id=c;
+        return obj;
     }
+    $("#others").delegate("div", "click", function () {
+        var id=$(this).attr("id");
+        alert(id);
+        $("#selected").removeAttr("disabled");
+    });
 })
