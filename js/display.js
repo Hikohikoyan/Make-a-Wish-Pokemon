@@ -1,7 +1,5 @@
 $(function () {
     //变换页面 和传递数据
-    // $(".page").hide();
-    // $("#index").show();//主页
     var clicktime=0;
     var click=0;
     var user,tel,wechat;
@@ -11,8 +9,6 @@ $(function () {
     var wish_text;//愿望文本公用存储
     var wishes=new Array();//愿望ID公用存储
     var wisher_id=new Array();
-    // allhide();
-    // $("#index").show();
     $("#img41").click(function(){
         $("#loading").remove();
         $("#index").show();
@@ -23,15 +19,12 @@ $(function () {
     $(".main_contain").show();
     var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
     if(nowpage.indexOf("wish")==0){
-        var setting=prepare(0);
-        $.ajax(setting).done(function(data){
-            console.log(data);
-            $("#wishtext").text(data.errmsg['pre_wishes']);})
-
         console.log("wish page");
+        show1("#hope_page");
     }
     if(nowpage.indexOf("help")==0){
         get_help_wishes();
+        show1("#help_page");
         console.log("help page");
     }
     if(nowpage.indexOf("major")==0){
@@ -46,7 +39,6 @@ $(function () {
         $(".form").hide();
         document.getElementById("style1").href="css/wish.css";
         console.log("into hope_page");
-        hash="#Now,make-a-wish!";
         window.location.href="wish.html";
     })//点击许愿
     $("#rule").click(function(){
@@ -88,9 +80,7 @@ $(function () {
         elf=sessionStorage.getItem('elf_num');
         //path elfs[i]
         $("h1").text("你的精灵("+elf+")");
-        $(".elfcontain").removeChild(".elf");
         for(var i=0;i<elf;i++){
-            console.log(elf);
             $(".elfcontain1").append("<div class='elf'><img id='elf"+i
             +"' src='img/bigelfboder.png'>"
             +"<img class='elfpic' src='img/fairy2.png'></div>");
@@ -102,16 +92,15 @@ $(function () {
         show1("#balls");
         $("#back").show();
         $("h1").text("你的精灵球("+ball+")");
-        $("#ball99").removeChild(".ball");
         ball=sessionStorage.getItem('ball_num');
         if(ball==0){
             return;
         }
         for(var i=0;i<ball;i++){
             $("#ball99").append("<div class='ball'><img id='ball"+i
-            +"' class='ballpic' src='img/explode/1.png'>"
-            +"</div>");
-            // +"<img class='ballpic' src='img/explode/1.png'></div>");
+            +"' src='img/bigelfboder.png'>"
+            +"<img class='ballpic' src='img/explode/1.png'></div>");
+            // +"<img class='elfpic' src='img/fairy2.png'></div>");
         }
 
     })//查看精灵球
@@ -186,7 +175,6 @@ $(function () {
         $.ajax(prepare(9)).done(function(data){
             if(data[0]!=undefined||data[0]!=null){
                 $(".nowish").remove();
-                $(".mine").remove();
                 $(".dream").show();
                 for(var i=0;i<data.length;i++){
                     console.log(i);
@@ -414,7 +402,7 @@ $(function () {
         request[8]="open_ball";
         request[9]="my_wishes";
         request[10]="my_help";
-        //var url="js/errmsg.json";
+        var url="js/errmsg.json";
         var method="GET";
         if(num==1||num==2||num==4||num==5){
             method="POST";
@@ -425,7 +413,7 @@ $(function () {
         }else if(num==5||num==1){
             url="js/5.json"
         }
-          var url="/"+request[num];
+        //  var url="/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
@@ -517,7 +505,7 @@ $(function () {
         var setting=prepare(0);
         $.ajax(setting).done(function(data){
             console.log(data);
-            $("#wishtext").text(data.errmsg['pre_wishes']);
+            $("#wishtext").text(data.errmsg);
         });
     }
         if(click==5){
@@ -551,9 +539,7 @@ $(function () {
         }, 1000);
         clicktime=0;
 })
-
-$(".ballpic").click(function(){})
-
+$
     //点击精灵球 随机获取精灵 球-1
     function ball_dele(){
         $(".ballcontain").click(function(){
