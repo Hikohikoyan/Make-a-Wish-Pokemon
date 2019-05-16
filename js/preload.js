@@ -27,6 +27,8 @@ $(function(){
     // imgdownload.on("fileload", handleFileLoad, this);
     imgdownload.on("complete", handleComplete, this);
     imgdownload.loadManifest([
+        "css/wish.css",
+        "css/index.css",
         "img/smallback.jpg",
         "img/background.png",
         "img/elfborder.png",//index.html

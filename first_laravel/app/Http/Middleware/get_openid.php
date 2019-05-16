@@ -14,7 +14,7 @@ class get_openid
      * @return mixed
      */
     public function handle($request, Closure $next){
-        $request->session()->put('openid', "4");//
+        $request->session()->put('openid', "8");//
         if($request->session()->has('openid')){
             return $next($request);
         }else{
