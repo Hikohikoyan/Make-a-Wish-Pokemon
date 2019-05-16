@@ -1,13 +1,13 @@
 {
     "id":1,
     "wish_content":"damnit",
-    "wisher_id":99,
+    "wisher_id":9,
     "errcode":0,
     "errmsg":"nothing",
     "name":"JSON先生",
     "telephone":"120",
     "weixin":"荆州锅盔",
-    "now_total_ball":99,
-    "path_array":"img/rotate.png",
+    "now_total_ball":9,
+    "path_array":"1/2/3/4/5/6/7",
     "fairy_num":11
 }

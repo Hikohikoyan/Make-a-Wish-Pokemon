@@ -439,16 +439,8 @@ img#middle{
     left: 0;
     margin-top: 20px;
 }
-#middle:hover{
-    width: 54.6px;
-    /* margin-top: 12px;
-    margin-left: -27.3px; */
-    animation:   rotate2 1.2s linear infinite;
-    -webkit-animation:   rotate2 1.2s linear infinite;
-    -webkit-transform-origin: center;
-    -moz-animation:    rotate2 1.2s linear infinite;
-    -o-animation:     rotate2 1.2s linear infinite; 
-}
+/* #middle:hover{
+} */
 #customtext{
     display: none;
     outline: none;

@@ -97,9 +97,9 @@ $(function () {
         $("#top").hide();
         show1("#balls");
         $("#back").show();
+        ball=sessionStorage.getItem('ball_num');
         $("h1").text("你的精灵球("+ball+")");
         $("#ball99").empty();
-        ball=sessionStorage.getItem('ball_num');
         if(ball==0){
             return;
         }
@@ -410,7 +410,7 @@ $(function () {
         request[8]="open_ball";
         request[9]="my_wishes";
         request[10]="my_help";
-        //var url="js/errmsg.json";
+        var url="js/errmsg.json";
         var method="GET";
         if(num==1||num==2||num==4||num==5){
             method="POST";
@@ -421,7 +421,7 @@ $(function () {
         }else if(num==5||num==1){
             url="js/5.json"
         }
-          var url="pokemon/"+request[num];
+        //   var url="pokemon/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
@@ -471,7 +471,12 @@ $(function () {
             elfs=res.path_array;
             elf=res.fairy_num;    
             $(".span1").text(elf);
+            elfs=elfs.split("/");
             sessionStorage.setItem("elf_num",elf);
+            for(var i=0;i<elfs.length;i++){
+                var str='elf'+i;
+                sessionStorage.setItem(str,elfs[i]);
+            }
         });
         settings=prepare(6);
         console.log("请求精灵ball列表");
@@ -507,6 +512,14 @@ $(function () {
     }
     $("#middle").click(function(){
         //发送请求换愿望
+        $("#middle").css({
+        "width":"54.6px",
+        "animation": "rotate2 1.2s linear infinite",
+        "-webkit-animation":"rotate2 1.2s linear infinite",
+        " -webkit-transform-origin":"center",
+        "-moz-animation": "rotate2 1.2s linear infinite",
+        "-o-animation": "rotate2 1.2s linear infinite", 
+        })
         console.log("第"+click+"次愿望");
         click=click+1;
         if(click<=5){
@@ -548,7 +561,38 @@ $(function () {
         clicktime=0;
 })
 
-$(".ballpic").click(function(){})
+$("#ball99").delegate("img.ballpic", "click", function () {
+    var str=1;
+    $.ajax(prepare(10)).done(function(data){
+        //存src session|
+        console.log(data);
+    })
+    $(this).css({
+        "animation":"bomb 1s;",
+        "-webkit-animation":"bomb 1s",
+        "-webkit-transform-origin":"center"
+        })
+        setTimeout(() => {
+            changepic();
+        }, 200);
+        function changepic(){
+            var bomb=setInterval(function(){
+                if(str<20){
+                    str = Number(str)
+                    str=str+1;
+                }
+                $(this).attr("src","img/explode/"+str+".png");
+            },50);
+            setTimeout(() => {
+                if(str=20){
+                    show_elf();
+                    clearInterval(bomb);
+                }
+                }, 5000);
+
+        }
+    // alert(id);
+});
 
     //点击精灵球 随机获取精灵 球-1
     function ball_dele(){
