@@ -98,8 +98,9 @@ $(function () {
             return;
         }
         for(var i=0;i<ball;i++){
-            $("#ball99").append("<div class='ball'><img class='ballcontain'"+i
-            +"' src='img/6.png'></div>");
+            $("#ball99").append("<div class='ball'><img id='ball"+i
+            +"' src='img/bigelfboder.png'>"
+            +"<img class='ballpic' src='img/explode/1.png'></div>");
             // +"<img class='elfpic' src='img/fairy2.png'></div>");
         }
 

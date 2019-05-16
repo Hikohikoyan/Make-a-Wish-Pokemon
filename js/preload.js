@@ -89,7 +89,7 @@ $(function(){
             }
             var src="img/rotate/"+str+".png";
             $("#rotate").attr("src",src);
-        },38);
+        },58);
         setTimeout(function(){
             clearInterval(interval);
             $(".outborder").hide();
@@ -111,7 +111,7 @@ $(function(){
                 });
                 console.log("index page");
             }
-        },800);
+        },1700);
     }
     function complete(){
         $("#loadingtext").css({

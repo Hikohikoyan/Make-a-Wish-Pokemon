@@ -138,6 +138,7 @@ img{
     margin-top: 8px;
     /* text-align: center; */
     /* left: 50%; */
+    pointer-events: auto;
     margin-left: 8%;
 }
 h1{
@@ -507,6 +508,19 @@ h2{
     left: 0;
     margin-top: 0;
     margin-left: 5px;
+}
+.ball{
+    height: 120px;
+}
+.ballpic{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    top: -111px;
+    left: 0;
+    margin-top: 0;
+    margin-left: 15.4px;
+    width: 70px;
 }
 .elfcontain1{
     display: grid;
