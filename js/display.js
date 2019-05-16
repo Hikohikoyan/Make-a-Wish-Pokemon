@@ -82,6 +82,7 @@ $(function () {
         //path elfs[i]
         $("h1").text("你的精灵("+elf+")");
         for(var i=0;i<elf;i++){
+            console.log(elf);
             $(".elfcontain1").append("<div class='elf'><img id='elf"+i
             +"' src='img/bigelfboder.png'>"
             +"<img class='elfpic' src='img/fairy2.png'></div>");
@@ -403,7 +404,7 @@ $(function () {
         request[8]="open_ball";
         request[9]="my_wishes";
         request[10]="my_help";
-        var url="js/errmsg.json";
+        //var url="js/errmsg.json";
         var method="GET";
         if(num==1||num==2||num==4||num==5){
             method="POST";
@@ -414,7 +415,7 @@ $(function () {
         }else if(num==5||num==1){
             url="js/5.json"
         }
-        //  var url="/"+request[num];
+          var url="/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
