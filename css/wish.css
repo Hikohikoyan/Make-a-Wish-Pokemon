@@ -201,6 +201,7 @@ input[type="image"]{
 img{
     max-width: 75%;
     margin-top: 12%;
+    pointer-events: auto;
 }
 h1{
     text-align: center;
