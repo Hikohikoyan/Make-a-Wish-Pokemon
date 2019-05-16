@@ -11,7 +11,7 @@ class save_wish extends Controller
     
     public function index(Request $request){
         $random_photo_order=mt_rand(1,10);
-        $path="../first_laravel/public/"."fairy"."$random_photo_order".".png";
+        $path="img/"."fairy/"."$random_photo_order".".png";
         $wish_content=$request->wish_content;
         $openid=$request->session()->get('openid');
         $wish_times=$request->get('wish_times');
