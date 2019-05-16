@@ -86,7 +86,7 @@ $(function () {
         elf=sessionStorage.getItem('elf_num');
         //path elfs[i]
         $("h1").text("你的精灵("+elf+")");
-        $(".elfcontain").removeChild(".elf");
+        $(".elfcontain1").empty();
         for(var i=0;i<elf;i++){
             console.log(elf);
             $(".elfcontain1").append("<div class='elf'><img id='elf"+i
@@ -100,7 +100,7 @@ $(function () {
         show1("#balls");
         $("#back").show();
         $("h1").text("你的精灵球("+ball+")");
-        $("#ball99").removeChild(".ball");
+        $("#ball99").empty();
         ball=sessionStorage.getItem('ball_num');
         if(ball==0){
             return;
@@ -184,7 +184,7 @@ $(function () {
         $.ajax(prepare(9)).done(function(data){
             if(data[0]!=undefined||data[0]!=null){
                 $(".nowish").remove();
-                $(".mine").remove();
+                $(".dream").empty();
                 $(".dream").show();
                 for(var i=0;i<data.length;i++){
                     console.log(i);
