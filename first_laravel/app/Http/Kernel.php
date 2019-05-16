@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
        \App\Http\Middleware\TrustProxies::class,
-       \App\Http\Middleware\get_openid::class,
+       //\App\Http\Middleware\get_openid::class,
        
     ];
 
@@ -65,11 +65,11 @@ class Kernel extends HttpKernel
         'crsf'=>\App\Http\Middleware\VerifyCsrfToken::class,
         'Checklogin'=>\App\Http\Middleware\Checklogin::class,
         'caculate_request'=>\App\Http\Middleware\caculate_request::class,
-        //'get_openid'=>\App\Http\Middleware\get_openid::class,
+        'get_openid'=>\App\Http\Middleware\get_openid::class,
         'user_exist'=>\App\Http\Middleware\user_exist::class,
         'judge_wishorhelp_times'=>\App\Http\Middleware\judge_wishorhelp_times::class,
         'caculate_ball'=>\App\Http\Middleware\caculate_ball::class,
-        'start_activity'=>\App\Http\Middleware\start_activity::class,
+        
     ];
 
     /**
