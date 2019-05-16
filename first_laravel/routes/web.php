@@ -11,18 +11,17 @@
 |
 */
 //use App\Http\Middleware\Checklogin;
-Route::post('/get_pre_wishes/','get_pre_wishes@index')->middleware('get_openid','caculate_request');//查看预定义愿望
+Route::get('/get_pre_wishes/','get_pre_wishes@index')->middleware('get_openid','caculate_request');//查看预定义愿望
 
 Route::group(['middleware'=>['get_openid','user_exist']],function(){
     Route::post('/save_wish/','save_wish@index')->middleware('judge_wishorhelp_times');
     Route::post('/commit_info/','user_info@commit_info');
-
-});
+});//保存愿望、展示个人信息，提交信息
 
 Route::group(['middleware'=>['get_openid']],function(){
-    Route::post('/help_wish/','show_wishes@help_wish');
-    Route::post('/my_wishes/','show_wishes@my_wishes');
-    Route::post('/my_help/','show_wishes@my_help');
+    Route::get('/help_wish/','show_wishes@help_wish');
+    Route::get('/my_wishes/','show_wishes@my_wishes');
+    Route::get('/my_help/','show_wishes@my_help');
 });//查看各种愿望，我帮助的，我许下的，以及浏览愿望
 
 Route::group(['middleware'=>['get_openid']],function(){
@@ -33,9 +32,9 @@ Route::group(['middleware'=>['get_openid']],function(){
 
 
 Route::group(['middleware'=>['get_openid','caculate_ball']],function(){
-    Route::post('/ball_list/','show_list@ball_list');
-    Route::post('/fairy_list/','show_list@fairy_list');
-    Route::post('/open_ball/','open_ball@index');
+    Route::get('/ball_list/','show_list@ball_list');
+    Route::get('/fairy_list/','show_list@fairy_list');
+    Route::get('/open_ball/','open_ball@index');
 
 });
 Route::group(['middleware'=>['get_openid','caculate_ball']],function(){
