@@ -423,7 +423,7 @@ $(function () {
         }else if(num==5||num==1){
             url="js/5.json"
         }
-          var url="/"+request[num];
+          var url="pokemon/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
