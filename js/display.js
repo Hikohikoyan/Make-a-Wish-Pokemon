@@ -8,7 +8,7 @@ $(function () {
     var elfs=new Array();//path elf
     var elf;
     var ball;    
-    var wishText;//愿望文本公用存储
+    var wish_text;//愿望文本公用存储
     var wishes=new Array();//愿望ID公用存储
     var wisher_id=new Array();
     // allhide();
@@ -56,9 +56,11 @@ $(function () {
     })//点击返回主页（规则页）return.png
     function goback(){
         var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
-        if(nowpage.indexOf("help")==0||nowpage.indexOf("wish")==0){
+        if(nowpage.indexOf("wish")==0){
             //现在是助愿页/许愿
             window.history.back();
+        }else if(nowpage.indexOf("help")==0){
+            window.location.href="major.html";
         }else{
             console.log("返回了");
             $("#elfs").hide();
@@ -113,6 +115,8 @@ $(function () {
     })//助愿页
     $("#selected").click(function(id,wisher_id){
         var id=sessionStorage.getItem('id');
+        var wisher_id=sessionStorage.getItem(id).split("/")[1].replace("wisher:","");
+        id=Number(id.replace("help",""));
         choose(id);
         var data=JSON.stringify({
             "wisher_id":wisher_id
@@ -152,7 +156,7 @@ $(function () {
         var wishText=new Array();
         $.ajax(prepare(3)).done(function(data){
             console.log(data);
-            for(var i=0;i<2;i++){
+            for(var i=0;i<=2;i++){
                 wishes[i]=data[i].id;
                 wishText[i]=data[i].wish_content;
                 wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
@@ -174,6 +178,7 @@ $(function () {
         $.ajax(prepare(9)).done(function(data){
             if(data[0]!=undefined||data[0]!=null){
                 $(".nowish").remove();
+                $(".mine").remove();
                 $(".dream").show();
                 for(var i=0;i<data.length;i++){
                     console.log(i);
@@ -201,11 +206,11 @@ $(function () {
         }, 5000);
         if(clicktime==666){//自定义愿望
             clearInterval(open);
-            wishText=$("#customtext").val();
-            if(/^\s*$/.test(wishText)==false){//自定义文本不为空
-                console.log(clicktime+"许愿："+wishText);
+            wish_text=$("#customtext").val();
+            if(/^\s*$/.test(wish_text)==false){//自定义文本不为空
+                console.log(clicktime+"许愿："+wish_text);
                 var pack_wish=JSON.stringify({
-                    'wish_content':wishText
+                    'wish_content':wish_text
                 })
                 $.ajax(prepare(1,pack_wish)).done(function(data){
                     if(data.errcode==0){//允许填写信息
@@ -231,10 +236,10 @@ $(function () {
             }
         }else if(clicktime==0){
         console.log(clicktime);//预定义
-        wishText=$("#wishtext").text();
-        console.log("许愿："+wishText);
+        wish_text=$("#wishtext").text();
+        console.log("许愿："+wish_text);
         var pack_wish=JSON.stringify({
-            'wish_content':wishText
+            'wish_content':wish_text
         })
         $.ajax(prepare(1,pack_wish)).done(function(data){
             if(data.errcode==0){
@@ -247,7 +252,7 @@ $(function () {
                 $("#hope_page").show();
                 $("#sign_page").show();
                 console.log("into form_page");
-                console.log(wishText);
+                console.log(wish_text);
             }else if(data.errcode==1|data.errcode==2){
             $("#attention0").text(data.errmsg);
         }
@@ -280,11 +285,8 @@ $(function () {
         $("#ok").attr("disabled","disabled");
         $("#ok").mousemove(function(e){
             if(e.offsetX>=0&&e.offsetY>=0){
-                $("#vxalert").text("你还没输信息");
-                $("#vxalert").show();
                 setTimeout(() => {
                     $("#vxalert").hide();
-                    $("#vxalert").text("请输入微信");
                 }, 1000);
             }
         });

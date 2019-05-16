@@ -122,13 +122,13 @@ h3,.loadspan{
 html{
     width: 100%;
     height:100%;
-    background-image: url(../img/background.png);
+    /* background-image: url(../img/background.png);
     background-attachment: fixed;
     background-size: 150%;
     background-repeat: repeat-y;
     background-position: bottom;
     background-attachment: fixed;
-    background-position-y: 90%;
+    background-position-y: 90%; */
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -173,6 +173,14 @@ body{
     padding: 0%;
     overflow-y: scroll;
     overflow-x: hidden;
+    background-image: url(../img/background.png);
+    background-attachment: fixed;
+    background-size: 150%;
+    background-repeat: repeat-y;
+    background-position: bottom;
+    background-attachment: fixed;
+    background-position-y: 90%;
+
     width: 100%; 
     height:100%;
 }
