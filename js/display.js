@@ -23,6 +23,11 @@ $(function () {
     $(".main_contain").show();
     var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
     if(nowpage.indexOf("wish")==0){
+        var setting=prepare(0);
+        $.ajax(setting).done(function(data){
+            console.log(data);
+            $("#wishtext").text(data.errmsg['pre_wishes']);})
+
         console.log("wish page");
     }
     if(nowpage.indexOf("help")==0){
@@ -81,6 +86,7 @@ $(function () {
         elf=sessionStorage.getItem('elf_num');
         //path elfs[i]
         $("h1").text("你的精灵("+elf+")");
+        $(".elfcontain").removeChild(".elf");
         for(var i=0;i<elf;i++){
             console.log(elf);
             $(".elfcontain1").append("<div class='elf'><img id='elf"+i
@@ -94,15 +100,16 @@ $(function () {
         show1("#balls");
         $("#back").show();
         $("h1").text("你的精灵球("+ball+")");
+        $("#ball99").removeChild(".ball");
         ball=sessionStorage.getItem('ball_num');
         if(ball==0){
             return;
         }
         for(var i=0;i<ball;i++){
             $("#ball99").append("<div class='ball'><img id='ball"+i
-            +"' src='img/bigelfboder.png'>"
-            +"<img class='ballpic' src='img/explode/1.png'></div>");
-            // +"<img class='elfpic' src='img/fairy2.png'></div>");
+            +"' class='ballpic' src='img/explode/1.png'>"
+            +"</div>");
+            // +"<img class='ballpic' src='img/explode/1.png'></div>");
         }
 
     })//查看精灵球
@@ -114,6 +121,8 @@ $(function () {
     })//助愿页
     $("#selected").click(function(id,wisher_id){
         var id=sessionStorage.getItem('id');
+        var wisher_id=sessionStorage.getItem(id).split("/")[1].replace("wisher:","");
+        id=Number(id.replace("help",""));
         choose(id);
         var data=JSON.stringify({
             "wisher_id":wisher_id
@@ -153,7 +162,7 @@ $(function () {
         var wishText=new Array();
         $.ajax(prepare(3)).done(function(data){
             console.log(data);
-            for(var i=0;i<2;i++){
+            for(var i=0;i<=2;i++){
                 wishes[i]=data[i].id;
                 wishText[i]=data[i].wish_content;
                 wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
@@ -175,6 +184,7 @@ $(function () {
         $.ajax(prepare(9)).done(function(data){
             if(data[0]!=undefined||data[0]!=null){
                 $(".nowish").remove();
+                $(".mine").remove();
                 $(".dream").show();
                 for(var i=0;i<data.length;i++){
                     console.log(i);
@@ -281,11 +291,8 @@ $(function () {
         $("#ok").attr("disabled","disabled");
         $("#ok").mousemove(function(e){
             if(e.offsetX>=0&&e.offsetY>=0){
-                $("#vxalert").text("你还没输信息");
-                $("#vxalert").show();
                 setTimeout(() => {
                     $("#vxalert").hide();
-                    $("#vxalert").text("请输入微信");
                 }, 1000);
             }
         });
@@ -508,7 +515,7 @@ $(function () {
         var setting=prepare(0);
         $.ajax(setting).done(function(data){
             console.log(data);
-            $("#wishtext").text(data.errmsg);
+            $("#wishtext").text(data.errmsg['pre_wishes']);
         });
     }
         if(click==5){
@@ -542,6 +549,9 @@ $(function () {
         }, 1000);
         clicktime=0;
 })
+
+$(".ballpic").click(function(){})
+
     //点击精灵球 随机获取精灵 球-1
     function ball_dele(){
         $(".ballcontain").click(function(){
