@@ -17,7 +17,7 @@ class save_wish extends Controller
         $wish_times=$request->get('wish_times');
         
         $exist_code=$request->get('exist_code');
-        if($exist_code!=0){
+        if($exist_code==0){
             $name="";
             $telephone="";
             $weixin="";

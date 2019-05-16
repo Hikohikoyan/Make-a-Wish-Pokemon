@@ -15,7 +15,7 @@ class user_info extends Controller
         $weixin=$request->weixin;
         $openid=$request->session()->get('openid');
         if($name!=null && $telephone!=null && $weixin!=null){
-            if($exist_code==0){
+            if($exist_code!=0){
                 DB::table('user')
                 ->where('user_id', $openid)
                 ->update(['name' => "$name",'telephone'=>"$telephone",'weixin'=>"$weixin"]);
