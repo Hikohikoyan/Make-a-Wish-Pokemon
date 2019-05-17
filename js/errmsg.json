@@ -34,7 +34,7 @@
         "ball_path":"NULL",
         "fairy_path":"NULL",
         "time":"xxxx"},
-        {"id":36,
+    {"id":36,
             "wish_content":"dsfvcwesdfvcxzsdfbcxsesfd",
             "errcode":0,
             "errmsg":"Json先生的json文件",
@@ -44,5 +44,5 @@
             "helper_open":"xxx",
             "ball_path":"NULL",
             "fairy_path":"NULL",
-            "time":"xxxx"}
+    "time":"xxxx"}
 ]

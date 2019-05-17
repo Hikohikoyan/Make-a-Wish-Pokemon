@@ -8,6 +8,6 @@
     "telephone":"120",
     "weixin":"荆州锅盔",
     "now_total_ball":9,
-    "path_array":"1/2/3/4/5/6/7",
-    "fairy_num":11
+    "path_array":["img\/fairy\/1.png","img\/fairy\/8.png"],
+    "fairy_num":"2"
 }

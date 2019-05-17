@@ -87,9 +87,11 @@ $(function () {
         $(".elfcontain1").empty();
         for(var i=0;i<elf;i++){
             console.log(elf);
+            var str="elf"+i;
+            var src=sessionStorage.getItem(str);
             $(".elfcontain1").append("<div class='elf'><img id='elf"+i
             +"' src='img/bigelfboder.png'>"
-            +"<img class='elfpic' src='img/fairy2.png'></div>");
+            +"<img class='elfpic' src="+src+"></div>");
         }
     })//查看精灵
     $("#btn2").click(function(){
@@ -199,11 +201,6 @@ $(function () {
     });
     //wish.html 许愿页
     $("#next").click(function(){
-        setTimeout(() => {
-            $("#next").attr("disabled","disabled");
-            $("#attention0").text("请稍候……");
-            $("attention0").show();
-        }, 1800);
         var open=setInterval(() => {
             $("attention0").show();
             $("#next").removeAttr("disabled");
@@ -413,13 +410,17 @@ $(function () {
         var url="js/errmsg.json";
         var method="GET";
         if(num==1||num==2||num==4||num==5){
-            method="POST";
+            // method="POST";
             console.log("change method"+method);
         }
         if(num!=3&&num!=9){
             url="js/test.json"
-        }else if(num==5||num==1){
+        }
+        if(num==5||num==1){
             url="js/5.json"
+        }
+        if(num==8){
+            url="js/open_ball.json";
         }
         //   var url="pokemon/"+request[num];
         if(some!=""||some!=undefined){
@@ -471,10 +472,10 @@ $(function () {
             elfs=res.path_array;
             elf=res.fairy_num;    
             $(".span1").text(elf);
-            elfs=elfs.split("/");
             sessionStorage.setItem("elf_num",elf);
-            for(var i=0;i<elfs.length;i++){
+            for(var i=0;i<elf;i++){
                 var str='elf'+i;
+                elfs[i]=elfs[i].replace("\"","");
                 sessionStorage.setItem(str,elfs[i]);
             }
         });
@@ -493,17 +494,15 @@ $(function () {
         var ctx = canvas.getContext("2d");
         //暂时写死
         var Img = new Image();
-        var src=elfs[id];
-        src="img/fairy2.png";
+        var src=sessionStorage.getItem("open_ball");
         Img.src = src;
         console.log("drawelf"+src);
         Img.onload=function(){
             console.log("开始画了")
             ctx.drawImage(Img,0,0,200,200);
-            ctx.shadowColor = "white";
-            ctx.shadowBlur = 0;
+            // ctx.shadowColor = "white";
+            // ctx.shadowBlur = 0;
             ctx.save();
-            var usecache=1;
             setTimeout(function(){
                 ctx.clip();
                 console.log("清除画板");
@@ -562,49 +561,46 @@ $(function () {
 })
 
 $("#ball99").delegate("img.ballpic", "click", function () {
-    var str=1;
-    $.ajax(prepare(10)).done(function(data){
+    $.ajax(prepare(8)).done(function(data){
         //存src session|
-        console.log(data);
+        var src=data[0].fairy_path;
+        src=src.replace("\"","");
+        sessionStorage.setItem("open_ball",src);
     })
-    $(this).css({
-        "animation":"bomb 1s;",
-        "-webkit-animation":"bomb 1s",
-        "-webkit-transform-origin":"center"
-        })
+    var id="#"+$(this).attr("id")
+    ball_dele(id);
+    console.log($(this).attr("id"))
+    // alert(id);
+});
+
+    //点击精灵球 随机获取精灵 球-1
+function ball_dele(ballid){
+    $(ballid).remove();
+    $("#balls").append("<img class='explode_gif' src='img/explode/1.png'>");
         setTimeout(() => {
             changepic();
         }, 200);
         function changepic(){
+            var str=1;
             var bomb=setInterval(function(){
                 if(str<20){
                     str = Number(str)
                     str=str+1;
                 }
-                $(this).attr("src","img/explode/"+str+".png");
-            },50);
+                $(".explode_gif").attr("src","img/explode/"+str+".png");
+            },60);
             setTimeout(() => {
                 if(str=20){
-                    show_elf();
+                    // show_elf();
                     clearInterval(bomb);
+                    $(".explode_gif").attr("src","img/smallback.jpg");
+                    $("#balls").fadeOut(200);
+                    show_elf()
+                    $(".explode_gif").remove();
+                    $(".success").show();
                 }
-                }, 5000);
-
-        }
-    // alert(id);
-});
-
-    //点击精灵球 随机获取精灵 球-1
-    function ball_dele(){
-        $(".ballcontain").click(function(){
-            //这里是那个动画
-            $(this).remove();
-            $.ajax(prepare(11)).done(function(){
-                console.log("OK,你打开了一个精灵球");
-                console.log("状态："+pack.errcode);
-                //弹窗 没有空的精灵球了
-            })
-        })
+                },3000);}
+    
     }
     function show_rule(){
         allhide();
