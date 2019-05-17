@@ -123,7 +123,7 @@ h3,.loadspan{
     }
 }
 html{
-    overflow-y: scroll;
+    overflow: hidden;
     overflow-x: hidden;
     height: 100%;
 }
@@ -140,6 +140,7 @@ body{
     overflow-y: hidden;
     overflow-x: hidden;
     width: 100vw;
+    margin-bottom: 20px;
     /* height: 100%; */
 }
 img{
