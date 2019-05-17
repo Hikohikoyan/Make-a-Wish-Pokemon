@@ -186,8 +186,8 @@ h3,.loadspan{
     margin-left: 12.5%;
     margin-right: 12.5%;
     /* padding: 12.5%; */
-    height: max-content;
-    /* width: 100%; */
+    height: -webkit-fill-available;
+        /* width: 100%; */
 }
 input[type="image"]{
     padding: 0%;
