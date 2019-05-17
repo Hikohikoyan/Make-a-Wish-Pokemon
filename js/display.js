@@ -140,9 +140,9 @@ $(function () {
         });
         var settings=prepare(4,data);
         $.ajax(settings).done(function(data){
-            $("#name").text("昵称："+String(data.name));
-            $("#tel").text("手机："+String(data.telephone));
-            $("#wechat").text("微信："+String(data.weixin));
+            $("#name").text("昵称："+data[0].name);
+            $("#tel").text("手机："+data[0].telephone);
+            $("#wechat").text("微信："+data[0].weixin);
         });//获取信息
         allhide();
         $("#change").hide();
@@ -520,7 +520,7 @@ $(function () {
         $.ajax(setting).done(function(data){
             $("#wishtext").text("昨天调试过了，保证这里没问题（大概");
                     // console.log(data);
-            // $("#wishtext").text(data.errmsg['pre_wishes']);
+             $("#wishtext").text(data.errmsg['pre_wishes']);
             $("#middle:hover").css({
                 "width":"54.6px",
                 "animation": "rotate2 0.7s linear infinite",
