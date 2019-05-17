@@ -79,21 +79,21 @@
 * 后台将随机传送愿望，一次3条,**response**显示为
 
   ```
-  [{"id":1,"wish_content":"xxxx","wisher_id":"xxx"},{"id":2,"wish_content":"xxxx","wisher_id":"xxx"},{"id":3,"wish_content":"xxxx","wisher_id":"xxx"}，{相同}]
+  [{"id":1,"wish_content":"xxxx"},{"id":2,"wish_content":"xxxx"},{"id":3,"wish_content":"xxxx"}，{相同}]
   ```
 
-* 这里只展示了一部分参数，前台根据需要选择，但是一定要记好每条愿望的**id,和wisher_id**,后面确定助愿时需要前端返回这两个数据
+* 这里只展示了一部分参数，前台根据需要选择，但是一定要记好每条愿望的**id**,后面确定助愿时需要前端返回这两个数据
 
   
 ### 第5个request：after_help_show_info.php
 
 * 点击查看愿望对应的许愿人的信息
 
-* 需要前端传对应愿望的wisher_id
+* 需要前端传对应愿望的id
 
   ```javascript
   {
-      "wisher_id":xxx   
+      "id":xxx   
   }
   ```
 
@@ -101,7 +101,7 @@
 * 后台返回对应的用户信息,**response**显示为
 
   ```php
-  [{"id":XX,"user_id":"XXX","telephone":XXX,"weixin":XXXX，"name":xxx}]
+  [{"id":XX,"telephone":XXX,"weixin":XXXX，"name":xxx}]
   ```
 
 
