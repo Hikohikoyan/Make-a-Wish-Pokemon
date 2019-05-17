@@ -9,7 +9,7 @@ $(function(){
         // $("#selected").hide();
         console.log("help page");
     }
-    if(nowpage.indexOf("major")==0){
+    if(nowpage.indexOf("index")==0){
         dopreload();
         $("#index").hide();
         console.log("index page");
@@ -126,7 +126,7 @@ $(function(){
                     $(".major").show();
                     $("#selected").show();
                 }
-                if(nowpage.indexOf("major")==0){
+                if(nowpage.indexOf("index")==0){
                     $(".welcome").css({
                         "display":"flex",
                         "animation": "punch 0.35s",

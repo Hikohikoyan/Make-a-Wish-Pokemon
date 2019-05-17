@@ -32,7 +32,7 @@ $(function () {
         show1("#help_page");//以flex style显示
         console.log("help page");
     }
-    if(nowpage.indexOf("major")==0){
+    if(nowpage.indexOf("index")==0){
         get_all();//获取精灵 精灵球 数量 sessionstorage
         console.log("index page");
     }
@@ -218,7 +218,7 @@ $(function () {
                         $("#tel").val(data.telephone);
                         $("#wechat").val(data.weixin);
                         $("#hope_page").show();
-                        $("#sign_page").show();
+                        show1("#sign_page");
                         console.log("into form_page");
                     }else if(data.errcode==1|data.errcode==2){
                     $("#attention0").text(data.errmsg);
@@ -249,20 +249,12 @@ $(function () {
                 $("#hope_page").show();
                 $("#sign_page").show();
                 console.log("into form_page");
-                console.log(wishText);
+                // console.log(wishText);
             }else if(data.errcode==1|data.errcode==2){
             $("#attention0").text(data.errmsg);
         }
         });
-    }else{
-        $("#next").attr("disabled","disabled");
-        $("#attention0").text("出了点小差错TAT");
-        setTimeout(() => {
-            $("#attention0").hide();
-            $("#next").removeAttr("disabled");
-        }, 1000);
-}   // location.hash=hash;
-    })//点击下一步填写信息
+    }})//点击下一步填写信息
     $("#name").bind('input propertychange', function () {
         prevent();
         name_check();
@@ -412,7 +404,7 @@ $(function () {
         if(num!=3&&num!=9){
             url="js/test.json"
         }
-        if(num==5||num==1){
+        if(num==5){
             url="js/5.json"
         }
         if(num==8){
@@ -520,8 +512,9 @@ $(function () {
         if(click<=5){
         var setting=prepare(0);
         $.ajax(setting).done(function(data){
-            console.log(data);
-            $("#wishtext").text(data.errmsg['pre_wishes']);
+            $("#wishtext").text("昨天调试过了，保证这里没问题（大概");
+            // console.log(data);
+            // $("#wishtext").text(data.errmsg['pre_wishes']);
         });
     }
         if(click==5){
