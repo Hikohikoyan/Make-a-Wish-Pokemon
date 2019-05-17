@@ -1,6 +1,9 @@
 *{
     background: none;
     outline: none;
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
 }
 html{
     height: 100%;
@@ -206,9 +209,9 @@ li{
     margin: 0%;
 }
 #custom,#cancel{
-    width: 70px;
+    width: 58px;
     bottom: 0;
-    width: 160px;
+    width:128px;
     margin-top: 15px;
     transform: scale(0.8);
 }
@@ -257,13 +260,14 @@ h2{
     padding: 0;
     margin-bottom: 8px;
     overflow: hidden;
+    padding-left: 25px;
 }
 #next{
     bottom: 0;
     position: relative;
     top: 0;
-    height: 70px;
-    width: 160px;
+    height: 58px;
+    width:128px;
     margin: 0;
     margin-top: 15px;
     transform: scale(0.8);
@@ -297,8 +301,8 @@ h2{
     bottom: 0;
     position: relative;
     top: 0;
-    height: 70px;
-    width: 160px;
+    height: 58px;
+    width: 128px;
     margin: 0;
     margin-top: 15px;
     transform: scale(0.8);
@@ -314,8 +318,8 @@ h2{
     max-width: 100%;
     position: relative;
     /* margin-bottom: 15%; */
-    height: 70px;
-    width: 160px;
+    height: 58px;
+    width: 128px;
     margin: 0;
     /* margin-top: 15px; */
     transform: scale(0.8);
@@ -445,8 +449,15 @@ img#middle{
     left: 0;
     margin-top: 20px;
 }
-/* #middle:hover{
-} */
+#middle:hover{
+    width:54.6px;
+    animation: rotate2 1.2s linear infinite;
+    -webkit-animation:rotate2 1.2s linear infinite;
+     -webkit-transform-origin:center;
+    -moz-animation: rotate2 1.2s linear infinite;
+    -o-animation: rotate2 1.2s linear infinite;      
+
+}
 #customtext{
     display: none;
     outline: none;
@@ -510,7 +521,7 @@ img#middle{
     margin-left: -40px;
     top: 4px;
     margin-bottom: 0;
-    display: none;
+    /* display: none; */
 }
 #get_page{
     display: flex;

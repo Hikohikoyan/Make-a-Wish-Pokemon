@@ -1,6 +1,9 @@
 *{
     background: none;
     outline: none;
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
 }
 #loading{
     background-image: url(../img/smallback.jpg);
@@ -128,16 +131,16 @@ body{
     /* background-image: url(../img/background.png);  */
     background-attachment: fixed;
     background-size: 150%;
-    background-repeat: repeat-y;
+    background-repeat: space;
     background-position: bottom;
     background-attachment: fixed;
-    background-position-y: 90%;
+    background-position-y: 100%;
     margin: 0%;
     padding: 0%;
     overflow-y: scroll;
     overflow-x: hidden;
-    width: 100vw; 
-    height:100%;
+    width: 100vw;
+    height: 100%;
 }
 img{
     margin-bottom: 28px;
@@ -160,20 +163,22 @@ h1{
     margin-top: 10%;
     white-space: nowrap;
     /* height: 0px; */
-    font-size: 35px;
+    font-size: 30px;
+    padding-left: 5px;
 }
 .title{
-    /* max-width: 80%;  */
+    /* max-width: 80%; */ 
     position: relative;
     top: 0;
     left: 0;
     margin: 0;
     padding: 0;
     left: 50%;
-    width: 280px;
-    margin-left: -140px;
+    width: 200px;
+    margin-left: -100px;
     margin-bottom: 30px;
-    margin-top: 18px;
+    margin-top: 55px;
+    /* transform: scale(0.68); */
 }
 .aside{
     display: grid;
@@ -238,33 +243,36 @@ label{
     margin-left: 9.5%;
 }
 #wish,#help,#rule,#mine{
-    height: 70px;
+    /* height: 70px; */
     margin: 0;
     padding: 0;
     /* margin-left: 25%; */
     position: relative;
-    width: 160px;
+    width: 128px;
     left: 50%;
     margin-bottom: 9%;
-    margin-left: -80px;
+    margin-left: -60px;
+    /* width: 120px; */
+    /* transform: scale(0.76); */
+    height: 58px;
 }
-/* .top-navagition{
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-    width: -webkit-fill-available;
-    height: max-content;
-} */
 #top{
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     white-space: nowrap;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    white-space: nowrap;
     float: left;
-    margin-left: 0px;
+    margin-left: -20px;
+    position: fixed;
+    left: 0;
+    top: 0;
     margin-top: 10px;
     height: 52px;
+    transform: scale(0.8);
 }
 
 #yourwish{
@@ -302,12 +310,12 @@ label{
     margin-top: 20%;
 }
 #rule{
-    width: 128px;
+    width: 98px;
     margin: 0;
     left: 0;
     /* margin-top: 12px; */
     position: relative;
-    margin-left: 40px;
+    margin-left: 70px;
     bottom: 0;
 }
 #pika{
@@ -317,7 +325,7 @@ label{
     width: 85px;
     /* top: 0; */
     bottom: 0;
-    margin-left: 15px;
+    margin-left: 25px;
     margin-bottom: 15px;
 }
 .select{
@@ -393,13 +401,12 @@ p{
     /* position: absolute; */
     position: relative;
     bottom: 10%;
-    width: 160px;
     /* margin-bottom: 28%; */
     margin: 0;
     /* left: 50%; */
     margin-bottom: 10%;
-    height: 70px;
-    width: 160px;
+    height: 58px;
+    width: 128px;
     margin: 0;
     margin-top: 15px;
     transform: scale(0.8);
@@ -418,15 +425,15 @@ p{
     bottom: 0;
     position: relative;
     top: 0;
-    height: 70px;
-    width: 160px;
+    height: 58px;
+    width: 128px;
     margin: 0;
     margin-top: 45px;
     transform: scale(0.8);
 }
 #ok2{
-    height: 70px;
-    width: 160px;
+    height: 58px;
+    width: 128px;
     margin: 0;
     margin-top: 15px;
     transform: scale(0.8);
@@ -439,14 +446,16 @@ h2{
     color: white;
     font-size: 25px;;
     margin-bottom: 10px;
+    padding-left: 15px;
 }
+
 #back_index{
     margin: 0%;
     bottom: 0;
     position: relative;
     top: 0;
-    height: 70px;
-    width: 160px;
+    height: 58px;
+    width: 128px;
     margin: 0;
     margin-top: 15px;
     transform: scale(0.8);
@@ -485,13 +494,14 @@ h2{
     justify-content: start;
     position: relative;
     align-content: start;
-    height: 300px;
+    height: 310px;
     grid-column-gap: 30px;
     margin-top: 27px;
     overflow: scroll;
     padding: 8px;
     /* height: 350px;
     margin-bottom: 40px; */
+    width: 100%;
 }
 .page,#expode_page{
     display: none;
@@ -572,9 +582,9 @@ h2{
     margin: 0;
     padding: 0;
     /* top: -111px; */
-    left: 0;
+    left: 50%;
     margin-top: 0;
-    margin-left: 15.4px;
+    margin-left: -35px;
     width: 70px;
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -691,12 +701,12 @@ h5{
     margin: 0;
     width: 130px;
     margin-top: 30px;
-    animation:   shan2 0.5s linear infinite;
-    -webkit-animation:   shan2 0.5s linear infinite;
+    animation:   shan2 1s linear infinite;
+    -webkit-animation:   shan2 1s linear infinite;
     -webkit-transform-origin:center;
-    -moz-animation:    shan2 0.5s linear infinite;
-    -o-animation:     shan2 0.5s linear infinite;
-
+    -moz-animation:    shan2 1s linear infinite;
+    -o-animation:     shan2 1s linear infinite;
+    margin-top: 80px;
 }
 @keyframes punch{
     /* 10%{
@@ -759,8 +769,65 @@ h5{
     padding-bottom: 30px;
 }
 #done{
-    color: white;
     position: relative;
+    color: rgba(253, 218, 56, 0.929);
+    -webkit-text-stroke: rgb(62,99,164);
+    -webkit-text-stroke-width: 0.6px;
+    font-size: 18px;
     top: -112px;
-    left: 220px;
+    font-weight: 600;
+    left: 215px;
+}
+.help_attention{
+    display: none;
+    background-image: url(../img/attentionbk.png);
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 300px;
+    height: 243px;
+    z-index: 100;
+    left: 50%;
+    margin-left: -150px;
+    top: 50%;
+    margin-top: -140px;
+}
+.att{
+    margin: 0%;
+    padding: 0%;
+    position: absolute;
+    top: 0;
+    top: 90px;
+    border: 0;
+    /* height: 20px; */
+    font-size: 100%;
+    white-space: normal;
+    height: 50px;
+    /* padding: 15px; */
+    width: 260px;
+    padding-left: 15px;
+}
+#iknow{
+    width: 128px;
+    height: 58px;
+    /* transform: scale(0.8); */
+    position: absolute;
+    top: 0;
+    top: 160px;
+    left: 50%;
+    margin-left: -64px;
+    transform: scale(0.8);
+}
+.minewishes{
+    margin: 0;
+    border: 0;
+    font-size: 18px;
+    padding: 0;
+    height: 60px;
+    margin-top: 8px;
+    white-space: normal;
 }

@@ -59,9 +59,11 @@ $(function () {
     })//点击返回主页（规则页）return.png
     function goback(){
         var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
-        if(nowpage.indexOf("help")==0||nowpage.indexOf("wish")==0){
+        if(nowpage.indexOf("wish")==0){
             //现在是助愿页/许愿
             window.history.back();
+        }else if(nowpage.indexOf("help")==0){
+            window.location.href="index.html"
         }else{
             console.log("返回了");
             $("#elfs").hide();
@@ -148,12 +150,6 @@ $(function () {
     //助愿页信息的确认按钮
     $("#ok2").click(function(){
         goback();
-        // allhide();
-        // $("#help_page").show();
-        // show1(".success")
-        // $("#back").show();
-        // show_elf();
-        // console.log("画elf图！")
     })//助愿的确认s按钮
     $("#change").bind("click", function () {
         $("#change").attr("disabled","disabled");
@@ -196,8 +192,8 @@ $(function () {
                     if(data[i].wish_content==undefined){
                         console.log(data);
                     }else{
-                    $(".dream").append("<div class='mine'><div class='helpbox'>"
-                    +String(data[i].wish_content)+"</div><span id='done'>"
+                    $(".dream").append("<div class='mine'><div class='helpbox'><p class='minewishes'>"
+                    +String(data[i].wish_content)+"</p></div><span id='done'>"
                     +String(data[i].situation)+"</span></div>");
                 }
             }}
@@ -264,55 +260,42 @@ $(function () {
         name_check();
     });
     $("#tel").bind('input propertychange', function () {
-        prevent();
+
         tel_check();
     })
     $("#wechat").bind('input propertychange', function () {
-        prevent();
+        if($("#wechat").focus()){
+            prevent();
+        }
         vx_check();
     })
     if(name_check()==true&&tel_check()==true&&vx_check()==true){
         $("#ok").removeAttr("disabled");
     }
     function prevent(){
-        $("#ok").attr("disabled","disabled");
-        $("#ok").mousemove(function(e){
-            if(e.offsetX>=0&&e.offsetY>=0){
-                setTimeout(() => {
-                    $("#vxalert").hide();
-                }, 1000);
-            }
-        });
         if(name_check()==true&&tel_check()==true&&vx_check()==true){
             $("#ok").removeAttr("disabled");
-            // console.log(vx_check());
-            // console.log("tel"+check(tel));
         }
-
     }
     function name_check(){
         var name=$("#name").val();
-        setTimeout(() => {
-            $("#namealert").hide();
-        }, 1800);
-        if(/^\s*$/.test(name)==true){
-            $("#namealert").show();
-            $("#ok").attr("disabled","disabled");
+        if(/^\s*$/.test(name)==true&&name!=""){
+            $("#namealert").text("请输入昵称");
+            // $("#ok").attr("disabled","disabled");
             return false;
         }else{
+            $("#namealert").text("");
             return true;
         }
     }
     function tel_check(){
         var tel=$("#tel").val();
-        setTimeout(() => {
-            $("#telalert").hide();
-        }, 1800);
         if(/^\s*$/.test(tel)==false&&checkPhone(tel)==true){
+            $("#telalert").text("");
             return true;
         }else{
-            $("#telalert").show();
-            $("#ok").attr("disabled","disabled");
+            $("#telalert").text("请输入手机号");
+            // $("#ok").attr("disabled","disabled");
             return false;
         }
         function checkPhone(num){ 
@@ -330,14 +313,12 @@ $(function () {
     }
     function vx_check(){
         var vx=$("#wechat").val();
-        setTimeout(() => {
-            $("#vxalert").hide();
-        }, 1800);
         if(/^\s*$/.test(vx)==false&&vx.length<=20){
+            $("#vxalert").text("");
             return true;
         }else{
-            $("#vxalert").show();
-            $("#ok").attr("disabled","disabled");
+            $("#vxalert").text("请输入微信号");
+            // $("#ok").attr("disabled","disabled");
             return false;
         }
     }
@@ -352,6 +333,21 @@ $(function () {
        'telephone':tel,
        'weixin':wechat,
         })
+        if(name_check()!=true){
+            $("#name").focus();
+            $("#namealert").text("请输入正确信息！");
+            return;
+        }
+        if(tel_check()!=true){
+            $("#tel").focus();
+            $("#telalert").text("请输入正确信息！");
+            return;
+        }
+        if(vx_check()!=true){
+            $("#wechat").focus();
+            $("#vxalert").text("请输入正确信息！");
+            return;
+        }
         $.ajax(prepare(2,pack)).done(function(data){
             if(data.errcode==0||data.errcode==1){
                 $("#sign_page").hide();
@@ -481,7 +477,7 @@ $(function () {
         });
     }
     //成功页画精灵
-    function show_elf(id){
+    function show_elf(){
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
         //暂时写死
@@ -503,24 +499,32 @@ $(function () {
     }
     $("#middle").click(function(){
         //发送请求换愿望
-        $("#middle").css({
-        "width":"54.6px",
-        "animation": "rotate2 1.2s linear infinite",
-        "-webkit-animation":"rotate2 1.2s linear infinite",
-        " -webkit-transform-origin":"center",
-        "-moz-animation": "rotate2 1.2s linear infinite",
-        "-o-animation": "rotate2 1.2s linear infinite", 
-        })
+        setTimeout(() => {
+            $("#middle:hover").css({
+                "width":"54.6px",
+                "animation": "a 1.2s linear infinite",
+                "-webkit-animation":"a 1.2s linear infinite",
+                " -webkit-transform-origin":"center",
+                "-moz-animation": "a 1.2s linear infinite",
+                "-o-animation": "a 1.2s linear infinite",         
+            })
+        }, 580);
         console.log("第"+click+"次愿望");
         click=click+1;
         if(click<=5){
         var setting=prepare(0);
         $.ajax(setting).done(function(data){
             $("#wishtext").text("昨天调试过了，保证这里没问题（大概");
-            $("#middle").css({
-                "width":"54.6px",})
                     // console.log(data);
             // $("#wishtext").text(data.errmsg['pre_wishes']);
+            $("#middle:hover").css({
+                "width":"54.6px",
+                "animation": "rotate2 0.7s linear infinite",
+                "-webkit-animation":"rotate2 0.7s linear infinite",
+                " -webkit-transform-origin":"center",
+                "-moz-animation": "rotate2 0.7s linear infinite",
+                "-o-animation": "rotate2 0.7s linear infinite",         
+            })
         });
     }
         if(click==5){
@@ -590,8 +594,8 @@ function ball_dele(ballid){
                     clearInterval(bomb);
                     $(".explode_gif").attr("src","img/smallback.jpg");
                     $("#balls").css({
-                        "animation":"hide 1s",
-                        "-webkit-animation":"hide 1s",
+                        "animation":"hide 0.3s",
+                        "-webkit-animation":"hide 0.3s",
                         "animation-fill-mode":"forwards",
                         "-webkit-transform-origin":"center",
                         "animation-timing-function": "linear"                    
@@ -656,9 +660,12 @@ function ball_dele(ballid){
         })
         $.ajax(prepare(5,pack)).done(function(data){
             if(data.errcode==0){
+                $(".help_attention").hide();
                 $("#selected").removeAttr("disabled");
-            }else{
+            }else if(data.errcode==1||data.errcode==2){
                 console.log(data.errmsg);
+                $(".att").text(data.errmsg);
+                $(".help_attention").show();
                 $("#selected").removeAttr("disabled");//有弹窗以后删掉
             }
         });

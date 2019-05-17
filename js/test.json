@@ -3,11 +3,11 @@
     "wish_content":"damnit",
     "wisher_id":9,
     "errcode":0,
-    "errmsg":"nothing",
+    "errmsg":"今天祝愿次数已满，请明天再来",
     "name":"JSON先生",
     "telephone":"120",
     "weixin":"荆州锅盔",
     "now_total_ball":9,
-    "path_array":["img\/fairy\/1.png","img\/fairy\/8.png"],
-    "fairy_num":"2"
+    "path_array":["img\/fairy\/5.png","img\/fairy\/4.png","img\/fairy\/6.png"],
+    "fairy_num":"3"
 }
