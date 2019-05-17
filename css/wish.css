@@ -18,10 +18,10 @@ body{
     background-position-y: 90%;
     margin: 0%;
     padding: 0%;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
-    width: 100%; 
-    height:100%;
+    width: 100vw;
+    /* height: 100%; */
 }
 .page{
     display: none;
@@ -212,6 +212,7 @@ li{
     width: 58px;
     bottom: 0;
     width:128px;
+    height: 58px;
     margin-top: 15px;
     transform: scale(0.8);
 }
