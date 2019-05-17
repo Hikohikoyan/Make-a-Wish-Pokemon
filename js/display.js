@@ -398,8 +398,9 @@ $(function () {
         var url="js/errmsg.json";
         var method="GET";
         if(num==1||num==2||num==4||num==5){
-            method="POST";
-            console.log("change method"+method);
+            if(location.hostname!="203.195.221.189"&&location.hostname!="localhost"){
+                method="POST";
+            console.log("change method"+method);}
         }
         if(num!=3&&num!=9){
             url="js/test.json"
