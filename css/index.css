@@ -122,6 +122,7 @@ h3,.loadspan{
 html{
     overflow-y: scroll;
     overflow-x: hidden;
+    height: 100%;
 }
 body{
     /* background-image: url(../img/background.png);  */
@@ -237,7 +238,7 @@ label{
     margin-left: 9.5%;
 }
 #wish,#help,#rule,#mine{
-    height: 72px;
+    height: 70px;
     margin: 0;
     padding: 0;
     /* margin-left: 25%; */
@@ -420,7 +421,7 @@ p{
     height: 70px;
     width: 160px;
     margin: 0;
-    margin-top: 15px;
+    margin-top: 45px;
     transform: scale(0.8);
 }
 #ok2{
@@ -460,6 +461,8 @@ h2{
     text-align: -webkit-center;
     padding-top: 20px;
     margin-top: 25%;
+    position: absolute;
+    width: 100%;
 }
 #expode_page:first-child{
     padding-left: 28px;
@@ -519,14 +522,24 @@ h2{
     margin-top: -95px;
     left: 50%;
     margin-left: -70px;
-    animation:bomb 20s;
-    -webkit-animation:bomb 20s;
+    animation:bomb 8s;
+    -webkit-animation:bomb 8s;
     animation-fill-mode:forwards;
     -webkit-transform-origin:center;
-    animation-timing-function: linear;
+    animation-timing-function: ease-in;
 }
 .ball{
     height: 120px;
+}
+@keyframes hide{
+    to{
+        opacity: 0.1;
+    }
+}
+@-webkit-keyframes hide{
+    to{
+        opacity: 0.1;
+    }
 }
 @keyframes bomb{
     from{
@@ -537,6 +550,7 @@ h2{
     to{
         /* position: absolute; */
         transform: scale(34);
+        opacity: 0.4;
         z-index: 10;
     }
 }
@@ -549,6 +563,7 @@ h2{
     to{
         /* position: absolute; */
         transform: scale(34);
+        opacity: 0.4;
         z-index: 10;
     }
 }
@@ -578,6 +593,11 @@ h2{
     /* width: 90%; */
     padding: 8px;
     height: 340px;
+}
+#balls{
+    animation-fill-mode:forwards;
+    -webkit-transform-origin:center;
+    animation-timing-function: ease-in;
 }
 .getpic{
     margin-bottom: 28px;

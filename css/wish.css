@@ -2,6 +2,9 @@
     background: none;
     outline: none;
 }
+html{
+    height: 100%;
+}
 body{
     background-image: url(../img/background.png);
     background-attachment: fixed;
@@ -224,7 +227,7 @@ input[type="text"],input[type="tel"]{
     padding-top: 2px;
     padding-bottom: 5px;
     padding-left: 10px;
-    width: 55%;
+    width: 65%;
     /* height: 30px; */
     border-radius: 0.3em 0.3em 0.3em;
     background-color: white;
@@ -234,6 +237,7 @@ input[type="text"],input[type="tel"]{
     opacity: 0.9;
     font-size: 23px;
     font-family: SimHei;
+    float: right;
 }
 #get_page{
     display: flex;
@@ -283,9 +287,11 @@ h2{
     top: 12vh;
     margin-left: 20px;
     height: 30vh;
+
 }
 .aside {
     margin-top: 40px;
+    padding-left: 15px;
 }
 #ok{
     bottom: 0;
@@ -297,7 +303,7 @@ h2{
     margin-top: 15px;
     transform: scale(0.8);
     margin-top: 60px;
-    margin-left: 56px;
+    /* margin-left: 56px; */
 }
 #again,#help,.fine{
     padding: 0%;
@@ -305,7 +311,7 @@ h2{
     display: block;
     height: 80%;
     /* margin-left: 25%; */
-    width: 50%;
+    max-width: 100%;
     position: relative;
     /* margin-bottom: 15%; */
     height: 70px;
@@ -501,8 +507,8 @@ img#middle{
     height: 20px;
     position: relative;
     left: 50%;
-    margin-left: -65px;
-    top: 3px;
+    margin-left: -40px;
+    top: 4px;
     margin-bottom: 0;
     display: none;
 }

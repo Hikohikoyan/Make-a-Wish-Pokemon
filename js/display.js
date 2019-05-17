@@ -96,6 +96,10 @@ $(function () {
         }
     })//查看精灵
     $("#btn2").click(function(){
+        $("#balls").css({
+            "animation":"a 1s",
+            "-webkit-animation":"a 1s",
+        })
         $(".main_contain").hide();
         $("#top").hide();
         show1("#balls");
@@ -247,7 +251,7 @@ $(function () {
                 $("#tel").val(data.telephone);
                 $("#wechat").val(data.weixin);
                 $("#hope_page").show();
-                $("#sign_page").show();
+                show1("#sign_page");
                 console.log("into form_page");
                 // console.log(wishText);
             }else if(data.errcode==1|data.errcode==2){
@@ -513,7 +517,9 @@ $(function () {
         var setting=prepare(0);
         $.ajax(setting).done(function(data){
             $("#wishtext").text("昨天调试过了，保证这里没问题（大概");
-            // console.log(data);
+            $("#middle").css({
+                "width":"54.6px",})
+                    // console.log(data);
             // $("#wishtext").text(data.errmsg['pre_wishes']);
         });
     }
@@ -529,7 +535,7 @@ $(function () {
 })
     //许愿页定制
     $("#custom").click(function(){
-        $("#attention0").show();
+        // $("#attention0").show();
         $("#wishtext").hide();
         $("#customtext").show();
         $("#custom").hide();
@@ -537,15 +543,15 @@ $(function () {
         clicktime=666;
         })
     $("#cancel").click(function(){
-        $("#attention0").hide();
+        // $("#attention0").hide();
         $("#wishtext").show();
         $("#customtext").hide();
         $("#cancel").hide();
         $("#custom").show();
         $("#next").removeAttr("disabled");
-        setTimeout(() => {
-            $("#attention0").show();
-        }, 1000);
+        // setTimeout(() => {
+        //     $("#attention0").show();
+        // }, 1000);
         clicktime=0;
 })
 
@@ -583,10 +589,17 @@ function ball_dele(ballid){
                     // show_elf();
                     clearInterval(bomb);
                     $(".explode_gif").attr("src","img/smallback.jpg");
-                    $("#balls").fadeOut(200);
-                    show_elf()
+                    $("#balls").css({
+                        "animation":"hide 1s",
+                        "-webkit-animation":"hide 1s",
+                        "animation-fill-mode":"forwards",
+                        "-webkit-transform-origin":"center",
+                        "animation-timing-function": "linear"                    
+                    })
+                    show_elf();
                     $(".explode_gif").remove();
-                    $(".success").show();
+                    $("#balls").hide();
+                    show1(".success");
                 }
                 },3000);}
     
