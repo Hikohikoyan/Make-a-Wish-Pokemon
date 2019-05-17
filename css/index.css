@@ -130,7 +130,7 @@ html{
 body{
     /* background-image: url(../img/background.png);  */
     background-attachment: fixed;
-    background-size: 150%;
+    background-size: 100%;
     background-repeat: space;
     background-position: bottom;
     background-attachment: fixed;
@@ -307,8 +307,7 @@ label{
     padding: 0%;
     display: flex;
     flex-direction: column;
-    margin-top: 20%;
-}
+    margin-top: 5%;}
 #rule{
     width: 98px;
     margin: 0;
@@ -422,14 +421,15 @@ p{
     margin-right: 5%;
 }
 #back{
-    bottom: 0;
+    bottom: 20px;
     position: relative;
     top: 0;
     height: 58px;
     width: 128px;
     margin: 0;
-    margin-top: 45px;
+    margin-top: 15px;
     transform: scale(0.8);
+    margin-bottom: 20px;
 }
 #ok2{
     height: 58px;
@@ -469,7 +469,7 @@ h2{
     /* padding-right: 25%; */
     text-align: -webkit-center;
     padding-top: 20px;
-    margin-top: 25%;
+    margin-top: 15%;
     position: absolute;
     width: 100%;
 }

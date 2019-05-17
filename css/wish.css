@@ -11,11 +11,11 @@ html{
 body{
     background-image: url(../img/background.png);
     background-attachment: fixed;
-    background-size: 150%;
-    background-repeat: repeat-y;
+    background-size: 100%;
+    background-repeat: space;
     background-position: bottom;
     background-attachment: fixed;
-    background-position-y: 90%;
+    background-position-y: 100%;
     margin: 0%;
     padding: 0%;
     overflow-y: hidden;
