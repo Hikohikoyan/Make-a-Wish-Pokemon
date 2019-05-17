@@ -402,7 +402,7 @@ $(function () {
         var url="js/errmsg.json";
         var method="GET";
         if(num==1||num==2||num==4||num==5){
-            // method="POST";
+            method="POST";
             console.log("change method"+method);
         }
         if(num!=3&&num!=9){
@@ -414,7 +414,7 @@ $(function () {
         if(num==8){
             url="js/open_ball.json";
         }
-        //   var url="pokemon/"+request[num];
+         var url="pokemon/"+request[num];
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
