@@ -12,11 +12,11 @@ html{
 body{
     background-image: url(../img/background.png);
     background-attachment: fixed;
-    background-size: 100%;
-    background-repeat: space;
+    background-size: 128%;
+    background-repeat: initial;
     background-position: bottom;
     background-attachment: fixed;
-    background-position-y: 100%;
+    background-position-y: 0;
     margin: 0%;
     padding: 0%;
     overflow-y: hidden;
@@ -262,7 +262,9 @@ h2{
     padding: 0;
     margin-bottom: 8px;
     overflow: hidden;
-    padding-left: 25px;
+    font-size: 20px;
+    padding-left: 10px;
+    height: 28px;
 }
 #next{
     bottom: 0;
@@ -524,11 +526,13 @@ img#middle{
     top: 4px;
     margin-bottom: 0;
     /* display: none; */
+    white-space: nowrap;
 }
 #get_page{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 }
 .success{
     display: none;

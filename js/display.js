@@ -145,9 +145,9 @@ $(function () {
             $("#wechat").text("微信："+String(data.weixin));
         });//获取信息
         allhide();
-        $("#help_page").show();
         $("#change").hide();
         $("#others").hide();
+        $("#help_page").hide();
         show1("#info");
         $("#selected").hide();
     })
@@ -355,13 +355,10 @@ $(function () {
         $.ajax(prepare(2,pack)).done(function(data){
             if(data.errcode==0||data.errcode==1){
                 $("#sign_page").hide();
+                $("#hope_page").hide();
                 show1(".success");
             }else{
                 $("#vxalert").text(data.errmsg);
-                $("#vxalert").show();
-                setTimeout(() => {
-                    $("#vxalert").hide();
-                }, 1800);        
             }
         });
     })
