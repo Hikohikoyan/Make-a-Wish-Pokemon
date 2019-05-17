@@ -67,6 +67,7 @@ $(function () {
             $("#elfs").hide();
             $("#balls").hide();
             $("#yourwish").hide();
+            $("#expode_page").hide();
             $("#top").show();
             $("#btn1").show();
             $("#btn2").show();
@@ -171,9 +172,9 @@ $(function () {
                 sessionStorage.setItem(str1,str2);
             }
             $('.helpbox').remove();
-            $("#others").append("<div class='helpbox' id='help"+wisher_id[0]+"'>"+wishText[0]+"</div>");
-            $("#others").append("<div class='helpbox' id='help"+wisher_id[1]+"'>"+wishText[1]+"</div>");
-            $("#others").append("<div class='helpbox' id='help"+wisher_id[2]+"'>"+wishText[2]+"</div>");
+            $("#others").append("<div class='helpbox' id='help1'>"+wishText[0]+"</div>");
+            $("#others").append("<div class='helpbox' id='help2'>"+wishText[1]+"</div>");
+            $("#others").append("<div class='helpbox' id='help3'>"+wishText[2]+"</div>");
             });
     }
     $("#mine").click(function(){
@@ -201,12 +202,7 @@ $(function () {
     });
     //wish.html 许愿页
     $("#next").click(function(){
-        var open=setInterval(() => {
-            $("attention0").show();
-            $("#next").removeAttr("disabled");
-        }, 5000);
         if(clicktime==666){//自定义愿望
-            clearInterval(open);
             wishText=$("#customtext").val();
             if(/^\s*$/.test(wishText)==false){//自定义文本不为空
                 console.log(clicktime+"许愿："+wishText);
@@ -662,8 +658,24 @@ function ball_dele(ballid){
         });
     }
     $("#others").delegate("div", "click", function () {
+        $(".select").show();
         var id=$(this).attr("id");
         sessionStorage.setItem('id',id);
         $("#selected").removeAttr("disabled");
+        if(id=="help1"){
+            $(".select").css({
+                "top":"40px"
+            })
+        }
+        if(id=="help2"){
+            $(".select").css({
+                "top":"160px"
+            })
+        }
+        if(id=="help3"){
+            $(".select").css({
+                "top":"280px"
+            })
+        }
     });
 })

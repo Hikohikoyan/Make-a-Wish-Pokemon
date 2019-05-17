@@ -76,6 +76,26 @@ $(function(){
             "img/rotate/19.png",
             "img/rotate/20.png",
             "img/rotate/21.png",//http://182.254.161.178/laravel/public/
+            "img/explode/1.png",
+            "img/explode/2.png",
+            "img/explode/3.png",
+            "img/explode/4.png",
+            "img/explode/5.png",
+            "img/explode/6.png",
+            "img/explode/7.png",
+            "img/explode/8.png",
+            "img/explode/9.png",
+            "img/explode/10.png",
+            "img/explode/11.png",
+            "img/explode/12.png",
+            "img/explode/13.png",
+            "img/explode/14.png",
+            "img/explode/15.png",
+            "img/explode/16.png",
+            "img/explode/17.png",
+            "img/explode/18.png",
+            "img/explode/19.png",
+            "img/explode/20.png",
         ]);
         imgdownload.load();
         function anime(str){
