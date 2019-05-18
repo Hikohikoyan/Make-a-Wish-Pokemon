@@ -24,9 +24,9 @@ class save_wish extends Controller
         }
         $exist_code=$request->get('exist_code');
         if($exist_code==0){
-            $name="";
-            $telephone="";
-            $weixin="";
+            $name=" ";
+            $telephone=" ";
+            $weixin=" ";
         }else{
             $get_openid_info=DB::table('user')->where('user_id', $openid)->first();
             $name=$get_openid_info->name;

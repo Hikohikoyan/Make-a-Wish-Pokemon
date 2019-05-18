@@ -1,41 +1,43 @@
 $(function () {
     //变换页面 和传递数据
-    // $(".page").hide();
-    // $("#index").show();//主页
-    var clicktime=0;
+    var clicktime=0;//禁止频繁点球
     var click=0;
     var user,tel,wechat;
     var elfs=new Array();//path elf
-    var elf;
+    var elf;//路径
     var ball;    
     var wishText;//愿望文本公用存储
     var wishes=new Array();//愿望ID公用存储
     var wisher_id=new Array();
-    // allhide();
-    // $("#index").show();
-    $("#img41").click(function(){
+    $('html').css({
+        'height':$(document).height(),
+        'width':$(document).width()
+    })
+    $("#img41").click(function(){//开头的GO
         $("#loading").remove();
         $("#index").show();
     })
-    $("#top").show();
+    $("#top").show();//allhide把这个也隐藏了 但是没写class class隐藏后也绑定不到就分开用id了 优先级待优化
     $(".btn2").show();
-    $(".btn1").show();
-    $(".main_contain").show();
+    $(".btn1").show();//到此 top两个显示按钮
+    $(".main_contain").show();//主页
     var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
     if(nowpage.indexOf("wish")==0){
         var setting=prepare(0);
         $.ajax(setting).done(function(data){
             console.log(data);
-            $("#wishtext").text(data.errmsg['pre_wishes']);})
-
+            $("#wishtext").text(data.errmsg['pre_wishes']);
+        })//愿望页面时先请求预定义愿望
+        show1("#hope_page");//以flex style显示
         console.log("wish page");
     }
     if(nowpage.indexOf("help")==0){
         get_help_wishes();
+        show1("#help_page");//以flex style显示
         console.log("help page");
     }
-    if(nowpage.indexOf("major")==0){
-        get_all();
+    if(nowpage.indexOf("index")==0){
+        get_all();//获取精灵 精灵球 数量 sessionstorage
         console.log("index page");
     }
     //主页按钮
@@ -61,14 +63,17 @@ $(function () {
     })//点击返回主页（规则页）return.png
     function goback(){
         var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
-        if(nowpage.indexOf("help")==0||nowpage.indexOf("wish")==0){
+        if(nowpage.indexOf("wish")==0){
             //现在是助愿页/许愿
             window.history.back();
+        }else if(nowpage.indexOf("help")==0){
+            window.location.href="index.html"
         }else{
             console.log("返回了");
             $("#elfs").hide();
             $("#balls").hide();
             $("#yourwish").hide();
+            $("#expode_page").hide();
             $("#top").show();
             $("#btn1").show();
             $("#btn2").show();
@@ -89,19 +94,30 @@ $(function () {
         $(".elfcontain1").empty();
         for(var i=0;i<elf;i++){
             console.log(elf);
+            var str="elf"+i;
+            var src=sessionStorage.getItem(str);
             $(".elfcontain1").append("<div class='elf'><img id='elf"+i
             +"' src='img/bigelfboder.png'>"
-            +"<img class='elfpic' src='img/fairy2.png'></div>");
+            +"<img class='elfpic' src="+src+"></div>");
         }
     })//查看精灵
     $("#btn2").click(function(){
+        $("#balls").css({
+            "animation":"a 1s",
+            "-webkit-animation":"a 1s",
+        })
         $(".main_contain").hide();
         $("#top").hide();
         show1("#balls");
         $("#back").show();
+<<<<<<< HEAD
         $("h1").text("你的精灵球("+ball+")");
         $("#ball99").empty();
+=======
+>>>>>>> 9b470c40f7f65facfdcb0f5c745cfacc299609e7
         ball=sessionStorage.getItem('ball_num');
+        $("h1").text("你的精灵球("+ball+")");
+        $("#ball99").empty();
         if(ball==0){
             return;
         }
@@ -129,26 +145,20 @@ $(function () {
         });
         var settings=prepare(4,data);
         $.ajax(settings).done(function(data){
-            $("#name").text("昵称："+String(data.name));
-            $("#tel").text("手机："+String(data.telephone));
-            $("#wechat").text("微信："+String(data.weixin));
+            $("#name").text("昵称："+data[0].name);
+            $("#tel").text("手机："+data[0].telephone);
+            $("#wechat").text("微信："+data[0].weixin);
         });//获取信息
         allhide();
-        $("#help_page").show();
         $("#change").hide();
         $("#others").hide();
+        $("#help_page").hide();
         show1("#info");
         $("#selected").hide();
     })
     //助愿页信息的确认按钮
     $("#ok2").click(function(){
         goback();
-        // allhide();
-        // $("#help_page").show();
-        // show1(".success")
-        // $("#back").show();
-        // show_elf();
-        // console.log("画elf图！")
     })//助愿的确认s按钮
     $("#change").bind("click", function () {
         $("#change").attr("disabled","disabled");
@@ -171,9 +181,9 @@ $(function () {
                 sessionStorage.setItem(str1,str2);
             }
             $('.helpbox').remove();
-            $("#others").append("<div class='helpbox' id='help"+wisher_id[0]+"'>"+wishText[0]+"</div>");
-            $("#others").append("<div class='helpbox' id='help"+wisher_id[1]+"'>"+wishText[1]+"</div>");
-            $("#others").append("<div class='helpbox' id='help"+wisher_id[2]+"'>"+wishText[2]+"</div>");
+            $("#others").append("<div class='helpbox' id='help1'>"+wishText[0]+"</div>");
+            $("#others").append("<div class='helpbox' id='help2'>"+wishText[1]+"</div>");
+            $("#others").append("<div class='helpbox' id='help3'>"+wishText[2]+"</div>");
             });
     }
     $("#mine").click(function(){
@@ -191,8 +201,8 @@ $(function () {
                     if(data[i].wish_content==undefined){
                         console.log(data);
                     }else{
-                    $(".dream").append("<div class='mine'><div class='helpbox'>"
-                    +String(data[i].wish_content)+"</div><span id='done'>"
+                    $(".dream").append("<div class='mine'><div class='helpbox'><p class='minewishes'>"
+                    +String(data[i].wish_content)+"</p></div><span id='done'>"
                     +String(data[i].situation)+"</span></div>");
                 }
             }}
@@ -201,17 +211,7 @@ $(function () {
     });
     //wish.html 许愿页
     $("#next").click(function(){
-        setTimeout(() => {
-            $("#next").attr("disabled","disabled");
-            $("#attention0").text("请稍候……");
-            $("attention0").show();
-        }, 1800);
-        var open=setInterval(() => {
-            $("attention0").show();
-            $("#next").removeAttr("disabled");
-        }, 5000);
         if(clicktime==666){//自定义愿望
-            clearInterval(open);
             wishText=$("#customtext").val();
             if(/^\s*$/.test(wishText)==false){//自定义文本不为空
                 console.log(clicktime+"许愿："+wishText);
@@ -227,7 +227,7 @@ $(function () {
                         $("#tel").val(data.telephone);
                         $("#wechat").val(data.weixin);
                         $("#hope_page").show();
-                        $("#sign_page").show();
+                        show1("#sign_page");
                         console.log("into form_page");
                     }else if(data.errcode==1|data.errcode==2){
                     $("#attention0").text(data.errmsg);
@@ -256,76 +256,55 @@ $(function () {
                 $("#tel").val(data.telephone);
                 $("#wechat").val(data.weixin);
                 $("#hope_page").show();
-                $("#sign_page").show();
+                show1("#sign_page");
                 console.log("into form_page");
-                console.log(wishText);
+                // console.log(wishText);
             }else if(data.errcode==1|data.errcode==2){
             $("#attention0").text(data.errmsg);
         }
         });
-    }else{
-        $("#next").attr("disabled","disabled");
-        $("#attention0").text("出了点小差错TAT");
-        setTimeout(() => {
-            $("#attention0").hide();
-            $("#next").removeAttr("disabled");
-        }, 1000);
-}   // location.hash=hash;
-    })//点击下一步填写信息
+    }})//点击下一步填写信息
     $("#name").bind('input propertychange', function () {
         prevent();
         name_check();
     });
     $("#tel").bind('input propertychange', function () {
-        prevent();
+
         tel_check();
     })
     $("#wechat").bind('input propertychange', function () {
-        prevent();
+        if($("#wechat").focus()){
+            prevent();
+        }
         vx_check();
     })
     if(name_check()==true&&tel_check()==true&&vx_check()==true){
         $("#ok").removeAttr("disabled");
     }
     function prevent(){
-        $("#ok").attr("disabled","disabled");
-        $("#ok").mousemove(function(e){
-            if(e.offsetX>=0&&e.offsetY>=0){
-                setTimeout(() => {
-                    $("#vxalert").hide();
-                }, 1000);
-            }
-        });
         if(name_check()==true&&tel_check()==true&&vx_check()==true){
             $("#ok").removeAttr("disabled");
-            // console.log(vx_check());
-            // console.log("tel"+check(tel));
         }
-
     }
     function name_check(){
         var name=$("#name").val();
-        setTimeout(() => {
-            $("#namealert").hide();
-        }, 1800);
-        if(/^\s*$/.test(name)==true){
-            $("#namealert").show();
-            $("#ok").attr("disabled","disabled");
+        if(/^\s*$/.test(name)==true&&name!=""){
+            $("#namealert").text("请输入昵称");
+            // $("#ok").attr("disabled","disabled");
             return false;
         }else{
+            $("#namealert").text("");
             return true;
         }
     }
     function tel_check(){
         var tel=$("#tel").val();
-        setTimeout(() => {
-            $("#telalert").hide();
-        }, 1800);
         if(/^\s*$/.test(tel)==false&&checkPhone(tel)==true){
+            $("#telalert").text("");
             return true;
         }else{
-            $("#telalert").show();
-            $("#ok").attr("disabled","disabled");
+            $("#telalert").text("请输入手机号");
+            // $("#ok").attr("disabled","disabled");
             return false;
         }
         function checkPhone(num){ 
@@ -343,14 +322,12 @@ $(function () {
     }
     function vx_check(){
         var vx=$("#wechat").val();
-        setTimeout(() => {
-            $("#vxalert").hide();
-        }, 1800);
         if(/^\s*$/.test(vx)==false&&vx.length<=20){
+            $("#vxalert").text("");
             return true;
         }else{
-            $("#vxalert").show();
-            $("#ok").attr("disabled","disabled");
+            $("#vxalert").text("请输入微信号");
+            // $("#ok").attr("disabled","disabled");
             return false;
         }
     }
@@ -365,16 +342,28 @@ $(function () {
        'telephone':tel,
        'weixin':wechat,
         })
+        if(name_check()!=true){
+            $("#name").focus();
+            $("#namealert").text("请输入正确信息！");
+            return;
+        }
+        if(tel_check()!=true){
+            $("#tel").focus();
+            $("#telalert").text("请输入正确信息！");
+            return;
+        }
+        if(vx_check()!=true){
+            $("#wechat").focus();
+            $("#vxalert").text("请输入正确信息！");
+            return;
+        }
         $.ajax(prepare(2,pack)).done(function(data){
             if(data.errcode==0||data.errcode==1){
                 $("#sign_page").hide();
+                $("#hope_page").hide();
                 show1(".success");
             }else{
                 $("#vxalert").text(data.errmsg);
-                $("#vxalert").show();
-                setTimeout(() => {
-                    $("#vxalert").hide();
-                }, 1800);        
             }
         });
     })
@@ -412,18 +401,25 @@ $(function () {
         request[8]="open_ball";
         request[9]="my_wishes";
         request[10]="my_help";
-        //var url="js/errmsg.json";
+        var url="js/errmsg.json";
         var method="GET";
         if(num==1||num==2||num==4||num==5){
-            method="POST";
-            console.log("change method"+method);
+            if(location.hostname!="203.195.221.189"&&location.hostname!="localhost"){
+                method="POST";
+            console.log("change method"+method);}
         }
         if(num!=3&&num!=9){
             url="js/test.json"
-        }else if(num==5||num==1){
+        }
+        if(num==5){
             url="js/5.json"
         }
-          var url="/"+request[num];
+        if(num==8){
+            url="js/open_ball.json";
+        }
+        if(location.hostname!="203.195.221.189"&&location.hostname!="localhost"){
+            var url="http://182.254.161.178/pokemon/"+request[num];
+        }
         if(some!=""||some!=undefined){
         var settings={
             "url":url,
@@ -474,6 +470,11 @@ $(function () {
             elf=res.fairy_num;    
             $(".span1").text(elf);
             sessionStorage.setItem("elf_num",elf);
+            for(var i=0;i<elf;i++){
+                var str='elf'+i;
+                elfs[i]=elfs[i].replace("\"","");
+                sessionStorage.setItem(str,elfs[i]);
+            }
         });
         settings=prepare(6);
         console.log("请求精灵ball列表");
@@ -485,22 +486,20 @@ $(function () {
         });
     }
     //成功页画精灵
-    function show_elf(id){
+    function show_elf(){
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
         //暂时写死
         var Img = new Image();
-        var src=elfs[id];
-        src="img/fairy2.png";
+        var src=sessionStorage.getItem("open_ball");
         Img.src = src;
         console.log("drawelf"+src);
         Img.onload=function(){
             console.log("开始画了")
             ctx.drawImage(Img,0,0,200,200);
-            ctx.shadowColor = "white";
-            ctx.shadowBlur = 0;
+            // ctx.shadowColor = "white";
+            // ctx.shadowBlur = 0;
             ctx.save();
-            var usecache=1;
             setTimeout(function(){
                 ctx.clip();
                 console.log("清除画板");
@@ -509,13 +508,32 @@ $(function () {
     }
     $("#middle").click(function(){
         //发送请求换愿望
+        setTimeout(() => {
+            $("#middle:hover").css({
+                "width":"54.6px",
+                "animation": "a 1.2s linear infinite",
+                "-webkit-animation":"a 1.2s linear infinite",
+                " -webkit-transform-origin":"center",
+                "-moz-animation": "a 1.2s linear infinite",
+                "-o-animation": "a 1.2s linear infinite",         
+            })
+        }, 580);
         console.log("第"+click+"次愿望");
         click=click+1;
         if(click<=5){
         var setting=prepare(0);
         $.ajax(setting).done(function(data){
-            console.log(data);
-            $("#wishtext").text(data.errmsg['pre_wishes']);
+            $("#wishtext").text("昨天调试过了，保证这里没问题（大概");
+                    // console.log(data);
+             $("#wishtext").text(data.errmsg['pre_wishes']);
+            $("#middle:hover").css({
+                "width":"54.6px",
+                "animation": "rotate2 0.7s linear infinite",
+                "-webkit-animation":"rotate2 0.7s linear infinite",
+                " -webkit-transform-origin":"center",
+                "-moz-animation": "rotate2 0.7s linear infinite",
+                "-o-animation": "rotate2 0.7s linear infinite",         
+            })
         });
     }
         if(click==5){
@@ -530,7 +548,7 @@ $(function () {
 })
     //许愿页定制
     $("#custom").click(function(){
-        $("#attention0").show();
+        // $("#attention0").show();
         $("#wishtext").hide();
         $("#customtext").show();
         $("#custom").hide();
@@ -538,31 +556,66 @@ $(function () {
         clicktime=666;
         })
     $("#cancel").click(function(){
-        $("#attention0").hide();
+        // $("#attention0").hide();
         $("#wishtext").show();
         $("#customtext").hide();
         $("#cancel").hide();
         $("#custom").show();
         $("#next").removeAttr("disabled");
-        setTimeout(() => {
-            $("#attention0").show();
-        }, 1000);
+        // setTimeout(() => {
+        //     $("#attention0").show();
+        // }, 1000);
         clicktime=0;
 })
 
-$(".ballpic").click(function(){})
+$("#ball99").delegate("img.ballpic", "click", function () {
+    $.ajax(prepare(8)).done(function(data){
+        //存src session|
+        var src=data[0].fairy_path;
+        src=src.replace("\"","");
+        sessionStorage.setItem("open_ball",src);
+    })
+    var id="#"+$(this).attr("id")
+    ball_dele(id);
+    console.log($(this).attr("id"))
+    // alert(id);
+});
 
     //点击精灵球 随机获取精灵 球-1
-    function ball_dele(){
-        $(".ballcontain").click(function(){
-            //这里是那个动画
-            $(this).remove();
-            $.ajax(prepare(11)).done(function(){
-                console.log("OK,你打开了一个精灵球");
-                console.log("状态："+pack.errcode);
-                //弹窗 没有空的精灵球了
-            })
-        })
+function ball_dele(ballid){
+    $(ballid).remove();
+    $("#balls").append("<img class='explode_gif' src='img/explode/1.png'>");
+        setTimeout(() => {
+            changepic();
+        }, 200);
+        function changepic(){
+            var str=1;
+            var bomb=setInterval(function(){
+                if(str<20){
+                    str = Number(str)
+                    str=str+1;
+                }
+                $(".explode_gif").attr("src","img/explode/"+str+".png");
+            },60);
+            setTimeout(() => {
+                if(str=20){
+                    // show_elf();
+                    clearInterval(bomb);
+                    $(".explode_gif").attr("src","img/smallback.jpg");
+                    $("#balls").css({
+                        "animation":"hide 0.3s",
+                        "-webkit-animation":"hide 0.3s",
+                        "animation-fill-mode":"forwards",
+                        "-webkit-transform-origin":"center",
+                        "animation-timing-function": "linear"                    
+                    })
+                    show_elf();
+                    $(".explode_gif").remove();
+                    $("#balls").hide();
+                    show1(".success");
+                }
+                },3000);}
+    
     }
     function show_rule(){
         allhide();
@@ -616,16 +669,35 @@ $(".ballpic").click(function(){})
         })
         $.ajax(prepare(5,pack)).done(function(data){
             if(data.errcode==0){
+                $(".help_attention").hide();
                 $("#selected").removeAttr("disabled");
-            }else{
+            }else if(data.errcode==1||data.errcode==2){
                 console.log(data.errmsg);
+                $(".att").text(data.errmsg);
+                $(".help_attention").show();
                 $("#selected").removeAttr("disabled");//有弹窗以后删掉
             }
         });
     }
     $("#others").delegate("div", "click", function () {
+        $(".select").show();
         var id=$(this).attr("id");
         sessionStorage.setItem('id',id);
         $("#selected").removeAttr("disabled");
+        if(id=="help1"){
+            $(".select").css({
+                "top":"40px"
+            })
+        }
+        if(id=="help2"){
+            $(".select").css({
+                "top":"160px"
+            })
+        }
+        if(id=="help3"){
+            $(".select").css({
+                "top":"280px"
+            })
+        }
     });
 })

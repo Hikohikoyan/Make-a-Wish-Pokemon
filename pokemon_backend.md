@@ -5,6 +5,7 @@
 * 无需前端发送数据
 
 * 后台传输数据有
+* 数据直接.errmsg .request获取
 
   ```php
   $array_random=[
@@ -12,8 +13,7 @@
       'request'=>$request_times,//方便后台调试，检查错误，前端无需获取
       'get_id'=>$get_id//方便后台调试，前端无需获取
   ]
-  ```
-
+  `
 ### 第2个request :save_wish.php
 
 * 储存用户许下的愿望，无论是选择我们设定好的还是自定义的，保存许愿都用同一个
@@ -27,6 +27,8 @@
   ```
 
 * 后台将返回三种状态
+
+*。直接.errcode  .errmsg 都是简单.获取
 
   ```php
   $warn=[
@@ -57,6 +59,7 @@
   ```
 
 * 后台传的数据为
+* 直接.获取
 
   ```php
   [
@@ -73,32 +76,32 @@
 
 * 无需前端发送数据
 
-* 后台将随机传送愿望，一次3条,response显示为
+* 后台将随机传送愿望，一次3条,**response**显示为
 
   ```
-  [{"id":1,"wish_content":"xxxx","wisher_id":"xxx"},{"id":2,"wish_content":"xxxx","wisher_id":"xxx"},{"id":3,"wish_content":"xxxx","wisher_id":"xxx"}，{相同}]
+  [{"id":1,"wish_content":"xxxx"},{"id":2,"wish_content":"xxxx"},{"id":3,"wish_content":"xxxx"}，{相同}]
   ```
 
-* 这里只展示了一部分参数，前台根据需要选择，但是一定要记好每条愿望的**id,和wisher_id**,后面确定助愿时需要前端返回这两个数据
+* 这里只展示了一部分参数，前台根据需要选择，但是一定要记好每条愿望的**id**,后面确定助愿时需要前端返回这两个数据
 
   
 ### 第5个request：after_help_show_info.php
 
 * 点击查看愿望对应的许愿人的信息
 
-* 需要前端传对应愿望的wisher_id
+* 需要前端传对应愿望的id
 
   ```javascript
   {
-      "wisher_id":xxx   
+      "id":xxx   
   }
   ```
 
 
-* 后台返回对应的用户信息,response显示为
+* 后台返回对应的用户信息,**response**显示为
 
   ```php
-  [{"id":XX,"user_id":"XXX","telephone":XXX,"weixin":XXXX，"name":xxx}]
+  [{"id":XX,"telephone":XXX,"weixin":XXXX，"name":xxx}]
   ```
 
 
@@ -116,7 +119,7 @@
   ```
 
 * 后台进行处理后，返回三种状态
-
+* 简单.获取
   ```php
   {
       'errcode'=>XXX,//0，1，2
@@ -133,6 +136,7 @@
 * 前端不需要传数据
 
 * 后台返回
+* 直接.获取
 
   ```php
   [
@@ -149,12 +153,11 @@
 * 前端不需要传数据
 
 * 后台返回
+* response 为
+
 
   ```php
-  [
-      'path_array'=>xxxx,//需要展示的所有精灵的 图片路径的数组
-      'fairy_num'=>xxx //精灵个数
-  ]
+ {"path_array":["img\/fairy\/1.png","img\/fairy\/8.png"],"fairy_num":"2"}
   ```
 
   
@@ -166,14 +169,16 @@
 * 前端不需要发送数据
 
 * 后台进行操作后返回
-
+* 直接 .获取
   ```php
   [
       'errcode'=>xxx,//value:0,235
       'errmsg'=>xxx,//value:"已经没有空的精灵球了"，"孵化成功"
       'detailed_msg'=>xxx // 后台调试时可以查看，前端不用理会
-      'fairy_path'=>xxx//精灵图片路径
+      'fairy_path'=>xxx//精灵图片路径，只有一条
   ]
+  response 为
+  {"errcode":0,"errmsg":"\u5b75\u5316\u6210\u529f","detailed_msg":{"id":8,"wish_content":"dsgdgsfg","wisher_id":"45","helper_id":"8","situation":"\u5df2\u9886\u53d6","wisher_open":"\u5df2\u6253\u5f00","helper_open":"0","ball_path":"NULL","fairy_path":"img\/fairy\/2.png","time":"05.03"},"fairy_path":"img\/fairy\/2.png"}
   ```
 
   
@@ -184,7 +189,7 @@
 
 * 前端不需要发送数据
 
-* 后台返回愿望数组，response的显示为(前端根据需要，选取wish_content展示即可)
+* 后台返回愿望数组，**response**的显示为(前端根据需要，选取wish_content展示即可)
 
   ```php
   [{"id":x,"wish_content":"xxxxxx","wisher_id":"xxx","helper_id":"xxxx","situation":"xxxx","helper_open":"xxx","ball_path":"NULL","fairy_path":"NULL","time":"xxxx"},{"id":x,"wish_content":"xxxxxx","wisher_id":"xxx","helper_id":"xxxx","situation":"xxxx","helper_open":"xxx","ball_path":"NULL","fairy_path":"NULL","time":"xxxx"},....,...]
