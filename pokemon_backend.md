@@ -174,11 +174,11 @@
   [
       'errcode'=>xxx,//value:0,235
       'errmsg'=>xxx,//value:"已经没有空的精灵球了"，"孵化成功"
-      'detailed_msg'=>xxx // 后台调试时可以查看，前端不用理会
+     
       'fairy_path'=>xxx//精灵图片路径，只有一条
   ]
   response 为
-  {"errcode":0,"errmsg":"\u5b75\u5316\u6210\u529f","detailed_msg":{"id":8,"wish_content":"dsgdgsfg","wisher_id":"45","helper_id":"8","situation":"\u5df2\u9886\u53d6","wisher_open":"\u5df2\u6253\u5f00","helper_open":"0","ball_path":"NULL","fairy_path":"img\/fairy\/2.png","time":"05.03"},"fairy_path":"img\/fairy\/2.png"}
+  {"errcode":0,"errmsg":"\u5b75\u5316\u6210\u529f","fairy_path":"img\/fairy\/2.png"}
   ```
 
   
@@ -192,7 +192,7 @@
 * 后台返回愿望数组，**response**的显示为(前端根据需要，选取wish_content展示即可)
 
   ```php
-  [{"id":x,"wish_content":"xxxxxx","wisher_id":"xxx","helper_id":"xxxx","situation":"xxxx","helper_open":"xxx","ball_path":"NULL","fairy_path":"NULL","time":"xxxx"},{"id":x,"wish_content":"xxxxxx","wisher_id":"xxx","helper_id":"xxxx","situation":"xxxx","helper_open":"xxx","ball_path":"NULL","fairy_path":"NULL","time":"xxxx"},....,...]
+  [{"id":x,"wish_content":"xxxxxx","situation":"xxxx"},{"id":x,"wish_content":"xxxxxx","situation":"xxxx"},....,...]
   ```
 
   
