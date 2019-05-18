@@ -38,18 +38,24 @@ class user_info extends Controller
 
     public function after_help_show_info( Request $request){
         $id=$request->id;
+        $openid=$request->session()->get('openid');        
+
         $validator = Validator::make($request->all(), [
             'id' => 'required|integer',
         ]);
         if($validator->fails()){
-            return response()->json(['errcode'=>77,'errmsg'=>"id is not a integer"]);
+            return response()->json(['errcode'=>77,'errmsg'=>"id 不是个整数"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
         }
-        $wisher_id=DB::table('custom_wish')
+        $user_id=DB::table('custom_wish')
         ->where('id',$id)
-        ->value('wisher_id');
-
+        ->select('wisher_id','helper_id')
+        ->get();
+        print_r($user_id);
+        if($user_id[0]->helper_id!=$openid){
+            return response()->json(['errcode'=>433,'errmsg'=>"You don't have right "]);
+        }
         $wish_info=DB::table('user')
-        ->where('user_id',$wisher_id)
+        ->where('user_id',$user_id[0]->wisher_id)
         ->select('name','telephone','weixin')
         ->get();
         return response()->json($wish_info);
