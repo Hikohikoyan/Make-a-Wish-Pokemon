@@ -14,6 +14,9 @@ $(function(){
         $("#index").hide();
         console.log("index page");
     }
+    $("img").click(function(event){
+        event.preventDefault();
+    })
     function dopreload(){
         var imgdownload = new createjs.LoadQueue(true);
         function handleComplete(){
@@ -29,7 +32,7 @@ $(function(){
         // imgdownload.on("fileload", handleFileLoad, this);
         imgdownload.on("complete", handleComplete, this);
         imgdownload.loadManifest([
-            "css/index.css",
+            // "css/index.css",
             "img/smallback.jpg",
             "img/background.png",
             "img/elfborder.png",//index.html
