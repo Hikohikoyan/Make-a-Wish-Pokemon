@@ -19,11 +19,11 @@ class judge_wishorhelp_times
         $date=date("m.d");
         $wish_times=DB::table('custom_wish')
         ->where('wisher_id',"$openid")
-        ->where('time',$date)
+        ->where('time1',$date)
         ->count();
         $help_times=DB::table('custom_wish')
         ->where('helper_id',"$openid")
-        ->where('time',$date)
+        ->where('time2',$date)
         ->count();
         $request->attributes->add(['wish_times'=>$wish_times]);
         $request->attributes->add(['help_times'=>$help_times]);

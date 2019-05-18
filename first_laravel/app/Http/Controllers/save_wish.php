@@ -6,16 +6,22 @@ use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Input; 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Connection;
+use Validator;
 class save_wish extends Controller
 {
     
     public function index(Request $request){
         $random_photo_order=mt_rand(1,10);
-        $path="../first_laravel/public/"."fairy"."$random_photo_order".".png";
+        $path="img/"."fairy/"."$random_photo_order".".png";
         $wish_content=$request->wish_content;
         $openid=$request->session()->get('openid');
         $wish_times=$request->get('wish_times');
-        
+        $validator = Validator::make($request->all(), [
+            'wish_content' => 'required', 
+          ]);
+        if ($validator->fails()) {
+            return response()->json(['errcode'=>2,'errmsg'=>"请再检查一下你输入的内容"]);
+        }
         $exist_code=$request->get('exist_code');
         if($exist_code==0){
             $name="";
@@ -29,18 +35,14 @@ class save_wish extends Controller
         }
         
 
-        if($wish_content!=null&&($wish_times<=3)){
+        if($wish_times<3){
+            echo($wish_times);
             $time=date("m.d");
-            DB::insert('insert into custom_wish (id,wish_content,wisher_id,helper_id,situation,wisher_open,helper_open,ball_path,fairy_path,time) values (?,?,?,?,?,?,?,?,?,?)', [NULL,"$wish_content","$openid","NULL","未领取","0","0","NULL","$path","$time"]);
+            $aa=DB::table('custom_wish')->insert(['wish_content'=>$wish_content,'wisher_id'=>$openid,'helper_id'=>"NULL",'situation'=>"未领取",'wisher_open'=>0,'helper_open'=>0,'fairy_path'=>$path,'time1'=>$time,'time2'=>"0"]); 
             return response()->json(['errcode'=>0,'errmsg'=>"success",'path'=>$path,'name'=>$name,'telephone'=>$telephone,'weixin'=>$weixin]);
         }else{
-            if($wish_times==4){
                 return response()->json(['errcode'=>1,'errmsg'=>"今天的许愿次数已用完，明天再来"]);
-            }else{
-                return response()->json(['errcode'=>2,'errmsg'=>"输入的内容不能为空"]);
-            }  
+        
         }
-
-
     }
 }
