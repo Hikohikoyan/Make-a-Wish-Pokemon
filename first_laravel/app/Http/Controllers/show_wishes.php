@@ -32,7 +32,7 @@ class show_wishes extends Controller
                     ->where("situation","未领取")
                     ->inRandomOrder()
                     ->take(3)
-                    ->select('id','wish_content')
+                    ->select('id','wish_content','time1')
                     ->get();
         
         return response()->json($fetch_wish);
