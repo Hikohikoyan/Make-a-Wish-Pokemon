@@ -147,13 +147,12 @@ $(function () {
         window.location.href="help.html";
         console.log("into help");
     })//助愿页
-    $("#selected").click(function(id,wisher_id){
+    $("#selected").click(function(id){
         var id=sessionStorage.getItem('id');
-        var wisher_id=sessionStorage.getItem(id).split("/")[1].replace("wisher:","");
-        id=Number(id.replace("help",""));
+        // id=Number(id.replace("help",""));
         choose(id);
         var data=JSON.stringify({
-            "wisher_id":wisher_id
+            "id":id
         });
         var settings=prepare(4,data);
     var ajax=$.ajax(settings);
@@ -192,9 +191,9 @@ $(function () {
             for(var i=0;i<=2;i++){
                 wishes[i]=data[i].id;
                 wishText[i]=data[i].wish_content;
-                wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
+                // wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
                 var str1='help'+(i+1);
-                var str2='id:'+wishes[i]+"/"+"wisher:"+wisher_id[i];
+                var str2=wishes[i];
                 sessionStorage.setItem(str1,str2);
             }
             $('.helpbox').remove();
@@ -569,8 +568,13 @@ $(function () {
         click=click+1;
         if(click<=5){
         var setting=prepare(0);
-    var ajax=$.ajax(setting).done(function(data){
-                    // console.log(data);
+    var ajax=$.ajax(setting);
+    ajax.done(function(data){
+    // console.log(data);
+    if(data.errmsg==null||data.errmsg===undefined){
+        allatt("网络出错啦，再试一次叭");
+        return;
+    }
             $("#wishtext").text(data.errmsg);
             $("#middle:hover").css({
                 "width":"54.6px",
@@ -709,14 +713,14 @@ function ball_dele(ballid){
         var pack=JSON.stringify({
             "id":id
         })
-    var ajax=    $.ajax(prepare(5,pack)).done(function(data){
+    var ajax=$.ajax(prepare(5,pack));
+    ajax.done(function(data){
             if(data.errcode==0){
                 $(".help_attention").hide();
                 $("#selected").removeAttr("disabled");
             }else if(data.errcode==1||data.errcode==2){
                 console.log(data.errmsg);
-                $(".att").text(data.errmsg);
-                $(".help_attention").show();
+                allatt(data.errmsg);
                 $("#selected").removeAttr("disabled");//有弹窗以后删掉
             }
         });
