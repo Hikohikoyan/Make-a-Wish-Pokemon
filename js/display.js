@@ -96,7 +96,7 @@ $(function () {
             console.log(elf);
             var str="elf"+i;
             var src=sessionStorage.getItem(str);
-            $(".elfcontain1").append("<div class='elf'><img id='elf"+i
+            $(".elfcontain1").append("<div class='elf'><img class='elfff' id='elf"+i
             +"' src='img/bigelfboder.png'>"
             +"<img class='elfpic' src="+src+"></div>");
         }
@@ -364,6 +364,7 @@ $(function () {
     })
     $("#again").click(function(){
         $(".success").hide();
+        show1("#hope_page");
         $("#back").show();
         $(".show").show();
     })//再次许愿

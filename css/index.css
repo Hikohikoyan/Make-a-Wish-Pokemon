@@ -257,7 +257,6 @@ label{
     height: 58px;
 }
 #top{
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     white-space: nowrap;
@@ -267,9 +266,9 @@ label{
     white-space: nowrap;
     float: left;
     margin-left: -20px;
-    position: fixed;
+    position: absolute;
     left: 0;
-    top: 0;
+    top: -5px;
     margin-top: 10px;
     height: 52px;
     transform: scale(0.8);
@@ -282,13 +281,12 @@ label{
     position: relative;
     margin-top: 12px;
     margin-bottom: 12.5%;
-    margin-left: 10px;
-    margin-right: 10px;
-    /* margin-left: 12.5%;
-    margin-right: 12.5%; */
+    /* margin-left: 10px; */
+    /* margin-right: 10px; */
     /* padding: 12.5%; */
     height: -webkit-fill-available;
     /* width: -webkit-fill-available; */
+
 }
 .main_contain{
     /* display: grid; */
@@ -507,21 +505,15 @@ h2{
     display: none;
 }
 .elfpic{
-    /* position: relative;
-    margin: 0;
-    padding: 0;
-    top: -50%;
-    left: 0;
-    margin-top: -20px;
-    margin-left: 5px; */
     position: relative;
     margin: 0;
     padding: 0;
-    top: -126px;
+    top: -100px;
     left: 0;
     margin-top: 0;
     margin-left: 6px;
-    width: 90px;
+    width: 70px;
+    height: 60px;
 }
 .explode_gif{
     position: absolute;
@@ -589,20 +581,30 @@ h2{
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+.elfff{
+    margin-bottom: 28px;
+    max-width: 80%;
+    margin-top: 8px;
+    /* text-align: center; */
+    /* left: 50%; */
+    pointer-events: auto;
+    /* margin-left: 8%; */
+}
 .elfcontain1{
     display: grid;
+    text-align: center;
     grid-template-columns: 90px 90px 90px;
     grid-template-rows: 120px 120px 120px;
-    justify-content: start;
+    justify-content: center;
     position: relative;
     align-content: space-between;
     /* height: 300px; */
-    grid-column-gap: 30px;
+    /* grid-column-gap: 30px; */
     margin-top: 27px;
     overflow-y: scroll;
-    /* width: 90%; */
+    width: 100%;
     padding: 8px;
-    height: 340px;
+    /* height: 340px; */
 }
 #balls{
     animation-fill-mode:forwards;
