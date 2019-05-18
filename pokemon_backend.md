@@ -185,17 +185,16 @@
 
 ### 第10个request(get):my_wishes.php
 
-* 查看我的许愿
+* 查看我的愿望（包括许愿加助愿）
 
 * 前端不需要发送数据
 
-* 后台返回愿望数组，**response**的显示为(前端根据需要，选取wish_content展示即可)
+* 后台返回愿望数组，**response**的显示为
 
   ```php
-  [{"id":x,"wish_content":"xxxxxx","situation":"xxxx"},{"id":x,"wish_content":"xxxxxx","situation":"xxxx"},....,...]
-  ```
+  [{"id":28,"wish_content":"dsfdf","situation":"已领取"},{"id":29,"wish_content":"dsfdfdfdfsdf","situation":"未领取"}，{"id":31,"wish_content":"dsfdfdfdfsdfdfdsfsfdfd","situation":"未领取"},{"id":19,"wish_content":"少付付","situation":"已帮助"},{"id":20,"wish_content":"付付反少时诵诗书所所所所所","situation":"已帮助"},{"id":27,"wish_content":"d","situation":"已帮助"}]
 
-  
+* 前端需储存**id**, 请求after_help_show_info时需要
 
 ### 第11个request(get):my_help.php
 
