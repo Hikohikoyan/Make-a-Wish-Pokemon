@@ -13,7 +13,7 @@ class commit_help extends Controller
         $id=$request->id;
         $helper_id=$request->session()->get('openid');
         $time=date("m.d");
-        echo($help_times);
+        
         if($help_times==2){
             return response()->json(['errcode'=>1,'errmsg'=>"今天祝愿次数已满，请明天再来"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
         }else{
