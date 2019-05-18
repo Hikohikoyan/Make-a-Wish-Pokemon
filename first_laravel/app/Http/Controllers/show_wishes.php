@@ -6,16 +6,12 @@ use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Input; 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Connection;
+use App\Flight;
+use App\Wish;
 class show_wishes extends Controller
 {
 
     public function my_help( Request $request){
-        $openid=$request->session()->get('openid');
-        $all_my_help=DB::table('custom_wish')
-        ->where('helper_id',$openid)
-        ->select('id','wish_content')
-        ->get();
-        return response()->json($all_my_help);
     }
 
     public function my_wishes( Request $request){
@@ -24,7 +20,20 @@ class show_wishes extends Controller
         ->where('wisher_id',$openid)
         ->select('id','wish_content','situation')
         ->get();
-        return response()->json($all_my_wishes);
+        $all_my_help=DB::table('custom_wish')
+        ->where('helper_id',$openid)
+        ->select('id','wish_content')
+        ->get();
+        $help_num=DB::table('custom_wish')->where('helper_id',$openid)->count();
+        $null_array=array();
+        for($i=0;$i<$help_num;$i++){
+            $collection = collect($all_my_help[$i]);
+            $merged = $collection->merge(['situation'=>"已帮助"]);
+            array_push($null_array,$merged);
+        }
+        $collect=collect([$all_my_wishes,$null_array]);
+        $collapsed=$collect->collapse();
+        return response()->json($collapsed)->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
 
     public function help_wish( Request $request){
