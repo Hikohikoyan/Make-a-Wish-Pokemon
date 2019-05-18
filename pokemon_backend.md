@@ -79,21 +79,21 @@
 * 后台将随机传送愿望，一次3条,**response**显示为
 
   ```
-  [{"id":1,"wish_content":"xxxx","wisher_id":"xxx"},{"id":2,"wish_content":"xxxx","wisher_id":"xxx"},{"id":3,"wish_content":"xxxx","wisher_id":"xxx"}，{相同}]
+  [{"id":1,"wish_content":"xxxx"},{"id":2,"wish_content":"xxxx"},{"id":3,"wish_content":"xxxx"}，{相同}]
   ```
 
-* 这里只展示了一部分参数，前台根据需要选择，但是一定要记好每条愿望的**id,和wisher_id**,后面确定助愿时需要前端返回这两个数据
+* 这里只展示了一部分参数，前台根据需要选择，但是一定要记好每条愿望的**id**,后面确定助愿时需要前端返回这两个数据
 
   
 ### 第5个request：after_help_show_info.php
 
 * 点击查看愿望对应的许愿人的信息
 
-* 需要前端传对应愿望的wisher_id
+* 需要前端传对应愿望的id
 
   ```javascript
   {
-      "wisher_id":xxx   
+      "id":xxx   
   }
   ```
 
@@ -101,7 +101,7 @@
 * 后台返回对应的用户信息,**response**显示为
 
   ```php
-  [{"id":XX,"user_id":"XXX","telephone":XXX,"weixin":XXXX，"name":xxx}]
+  [{"id":XX,"telephone":XXX,"weixin":XXXX，"name":xxx}]
   ```
 
 
@@ -174,11 +174,11 @@
   [
       'errcode'=>xxx,//value:0,235
       'errmsg'=>xxx,//value:"已经没有空的精灵球了"，"孵化成功"
-      'detailed_msg'=>xxx // 后台调试时可以查看，前端不用理会
+     
       'fairy_path'=>xxx//精灵图片路径，只有一条
   ]
   response 为
-  {"errcode":0,"errmsg":"\u5b75\u5316\u6210\u529f","detailed_msg":{"id":8,"wish_content":"dsgdgsfg","wisher_id":"45","helper_id":"8","situation":"\u5df2\u9886\u53d6","wisher_open":"\u5df2\u6253\u5f00","helper_open":"0","ball_path":"NULL","fairy_path":"img\/fairy\/2.png","time":"05.03"},"fairy_path":"img\/fairy\/2.png"}
+  {"errcode":0,"errmsg":"\u5b75\u5316\u6210\u529f","fairy_path":"img\/fairy\/2.png"}
   ```
 
   
@@ -192,7 +192,7 @@
 * 后台返回愿望数组，**response**的显示为(前端根据需要，选取wish_content展示即可)
 
   ```php
-  [{"id":x,"wish_content":"xxxxxx","wisher_id":"xxx","helper_id":"xxxx","situation":"xxxx","helper_open":"xxx","ball_path":"NULL","fairy_path":"NULL","time":"xxxx"},{"id":x,"wish_content":"xxxxxx","wisher_id":"xxx","helper_id":"xxxx","situation":"xxxx","helper_open":"xxx","ball_path":"NULL","fairy_path":"NULL","time":"xxxx"},....,...]
+  [{"id":x,"wish_content":"xxxxxx","situation":"xxxx"},{"id":x,"wish_content":"xxxxxx","situation":"xxxx"},....,...]
   ```
 
   

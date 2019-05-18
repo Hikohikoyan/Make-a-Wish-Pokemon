@@ -12,7 +12,7 @@
 */
 //use App\Http\Middleware\Checklogin;
 Route::get('/get_pre_wishes/','get_pre_wishes@index')->middleware('get_openid','caculate_request');//查看预定义愿望
-
+Route::get('/Check_login/','Check_login@index');
 Route::group(['middleware'=>['get_openid','user_exist']],function(){
     Route::post('/save_wish/','save_wish@index')->middleware('judge_wishorhelp_times');
     Route::post('/commit_info/','user_info@commit_info');

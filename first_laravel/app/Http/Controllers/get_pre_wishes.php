@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Connection;
 class get_pre_wishes extends Controller{
     public function index( Request $request){
-        $total_pre_wishes=5;
+        $total_pre_wishes=10;//实际应该为57条
         $request_times=$request->session()->get('request_times');
         $get_id=$request_times[0]%$total_pre_wishes;
         if($get_id==0){
