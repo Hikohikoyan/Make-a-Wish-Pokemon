@@ -140,7 +140,7 @@ body{
     padding: 0%;
     overflow: hidden;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
 }
 img{
     margin-bottom: 28px;
