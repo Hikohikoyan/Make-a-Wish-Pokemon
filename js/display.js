@@ -444,7 +444,7 @@ $(function () {
             console.log("change method"+method);}
         }
         if(num!=3&&num!=9){
-            url="/js/test.json"
+            url="js/test.json"
         }
         if(num==5){
             url="js/5.json"
@@ -453,7 +453,7 @@ $(function () {
             url="js/open_ball.json";
         }
         if(location.hostname!="203.195.221.189"&&location.hostname!="localhost"){
-            var url="pokemon/"+request[num];
+            var url="/pokemon/"+request[num];
         }
         if(some!=""||some!=undefined){
         var settings={
@@ -617,7 +617,7 @@ $(function () {
 $("#ball99").delegate("img.ballpic", "click", function () {
 var ajax=    $.ajax(prepare(8)).done(function(data){
         //存src session|
-        var src=data[0].fairy_path;
+        var src=data.fairy_path;
         src=src.replace("\"","");
         sessionStorage.setItem("open_ball",src);
     })
