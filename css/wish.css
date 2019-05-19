@@ -545,35 +545,35 @@ img#middle{
     background-image: url(../img/attentionbk.png);
     background-repeat: no-repeat;
     background-attachment: local;
-    background-size: 100%;
+    background-size: cover;
     position: absolute;
     top: 0;
     left: 0;
     margin: 0;
-    width: 300px;
-    height: 243px;
+    width: 240px;
+    height: 300px;
     z-index: 100;
     left: 50%;
-    margin-left: -150px;
-    top:  45%;
-    margin-top: -140px;
+    margin-left: -120px;
+    top: 45%;
+    margin-top: -100px;
 }
 .att{
     margin: 0%;
     padding: 0%;
-    position: absolute;
+    position: relative;
     top: 0;
     top: 90px;
     border: 0;
-    height: 20px;
+    height: min-content;
     font-size: 100%;
     white-space: normal;
     text-align: center;
     color: white;
     font-weight: 300;
     /* padding: 15px; */
-    width: 260px;
-    padding-left: 15px;
+    width: 160px;
+    padding-left: 40px;
 }
 #iknow{
     width: 128px;
@@ -581,7 +581,7 @@ img#middle{
     /* transform: scale(0.8); */
     position: absolute;
     top: 0;
-    top: 160px;
+    top: 200px;
     left: 50%;
     margin-left: -64px;
     transform: scale(0.8);
