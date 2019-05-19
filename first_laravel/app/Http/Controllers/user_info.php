@@ -50,7 +50,6 @@ class user_info extends Controller
         ->where('id',$id)
         ->select('wisher_id','helper_id')
         ->get();
-        print_r($user_id);
         if($user_id[0]->helper_id!=$openid){
             return response()->json(['errcode'=>433,'errmsg'=>"You don't have right "]);
         }
