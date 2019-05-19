@@ -24,6 +24,9 @@ $(function () {
             $("#img41").click(function () { //开头的GO
                 $("#loading").remove();
                 $("#index").show();
+                if(get_you()==false){
+                    $("#rule").click();
+                }
             })
             $("#top").show(); //allhide把这个也隐藏了 但是没写class class隐藏后也绑定不到就分开用id了 优先级待优化
             $(".btn2").show();
@@ -341,12 +344,12 @@ $(function () {
                                         var pack_wish = JSON.stringify({
                                             'wish_content': wishText
                                         })
-                                        // get_you();
                                         $.ajax(prepare(1, pack_wish)).done(function (data) {
-                                            if (data.errcode == 0) { //允许填写信息
-                                                $("#name").val(data.name);
-                                                $("#tel").val(data.telephone);
-                                                $("#wechat").val(data.weixin);
+                                            if (data.errcode == 0) {
+                                                console.log("请求成功 提交愿望");
+                                                // $("#name").val(data.name);
+                                                // $("#tel").val(data.telephone);
+                                                // $("#wechat").val(data.weixin);
                                             } else if (data.errcode == 1 | data.errcode == 2 || typeof (data.errcode) === "undefined") {
                                                 allatt(data.errmsg);
                                             }
@@ -393,6 +396,7 @@ $(function () {
                 function hoping(){
                     var result=get_you();//先看有没有这个人 返回true 有人 可以调用session
                     if(result!=true){
+                        allatt("提示：信息一经填写就不可修改哦，请勿填错~");
                         user = $("#name").val();
                         tel = $("#tel").val();
                         wechat = $("#wechat").val();
