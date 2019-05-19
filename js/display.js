@@ -289,6 +289,7 @@ $(function () {
                 $(".help_attention").append("<p class='att'></p>");
                 $(".help_attention_2").append("<p class='att'></p>");
                 $(".help_attention").hide();
+                $(".help_attention_2").hide();
                 $(".help_attention_index").hide();
             })
             function prevent() {
