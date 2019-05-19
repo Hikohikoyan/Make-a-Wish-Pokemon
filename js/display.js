@@ -9,10 +9,10 @@ $(function () {
     var wishText;//愿望文本公用存储
     var wishes=new Array();//愿望ID公用存储
     var wisher_id=new Array();
-    $('html').css({
-        'height':$(document).height(),
-        'width':$(document).width()
-    })
+    // $('html').css({
+    //     'height':$(document).height(),
+    //     'width':$(document).width()
+    // })
     $("#img41").click(function(){//开头的GO
         $("#loading").remove();
         $("#index").show();
