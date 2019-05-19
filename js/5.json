@@ -1,5 +1,7 @@
 {
     "name":"JSON先生",
     "telephone":"120",
-    "weixin":"荆州锅盔"
+    "weixin":"荆州锅盔",
+    "errcode":1,
+    "errmsg":"愿望已被领取"
 }
