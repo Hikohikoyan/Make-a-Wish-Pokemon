@@ -35,7 +35,7 @@ class open_ball extends Controller
             $fairy_path=DB::table('custom_wish')
             ->where('id',$id)
             ->value('fairy_path');
-            return response()->json(['errcode'=>0,'errmsg'=>"孵化成功",'detailed_msg'=>$open_ball_object,'fairy_path'=>$fairy_path]);
+            return response()->json(['errcode'=>0,'errmsg'=>"孵化成功",'fairy_path'=>$fairy_path]);
         }
     }
 }
