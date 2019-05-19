@@ -462,7 +462,7 @@ $(function () {
                             'telephone': tel,
                             'weixin': wechat,
                         })
-                        if (name_check() != true) {
+                        if (name_check() != true||user=="") {
                             $("#name").focus();
                             $("#namealert").text("请输入正确信息！");
                             return;
