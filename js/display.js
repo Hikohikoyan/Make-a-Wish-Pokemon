@@ -453,7 +453,7 @@ $(function () {
             url="js/open_ball.json";
         }
         if(location.hostname!="203.195.221.189"&&location.hostname!="localhost"){
-            var url="pokemon/"+request[num];
+            var url="/pokemon/"+request[num];
         }
         if(some!=""||some!=undefined){
         var settings={
