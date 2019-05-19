@@ -181,6 +181,8 @@ $(function () {
                 $("#help_page").hide();
                 show1("#info");
                 $("#selected").hide();
+            }else{
+                allatt(result);
             }})
             //助愿页信息的确认按钮
             $("#ok2").click(function () {
@@ -852,13 +854,13 @@ $(function () {
                             console.log(data.errmsg);
                             allatt(data.errmsg);
                             $("#selected").removeAttr("disabled"); 
-                            check="shit"//有弹窗以后删掉
+                            check=data.errcmsg//有弹窗以后删掉
                         }
                     });
                     if(check=="ok"){
                         return true;
                     }else{
-                        return false;
+                        return check;
                     }
                 }
                 $("#others").delegate("div", "click", function () {
