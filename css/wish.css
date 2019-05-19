@@ -565,14 +565,15 @@ img#middle{
     top: 0;
     top: 90px;
     border: 0;
-    height: 20px;
+    height: 100px;
     font-size: 100%;
     white-space: normal;
-    text-align: center;
+    text-align: start;
     color: white;
     font-weight: 300;
     /* padding: 15px; */
-    width: 200px;
+    width: 210px;
+    padding-right: 15px;
     left: 50%;
     margin-left: -100px;
 }

@@ -261,6 +261,9 @@ $(function () {
                 $(".show").hide();
                 $("#hope_page").show();
                 show1("#sign_page");
+                if(get_you()==false){
+                    allatt("提示：信息一经填写就不可修改哦，请勿填错~");
+                }
                 console.log("into form_page");
             }) //点击下一步填写信息
             $("#name").bind('input propertychange', function () {
@@ -448,7 +451,6 @@ $(function () {
                 function hoping(){
                     var result=get_you();//先看有没有这个人 返回true 有人 可以调用session
                     if(result!=true){
-                        allatt("提示：信息一经填写就不可修改哦，请勿填错~");
                         $("#name").removeAttr("readonly");
                         $("#tel").removeAttr("readonly");
                         $("#wechat").removeAttr("readonly");
