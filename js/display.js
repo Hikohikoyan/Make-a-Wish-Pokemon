@@ -225,6 +225,8 @@ $(function () {
                 allhide();
                 $("#back").show();
                 $(".main_contain").hide();
+                $(".help_attention_index").append("<br>");
+                allatt("黄框表示已许下的愿望，蓝框表示选择帮助的，点击可查看TA的资料哦~");
                 $.ajax(prepare(9)).done(function (data) {
                     if (data[0] != "undefined" || data[0] != null) {
                         $(".nowish").remove();
@@ -237,9 +239,10 @@ $(function () {
                                 return;
                             } else {
                                 if(data[i].situation=="已帮助"){
-                                    $(".dream").append("<div class='mine'><div class='helpbox_help' id='"+data[i].id+"><p class='minewishes'>" +
-                                    String(data[i].wish_content) + "</p></div><span id='done'>" +
+                                    $(".dream").append("<div class='mine'><div class='helpbox_help' id='"+data[i].id+"'><p class='minewishes'>" +
+                                    String(data[i].wish_content) + "</p></div><span id='done1'>" +
                                     String("点击查看") + "</span></div>");
+                                    bindclick("#"+data[i].id);
                                 }else{
                                     $(".dream").append("<div class='mine'><div class='helpbox'><p class='minewishes'>" +
                                     String(data[i].wish_content) + "</p></div><span id='done'>" +
@@ -279,10 +282,14 @@ $(function () {
                 $("#ok").removeAttr("disabled");
             }
             $(".close").click(function () {
+                // $(".help_attention").empty();
+                // $(".help_attention_index").empty();
+                $(".att").remove();
+                $(".help_attention_index").append("<p class='att'></p>");
+                $(".help_attention").append("<p class='att'></p>");
                 $(".help_attention").hide();
                 $(".help_attention_index").hide();
             })
-
             function prevent() {
                 if (name_check() == true && tel_check() == true && vx_check() == true) {
                     $("#ok").removeAttr("disabled");
@@ -303,6 +310,9 @@ $(function () {
 
             function tel_check() {
                 var tel = $("#tel").val();
+                if(tel==undefined){
+                    return false;
+                }
                 if (/^\s*$/.test(tel) == false && checkPhone(tel) == true) {
                     $("#telalert").text("");
                     return true;
@@ -865,28 +875,33 @@ $(function () {
                         })
                     }
                 });
-                $(".mine").delegate("div","click",function(){
-                    var classes=$(this).attr("class");
-                    if(classes=="helpbox_help"){
-                        var id=$(this).attr("id");
-                        var check=sessionStorage.setItem("checkhelp",id);
+                function bindclick(divid){
+                    $(divid).bind("click", function () {
+                        id=divid.replace("#","");
+                        console.log("查看我的第"+divid+"条愿望");
+                        sessionStorage.setItem("checkhelp",id);
+                        var check=divid.replace("#","");
                         find(check);
-                    }
-                })
+                    })
+                }
                 function find(helpid){
                     var setting=prepare(4,helpid);
                     $.ajax(setting).done(function(data){
                         if(data.name==undefined||data.name==null){
-                            allatt("错误:");
-                            allatt("");
-                            allatt("网络出错，请重试");
+                            // $(".help_attention_index").prepend("<br>");
+                            $(".att").text("错误：");
+                            $(".help_attention_index").append("<p class='att'>获取不到</p>")
+                            $(".help_attention_index").show();
+                            $(".help_attention").show();
+                            $(".return").show();        
                             return;
                         }
-                        allatt("");
-                        allatt("姓名："+data.name);
-                        allatt("手机："+data.tel);
-                        allatt("微信："+data.weixin);
-                        allatt("");
-                    })
+                        $(".att").text("姓名："+data.name);
+                        $(".help_attention_index").append("<p class='att'style='top: 120px'>"+"手机："+data.tel+"</p>")
+                        $(".help_attention_index").append("<p class='att' style='top: 150px'>"+"微信："+data.tel+"</p>")
+                        $(".help_attention_index").show();
+                        $(".help_attention").show();
+                        $(".return").show();        
+                })
                 }
             })
