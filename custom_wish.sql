@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2019-05-19 17:23:22
+-- 生成日期： 2019-05-19 17:25:05
 -- 服务器版本： 10.1.36-MariaDB
 -- PHP 版本： 7.2.10
 
@@ -36,7 +36,7 @@ CREATE TABLE `custom_wish` (
   `situation` text CHARACTER SET utf8mb4 NOT NULL,
   `wisher_open` text CHARACTER SET utf8mb4 NOT NULL,
   `helper_open` text CHARACTER SET utf8mb4 NOT NULL,
-  `fairry_path` text CHARACTER SET utf8mb4 NOT NULL,
+  `fairy_path` text CHARACTER SET utf8mb4 NOT NULL,
   `time1` text CHARACTER SET utf8mb4 NOT NULL,
   `time2` text CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

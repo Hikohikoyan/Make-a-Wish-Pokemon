@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2019-05-19 07:41:50
+-- 生成日期： 2019-05-19 17:54:36
 -- 服务器版本： 10.1.36-MariaDB
 -- PHP 版本： 7.2.10
 
@@ -33,8 +33,16 @@ CREATE TABLE `user` (
   `user_id` text CHARACTER SET utf8mb4 NOT NULL,
   `name` text CHARACTER SET utf8mb4 NOT NULL,
   `telephone` varchar(12) CHARACTER SET utf8mb4 NOT NULL,
-  `weixin` text CHARACTER SET utf8mb4 NOT NULL
+  `weixin` varchar(25) CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- 转存表中的数据 `user`
+--
+
+INSERT INTO `user` (`id`, `user_id`, `name`, `telephone`, `weixin`) VALUES
+(1, '8', '罗霄', '11111111111', 'sdsdf789456'),
+(2, '8', '罗霄', '11111111111', 'sdsdf789456');
 
 --
 -- 转储表的索引
@@ -54,7 +62,7 @@ ALTER TABLE `user`
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
