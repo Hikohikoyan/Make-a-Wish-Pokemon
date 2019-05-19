@@ -287,6 +287,7 @@ $(function () {
                 $(".att").remove();
                 $(".help_attention_index").append("<p class='att'></p>");
                 $(".help_attention").append("<p class='att'></p>");
+                $(".help_attention_2").append("<p class='att'></p>");
                 $(".help_attention").hide();
                 $(".help_attention_index").hide();
             })
@@ -498,20 +499,21 @@ $(function () {
                 function allatt(errmsg) {
                     if(errmsg=="提示："){
                         $(".att").text(errmsg);
-                        $(".att").append("<br>");
+                        $(".help_attention_2").show();
                         $(".help_attention_index").show();
                         $(".help_attention").show();
                         $(".return").show();
                         return;    
                     }
                     if(errmsg==" "){
-                        $(".att").append("<br>");
+                        $(".help_attention_2").show();
                         $(".help_attention_index").show();
                         $(".help_attention").show();
                         $(".return").show();
                         return;    
                     }
                     $(".att").text(errmsg);
+                    $(".help_attention_2").show();
                     $(".help_attention_index").show();
                     $(".help_attention").show();
                     $(".return").show();
