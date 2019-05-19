@@ -111,13 +111,11 @@ $(function () {
                 elf = sessionStorage.getItem('elf_num');
                 //path elfs[i]
                 if (elf === undefined || elf === null) {
-                    console.log(0);
                     elf = 0;
                 }
                 $("h1").text("你的精灵(" + elf + ")");
                 $(".elfcontain1").empty();
                 for (var i = 0; i < elf; i++) {
-                    console.log(elf);
                     var str = "elf" + i;
                     var src = sessionStorage.getItem(str);
                     $(".elfcontain1").append("<div class='elf'><img class='elfff' id='elf" + i +
@@ -136,8 +134,6 @@ $(function () {
                 $("#back").show();
                 ball = sessionStorage.getItem('ball_num');
                 if (ball === undefined || ball === null) {
-                    console.log(0);
-
                     ball = 0;
                 }
                 $("h1").text("你的精灵球(" + ball + ")");
@@ -193,6 +189,7 @@ $(function () {
             $("#change").bind("click", function () {
                 $("#change").attr("disabled", "disabled");
                 get_help_wishes();
+                $(".select").hide();
                 setTimeout(() => {
                     console.log("换一批 解除");
                     $("#change").removeAttr("disabled")
@@ -414,7 +411,7 @@ $(function () {
                                         $("#attention0").text("许个愿吧~");
                                     }
                                 } else if (clicktime == 0) {
-                                    console.log(clicktime); //预定义
+                                    console.log("预定义"); //预定义
                                     var wishText = $("#wishtext").text();
                                     console.log("许愿：" + wishText);
                                     var pack_wish = JSON.stringify({
@@ -570,6 +567,8 @@ $(function () {
                     }
                     if (location.hostname != "203.195.221.189" && location.hostname != "localhost") {
                         var url = "/pokemon/" + request[num];
+                    }else{
+                        var url= "http://182.254.161.178/laravel/public//pokemon/"+request[num];
                     }
                     if (some != "" || some != undefined) {
                         var settings = {
@@ -808,7 +807,7 @@ $(function () {
                         result.push("Nothing at all");
                         return result[0];
                     }
-                    console.log("收到了！开始转换---dididi");
+                    // console.log("收到了！开始转换---dididi");
                     switch (num) {
                         case 6:
                             result['now_total_ball'] = collection.now_total_ball;
