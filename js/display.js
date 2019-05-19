@@ -13,6 +13,12 @@ $(function () {
     //     'height':$(document).height(),
     //     'width':$(document).width()
     // })
+    document.body.addEventListener('touchmove', function(e){
+        e.preventDefault();
+    }, {passive: false})
+    // $('body').on('touchmove', function (event) {
+    //     event.preventDefault();
+    // });
     $("#img41").click(function(){//开头的GO
         $("#loading").remove();
         $("#index").show();
