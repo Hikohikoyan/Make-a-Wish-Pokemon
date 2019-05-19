@@ -799,7 +799,7 @@ $(function () {
                 }
                 $("#others").delegate("div", "click", function () {
                     $(".select").show();
-                    var id = $(this).attr("chooseid");
+                    var id = $(this).attr("id");
                     sessionStorage.setItem('chooseid', id);
                     $("#selected").removeAttr("disabled");
                     if (id == "help1") {
