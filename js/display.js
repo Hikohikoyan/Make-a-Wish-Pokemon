@@ -160,7 +160,7 @@ $(function () {
                 console.log("into help");
             }) //助愿页
             $("#selected").click(function () {
-                var id = sessionStorage.getItem('id');//help1
+                var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
                 id=sessionStorage.getItem(id);
                 choose(id);
