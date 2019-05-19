@@ -234,16 +234,24 @@ $(function () {
                             console.log(i);
                             if (data[i].wish_content === undefined) {
                                 console.log(data);
+                                return;
                             } else {
-                                $(".dream").append("<div class='mine'><div class='helpbox'><p class='minewishes'>" +
+                                if(data[i].situation=="已帮助"){
+                                    $(".dream").append("<div class='mine'><div class='helpbox_help' id='"+data[i].id+"><p class='minewishes'>" +
+                                    String(data[i].wish_content) + "</p></div><span id='done'>" +
+                                    String("点击查看") + "</span></div>");
+                                }else{
+                                    $(".dream").append("<div class='mine'><div class='helpbox'><p class='minewishes'>" +
                                     String(data[i].wish_content) + "</p></div><span id='done'>" +
                                     String(data[i].situation) + "</span></div>");
+                                }
                             }
                         }
                     }
                 })
                 show1("#yourwish");
             });
+
             //wish.html 许愿页
             $("#next").click(function () {
                 allhide(); //包含hope page
@@ -257,8 +265,9 @@ $(function () {
                 name_check();
             });
             $("#tel").bind('input propertychange', function () {
-
-                tel_check();
+                if($("#tel").val().length>=3){
+                    tel_check();
+                }
             })
             $("#wechat").bind('input propertychange', function () {
                 if ($("#wechat").focus()) {
@@ -298,7 +307,8 @@ $(function () {
                     $("#telalert").text("");
                     return true;
                 } else {
-                    $("#telalert").text("请输入手机号");
+                    if(tel.length>=4){
+                    $("#telalert").text("请输入手机号");}
                     // $("#ok").attr("disabled","disabled");
                     return false;
                 }
@@ -329,26 +339,36 @@ $(function () {
                 }
             }
             function get_you(){
-                prepare();
-                $.ajax().done(function(data){
-                    if (data.name != "" && data.telephone != "" && data.weixin != "") {
-                        str="name:"+data.name+"/"+"tel:"+data.telephone+"/"+"wechat:"+data.weixin;
+                var setting=prepare(11);
+                var result;
+                $.ajax(setting).done(function(data){
+                    if (data.errcode==0) {
+                        if(data.user==undefined){
+                            result=false;
+                            return;
+                        }
+                        str="name:"+data.user.name+"/"+"tel:"+data.user.telephone+"/"+"wechat:"+data.user.weixin;
                         sessionStorage.setItem("you",str);
                         if(nowpage.indexOf("wish")==0){
-                            $("#name").val(data.name);
-                            $("#tel").val(data.telephone);
-                            $("#wechat").val(data.weixin);
+                            var you=sessionStorage.getItem("you");
+                            you=you.split("/");
+                            var name=you[0].replace("name:");
+                            var tel=you[1].replace("tel:");
+                            var weixin=you[2].replace("wechat:");
+                            $("#name").val(name);
+                            $("#tel").val(tel);
+                            $("#wechat").val(weixin);
                             change_white("#name");
                             change_white("#tel");
                             change_white("#wechat");    
                         }
+                        result=true;
+                        return;
+                    }else{
+                        result=false;
                     }
                 })
-                if(sessionStorage.getItem("you")==null){
-                    return false;
-                }else{
-                    return true;
-                }
+                return result;
             }
             $("#ok").click(function () { //填写完毕 提交信息
                     hoping();
@@ -466,6 +486,21 @@ $(function () {
                     window.history.back(); //返回按钮
                 })
                 function allatt(errmsg) {
+                    if(errmsg=="提示："){
+                        $(".att").text(errmsg);
+                        $(".att").append("<br>");
+                        $(".help_attention_index").show();
+                        $(".help_attention").show();
+                        $(".return").show();
+                        return;    
+                    }
+                    if(errmsg==" "){
+                        $(".att").append("<br>");
+                        $(".help_attention_index").show();
+                        $(".help_attention").show();
+                        $(".return").show();
+                        return;    
+                    }
                     $(".att").text(errmsg);
                     $(".help_attention_index").show();
                     $(".help_attention").show();
@@ -497,6 +532,7 @@ $(function () {
                     request[8] = "open_ball";
                     request[9] = "my_wishes";
                     request[10] = "my_help";
+                    request[11] = "get_user";
                     var url = "js/errmsg.json";
                     var method = "GET";
                     if (num == 1 || num == 2 || num == 4 || num == 5) {
@@ -829,5 +865,28 @@ $(function () {
                         })
                     }
                 });
-
+                $(".mine").delegate("div","click",function(){
+                    var classes=$(this).attr("class");
+                    if(classes=="helpbox_help"){
+                        var id=$(this).attr("id");
+                        var check=sessionStorage.setItem("checkhelp",id);
+                        find(check);
+                    }
+                })
+                function find(helpid){
+                    var setting=prepare(4,helpid);
+                    $.ajax(setting).done(function(data){
+                        if(data.name==undefined||data.name==null){
+                            allatt("错误:");
+                            allatt("");
+                            allatt("网络出错，请重试");
+                            return;
+                        }
+                        allatt("");
+                        allatt("姓名："+data.name);
+                        allatt("手机："+data.tel);
+                        allatt("微信："+data.weixin);
+                        allatt("");
+                    })
+                }
             })
