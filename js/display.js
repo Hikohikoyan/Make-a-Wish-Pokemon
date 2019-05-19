@@ -444,7 +444,7 @@ $(function () {
             console.log("change method"+method);}
         }
         if(num!=3&&num!=9){
-            url="/js/test.json"
+            url="js/test.json"
         }
         if(num==5){
             url="js/5.json"
