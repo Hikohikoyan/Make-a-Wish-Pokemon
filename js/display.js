@@ -24,10 +24,17 @@ $(function () {
     var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
     if(nowpage.indexOf("wish")==0){
         var setting=prepare(0);
-        $.ajax(setting).done(function(data){
-            console.log(data);
-            $("#wishtext").text(data.errmsg['pre_wishes']);
-        })//愿望页面时先请求预定义愿望
+        var ajax=$.ajax(setting);
+        ajax.done(function(data){
+            if(typeof(data)==="undefined"||typeof(data.errmsg)==="undefined"){
+                allatt("网络好像出了点问题，稍后再来尝试叭");
+                return;
+            }
+            $("#wishtext").text(data.errmsg);
+        });//愿望页面时先请求预定义愿望
+        ajax.fail(function(textStatus){
+            allatt(String(textStatus));
+        });
         show1("#hope_page");//以flex style显示
         console.log("wish page");
     }
@@ -70,6 +77,7 @@ $(function () {
             window.location.href="index.html"
         }else{
             console.log("返回了");
+            get_all();
             $("#elfs").hide();
             $("#balls").hide();
             $("#yourwish").hide();
@@ -80,7 +88,7 @@ $(function () {
             $(".main_contain").show();
         }
     }
-    $("img#back").click(function(){
+    $(".back").click(function(){
         goback();
     })
     $("#btn1").click(function(){
@@ -90,13 +98,17 @@ $(function () {
         $("#back").show();
         elf=sessionStorage.getItem('elf_num');
         //path elfs[i]
+        if(elf===undefined||elf===null){
+            console.log(0);
+            elf=0;
+        }
         $("h1").text("你的精灵("+elf+")");
         $(".elfcontain1").empty();
         for(var i=0;i<elf;i++){
             console.log(elf);
             var str="elf"+i;
             var src=sessionStorage.getItem(str);
-            $(".elfcontain1").append("<div class='elf'><img id='elf"+i
+            $(".elfcontain1").append("<div class='elf'><img class='elfff' id='elf"+i
             +"' src='img/bigelfboder.png'>"
             +"<img class='elfpic' src="+src+"></div>");
         }
@@ -110,12 +122,12 @@ $(function () {
         $("#top").hide();
         show1("#balls");
         $("#back").show();
-<<<<<<< HEAD
-        $("h1").text("你的精灵球("+ball+")");
-        $("#ball99").empty();
-=======
->>>>>>> 9b470c40f7f65facfdcb0f5c745cfacc299609e7
         ball=sessionStorage.getItem('ball_num');
+        if(ball===undefined||ball===null){
+            console.log(0);
+
+            ball=0;
+        }
         $("h1").text("你的精灵球("+ball+")");
         $("#ball99").empty();
         if(ball==0){
@@ -135,20 +147,23 @@ $(function () {
         window.location.href="help.html";
         console.log("into help");
     })//助愿页
-    $("#selected").click(function(id,wisher_id){
+    $("#selected").click(function(id){
         var id=sessionStorage.getItem('id');
-        var wisher_id=sessionStorage.getItem(id).split("/")[1].replace("wisher:","");
-        id=Number(id.replace("help",""));
+        // id=Number(id.replace("help",""));
         choose(id);
         var data=JSON.stringify({
-            "wisher_id":wisher_id
+            "id":id
         });
         var settings=prepare(4,data);
-        $.ajax(settings).done(function(data){
-            $("#name").text("昵称："+data[0].name);
-            $("#tel").text("手机："+data[0].telephone);
-            $("#wechat").text("微信："+data[0].weixin);
+    var ajax=$.ajax(settings);
+    ajax.done(function(data){
+            $("#name").text("昵称："+String(data.name));
+            $("#tel").text("手机："+String(data.telephone));
+            $("#wechat").text("微信："+String(data.weixin));
         });//获取信息
+        ajax.fail(function(textStatus){
+            allatt(String(textStatus));
+        });
         allhide();
         $("#change").hide();
         $("#others").hide();
@@ -170,14 +185,15 @@ $(function () {
     })//换一批
     function get_help_wishes(){
         var wishText=new Array();
-        $.ajax(prepare(3)).done(function(data){
+    var ajax=$.ajax(prepare(3));
+    ajax.done(function(data){
             console.log(data);
             for(var i=0;i<=2;i++){
                 wishes[i]=data[i].id;
                 wishText[i]=data[i].wish_content;
-                wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
+                // wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
                 var str1='help'+(i+1);
-                var str2='id:'+wishes[i]+"/"+"wisher:"+wisher_id[i];
+                var str2=wishes[i];
                 sessionStorage.setItem(str1,str2);
             }
             $('.helpbox').remove();
@@ -185,20 +201,23 @@ $(function () {
             $("#others").append("<div class='helpbox' id='help2'>"+wishText[1]+"</div>");
             $("#others").append("<div class='helpbox' id='help3'>"+wishText[2]+"</div>");
             });
+            ajax.fail(function(textStatus){
+                allatt(String(textStatus));
+            });
     }
     $("#mine").click(function(){
         //显示 我的愿望清单  yourwish
         allhide();
         $("#back").show();
         $(".main_contain").hide();
-        $.ajax(prepare(9)).done(function(data){
-            if(data[0]!=undefined||data[0]!=null){
+    $.ajax(prepare(9)).done(function(data){
+            if(data[0]!="undefined"||data[0]!=null){
                 $(".nowish").remove();
                 $(".dream").empty();
                 $(".dream").show();
                 for(var i=0;i<data.length;i++){
                     console.log(i);
-                    if(data[i].wish_content==undefined){
+                    if(data[i].wish_content===undefined){
                         console.log(data);
                     }else{
                     $(".dream").append("<div class='mine'><div class='helpbox'><p class='minewishes'>"
@@ -212,13 +231,13 @@ $(function () {
     //wish.html 许愿页
     $("#next").click(function(){
         if(clicktime==666){//自定义愿望
-            wishText=$("#customtext").val();
+            var wishText=$("#customtext").val();
             if(/^\s*$/.test(wishText)==false){//自定义文本不为空
                 console.log(clicktime+"许愿："+wishText);
                 var pack_wish=JSON.stringify({
                     'wish_content':wishText
                 })
-                $.ajax(prepare(1,pack_wish)).done(function(data){
+            $.ajax(prepare(1,pack_wish)).done(function(data){
                     if(data.errcode==0){//允许填写信息
                         console.log("愿望发送给后台了！");
                         allhide();//包含hope page
@@ -229,25 +248,21 @@ $(function () {
                         $("#hope_page").show();
                         show1("#sign_page");
                         console.log("into form_page");
-                    }else if(data.errcode==1|data.errcode==2){
+                    }else if(data.errcode==1|data.errcode==2||typeof(data.errcode)==="undefined"){
                     $("#attention0").text(data.errmsg);
                     }});
             }else{
                 $("#next").attr("disabled","disabled");
                 $("#attention0").text("许个愿吧~");
-                setTimeout(() => {
-                    $("#attention0").hide();
-                    $("#next").removeAttr("disabled");
-                }, 1000);
             }
         }else if(clicktime==0){
         console.log(clicktime);//预定义
-        wishText=$("#wishtext").text();
+        var wishText=$("#wishtext").text();
         console.log("许愿："+wishText);
         var pack_wish=JSON.stringify({
             'wish_content':wishText
         })
-        $.ajax(prepare(1,pack_wish)).done(function(data){
+    $.ajax(prepare(1,pack_wish)).done(function(data){
             if(data.errcode==0){
                 console.log("愿望发送给后台了！");
                 allhide();//包含hope page
@@ -260,8 +275,12 @@ $(function () {
                 console.log("into form_page");
                 // console.log(wishText);
             }else if(data.errcode==1|data.errcode==2){
-            $("#attention0").text(data.errmsg);
-        }
+                $("#attention0").text(data.errmsg);
+                return;
+        }else if(typeof(data)==="undefined"||typeof(data.errmsg)==="undefined"){
+                allatt("网络好像出了点问题，稍后再来尝试叭");
+                return;
+            }
         });
     }})//点击下一步填写信息
     $("#name").bind('input propertychange', function () {
@@ -281,6 +300,10 @@ $(function () {
     if(name_check()==true&&tel_check()==true&&vx_check()==true){
         $("#ok").removeAttr("disabled");
     }
+    $(".close").click(function(){
+        $(".help_attention").hide();
+        $(".help_attention_index").hide();
+    })
     function prevent(){
         if(name_check()==true&&tel_check()==true&&vx_check()==true){
             $("#ok").removeAttr("disabled");
@@ -308,7 +331,7 @@ $(function () {
             return false;
         }
         function checkPhone(num){ 
-            if(num==undefined){
+            if(num===undefined){
                 return;
             }
             if(num.length!=11){
@@ -357,24 +380,36 @@ $(function () {
             $("#vxalert").text("请输入正确信息！");
             return;
         }
-        $.ajax(prepare(2,pack)).done(function(data){
+    var ajax=$.ajax(prepare(2,pack));
+    ajax.done(function(data){
             if(data.errcode==0||data.errcode==1){
                 $("#sign_page").hide();
                 $("#hope_page").hide();
                 show1(".success");
             }else{
                 $("#vxalert").text(data.errmsg);
-            }
+            };
         });
+        ajax.fail(function(textStatus){
+            console.log(textStatus);
+            allatt("网络好像出了点问题，稍后再来尝试叭");
+        })
     })
     $("#again").click(function(){
         $(".success").hide();
+        show1("#hope_page");
         $("#back").show();
         $(".show").show();
     })//再次许愿
     $("#return").click(function(){
        window.history.back();//返回按钮
     })
+    function allatt(errmsg){
+        $(".att").text(String(errmsg));
+        $(".help_attention_index").show();
+        $(".help_attention").show();
+        $(".return").show();
+    }
     //隐藏
     function allhide(){
         $(".page").hide();
@@ -409,7 +444,7 @@ $(function () {
             console.log("change method"+method);}
         }
         if(num!=3&&num!=9){
-            url="js/test.json"
+            url="/js/test.json"
         }
         if(num==5){
             url="js/5.json"
@@ -418,7 +453,7 @@ $(function () {
             url="js/open_ball.json";
         }
         if(location.hostname!="203.195.221.189"&&location.hostname!="localhost"){
-            var url="http://182.254.161.178/pokemon/"+request[num];
+            var url="pokemon/"+request[num];
         }
         if(some!=""||some!=undefined){
         var settings={
@@ -429,11 +464,22 @@ $(function () {
                 "Content-Type": "application/json",
                 "cache-control": "no-cache"
               },
+            "statusCode": {
+                404: function() {
+                  allatt( "网络好像出了点问题，稍后再来尝试叭" );
+                },
+                500: function(){
+                    allatt("网络好像出了点问题，稍后再来尝试叭");
+                },
+                402:function(){
+                    allatt("网络好像出了点问题，稍后再来尝试叭");
+                }
+            },
             "fail":function(){
                 console.log("不知什么原因失败了哭");
             },
             "error":function(response){
-                console.log(response.statusText);
+                allatt(response.statusText);
             }
         };
         }else{
@@ -463,7 +509,7 @@ $(function () {
     function get_all(){
         //获取已有的精灵/精灵球
         settings=prepare(7);
-        $.ajax(settings).done(function(data){
+    $.ajax(settings).done(function(data){
             console.log("请求精灵列表");
             var res=translate(7,data);
             elfs=res.path_array;
@@ -478,7 +524,7 @@ $(function () {
         });
         settings=prepare(6);
         console.log("请求精灵ball列表");
-        $.ajax(settings).done(function(data){
+    $.ajax(settings).done(function(data){
             var res=translate(6,data);
             ball=res.now_total_ball;
             $(".span2").text(ball);
@@ -522,10 +568,14 @@ $(function () {
         click=click+1;
         if(click<=5){
         var setting=prepare(0);
-        $.ajax(setting).done(function(data){
-            $("#wishtext").text("昨天调试过了，保证这里没问题（大概");
-                    // console.log(data);
-             $("#wishtext").text(data.errmsg['pre_wishes']);
+    var ajax=$.ajax(setting);
+    ajax.done(function(data){
+    // console.log(data);
+    if(data.errmsg==null||data.errmsg===undefined){
+        allatt("网络出错啦，再试一次叭");
+        return;
+    }
+            $("#wishtext").text(data.errmsg);
             $("#middle:hover").css({
                 "width":"54.6px",
                 "animation": "rotate2 0.7s linear infinite",
@@ -548,7 +598,6 @@ $(function () {
 })
     //许愿页定制
     $("#custom").click(function(){
-        // $("#attention0").show();
         $("#wishtext").hide();
         $("#customtext").show();
         $("#custom").hide();
@@ -562,14 +611,11 @@ $(function () {
         $("#cancel").hide();
         $("#custom").show();
         $("#next").removeAttr("disabled");
-        // setTimeout(() => {
-        //     $("#attention0").show();
-        // }, 1000);
         clicktime=0;
 })
 
 $("#ball99").delegate("img.ballpic", "click", function () {
-    $.ajax(prepare(8)).done(function(data){
+var ajax=    $.ajax(prepare(8)).done(function(data){
         //存src session|
         var src=data[0].fairy_path;
         src=src.replace("\"","");
@@ -629,7 +675,7 @@ function ball_dele(ballid){
     var collection=new Object();//什么都往里面存 没问题的（
     function translate(num,collection){
         var result=new Array();
-        if(collection==undefined||collection==""||collection==null){
+        if(collection===undefined||collection==""||collection===null){
             console.log("收不到！");
             console.log(collection);
             result.push("Nothing at all");
@@ -667,14 +713,14 @@ function ball_dele(ballid){
         var pack=JSON.stringify({
             "id":id
         })
-        $.ajax(prepare(5,pack)).done(function(data){
+    var ajax=$.ajax(prepare(5,pack));
+    ajax.done(function(data){
             if(data.errcode==0){
                 $(".help_attention").hide();
                 $("#selected").removeAttr("disabled");
             }else if(data.errcode==1||data.errcode==2){
                 console.log(data.errmsg);
-                $(".att").text(data.errmsg);
-                $(".help_attention").show();
+                allatt(data.errmsg);
                 $("#selected").removeAttr("disabled");//有弹窗以后删掉
             }
         });
@@ -696,8 +742,9 @@ function ball_dele(ballid){
         }
         if(id=="help3"){
             $(".select").css({
-                "top":"280px"
+                "top":"278px"
             })
         }
     });
+    
 })
