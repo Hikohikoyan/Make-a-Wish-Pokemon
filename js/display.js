@@ -46,6 +46,7 @@ $(function () {
                 ajax.fail(function (textStatus) {
                     allatt(String(textStatus));
                 });
+                get_you();
                 show1("#hope_page"); //以flex style显示
                 console.log("wish page");
             }
@@ -158,9 +159,10 @@ $(function () {
                 window.location.href = "help.html";
                 console.log("into help");
             }) //助愿页
-            $("#selected").click(function (id) {
-                var id = sessionStorage.getItem('id');
+            $("#selected").click(function () {
+                var id = sessionStorage.getItem('id');//help1
                 // id=Number(id.replace("help",""));
+                id=sessionStorage.getItem(id);
                 choose(id);
                 var data = JSON.stringify({
                     "id": id
@@ -246,7 +248,6 @@ $(function () {
                 $(".show").hide();
                 $("#hope_page").show();
                 show1("#sign_page");
-                showinfo();
                 console.log("into form_page");
             }) //点击下一步填写信息
             $("#name").bind('input propertychange', function () {
@@ -328,7 +329,24 @@ $(function () {
             function get_you(){
                 prepare();
                 $.ajax().done(function(data){
+                    if (data.name != "" && data.telephone != "" && data.weixin != "") {
+                        str="name:"+data.name+"/"+"tel:"+data.telephone+"/"+"wechat:"+data.weixin;
+                        sessionStorage.setItem("you",str);
+                        if(nowpage.indexOf("wish")==0){
+                            $("#name").val(data.name);
+                            $("#tel").val(data.telephone);
+                            $("#wechat").val(data.weixin);
+                            change_white("#name");
+                            change_white("#tel");
+                            change_white("#wechat");    
+                        }
+                    }
                 })
+                if(sessionStorage.getItem("you")==null){
+                    return false;
+                }else{
+                    return true;
+                }
             }
             $("#ok").click(function () { //填写完毕 提交信息
                     hoping();
@@ -425,17 +443,6 @@ $(function () {
                         //从sessionstorage里拿 
                         var info=sessionStorage.getItem("you");
                         commit_wish(info);
-                    }
-                }
-
-                function showinfo() {
-                    if (data.name != "" && data.telephone != "" && data.weixin != "") {
-                        $("#name").val(data.name);
-                        $("#tel").val(data.telephone);
-                        $("#wechat").val(data.weixin);
-                        change_white("#name");
-                        change_white("#tel");
-                        change_white("#wechat");
                     }
                 }
 
@@ -792,8 +799,8 @@ $(function () {
                 }
                 $("#others").delegate("div", "click", function () {
                     $(".select").show();
-                    var id = $(this).attr("id");
-                    sessionStorage.setItem('id', id);
+                    var id = $(this).attr("chooseid");
+                    sessionStorage.setItem('chooseid', id);
                     $("#selected").removeAttr("disabled");
                     if (id == "help1") {
                         $(".select").css({
