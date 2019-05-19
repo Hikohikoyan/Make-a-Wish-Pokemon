@@ -26,11 +26,11 @@ $(function () {
         var setting=prepare(0);
         var ajax=$.ajax(setting);
         ajax.done(function(data){
-            if(typeof(data)==="undefined"||typeof(data.errmsg['pre_wishes'])==="undefined"){
+            if(typeof(data)==="undefined"||typeof(data.errmsg.pre_wishes)==="undefined"){
                 allatt("网络好像出了点问题，稍后再来尝试叭");
                 return;
             }
-            $("#wishtext").text(data.errmsg['pre_wishes']);
+            $("#wishtext").text(data.errmsg.pre_wishes);
         });//愿望页面时先请求预定义愿望
         ajax.fail(function(textStatus){
             allatt(String(textStatus));
@@ -571,11 +571,11 @@ $(function () {
     var ajax=$.ajax(setting);
     ajax.done(function(data){
     // console.log(data);
-    if(data.errmsg==null||data.errmsg===undefined){
+    if(data.errmsg.pre_wishes==null||data.errmsg.pre_wishes===undefined){
         allatt("网络出错啦，再试一次叭");
         return;
     }
-            $("#wishtext").text(data.errmsg);
+            $("#wishtext").text(data.errmsg.pre_wishes);
             $("#middle:hover").css({
                 "width":"54.6px",
                 "animation": "rotate2 0.7s linear infinite",
