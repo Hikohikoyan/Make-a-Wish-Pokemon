@@ -163,7 +163,7 @@ $(function () {
                 var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
                 id=sessionStorage.getItem(id);
-                choose(id);
+                if(choose(id)==true){
                 var data = JSON.stringify({
                     "id": id
                 });
@@ -183,7 +183,7 @@ $(function () {
                 $("#help_page").hide();
                 show1("#info");
                 $("#selected").hide();
-            })
+            }})
             //助愿页信息的确认按钮
             $("#ok2").click(function () {
                 goback();
@@ -464,7 +464,7 @@ $(function () {
                     window.history.back(); //返回按钮
                 })
                 function allatt(errmsg) {
-                    $(".att").text(String(errmsg));
+                    $(".att").text(errmsg);
                     $(".help_attention_index").show();
                     $(".help_attention").show();
                     $(".return").show();
@@ -790,10 +790,12 @@ $(function () {
                         if (data.errcode == 0) {
                             $(".help_attention").hide();
                             $("#selected").removeAttr("disabled");
-                        } else if (data.errcode == 1 || data.errcode == 2) {
+                            return true;
+                        } else if (data.errcode == 1 || data.errcode == 2||data.errcode==433) {
                             console.log(data.errmsg);
                             allatt(data.errmsg);
-                            $("#selected").removeAttr("disabled"); //有弹窗以后删掉
+                            $("#selected").removeAttr("disabled"); 
+                            return false;//有弹窗以后删掉
                         }
                     });
                 }
