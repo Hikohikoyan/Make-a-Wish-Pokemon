@@ -617,7 +617,7 @@ $(function () {
 $("#ball99").delegate("img.ballpic", "click", function () {
 var ajax=    $.ajax(prepare(8)).done(function(data){
         //存src session|
-        var src=data[0].fairy_path;
+        var src=data.fairy_path;
         src=src.replace("\"","");
         sessionStorage.setItem("open_ball",src);
     })
