@@ -588,7 +588,7 @@ $(function () {
                                 console.log("不知什么原因失败了哭");
                             },
                             "error": function (response) {
-                                allatt(response.statusText);
+                                console.log("你要知道 报错了：ajax error:"+response.statusText);
                             }
                         };
                     } else {
