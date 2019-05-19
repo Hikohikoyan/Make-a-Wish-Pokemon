@@ -448,6 +448,9 @@ $(function () {
                     var result=get_you();//先看有没有这个人 返回true 有人 可以调用session
                     if(result!=true){
                         allatt("提示：信息一经填写就不可修改哦，请勿填错~");
+                        $("#name").removeAttr("readonly");
+                        $("#tel").removeAttr("readonly");
+                        $("#wechat").removeAttr("readonly");
                         user = $("#name").val();
                         tel = $("#tel").val();
                         wechat = $("#wechat").val();
