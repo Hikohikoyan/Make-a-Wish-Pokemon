@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class user_info extends Controller
 {
     public function commit_info(Request $request){
-        $exist_code=$request->session()->get('exist_code');        
+        $exist_code=$request->get('exist_code');        
         $name=$request->name;
         $telephone=$request->telephone;
         $weixin=$request->weixin;
@@ -59,5 +59,21 @@ class user_info extends Controller
         ->select('name','telephone','weixin')
         ->get();
         return response()->json($wish_info);
+    }
+
+    public function get_user(Request $request) {
+        $openid = session('openid');
+        $user = NULL;
+        if ($request->exist_code > 0) {
+            $user = DB::table('user')
+                    ->where('user_id', $openid)
+                    ->first();
+        } 
+        $data = [
+            'errcode' => $user ? 0 : 1,
+            'user' => $user
+        ];
+
+        return response()->json($data);
     }
 }

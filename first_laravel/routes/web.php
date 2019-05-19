@@ -16,6 +16,7 @@ Route::get('/Check_login/','Check_login@index');
 Route::group(['middleware'=>['get_openid','user_exist']],function(){
     Route::post('/save_wish/','save_wish@index')->middleware('judge_wishorhelp_times');
     Route::post('/commit_info/','user_info@commit_info');
+    Route::get('/get_user', 'user_info@get_user');
 });//保存愿望、展示个人信息，提交信息
 
 Route::group(['middleware'=>['get_openid']],function(){
