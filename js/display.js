@@ -163,7 +163,9 @@ $(function () {
                 var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
                 id=sessionStorage.getItem(id);
-                if(choose(id)==true){
+                var result=choose(id);
+                console.log(result);
+                if(result==true){
                 var data = JSON.stringify({
                     "id": id
                 });
@@ -524,6 +526,7 @@ $(function () {
                                 "Content-Type": "application/json",
                                 "cache-control": "no-cache"
                             },
+                            "async":false,
                             "statusCode": {
                                 404: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
@@ -785,19 +788,25 @@ $(function () {
                     var pack = JSON.stringify({
                         "id": id
                     })
+                    var check="shit";
                     var ajax = $.ajax(prepare(5, pack));
                     ajax.done(function (data) {
                         if (data.errcode == 0) {
                             $(".help_attention").hide();
                             $("#selected").removeAttr("disabled");
-                            return true;
-                        } else if (data.errcode == 1 || data.errcode == 2||data.errcode==433) {
+                            check="ok";
+                        } else{
                             console.log(data.errmsg);
                             allatt(data.errmsg);
                             $("#selected").removeAttr("disabled"); 
-                            return false;//有弹窗以后删掉
+                            check="shit"//有弹窗以后删掉
                         }
                     });
+                    if(check=="ok"){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
                 $("#others").delegate("div", "click", function () {
                     $(".select").show();
