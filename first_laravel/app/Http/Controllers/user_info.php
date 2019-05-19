@@ -25,7 +25,7 @@ class user_info extends Controller
         }
 
         $openid=$request->session()->get('openid');
-        if($exist_code==0){
+        if($exist_code!=0){
             DB::table('user')
             ->where('user_id', $openid)
             ->update(['name' => $name,'telephone'=>$telephone,'weixin'=>$weixin]);
