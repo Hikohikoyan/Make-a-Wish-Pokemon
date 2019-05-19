@@ -485,11 +485,22 @@ $(function () {
         }else{
             var settings={
                 "url":url,
-                "method":"POST",
+                "method":method,
                 "headers": {
                     "Content-Type": "application/json",
                     "cache-control": "no-cache"
                   },
+                  "statusCode": {
+                    404: function() {
+                      allatt( "网络好像出了点问题，稍后再来尝试叭" );
+                    },
+                    500: function(){
+                        allatt("网络好像出了点问题，稍后再来尝试叭");
+                    },
+                    402:function(){
+                        allatt("网络好像出了点问题，稍后再来尝试叭");
+                    }
+                },    
                   "fail":function(){
                       if(data.errcode==456){
                           console.log("未授权");
@@ -497,10 +508,10 @@ $(function () {
                       }
                       console.log("不知什么原因失败了哭");
                     },
-                  "error":function(response){
-                      console.log(response.statusText);
-                  }
-            };    
+                    "error":function(response){
+                        allatt(response.statusText);
+                    }
+                    };    
         }
         return settings; 
     }
