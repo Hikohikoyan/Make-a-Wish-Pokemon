@@ -568,7 +568,7 @@ $(function () {
                     if (location.hostname != "203.195.221.189" && location.hostname != "localhost") {
                         var url = "/pokemon/" + request[num];
                     }else{
-                        var url= "http://182.254.161.178/laravel/public//pokemon/"+request[num];
+                        var url= "http://182.254.161.178/laravel/public/pokemon/"+request[num];
                     }
                     if (some != "" || some != undefined) {
                         var settings = {
