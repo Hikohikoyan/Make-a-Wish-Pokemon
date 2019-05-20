@@ -44,7 +44,7 @@ class user_info extends Controller
             'id' => 'required|integer',
         ]);
         if($validator->fails()){
-            return response()->json(['errcode'=>77,'errmsg'=>"id 不是个整数"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+            return response()->json(['errcode'=>77,'errmsg'=>"id 不是个整数"]);
         }
         $user_id=DB::table('custom_wish')
         ->where('id',$id)
