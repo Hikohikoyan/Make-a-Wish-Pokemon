@@ -214,7 +214,7 @@ li{
     bottom: 0;
     width:128px;
     height: 58px;
-    margin-top: 15px;
+    margin-top: 12px;
     transform: scale(0.8);
 }
 #cancel{
@@ -476,6 +476,7 @@ img#middle{
     padding-left: 15px;
     padding-right: 15px;
     border: solid #d2b634 4px;
+    overflow-y:auto;
     border-radius: 0.9em;
     padding-bottom: 10%;
     position: relative;

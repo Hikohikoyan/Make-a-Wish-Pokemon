@@ -200,7 +200,7 @@ $(function () {
                 setTimeout(() => {
                     console.log("换一批 解除");
                     $("#change").removeAttr("disabled")
-                }, 300);
+                }, 400);
             }) //换一批
             function get_help_wishes() {
                 var wishText = new Array();
@@ -227,12 +227,11 @@ $(function () {
                 });
             }
             $("#mine").click(function () {
-                location.hash="mine";
+                // location.hash="mine";
                 //显示 我的愿望清单  yourwish
                 allhide();
                 $("#back").show();
                 $(".main_contain").hide();
-                $(".help_attention_index").append("<br>");
                 allatt("黄框表示已许下的愿望，蓝框表示选择帮助的愿望，点击可查看TA的资料哦~");
                 $.ajax(prepare(9)).done(function (data) {
                     if (data[0] != "undefined" || data[0] != null) {
@@ -454,9 +453,6 @@ $(function () {
                 function hoping(){
                     var result=get_you();//先看有没有这个人 返回true 有人 可以调用session
                     if(result!=true){
-                        $("#name").removeAttr("readonly");
-                        $("#tel").removeAttr("readonly");
-                        $("#wechat").removeAttr("readonly");
                         user = $("#name").val();
                         tel = $("#tel").val();
                         wechat = $("#wechat").val();
@@ -493,7 +489,7 @@ $(function () {
                             "background-color": "unset",
                             "color": "white"
                         })
-                        $(str).attr("readonly","readonly");
+                        // $(str).attr("readonly","readonly");
                         return;
                 }
                 $("#again").click(function () {
