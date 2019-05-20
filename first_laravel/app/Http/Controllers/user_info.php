@@ -60,4 +60,20 @@ class user_info extends Controller
         ->get();
         return response()->json($wish_info[0]);
     }
+
+    public function get_user(Request $request) {
+        $openid = session('openid');
+        $user = NULL;
+        if ($request->exist_code > 0) {
+            $user = DB::table('user')
+                    ->where('user_id', $openid)
+                    ->first();
+        } 
+        $data = [
+            'errcode' => $user ? 0 : 1,
+            'user' => $user
+        ];
+
+        return response()->json($data);
+    }
 }
