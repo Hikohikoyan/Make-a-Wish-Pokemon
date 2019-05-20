@@ -18,9 +18,6 @@ $(function () {
             }, {
                 passive: false
             })
-            // $('body').on('touchmove', function (event) {
-            //     event.preventDefault();
-            // });
             $("#img41").click(function () { //开头的GO
                 $("#loading").remove();
                 $("#index").show();
@@ -216,7 +213,6 @@ $(function () {
                         sessionStorage.setItem(str1, str2);
                         $("#others").append("<div class='helpbox' id='"+str1+"'>" + wishText[i] + "</div>");
                     }
-                    
                 });
                 ajax.fail(function (textStatus) {
                     allatt(String(textStatus));
@@ -584,7 +580,6 @@ $(function () {
                                 "Content-Type": "application/json",
                                 "cache-control": "no-cache"
                             },
-                            "async":false,
                             "statusCode": {
                                 404: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
@@ -594,6 +589,9 @@ $(function () {
                                 },
                                 402: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
+                                },
+                                419:function () {
+                                    window.location.href="";
                                 }
                             },
                             "fail": function () {
@@ -696,7 +694,7 @@ $(function () {
                             "-moz-animation": "a 1.2s linear infinite",
                             "-o-animation": "a 1.2s linear infinite",
                         })
-                    }, 580);
+                    }, 800);
                     console.log("第" + click + "次愿望");
                     click = click + 1;
                     if (click <= 5) {

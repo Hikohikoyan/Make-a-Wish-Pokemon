@@ -18,9 +18,10 @@ class get_openid
         if($request->session()->has('openid')){
             return $next($request);
         }else{
-           redirect("https://hemc.100steps.net/2018/fireman/auth.php?redirect=182.254.161.178/pokemon/Check_login&state=xxx");
-
-           
-        }
+            return response()->json([
+                'errcode' => '10000',
+                'errmsg' => '微信未授权'
+                ]);
+            }
     }
 }
