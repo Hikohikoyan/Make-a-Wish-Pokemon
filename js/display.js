@@ -55,6 +55,9 @@ $(function () {
                 console.log("help page");
             }
             if (nowpage.indexOf("index") == 0) {
+                let now = new Date();
+                date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDay() + "/" + now.getHours() + ":" + now.getMinutes();
+                localStorage.setItem("lasttime",date);                        
                 get_all(); //获取精灵 精灵球 数量 sessionstorage
                 console.log("index page");
             }
@@ -409,11 +412,12 @@ $(function () {
                                                 allatt(data.errmsg);
                                             }
                                         });
+                                        return;
                                     } else {
                                         $("#next").attr("disabled", "disabled");
                                         $("#attention0").text("许个愿吧~");
+                                        return;
                                     }
-                                    return;
                                 } else if (clicktime == 0) {
                                     console.log("预定义"); //预定义
                                     var wishText = $("#wishtext").text();
@@ -439,7 +443,7 @@ $(function () {
                                 } 
                             }else {
                                     $("#vxalert").text(data.errmsg);
-                                };
+                            };
                             commit_info.fail(function (textStatus) {
                             console.log(textStatus);
                             allatt("网络好像出了点问题，稍后再来尝试叭");
@@ -775,9 +779,6 @@ $(function () {
                     }
                 }
                 function show_rule() {
-                    let now = new Date();
-                    date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDay() + "/" + now.getHours() + ":" + now.getMinutes();
-                    localStorage.setItem("lasttime",date);                        
                     allhide();
                     $(".main_contain").hide();
                     $("#back").hide();
