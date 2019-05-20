@@ -36,7 +36,6 @@ class save_wish extends Controller
         
 
         if($wish_times<3){
-            echo($wish_times);
             $time=date("m.d");
             $aa=DB::table('custom_wish')->insert(['wish_content'=>$wish_content,'wisher_id'=>$openid,'helper_id'=>"NULL",'situation'=>"未领取",'wisher_open'=>0,'helper_open'=>0,'fairy_path'=>$path,'time1'=>$time,'time2'=>"0"]); 
             return response()->json(['errcode'=>0,'errmsg'=>"success",'path'=>$path,'name'=>$name,'telephone'=>$telephone,'weixin'=>$weixin]);
