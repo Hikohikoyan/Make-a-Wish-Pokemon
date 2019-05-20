@@ -4,11 +4,13 @@ $(function(){
 
     if(nowpage.indexOf("wish")==0){
         // $("#hope_page").hide();
+        onepic();
         console.log("wish page");
     }
     if(nowpage.indexOf("help")==0){
         // $(".major").hide();
         // $("#selected").hide();
+        onepic();
         console.log("help page");
     }
     if(nowpage.indexOf("index")==0){
@@ -16,17 +18,55 @@ $(function(){
             console.log("隐藏loading");
             $("#loading").hide();
             $("#index").show();
+            simpleload();
             return;
         }
-        dopreload();
-        $("#index").hide();
+        allload();
         console.log("index page");    
     }
     $("img").click(function(event){
         // event.preventDefault();
         return false;
     })
-    function dopreload(){
+    function onepic(){
+        var backgroundownload = new createjs.LoadQueue(true);
+        backgroundownload.loadManifest([
+            "img/background.png",
+            "attentionbk.png"
+        ]);
+        backgroundownload.load();
+    }
+    function simpleload(){
+        var explodeimg=new createjs.LoadQueue(true);
+        function handleComplete(){
+            console.log("smaller pic");
+        }
+        explodeimg.on("complete",handleComplete,this);
+        explodeimg.loadManifest([
+            "img/explode/1.png",
+            "img/explode/2.png",
+            "img/explode/3.png",
+            "img/explode/4.png",
+            "img/explode/5.png",
+            "img/explode/6.png",
+            "img/explode/7.png",
+            "img/explode/8.png",
+            "img/explode/9.png",
+            "img/explode/10.png",
+            "img/explode/11.png",
+            "img/explode/12.png",
+            "img/explode/13.png",
+            "img/explode/14.png",
+            "img/explode/15.png",
+            "img/explode/16.png",
+            "img/explode/17.png",
+            "img/explode/18.png",
+            "img/explode/19.png",
+            "img/explode/20.png",
+        ]);
+        explodeimg.load();
+    }
+    function allload(){
         var imgdownload = new createjs.LoadQueue(true);
         function handleComplete(){
             var src=$("#rotate").attr("src");

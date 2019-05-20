@@ -304,6 +304,18 @@ $(function () {
                 $(".help_attention_2").hide();
                 $(".help_attention_index").hide();
             })
+            function check(str){
+                str=String(str);
+                if(str.indexOf("<script>")){
+                    str.replace("<script>","");
+                }
+                if((/(\w+.html)$/).test(str)==true){
+                    allatt("请输入内容");
+                    return true;
+                }
+                var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
+                return patt_illegal.test(str);
+            }
             function prevent() {
                 if (name_check() == true && tel_check() == true && vx_check() == true) {
                     $("#ok").removeAttr("disabled");
@@ -407,7 +419,7 @@ $(function () {
                                 if (clicktime == 666) { //自定义愿望
                                     var wishText = $("#customtext").val();
                                     var res=/^\s*$/.test(wishText);
-                                    if (res==false) { //自定义文本不为空
+                                    if (res==false&&check(wishText)==false) { //自定义文本不为空
                                         console.log(clicktime + "许愿：" + wishText);
                                         var pack_wish = JSON.stringify({
                                             'wish_content': wishText
