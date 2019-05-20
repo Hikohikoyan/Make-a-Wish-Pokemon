@@ -56,7 +56,7 @@ $(function () {
             }
             if (nowpage.indexOf("index") == 0) {
                 if(location.hash!="#rule"||location.href!="#mine"){
-                    preventDefault();
+                    // preventDefault();
                 }
                 get_all(); //获取精灵 精灵球 数量 sessionstorage
                 console.log("index page");
@@ -86,7 +86,7 @@ $(function () {
             function goback() {
                 location.href=location.hash.replace("mine","");
                 location.hash.replace("rule","");
-                var nowpage = window.location.pathname.match(/(\w+.html)$/)[0];
+                 var nowpage = window.location.pathname.match(/(\w+.html)$/)[0];
                 if (nowpage.indexOf("wish") == 0) {
                     //现在是助愿页/许愿
                     window.history.back();
@@ -105,8 +105,14 @@ $(function () {
                     $(".main_contain").show();
                 }
             }
-            $(".back").click(function () {
+            // document.getElementsByClassName('back').addEventListener('click', function(e){
+            //     goback()
+            //     e.preventDefault()
+            // })
+            $(".back").click(function (e) {
                 goback();
+                // e.preventDefault()
+                return false;
             })
             $("#btn1").click(function () {
                 $(".main_contain").hide();
@@ -163,14 +169,15 @@ $(function () {
             $("#selected").click(function () {
                 var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
-                choose(id);
                 id=sessionStorage.getItem(id);
+                choose(id);
                 var result=sessionStorage.getItem("gohelp_status");
                 if(result==0){
-                var data = JSON.stringify({
+                    console
+                var pack= JSON.stringify({
                     "id": id
                 });
-                var settings = prepare(4, data);
+                var settings = prepare(4, pack);
                 var ajax = $.ajax(settings);
                 ajax.done(function (data) {
                     $("#name").text("昵称：" + String(data.name));
@@ -501,6 +508,7 @@ $(function () {
                 $("#again").click(function () {
                     $(".success").hide();
                     show1("#hope_page");
+                    $(".form").hide();
                     $("#back").show();
                     $(".show").show();
                 }) //再次许愿
@@ -881,7 +889,7 @@ $(function () {
                         if(data.name==undefined||data.name==null){
                             // $(".help_attention_index").prepend("<br>");
                             $(".att").text("错误：");
-                            $(".help_attention_index").append("<p class='att'>获取不到</p>")
+                            $(".help_attention_index").append("<p class='att' style='top: 120px'>获取不到</p>")
                             $(".help_attention_index").show();
                             $(".help_attention").show();
                             $(".return").show();        
