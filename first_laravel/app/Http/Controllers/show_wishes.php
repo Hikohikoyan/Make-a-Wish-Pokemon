@@ -15,7 +15,7 @@ class show_wishes extends Controller
     }
 
     public function my_wishes( Request $request){
-        $openid=$request->session()->get('openid');           
+        $openid=$request->session()->get('openid');
         $all_my_wishes=DB::table('custom_wish')
         ->where('wisher_id',$openid)
         ->select('id','wish_content','situation')
@@ -37,8 +37,10 @@ class show_wishes extends Controller
     }
 
     public function help_wish( Request $request){
+        $openid=$request->session()->get('openid');
         $fetch_wish=DB::table('custom_wish')
                     ->where("situation","未领取")
+                    ->where('wisher_id', '<>', $openid)
                     ->inRandomOrder()
                     ->take(3)
                     ->select('id','wish_content','time1')
