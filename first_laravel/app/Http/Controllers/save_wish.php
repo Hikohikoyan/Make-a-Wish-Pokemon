@@ -22,7 +22,7 @@ class save_wish extends Controller
         if ($validator->fails()) {
             return response()->json(['errcode'=>2,'errmsg'=>"请再检查一下你输入的内容"]);
         }
-        $exist_code=$request->get('exist_code');
+        $exist_code=$request->session()->get('exist_code');
         if($exist_code==0){
             $name=" ";
             $telephone=" ";

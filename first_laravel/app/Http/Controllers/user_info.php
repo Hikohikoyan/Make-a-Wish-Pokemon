@@ -64,7 +64,7 @@ class user_info extends Controller
     public function get_user(Request $request) {
         $openid = session('openid');
         $user = NULL;
-        if ($request->exist_code > 0) {
+        if ($request->session()->get('exist_code') > 0) {
             $user = DB::table('user')
                     ->where('user_id', $openid)
                     ->first();
