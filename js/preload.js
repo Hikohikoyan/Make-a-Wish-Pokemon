@@ -33,6 +33,7 @@ $(function(){
         imgdownload.on("complete", handleComplete, this);
         imgdownload.loadManifest([
             // "css/index.css",
+            "img/iknow.png",
             "img/smallback.jpg",
             "img/background.png",
             "img/elfborder.png",//index.html
