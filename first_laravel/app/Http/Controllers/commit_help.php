@@ -18,7 +18,7 @@ class commit_help extends Controller
             return response()->json(['errcode'=>1,'errmsg'=>"今天祝愿次数已满，请明天再来"]);
         }else{
             $change_situation=DB::table('custom_wish')
-            ->where([['id',$id],['helper_id', 0],['situation',"未领取"]])
+            ->where([['id',$id],['helper_id',"NULL"],['situation',"未领取"]])
              ->update(['situation'=>"已领取",'helper_id'=>$helper_id,'time2'=>$time]);
             
             if($change_situation==0){
