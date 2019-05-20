@@ -59,9 +59,9 @@ $(function () {
             //主页按钮
             $("#wish").click(function () {
                 // allhide();
-                $("#hope_page").show();
-                $(".show").show();
-                $(".form").hide();
+                // $("#hope_page").show();
+                // $(".show").show();
+                // $(".form").hide();
                 document.getElementById("style1").href = "css/wish.css";
                 console.log("into hope_page");
                 hash = "#Now,make-a-wish!";
@@ -870,7 +870,10 @@ $(function () {
                     })
                 }
                 function find(helpid){
-                    var setting=prepare(4,helpid);
+                    var pack=JSON.stringify({
+                        "id":helpid
+                    });
+                    var setting=prepare(4,pack);
                     $.ajax(setting).done(function(data){
                         if(data.name==undefined||data.name==null){
                             // $(".help_attention_index").prepend("<br>");
