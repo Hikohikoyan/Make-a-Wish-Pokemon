@@ -71,6 +71,7 @@ $(function () {
                 show_rule();
             }) //点击规则
             $(".return").click(function () {
+                $(".att").remove();
                 $("#rule_page").hide();
                 goback();
                 return false;
@@ -226,7 +227,7 @@ $(function () {
                 $("#back").show();
                 $(".main_contain").hide();
                 $(".help_attention_index").append("<br>");
-                allatt("黄框表示已许下的愿望，蓝框表示选择帮助的，点击可查看TA的资料哦~");
+                allatt("黄框表示已许下的愿望，蓝框表示选择帮助的愿望，点击可查看TA的资料哦~");
                 $.ajax(prepare(9)).done(function (data) {
                     if (data[0] != "undefined" || data[0] != null) {
                         $(".nowish").remove();
@@ -285,12 +286,6 @@ $(function () {
                 $("#ok").removeAttr("disabled");
             }
             $(".close").click(function () {
-                // $(".help_attention").empty();
-                // $(".help_attention_index").empty();
-                $(".att").remove();
-                $(".help_attention_index").append("<p class='att'></p>");
-                $(".help_attention").append("<p class='att'></p>");
-                $(".help_attention_2").append("<p class='att'></p>");
                 $(".help_attention").hide();
                 $(".help_attention_2").hide();
                 $(".help_attention_index").hide();
@@ -507,6 +502,10 @@ $(function () {
                     window.history.back(); //返回按钮
                 })
                 function allatt(errmsg) {
+                    $(".att").remove();
+                    $(".help_attention_index").append("<p class='att'></p>");
+                    $(".help_attention").append("<p class='att'></p>");
+                    $(".help_attention_2").append("<p class='att'></p>");    
                     if(errmsg=="提示："){
                         $(".att").text(errmsg);
                         $(".help_attention_2").show();
