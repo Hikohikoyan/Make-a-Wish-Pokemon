@@ -156,9 +156,8 @@ $(function () {
                 var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
                 id=sessionStorage.getItem(id);
-                var result=choose(id);
-                console.log(result);
-                if(result==true){
+                var result=sessionStorage.getItem("gohelp_status");
+                if(result==0){
                 var data = JSON.stringify({
                     "id": id
                 });
@@ -423,12 +422,8 @@ $(function () {
                                     $.ajax(prepare(1, pack_wish)).done(function (data) {
                                         if (data.errcode == 0) {
                                             console.log("愿望发送给后台了！");
-                                            allhide(); //包含hope page
-                                            $(".show").hide();
-                                            $("#hope_page").show();
-                                            console.log("into success");
-                                            $("#sign_page").hide();
                                             $("#hope_page").hide();
+                                            console.log("into success");
                                             show1(".success");
                                         } else if (data.errcode == 1 | data.errcode == 2) {
                                             allatt(data.errmsg);
@@ -723,7 +718,7 @@ $(function () {
                     clicktime = 0;
                 })
                 $("#ball99").delegate("img.ballpic", "click", function () {
-                    var ajax = $.ajax(prepare(8)).done(function (data) {
+                    $.ajax(prepare(8)).done(function (data) {
                         //存src session|
                         var src = data.fairy_path;
                         src = src.replace("\"", "");
@@ -828,16 +823,14 @@ $(function () {
                         if (data.errcode == 0) {
                             $(".help_attention").hide();
                             $("#selected").removeAttr("disabled");
-                            return true;
+                            sessionStorage.setItem("gohelp_status",data.errcode);
                         } else{
                             console.log(data.errmsg);
                             allatt(data.errmsg);
                             $("#selected").removeAttr("disabled"); 
-                            return data.errmsg;
+                            sessionStorage.setItem("gohelp_status",data.errmsg);
                         }
                     });
-
-
                 }
                 $("#others").delegate("div", "click", function () {
                     $(".select").show();
@@ -885,7 +878,7 @@ $(function () {
                             return;
                         }
                         $(".att").text("姓名："+data.name);
-                        $(".help_attention_index").append("<p class='att'style='top: 120px'>"+"手机："+data.tel+"</p>")
+                        $(".help_attention_index").append("<p class='att' style='top: 120px'>"+"手机："+data.tel+"</p>")
                         $(".help_attention_index").append("<p class='att' style='top: 150px'>"+"微信："+data.tel+"</p>")
                         $(".help_attention_index").show();
                         $(".help_attention").show();
