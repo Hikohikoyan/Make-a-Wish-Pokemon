@@ -13,11 +13,13 @@ $(function(){
     }
     if(nowpage.indexOf("index")==0){
         if(localStorage.getItem("first")==1){
+            console.log("隐藏loading");
+            $("#loading").hide();
+            $("#index").show();
             return;
         }
         dopreload();
         $("#index").hide();
-        anime(1);
         console.log("index page");    
     }
     $("img").click(function(event){
