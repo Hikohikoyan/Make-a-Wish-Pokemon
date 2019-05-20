@@ -13,11 +13,13 @@ $(function () {
             //     'height':$(document).height(),
             //     'width':$(document).width()
             // })
-            document.body.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-            }, {
-                passive: false
-            })
+            function preventDefault(){
+                document.body.addEventListener('touchmove', function (e) {
+                    e.preventDefault();
+                }, {
+                    passive: false
+                })
+                }
             $("#img41").click(function () { //开头的GO
                 $("#loading").remove();
                 $("#index").show();
@@ -53,6 +55,9 @@ $(function () {
                 console.log("help page");
             }
             if (nowpage.indexOf("index") == 0) {
+                if(location.hash!="#rule"||location.href!="#mine"){
+                    preventDefault();
+                }
                 get_all(); //获取精灵 精灵球 数量 sessionstorage
                 console.log("index page");
             }
@@ -68,6 +73,7 @@ $(function () {
                 window.location.href = "wish.html";
             }) //点击许愿
             $("#rule").click(function () {
+                location.hash="rule";
                 show_rule();
             })
             $("#pika").click(function () {
@@ -78,6 +84,8 @@ $(function () {
                 goback();
             }) //点击返回主页（规则页）return.png
             function goback() {
+                location.href=location.hash.replace("mine","");
+                location.hash.replace("rule","");
                 var nowpage = window.location.pathname.match(/(\w+.html)$/)[0];
                 if (nowpage.indexOf("wish") == 0) {
                     //现在是助愿页/许愿
@@ -219,6 +227,7 @@ $(function () {
                 });
             }
             $("#mine").click(function () {
+                location.hash="mine";
                 //显示 我的愿望清单  yourwish
                 allhide();
                 $("#back").show();
