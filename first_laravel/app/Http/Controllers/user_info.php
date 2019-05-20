@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Validator;
 class user_info extends Controller
 {
     public function commit_info(Request $request){
-        $exist_code=$request->get('exist_code');        
+        $exist_code=$request->session()->get('exist_code');        
         $name=$request->name;
         $telephone=$request->telephone;
         $weixin=$request->weixin;
         $validator = Validator::make($request->all(), [
             'name' => 'required|alpha|min:2',
             'telephone' => 'required|digits:11', 
-            'weixin' => 'required|alpha_dash',
+            'weixin' => 'alpha_dash',
           ]);
 
         if ($validator->fails()) {
@@ -44,12 +44,13 @@ class user_info extends Controller
             'id' => 'required|integer',
         ]);
         if($validator->fails()){
-            return response()->json(['errcode'=>77,'errmsg'=>"id 不是个整数"]);
+            return response()->json(['errcode'=>77,'errmsg'=>"id 不是个整数"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
         }
         $user_id=DB::table('custom_wish')
         ->where('id',$id)
         ->select('wisher_id','helper_id')
         ->get();
+
         if($user_id[0]->helper_id!=$openid){
             return response()->json(['errcode'=>433,'errmsg'=>"You don't have right "]);
         }
@@ -57,22 +58,6 @@ class user_info extends Controller
         ->where('user_id',$user_id[0]->wisher_id)
         ->select('name','telephone','weixin')
         ->get();
-        return response()->json($wish_info);
-    }
-
-    public function get_user(Request $request) {
-        $openid = session('openid');
-        $user = NULL;
-        if ($request->exist_code > 0) {
-            $user = DB::table('user')
-                    ->where('user_id', $openid)
-                    ->first();
-        } 
-        $data = [
-            'errcode' => $user ? 0 : 1,
-            'user' => $user
-        ];
-
-        return response()->json($data);
+        return response()->json($wish_info[0]);
     }
 }

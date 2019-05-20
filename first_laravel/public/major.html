@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, 
+    minimum-scale=0.5, maximum-scale=2.0, user-scalable=0" />
+    <meta name="description" content="许愿宝可梦">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" id="style1" href="css/index.css">
+</head>
+<body>
+    <div id="loading">
+        <div class="outborder">
+            <img id="rotate"  height="62.4px" src="img/rotate/1.png">
+            <h3 id="loadingtext">loading</h3><span class="loadspan">.</span>
+        </div>
+        <div class="welcome">
+            <img src="img/welcome.png" id="welcome_p">
+            <img src="img/41.png" id="img41">
+        </div>
+    </div>
+    <div id="index">
+        <div id="top">
+        <div class="btn1" id="btn1">
+            <img src="img/elfborder.png" style="float:left">
+            <span class="span1">0</span>
+        </div>
+        <div class="btn2" id="btn2">
+            <img src="img/ballborder.png" style="float:left">
+            <span class="span2">0</span>
+        </div>
+        </div>
+        <div class="main_contain">
+            <img src="img/title.png" class="title">
+            <img class="index" src="img/wish.png" id="wish" value="许愿">
+            <img class="index" id="help" src="img/help.png" value="助愿">
+            <img class="index" id="mine" src="img/mine.png" value="我的愿望">
+            <img class="index" id="rule" src="img/rule.png" value="规则">
+            <img id="pika" src="img/49.png">
+        </div>
+    <div class="page" id="rule_page">
+        <h5>规则</h5>
+            <p class="p">(1)【许愿】:你可以选择或写下一个愿望在精灵球里，当有人帮你实现愿望的时候，点击精灵球就会孵化一只属于你和助愿者的可爱小精灵<br>
+                (2)【助愿】:你可以看到别人的愿望并为ta实现愿望。当许愿者确定愿望已实现后你们都可以拥有一只可爱的小精灵。<br>
+                (3)集齐十只小精灵后可以在“流年车站”摊位领取丰厚奖品！<br>
+                (4)另外，每天许愿次数不得超过五次
+            </p>
+            <img src="img/back.png" class="return" id="back_index">
+    </div>
+    <div class="page" id="yourwish"><!---点击精灵球-->
+        <div id="yours" style="align-items: center;">
+            <h2 class="nowish" style="margin-top: 55%;
+            margin-bottom: 10%;
+            margin-left: 10px;
+            font-size: 24px;">你还没有愿望，</h2>
+            <h2 class="nowish" style="font-size: 23px;
+            margin-bottom: 180px;
+            margin-left: 5px;">快去许愿吧！</h2>
+            <div class="dream" style="display:none;height: 400px;
+            padding-top: 10px;
+            overflow-y: scroll;">
+            <!-- <div class="mine" >
+                    <div class="helpbox">
+
+                    </div>
+                    <span id="done" >
+
+                    </span>
+            </div> -->
+            </div>
+            <img src="img/back.png" id="back">
+        </div>
+    </div>
+    <div class="page" id="elfs">
+        <h1>你的精灵(0)</h1>
+        <div class="elfcontain1">
+            <!-- <div class="elf">
+            <img id="elf1"src="img/bigelfboder.png">
+            <img class="elfpic" src="img/fairy1.png" alt="精灵">
+            </div> -->
+        </div>
+        <img src="img/back.png" id="back">
+    </div>
+    <div class="page" id="balls">
+        <h1>你的精灵球(0)</h1>
+        <div class="elfcontain" id="ball99">
+            <!-- <div class="ball">
+                    <img class="ballcontain" src="img/6.png">
+            </div> -->
+        </div>
+        <img src="img/back.png" id="back">
+    </div>
+    <div class="success" id="expode_page">
+        <h2>恭喜你获得新的精灵！</h2>
+        <div class="getelf" >
+            <div class="getpic">
+                <canvas width="200px" height="200px" id="canvas"></canvas>
+            </div>
+            <!-- <img id="elf123" style="display:none"> -->
+        </div>
+        <img src="img/back.png" id="back">
+    </div>
+</body>
+<script src="js/preload.js"></script>
+<script src="js/display.js"></script>
+<!-- <script src="js/vconsole.js"></script> -->
+ <!-- <script>
+    // init vConsole
+    var vConsole = new VConsole();
+  </script> -->
+</html>
