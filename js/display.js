@@ -555,7 +555,7 @@ $(function () {
                             method = "POST";
                             console.log("change method" + method);
                         }
-                        var url = " /pokemon/" + request[num];
+                        var url = " backend/" + request[num];
                     if (some != "" || some != undefined) {
                         var settings = {
                             "url": url,
