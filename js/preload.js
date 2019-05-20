@@ -10,9 +10,14 @@ $(function(){
         console.log("help page");
     }
     if(nowpage.indexOf("index")==0){
-        dopreload();
         $("#index").hide();
-        console.log("index page");
+        anime(1);
+        console.log("index page");    
+        if(localStorage.getItem("lasttime")!=undefined){
+            return;
+        }else{
+            dopreload();
+        }
     }
     $("img").click(function(event){
         // event.preventDefault();
@@ -102,9 +107,10 @@ $(function(){
             "img/explode/19.png",
             "img/explode/20.png",
         ]);
-        imgdownload.load();
-        function anime(str){
-            var interval=setInterval(function(){
+    imgdownload.load();
+}
+    function anime(str){
+        var interval=setInterval(function(){
                 $("#rotate").css({
                     "animation":" a",
                     "-webkit-animation":"a ",
@@ -120,6 +126,7 @@ $(function(){
             },58);
             setTimeout(function(){
                 clearInterval(interval);
+                complete();
                 $(".outborder").hide();
                 var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
                 if(nowpage.indexOf("wish")==0){
@@ -140,15 +147,13 @@ $(function(){
                     console.log("index page");
                 }
             },1700);
-        }
-        function complete(){
+}
+    function complete(){
             $("#loadingtext").css({
                 "animation":" a",
                 "-webkit-animation":"a ",
                 "-moz-animation":"a",
                 "-o-animation": "a",
-            });
-        }    
-    }
-    
+});
+}
 })

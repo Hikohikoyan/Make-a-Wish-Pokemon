@@ -55,21 +55,12 @@ $(function () {
                 console.log("help page");
             }
             if (nowpage.indexOf("index") == 0) {
-                if(location.hash!="#rule"||location.href!="#mine"){
-                    // preventDefault();
-                }
                 get_all(); //获取精灵 精灵球 数量 sessionstorage
                 console.log("index page");
             }
             //主页按钮
             $("#wish").click(function () {
-                // allhide();
-                // $("#hope_page").show();
-                // $(".show").show();
-                // $(".form").hide();
-                document.getElementById("style1").href = "css/wish.css";
                 console.log("into hope_page");
-                hash = "#Now,make-a-wish!";
                 window.location.href = "wish.html";
             }) //点击许愿
             $("#rule").click(function () {
@@ -82,10 +73,11 @@ $(function () {
             $(".return").click(function () {
                 $("#rule_page").hide();
                 goback();
+                return false;
             }) //点击返回主页（规则页）return.png
             function goback() {
-                location.href=location.hash.replace("mine","");
-                location.hash.replace("rule","");
+                // location.href=location.hash.replace("mine","");
+                // location.hash.replace("rule","");
                 var nowpage = window.location.pathname.match(/(\w+.html)$/)[0];
                 if (nowpage.indexOf("wish") == 0) {
                     //现在是助愿页/许愿
@@ -156,8 +148,6 @@ $(function () {
 
             }) //查看精灵球
             $("#help").click(function () {
-                // allhide();
-                // $(".main_contain").hide();
                 window.location.href = "help.html";
                 console.log("into help");
             }) //助愿页
@@ -401,6 +391,12 @@ $(function () {
                     hoping();
                 })
                 function commit_wish(info){
+                    // info=info.split("/");
+                    // var pack=JSON.stringify({
+                    //     "name":info[0].replace("name:",""),
+                    //     "tel":info[1].replace("tel:",""),
+                    //     "weixin":info[2].replace("wechat:","")
+                    // })
                     var commit_info = $.ajax(prepare(2, info));
                     commit_info.done(function (data) {
                             if (data.errcode == 0 || data.errcode == 1) {
@@ -414,9 +410,6 @@ $(function () {
                                         $.ajax(prepare(1, pack_wish)).done(function (data) {
                                             if (data.errcode == 0) {
                                                 console.log("请求成功 提交愿望");
-                                                // $("#name").val(data.name);
-                                                // $("#tel").val(data.telephone);
-                                                // $("#wechat").val(data.weixin);
                                             } else if (data.errcode == 1 | data.errcode == 2 || typeof (data.errcode) === "undefined") {
                                                 allatt(data.errmsg);
                                             }
@@ -425,6 +418,7 @@ $(function () {
                                         $("#next").attr("disabled", "disabled");
                                         $("#attention0").text("许个愿吧~");
                                     }
+                                    return;
                                 } else if (clicktime == 0) {
                                     console.log("预定义"); //预定义
                                     var wishText = $("#wishtext").text();
@@ -438,19 +432,20 @@ $(function () {
                                             $("#hope_page").hide();
                                             console.log("into success");
                                             show1(".success");
+                                            return;
                                         } else if (data.errcode == 1 | data.errcode == 2) {
                                             allatt(data.errmsg);
                                             return;
                                         } else if (typeof (data) === "undefined" || typeof (data.errmsg) === "undefined") {
                                             allatt("网络好像出了点问题，稍后再来尝试叭");
-                                            return;
                                         }
                                     });
-                                } else {
+                                    return;
+                                } 
+                            }else {
                                     $("#vxalert").text(data.errmsg);
                                 };
-                            }; 
-                            ajax.fail(function (textStatus) {
+                            commit_info.fail(function (textStatus) {
                             console.log(textStatus);
                             allatt("网络好像出了点问题，稍后再来尝试叭");
                         })
@@ -781,12 +776,14 @@ $(function () {
                     }
                 }
                 function show_rule() {
+                    let now = new Date();
+                    date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDay() + "/" + now.getHours() + ":" + now.getMinutes();
+                    localStorage.setItem("lasttime",date);                        
                     allhide();
                     $(".main_contain").hide();
                     $("#back").hide();
                     $("#back_index").show();
                     show1("#rule_page");
-                    document.getElementById("style1").href = "css/index.css";
                     console.log("into rule_page");
                 }
                 var collection = new Object(); //什么都往里面存 没问题的（
