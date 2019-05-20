@@ -364,6 +364,7 @@ $(function () {
                         sessionStorage.setItem("you",str);
                         var nowpage = window.location.pathname.match(/(\w+.html)$/)[0];
                         if(nowpage.indexOf("wish")==0){
+                            console.log("get you");
                             var you=sessionStorage.getItem("you");
                             you=you.split("/");
                             var name=you[0].replace("name:","");
