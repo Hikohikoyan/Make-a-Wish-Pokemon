@@ -800,6 +800,7 @@ div#btn1::before,div#btn2::before{
     margin: 0;
     width: 240px;
     text-align: center;
+    border-radius: 0.9em;
     height: 300px;
     z-index: 100;
     left: 50%;
@@ -819,6 +820,7 @@ div#btn1::before,div#btn2::before{
     margin: 0;
     width: 300px;
     height: 243px;
+    border-radius: 0.9em;
     z-index: 100;
     left: 50%;
     margin-left: -150px;
@@ -906,6 +908,7 @@ div#btn1::before,div#btn2::before{
     width: 280px;
     height: 243px;
     z-index: 100;
+    border-radius: 0.9em;
     left: 50%;
     margin-left: -140px;
     top: 50%;

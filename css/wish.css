@@ -544,6 +544,7 @@ img#middle{
     background-repeat: no-repeat;
     background-attachment: local;
     background-size: cover;
+    border-radius: 0.9em;
     position: absolute;
     top: 0;
     left: 0;
