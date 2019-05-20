@@ -339,7 +339,9 @@ h2{
     background-clip: border-box;
     padding-top: 3.5vh;
     padding-left: 12px;
-    width: 55vw;
+    width: 260px;
+    white-space: normal;
+    overflow-y: scroll;
     font-family: SimHei;
     font-size: 2.4vh;
 }

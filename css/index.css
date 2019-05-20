@@ -1,7 +1,7 @@
 *{
     background: none;
     outline: none;
-    /* pointer-events: auto; */
+    pointer-events: auto;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -375,6 +375,8 @@ p{
     height: 55px;
     padding-bottom: 3.5vh;
     font-family: SimHei;
+    white-space: normal;
+    overflow-y: scroll;
     font-size: 18px;
     border: solid #d2b634 3px;
     color: white;
@@ -382,7 +384,6 @@ p{
     border-radius: 0.4em;
     /* float: left; */
 }
-
 #change{
     position: relative;
     width: 25%;
