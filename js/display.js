@@ -415,6 +415,10 @@ $(function () {
                                         $.ajax(prepare(1, pack_wish)).done(function (data) {
                                             if (data.errcode == 0) {
                                                 console.log("请求成功 提交愿望");
+                                                $("#hope_page").hide();
+                                                console.log("into success");
+                                                $(".success").show();
+                                                show1(".success");    
                                             } else if (data.errcode == 1 | data.errcode == 2 || typeof (data.errcode) === "undefined") {
                                                 allatt(data.errmsg);
                                             }
@@ -437,6 +441,7 @@ $(function () {
                                             console.log("愿望发送给后台了！");
                                             $("#hope_page").hide();
                                             console.log("into success");
+                                            $(".success").show();
                                             show1(".success");
                                             return;
                                         } else if (data.errcode == 1 | data.errcode == 2) {
