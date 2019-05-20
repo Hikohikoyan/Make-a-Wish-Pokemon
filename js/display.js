@@ -365,9 +365,9 @@ $(function () {
                         if(nowpage.indexOf("wish")==0){
                             var you=sessionStorage.getItem("you");
                             you=you.split("/");
-                            var name=you[0].replace("name:");
-                            var tel=you[1].replace("tel:");
-                            var weixin=you[2].replace("wechat:");
+                            var name=you[0].replace("name:","");
+                            var tel=you[1].replace("tel:","");
+                            var weixin=you[2].replace("wechat:","");
                             $("#name").val(name);
                             $("#tel").val(tel);
                             $("#wechat").val(weixin);
