@@ -17,7 +17,7 @@ class user_info extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|alpha|min:2',
             'telephone' => 'required|digits:11', 
-            'weixin' => ['required','regex:/^[a-zA-Z][a-zA-Z0-9_-]{5,19}$/'],
+            'weixin' => 'required|alpha_dash',
           ]);
 
         if ($validator->fails()) {
