@@ -2,8 +2,8 @@
     background: none;
     outline: none;
     /* pointer-events: auto; */
-    user-select: none;
-    -webkit-user-select: none;
+    /* user-select: none; */
+    -webkit-user-select: auto;
 }
 html{
     height: 100%;
@@ -189,6 +189,9 @@ h3,.loadspan{
     /* padding: 12.5%; */
     height: -webkit-fill-available;
         /* width: 100%; */
+}
+input,textarea{
+    z-index: 100;
 }
 input[type="image"]{
     padding: 0%;

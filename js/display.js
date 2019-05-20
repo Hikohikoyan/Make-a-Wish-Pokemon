@@ -260,7 +260,14 @@ $(function () {
                 })
                 show1("#yourwish");
             });
-
+            //custom
+            $("#customtext").bind('input propertychange', function () {
+                var text=$("#customtext").val();
+                if(text.length>=45){
+                    allatt("不可以太贪心哦~");
+                    // text.
+                }
+            })
             //wish.html 许愿页
             $("#next").click(function () {
                 allhide(); //包含hope page
