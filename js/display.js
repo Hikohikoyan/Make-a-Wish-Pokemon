@@ -579,10 +579,7 @@ $(function () {
                                     window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
                                 }
                             },
-                            "error": function (response) {
-                                console.log("你要知道 报错了");
-                                allatt(response.statusText)
-                            }
+
                         };
                     } else {
                         var settings = {
@@ -606,10 +603,6 @@ $(function () {
                                     window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
                                 }
                             },
-
-                            "error": function (response) {
-                                allatt(response.statusText);
-                            }
                         };
                     }
                     return settings;
