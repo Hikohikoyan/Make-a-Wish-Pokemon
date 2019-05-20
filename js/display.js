@@ -155,6 +155,7 @@ $(function () {
             $("#selected").click(function () {
                 var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
+                choose(id);
                 id=sessionStorage.getItem(id);
                 var result=sessionStorage.getItem("gohelp_status");
                 if(result==0){
