@@ -504,6 +504,7 @@ $(function () {
                 $("#again").click(function () {
                     $(".success").hide();
                     show1("#hope_page");
+                    $(".form").hide();
                     $("#back").show();
                     $(".show").show();
                 }) //再次许愿
