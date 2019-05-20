@@ -57,7 +57,7 @@ $(function () {
             if (nowpage.indexOf("index") == 0) {
                 let now = new Date();
                 date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDay() + "/" + now.getHours() + ":" + now.getMinutes();
-                localStorage.setItem("lasttime",date);                        
+                localStorage.setItem("lasttime",date);
                 get_all(); //获取精灵 精灵球 数量 sessionstorage
                 console.log("index page");
             }
@@ -289,6 +289,7 @@ $(function () {
                 $("#ok").removeAttr("disabled");
             }
             $(".close").click(function () {
+                clear();
                 $(".help_attention").hide();
                 $(".help_attention_2").hide();
                 $(".help_attention_index").hide();
@@ -503,28 +504,16 @@ $(function () {
                     $(".show").show();
                 }) //再次许愿
                 $("#return").click(function () {
+                    clear();
                     window.history.back(); //返回按钮
                 })
-                function allatt(errmsg) {
+                function clear(){
                     $(".att").remove();
                     $(".help_attention_index").append("<p class='att'></p>");
                     $(".help_attention").append("<p class='att'></p>");
                     $(".help_attention_2").append("<p class='att'></p>");    
-                    if(errmsg=="提示："){
-                        $(".att").text(errmsg);
-                        $(".help_attention_2").show();
-                        $(".help_attention_index").show();
-                        $(".help_attention").show();
-                        $(".return").show();
-                        return;    
                     }
-                    if(errmsg==" "){
-                        $(".help_attention_2").show();
-                        $(".help_attention_index").show();
-                        $(".help_attention").show();
-                        $(".return").show();
-                        return;    
-                    }
+                function allatt(errmsg) {
                     $(".att").text(errmsg);
                     $(".help_attention_2").show();
                     $(".help_attention_index").show();
