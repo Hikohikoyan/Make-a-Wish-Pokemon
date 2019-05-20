@@ -25,8 +25,8 @@ class judge_wishorhelp_times
         ->where('helper_id',"$openid")
         ->where('time2',$date)
         ->count();
-        $request->attributes->add(['wish_times'=>$wish_times]);
-        $request->attributes->add(['help_times'=>$help_times]);
+        $request->request->add(['wish_times'=>$wish_times]);
+        $request->request->add(['help_times'=>$help_times]);
         return $next($request);
     }
 }
