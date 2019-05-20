@@ -553,7 +553,11 @@ $(function () {
                     if (num == 1 || num == 2 || num == 4 || num == 5) {
                             method = "POST";
                             console.log("change method" + method);
-                        }
+                    }
+                    var async=true;
+                    if(num==5){
+                        async=false;
+                    }
                     var url = " api/" + request[num];
                     if (some != "" || some != undefined) {
                         var settings = {
@@ -564,6 +568,7 @@ $(function () {
                                 "Content-Type": "application/json",
                                 "cache-control": "no-cache"
                             },
+                            "async":async,
                             "statusCode": {
                                 404: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
@@ -816,26 +821,20 @@ $(function () {
                     var pack = JSON.stringify({
                         "id": id
                     })
-
                     var ajax = $.ajax(prepare(5, pack));
                     ajax.done(function (data) {
-                        var check="shit";
                         if (data.errcode == 0) {
                             $(".help_attention").hide();
                             $("#selected").removeAttr("disabled");
-                            check="ok";
+                            return true;
                         } else{
                             console.log(data.errmsg);
                             allatt(data.errmsg);
                             $("#selected").removeAttr("disabled"); 
-                            check=data.errcmsg//有弹窗以后删掉
-                        }
-                        if(check=="ok"){
-                            return true;
-                        }else{
-                            return check;
+                            return data.errmsg;
                         }
                     });
+
 
                 }
                 $("#others").delegate("div", "click", function () {
