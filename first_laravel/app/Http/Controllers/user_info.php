@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class user_info extends Controller
 {
     public function commit_info(Request $request){
-        $exist_code=$request->session()->get('exist_code');        
+        $exist_code=$request->session()->get('exist_code');
         $name=$request->name;
         $telephone=$request->telephone;
         $weixin=$request->weixin;
@@ -31,7 +31,7 @@ class user_info extends Controller
             ->update(['name' => $name,'telephone'=>$telephone,'weixin'=>$weixin]);
             return response()->json(['errcode'=>0,'errmsg'=>"修改成功"]);
         }else{
-            DB::table('user')->insert(['id'=>NULL,'user_id'=>$openid,'name'=>$name,'telephone'=>$telephone,'weixin'=>$weixin,]);
+            DB::table('user')->insert(['user_id'=>$openid,'name'=>$name,'telephone'=>$telephone,'weixin'=>$weixin,]);
             return response()->json(['errcode'=>1,'errmsg'=>"添加信息成功"]);
         }
     }
