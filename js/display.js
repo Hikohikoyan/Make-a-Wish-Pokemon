@@ -485,7 +485,7 @@ $(function () {
 
                 function change_white(str) {
                         $(str).css({
-                            "backgroung-color": "none",
+                            "backgroung-color": "black",
                             "color": "white"
                         })
                         $(str).attr("readonly","readonly");
