@@ -719,7 +719,7 @@ $(function () {
                     clicktime = 0;
                 })
                 $("#ball99").delegate("img.ballpic", "click", function () {
-                    var ajax = $.ajax(prepare(8)).done(function (data) {
+                    $.ajax(prepare(8)).done(function (data) {
                         //存src session|
                         var src = data.fairy_path;
                         src = src.replace("\"", "");
@@ -820,19 +820,20 @@ $(function () {
                         "id": id
                     })
                     var ajax = $.ajax(prepare(5, pack));
+                    var check;
                     ajax.done(function (data) {
                         if (data.errcode == 0) {
                             $(".help_attention").hide();
                             $("#selected").removeAttr("disabled");
-                            return true;
+                            check=true;
                         } else{
                             console.log(data.errmsg);
                             allatt(data.errmsg);
                             $("#selected").removeAttr("disabled"); 
-                            return data.errmsg;
+                            check=data.errmsg;
                         }
                     });
-
+                    return check;
 
                 }
                 $("#others").delegate("div", "click", function () {
