@@ -18,10 +18,7 @@ class get_openid
         if($request->session()->has('openid')){
             return $next($request);
         }else{
-            return response()->json([
-                'errcode' => '10000',
-                'errmsg' => '微信未授权'
-                ]);
-            }
+           return response("微信未授权", 419);
+        }
     }
 }
