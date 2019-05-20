@@ -555,7 +555,7 @@ $(function () {
                             method = "POST";
                             console.log("change method" + method);
                         }
-                        var url = "/pokemon/" + request[num];
+                        var url = " /pokemon/" + request[num];
                     if (some != "" || some != undefined) {
                         var settings = {
                             "url": url,
@@ -578,9 +578,6 @@ $(function () {
                                 419:function () {
                                     window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
                                 }
-                            },
-                            "fail": function () {
-                                console.log("不知什么原因失败了哭");
                             },
                             "error": function (response) {
                                 console.log("你要知道 报错了");
@@ -609,13 +606,7 @@ $(function () {
                                     window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
                                 }
                             },
-                            "fail": function () {
-                                if (data.errcode == 456) {
-                                    console.log("未授权");
-                                    location.href = "之后会给我们的" + "#BBT微信后台#/Home/Index/index?state=" + location.href;
-                                }
-                                console.log("不知什么原因失败了哭");
-                            },
+
                             "error": function (response) {
                                 allatt(response.statusText);
                             }

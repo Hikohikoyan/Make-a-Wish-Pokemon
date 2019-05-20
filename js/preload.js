@@ -15,7 +15,8 @@ $(function(){
         console.log("index page");
     }
     $("img").click(function(event){
-        event.preventDefault();
+        // event.preventDefault();
+        return false;
     })
     function dopreload(){
         var imgdownload = new createjs.LoadQueue(true);
