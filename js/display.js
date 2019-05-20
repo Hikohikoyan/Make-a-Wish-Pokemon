@@ -549,13 +549,12 @@ $(function () {
                     request[9] = "my_wishes";
                     request[10] = "my_help";
                     request[11] = "get_user";
-                    var url = "js/errmsg.json";
                     var method = "GET";
                     if (num == 1 || num == 2 || num == 4 || num == 5) {
                             method = "POST";
                             console.log("change method" + method);
                         }
-                        var url = " backend/" + request[num];
+                    var url = " api/" + request[num];
                     if (some != "" || some != undefined) {
                         var settings = {
                             "url": url,
