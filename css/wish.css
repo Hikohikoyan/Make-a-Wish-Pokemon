@@ -448,7 +448,7 @@ p{
 }
 img#middle{
     /*transform: scale(0.7); */
-    z-index: 3;
+    z-index: 120;
     width: 54.6px;
     margin: 0%;
     position: relative;

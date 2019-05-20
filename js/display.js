@@ -73,7 +73,7 @@ $(function () {
                 show_rule();
             }) //点击规则
             $(".return").click(function () {
-                $(".att").remove();
+                clear();
                 $("#rule_page").hide();
                 goback();
                 return false;
@@ -229,10 +229,10 @@ $(function () {
             $("#mine").click(function () {
                 // location.hash="mine";
                 //显示 我的愿望清单  yourwish
+                allatt("黄框表示已许下的愿望，蓝框表示选择帮助的愿望，点击可查看TA的资料哦~");
                 allhide();
                 $("#back").show();
                 $(".main_contain").hide();
-                allatt("黄框表示已许下的愿望，蓝框表示选择帮助的愿望，点击可查看TA的资料哦~");
                 $.ajax(prepare(9)).done(function (data) {
                     if (data[0] != "undefined" || data[0] != null) {
                         $(".nowish").remove();
