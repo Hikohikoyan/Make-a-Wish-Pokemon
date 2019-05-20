@@ -567,7 +567,7 @@ $(function () {
                     if(num==5){
                         async=false;
                     }
-                    var url = "" + request[num];
+                    var url = "api/" + request[num];
                     if (some != "" || some != undefined) {
                         var settings = {
                             "url": url,
