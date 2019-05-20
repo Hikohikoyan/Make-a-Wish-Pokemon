@@ -11,8 +11,8 @@ class open_ball extends Controller
     public function index( Request $request){
         $openid=$request->session()->get('openid');
         $open_ball_object=DB::table('custom_wish')
-        ->where(['wisher_id',$openid], ['situation',"已领取"], ['wisher_open',"0"])
-        ->orwhere(['helper_id',$openid], ['situation',"已领取"], ['helper_open',"0"])
+        ->where(['wisher_id', '=', $openid], ['situation', '=', "已领取"], ['wisher_open', '=', "0"])
+        ->orwhere(['helper_id', '=', $openid], ['situation', '=', "已领取"], ['helper_open', '=', "0"])
         ->first();
         if($open_ball_object==null){
             return response()->json(['errcode'=>235,'errmsg'=>"已经没有空的精灵球了"]);
