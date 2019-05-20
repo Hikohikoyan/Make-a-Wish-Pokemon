@@ -496,7 +496,7 @@ $(function () {
                             "background-color": "unset",
                             "color": "white"
                         })
-                        // $(str).attr("readonly","readonly");
+                        $(str).attr("readonly","readonly");
                         return;
                 }
                 $("#again").click(function () {
