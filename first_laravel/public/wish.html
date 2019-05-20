@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, 
+    minimum-scale=0.5, maximum-scale=2.0, user-scalable=0" />
+    <meta name="description" content="许愿宝可梦">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
+    <script src="js/preload.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" id="style1" href="css/wish.css">
+</head>
+<body style="background-image:url(img/background.png)">
+<div class="page" id="hope_page">
+    <div class="show">
+        <img src="img/attention1.png" style="height: 65px;position: relative;margin: 0;padding: 0;
+        top: 0;right: 0;margin-left: 125px;margin-top: -20px;margin-bottom: 15px;">
+        <img src="img/rotate/1.png" id="middle" >
+        <p id="wishtext">我想有人和我一起用同一个系列的沙雕微信头像一周</p>
+        <textarea id="customtext" rows="5" cols="14" placeholder="点击开始编辑"></textarea>
+        <p id="attention0"></p>
+        <input type="image" src="img/next.png" id="next">
+        <input type="image" src="img/cunstom.png" id="custom" value="自定义">
+        <input type="image" src="img/cancel.png" id="cancel" value="取消">
+    </div>
+    <div class="form" id="sign_page">
+            <div class="main_contain">
+                <h2 class="h2">我 的 信 息</h2>
+                <div class="aside">
+                    <label  for="name">昵称：</label>
+                    <input required="required" type="text" id="name">
+                </div>
+                    <span id="namealert" class="attention"></span>
+                <div class="aside">
+                    <label for="tel">手机：</label>
+                    <input required="required" maxlength="11" type="tel" id="tel" >
+                </div>
+                    <span id="telalert" class="attention"></span>
+                <div class="aside">
+                    <label for="wechat">微信：</label>
+                    <input required="required" maxlength="20" type="text" id="wechat">
+                </div>
+                    <span id="vxalert" class="attention"></span>
+            </div>
+                <input type="image" src="img/next.png" id="ok">
+    </div>
+</div>
+<div class="success">
+        <div  id="get_page" >
+        <h2 class="h2">许愿成功！</h2>
+        <h2 class="h2">愿望被领取之后</h2>
+        <h2 class="h2">就可以获得精灵球喔！</h2>
+        <input type="image" src="img/again.png" class="fine" id="again" placeholder="再许一个">
+        <input type="image" src="img/gohelp.png"class="fine" id="help">
+        <input type="image" src="img/return.png" class="fine" id="return">
+        </div>
+</div>
+<div class="help_attention">
+    <p class="att">你今天愿望次数用完了</p>
+    <input type="image" src="img/iknow.png" class="close" id="iknow">
+</div>
+<!-- <img src="img/back.png" id="back"> -->
+</body>
+<script src="js/display.js"></script>
+</html>

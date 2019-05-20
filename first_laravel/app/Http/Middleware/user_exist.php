@@ -18,7 +18,7 @@ class user_exist
         
         $openid=$request->session()->get('openid');
         $exist_code=DB::table('user')->where('user_id', $openid)->count();
-        $request->attributes->add(['exist_code'=>$exist_code]);
+        $request->session()->put('exist_code', $exist_code);
         return $next($request);
     }
 }

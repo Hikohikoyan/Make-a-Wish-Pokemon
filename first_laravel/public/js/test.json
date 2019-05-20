@@ -1,0 +1,19 @@
+{
+    "id":1,
+    "wish_content":"damnit",
+    "wisher_id":9,
+    "errcode":0,
+    "errmsg":"今天祝愿次数已满，请明天再来",
+    "name":"企鹅先生",
+    "telephone":"119",
+    "weixin":"我没有很想吃锅盔",
+    "now_total_ball":5,
+    "path_array":["img\/fairy\/5.png",
+        "img\/fairy\/4.png",
+        "img\/fairy\/3.png",
+        "img\/fairy\/6.png",
+        "img\/fairy\/9.png",
+        "img\/fairy\/8.png",
+        "img\/fairy\/1.png"],
+    "fairy_num":"7"
+}
