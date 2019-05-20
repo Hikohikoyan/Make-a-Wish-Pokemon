@@ -362,6 +362,7 @@ $(function () {
                         }
                         str="name:"+data.user.name+"/"+"tel:"+data.user.telephone+"/"+"wechat:"+data.user.weixin;
                         sessionStorage.setItem("you",str);
+                        var nowpage = window.location.pathname.match(/(\w+.html)$/)[0];
                         if(nowpage.indexOf("wish")==0){
                             var you=sessionStorage.getItem("you");
                             you=you.split("/");
