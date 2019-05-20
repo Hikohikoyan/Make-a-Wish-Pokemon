@@ -15,12 +15,12 @@ class Check_login extends Controller
         $origin_token=$token;
         $token=json_decode(base64_decode($token),true);
         if(md5(sha1($origin_token.'afnweof!@#@#$sdf1334dcsS'))!==$sign||empty($token['openid'])){
-            return redirect('https://182.254.161.178/laravel/public/index.html?fail=true');
+            return redirect('https://hemc.100steps.net/2019/wish-pokemon-test/index.html?fail=true');
         }
         $request->session()->put('openid',$token['openid']);
         $request->session()->put('nickname',$token['nickname']);
         $request->session()->put('headpic',$token['avatar']);
-        return redirect('https://182.254.161.178/laravel/public/index.html/');
+        return redirect('https://hemc.100steps.net/2019/wish-pokemon-test/index.html');
 
     }
 }
