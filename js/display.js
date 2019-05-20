@@ -487,7 +487,7 @@ $(function () {
 
                 function change_white(str) {
                         $(str).css({
-                            "background-color": "black",
+                            "background-color": "unset",
                             "color": "white"
                         })
                         $(str).attr("readonly","readonly");
