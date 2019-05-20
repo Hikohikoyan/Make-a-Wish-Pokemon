@@ -423,12 +423,8 @@ $(function () {
                                     $.ajax(prepare(1, pack_wish)).done(function (data) {
                                         if (data.errcode == 0) {
                                             console.log("愿望发送给后台了！");
-                                            allhide(); //包含hope page
-                                            $(".show").hide();
-                                            $("#hope_page").show();
-                                            console.log("into success");
-                                            $("#sign_page").hide();
                                             $("#hope_page").hide();
+                                            console.log("into success");
                                             show1(".success");
                                         } else if (data.errcode == 1 | data.errcode == 2) {
                                             allatt(data.errmsg);
@@ -885,7 +881,7 @@ $(function () {
                             return;
                         }
                         $(".att").text("姓名："+data.name);
-                        $(".help_attention_index").append("<p class='att'style='top: 120px'>"+"手机："+data.tel+"</p>")
+                        $(".help_attention_index").append("<p class='att' style='top: 120px'>"+"手机："+data.tel+"</p>")
                         $(".help_attention_index").append("<p class='att' style='top: 150px'>"+"微信："+data.tel+"</p>")
                         $(".help_attention_index").show();
                         $(".help_attention").show();
