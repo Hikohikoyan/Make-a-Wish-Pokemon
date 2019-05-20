@@ -202,18 +202,21 @@ $(function () {
                 var ajax = $.ajax(prepare(3));
                 ajax.done(function (data) {
                     console.log(data);
-                    for (var i = 0; i <= 2; i++) {
+                    $('.helpbox').remove();
+                    for (var i = 0; i <data.length; i++) {
+                        if(data.length==0){
+                            allatt("暂时还没有愿望,请稍后再来叭");
+                            return;
+                        }
                         wishes[i] = data[i].id;
                         wishText[i] = data[i].wish_content;
                         // wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
                         var str1 = 'help' + (i + 1);
                         var str2 = wishes[i];
                         sessionStorage.setItem(str1, str2);
+                        $("#others").append("<div class='helpbox' id='"+str1+"'>" + wishText[i] + "</div>");
                     }
-                    $('.helpbox').remove();
-                    $("#others").append("<div class='helpbox' id='help1'>" + wishText[0] + "</div>");
-                    $("#others").append("<div class='helpbox' id='help2'>" + wishText[1] + "</div>");
-                    $("#others").append("<div class='helpbox' id='help3'>" + wishText[2] + "</div>");
+                    
                 });
                 ajax.fail(function (textStatus) {
                     allatt(String(textStatus));
@@ -570,7 +573,7 @@ $(function () {
                     if (location.hostname != "203.195.221.189" && location.hostname != "localhost") {
                         var url = "/pokemon/" + request[num];
                     }else{
-                        var url= "http://182.254.161.178/laravel/public/pokemon/"+request[num];
+                        var url= "http://203.195.221.189/var/www/hexo/Hikohikoyan.github.io/Make-a-Wish-Pokemon/first_laravel/"+request[num];
                     }
                     if (some != "" || some != undefined) {
                         var settings = {

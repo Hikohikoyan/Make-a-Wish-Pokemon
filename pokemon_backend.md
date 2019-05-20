@@ -1,3 +1,12 @@
+get_user
+
+{
+  'errcode',
+  user:{
+
+  },
+}
+
 ### 第1个 request(get) get_pre_wishes.php
 
 * 获取事先既定愿望
