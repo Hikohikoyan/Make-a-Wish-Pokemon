@@ -18,9 +18,6 @@ $(function () {
             }, {
                 passive: false
             })
-            // $('body').on('touchmove', function (event) {
-            //     event.preventDefault();
-            // });
             $("#img41").click(function () { //开头的GO
                 $("#loading").remove();
                 $("#index").show();
@@ -202,18 +199,20 @@ $(function () {
                 var ajax = $.ajax(prepare(3));
                 ajax.done(function (data) {
                     console.log(data);
-                    for (var i = 0; i <= 2; i++) {
+                    $('.helpbox').remove();
+                    for (var i = 0; i <data.length; i++) {
+                        if(data.length==0){
+                            allatt("暂时还没有愿望,请稍后再来叭");
+                            return;
+                        }
                         wishes[i] = data[i].id;
                         wishText[i] = data[i].wish_content;
                         // wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
                         var str1 = 'help' + (i + 1);
                         var str2 = wishes[i];
                         sessionStorage.setItem(str1, str2);
+                        $("#others").append("<div class='helpbox' id='"+str1+"'>" + wishText[i] + "</div>");
                     }
-                    $('.helpbox').remove();
-                    $("#others").append("<div class='helpbox' id='help1'>" + wishText[0] + "</div>");
-                    $("#others").append("<div class='helpbox' id='help2'>" + wishText[1] + "</div>");
-                    $("#others").append("<div class='helpbox' id='help3'>" + wishText[2] + "</div>");
                 });
                 ajax.fail(function (textStatus) {
                     allatt(String(textStatus));
@@ -366,9 +365,9 @@ $(function () {
                         if(nowpage.indexOf("wish")==0){
                             var you=sessionStorage.getItem("you");
                             you=you.split("/");
-                            var name=you[0].replace("name:");
-                            var tel=you[1].replace("tel:");
-                            var weixin=you[2].replace("wechat:");
+                            var name=you[0].replace("name:","");
+                            var tel=you[1].replace("tel:","");
+                            var weixin=you[2].replace("wechat:","");
                             $("#name").val(name);
                             $("#tel").val(tel);
                             $("#wechat").val(weixin);
@@ -553,25 +552,10 @@ $(function () {
                     var url = "js/errmsg.json";
                     var method = "GET";
                     if (num == 1 || num == 2 || num == 4 || num == 5) {
-                        if (location.hostname != "203.195.221.189" && location.hostname != "localhost") {
                             method = "POST";
                             console.log("change method" + method);
                         }
-                    }
-                    if (num != 3 && num != 9) {
-                        url = "js/test.json"
-                    }
-                    if (num == 5) {
-                        url = "js/5.json"
-                    }
-                    if (num == 8) {
-                        url = "js/open_ball.json";
-                    }
-                    if (location.hostname != "203.195.221.189" && location.hostname != "localhost") {
                         var url = "/pokemon/" + request[num];
-                    }else{
-                        var url= "http://182.254.161.178/laravel/public/pokemon/"+request[num];
-                    }
                     if (some != "" || some != undefined) {
                         var settings = {
                             "url": url,
@@ -581,7 +565,6 @@ $(function () {
                                 "Content-Type": "application/json",
                                 "cache-control": "no-cache"
                             },
-                            "async":false,
                             "statusCode": {
                                 404: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
@@ -591,6 +574,9 @@ $(function () {
                                 },
                                 402: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
+                                },
+                                419:function () {
+                                    window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
                                 }
                             },
                             "fail": function () {
@@ -618,6 +604,9 @@ $(function () {
                                 },
                                 402: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
+                                },
+                                419:function (){
+                                    window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
                                 }
                             },
                             "fail": function () {
@@ -693,7 +682,7 @@ $(function () {
                             "-moz-animation": "a 1.2s linear infinite",
                             "-o-animation": "a 1.2s linear infinite",
                         })
-                    }, 580);
+                    }, 800);
                     console.log("第" + click + "次愿望");
                     click = click + 1;
                     if (click <= 5) {
@@ -844,9 +833,10 @@ $(function () {
                     var pack = JSON.stringify({
                         "id": id
                     })
-                    var check="shit";
+
                     var ajax = $.ajax(prepare(5, pack));
                     ajax.done(function (data) {
+                        var check="shit";
                         if (data.errcode == 0) {
                             $(".help_attention").hide();
                             $("#selected").removeAttr("disabled");
@@ -857,12 +847,13 @@ $(function () {
                             $("#selected").removeAttr("disabled"); 
                             check=data.errcmsg//有弹窗以后删掉
                         }
+                        if(check=="ok"){
+                            return true;
+                        }else{
+                            return check;
+                        }
                     });
-                    if(check=="ok"){
-                        return true;
-                    }else{
-                        return check;
-                    }
+
                 }
                 $("#others").delegate("div", "click", function () {
                     $(".select").show();
