@@ -156,9 +156,8 @@ $(function () {
                 var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
                 id=sessionStorage.getItem(id);
-                var result=choose(id);
-                console.log(result);
-                if(result==true){
+                var result=sessionStorage.getItem("gohelp_status");
+                if(result==0){
                 var data = JSON.stringify({
                     "id": id
                 });
@@ -820,21 +819,18 @@ $(function () {
                         "id": id
                     })
                     var ajax = $.ajax(prepare(5, pack));
-                    var check;
                     ajax.done(function (data) {
                         if (data.errcode == 0) {
                             $(".help_attention").hide();
                             $("#selected").removeAttr("disabled");
-                            check=true;
+                            sessionStorage.setItem("gohelp_status",data.errcode);
                         } else{
                             console.log(data.errmsg);
                             allatt(data.errmsg);
                             $("#selected").removeAttr("disabled"); 
-                            check=data.errmsg;
+                            sessionStorage.setItem("gohelp_status",data.errmsg);
                         }
                     });
-                    return check;
-
                 }
                 $("#others").delegate("div", "click", function () {
                     $(".select").show();
