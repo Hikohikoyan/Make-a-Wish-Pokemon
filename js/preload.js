@@ -1,9 +1,7 @@
 $(function(){
     var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
     let nowtimes=1;
-    function doadd(){
-        nowtimes=nowtimes+1;
-    }
+
     if(nowpage.indexOf("wish")==0){
         // $("#hope_page").hide();
         console.log("wish page");
@@ -14,10 +12,10 @@ $(function(){
         console.log("help page");
     }
     if(nowpage.indexOf("index")==0){
-        doadd();
-        if(nowtimes<3){
-            dopreload();
+        if(localStorage.getItem("first")==1){
+            return;
         }
+        dopreload();
         $("#index").hide();
         anime(1);
         console.log("index page");    

@@ -13,6 +13,7 @@ $(function () {
             //     'height':$(document).height(),
             //     'width':$(document).width()
             // })
+                // if (localStorage.getItem("first") === null) 
             function preventDefault(){
                 document.body.addEventListener('touchmove', function (e) {
                     e.preventDefault();
@@ -23,8 +24,9 @@ $(function () {
             $("#img41").click(function () { //开头的GO
                 $("#loading").remove();
                 $("#index").show();
-                if(get_you()==false){
+                if(localStorage.getItem("first")===null){
                     $("#rule").click();
+                    localStorage.setItem("first","1");
                 }
             })
             $("#top").show(); //allhide把这个也隐藏了 但是没写class class隐藏后也绑定不到就分开用id了 优先级待优化
@@ -55,9 +57,6 @@ $(function () {
                 console.log("help page");
             }
             if (nowpage.indexOf("index") == 0) {
-                let now = new Date();
-                date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDay() + "/" + now.getHours() + ":" + now.getMinutes();
-                localStorage.setItem("lasttime",date);
                 get_all(); //获取精灵 精灵球 数量 sessionstorage
                 console.log("index page");
             }
@@ -156,6 +155,7 @@ $(function () {
                 console.log("into help");
             }) //助愿页
             $("#selected").click(function () {
+                $("#selected").attr("disabled","disabled");
                 var id = sessionStorage.getItem('chooseid');//help1
                 // id=Number(id.replace("help",""));
                 nowid=sessionStorage.getItem(id);
@@ -173,9 +173,11 @@ $(function () {
                     $("#name").text("昵称：" + String(data.name));
                     $("#tel").text("手机：" + data.telephone);
                     $("#wechat").text("微信：" + data.weixin);
+                    $("#selected").removeAttr("disabled");
                 }); //获取信息
                 ajax.fail(function (textStatus) {
                     allatt(String(textStatus));
+                    $("#selected").removeAttr("disabled");
                 });
                 allhide();
                 $("#change").hide();
@@ -185,6 +187,7 @@ $(function () {
                 $("#selected").hide();
             }else{
                 allatt(result);
+                $("#selected").removeAttr("disabled");
             }})
             //助愿页信息的确认按钮
             $("#ok2").click(function () {
@@ -289,6 +292,7 @@ $(function () {
                 $("#ok").removeAttr("disabled");
             }
             $(".close").click(function () {
+                flag=false;
                 clear();
                 $(".help_attention").hide();
                 $(".help_attention_2").hide();
@@ -357,10 +361,6 @@ $(function () {
                 var result;
                 $.ajax(setting).done(function(data){
                     if (data.errcode==0) {
-                        if(data.user==undefined){
-                            result=false;
-                            return;
-                        }
                         str="name:"+data.user.name+"/"+"tel:"+data.user.telephone+"/"+"wechat:"+data.user.weixin;
                         sessionStorage.setItem("you",str);
                         var nowpage = window.location.pathname.match(/(\w+.html)$/)[0];
@@ -379,7 +379,6 @@ $(function () {
                             change_white("#wechat");    
                         }
                         result=true;
-                        return;
                     }else{
                         result=false;
                     }
@@ -401,7 +400,8 @@ $(function () {
                             if (data.errcode == 0 || data.errcode == 1) {
                                 if (clicktime == 666) { //自定义愿望
                                     var wishText = $("#customtext").val();
-                                    if (/^\s*$/.test(wishText) == false) { //自定义文本不为空
+                                    var res=/^\s*$/.test(wishText);
+                                    if (res==false) { //自定义文本不为空
                                         console.log(clicktime + "许愿：" + wishText);
                                         var pack_wish = JSON.stringify({
                                             'wish_content': wishText
@@ -853,8 +853,11 @@ $(function () {
                         })
                     }
                 });
+                var flag = false;
                 function bindclick(divid){
                     $(divid).bind("click", function () {
+                        if(flag) return;
+                        flag = true;
                         id=divid.replace("#","");
                         console.log("查看我的第"+divid+"条愿望");
                         sessionStorage.setItem("checkhelp",id);
