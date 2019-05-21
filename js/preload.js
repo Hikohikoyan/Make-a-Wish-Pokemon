@@ -13,10 +13,10 @@ $(function(){
     }
     if(nowpage.indexOf("index")==0){
         if(localStorage.getItem("first")==1){
-            loading();
+            // loading();
             console.log("隐藏loading");
             setTimeout(function(){
-                $("#loading").hide()
+                anime(1);
             },1200);
             $("#index").show();
             return;
