@@ -24,7 +24,7 @@ $(function () {
             $("#img41").click(function () { //开头的GO
                 $("#loading").remove();
                 $("#index").show();
-                if(localStorage.getItem("first")===null){
+                if(localStorage.getItem("first")===null||localStorage.getItem("first")!=1){
                     $("#rule").click();
                     localStorage.setItem("first","1");
                 }
@@ -207,13 +207,14 @@ $(function () {
             function get_help_wishes() {
                 var wishText = new Array();
                 var ajax = $.ajax(prepare(3));
+                $('.helpbox').remove();
                 ajax.done(function (data) {
-                    if(Object.keys(data)==0||data.length==0){
+                    if(data.length==0){
                         allatt("暂时还没有愿望,请稍后再来叭");
+                        $("#selected").attr("disabled","disabled");
                         return;
                     }
                     console.log(data);
-                    $('.helpbox').remove();
                     for (var i = 0; i <data.length; i++) {
                         wishes[i] = data[i].id;
                         wishText[i] = data[i].wish_content;
