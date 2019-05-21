@@ -295,7 +295,7 @@ $(function () {
                 name_check();
             });
             $("#tel").bind('input propertychange', function () {
-                if($("#tel").val().length>=3){
+                if($("#tel").val().length>=5){
                     tel_check();
                 }
             })
@@ -681,7 +681,7 @@ $(function () {
                 function cleanctx(){
                     console.log("清除画板");
                     $("canvas").remove();
-                    $(".getpic").append("<canvas width='200px' height=2'00px' id='canvas'></canvas>")
+                    $(".getpic").append("<canvas width='200px' height=200px' id='canvas'></canvas>")
                 }
                 //成功页画精灵
                 function show_elf() {
