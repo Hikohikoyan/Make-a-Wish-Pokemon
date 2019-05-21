@@ -19,10 +19,10 @@ class Start_finish_game
         $closeTime = '2019-05-30 00:00:00';
         $startTime = '2019-05-21 20:00:00';
         if($nowTime<$startTime){
-            return response()->json(['errcode'=>110,'errmsg'=>"来早了哦，活动还没开始，谢谢你的喜欢"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+            return response("活动还没开始",430);
         }
         if($nowTime>$closeTime){
-            return response()->json(['errcode'=>112,'errmsg'=>"来迟了，活动已经结束了哦"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+            return response("来迟了，活动已经结束了哦",431);
         }
          return $next($request);
 
