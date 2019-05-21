@@ -12,7 +12,7 @@ class user_info extends Controller
     public function commit_info(Request $request){
         $exist_code=$request->session()->get('exist_code');
         $name=htmlspecialchars($request->name);
-        $telephone=htmlspeicalchars($request->telephone);
+        $telephone=htmlspecialchars($request->telephone);
         $weixin=htmlspecialchars($request->weixin);
         $validator = Validator::make($request->all(), [
             'name' => 'required|alpha|min:2',

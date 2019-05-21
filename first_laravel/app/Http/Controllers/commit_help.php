@@ -10,7 +10,8 @@ class commit_help extends Controller
 {
     public function index( Request $request){
         $help_times=$request->get('help_times');
-        $id=$request->id;
+        $id=htmlspecialchars($request->id);
+        
         $helper_id=$request->session()->get('openid');
         $time=date("m.d");
         
