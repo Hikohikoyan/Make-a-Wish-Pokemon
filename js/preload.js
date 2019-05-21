@@ -3,14 +3,12 @@ $(function(){
     if(nowpage.indexOf("wish")==0){
         // $("#hope_page").hide();
         onepic();
-        simpleload();
         console.log("wish page");
     }
     if(nowpage.indexOf("help")==0){
         // $(".major").hide();
         // $("#selected").hide();
         onepic();
-        simpleload();
         console.log("help page");
     }
     if(nowpage.indexOf("index")==0){
@@ -37,24 +35,6 @@ $(function(){
             "attentionbk.png"
         ]);
         backgroundownload.load();
-    }
-    function simpleload(){
-        var explodeimg=new createjs.LoadQueue(true);
-        function handleComplete(){
-            console.log("smaller pic");
-        }
-        explodeimg.on("complete",handleComplete,this);
-        explodeimg.loadManifest([
-            "img/next.png",
-            "img/again.png",
-            "img/gohelp.png",
-            "img/change.png",
-            "img/wagada.png",
-            "img/cancel.png",//new
-            "img/back.png",
-            "img/return.png",
-        ]);
-        explodeimg.load();
     }
     function allload(){
         var imgdownload = new createjs.LoadQueue(true);

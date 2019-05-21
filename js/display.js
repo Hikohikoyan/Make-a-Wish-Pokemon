@@ -779,7 +779,7 @@ $(function () {
                     $("#balls").append("<img class='explode_gif' src='img/explode/1.png'>");
                     setTimeout(() => {
                         changepic();
-                    }, 200);
+                    }, 100);
                     function changepic() {
                         var str = 1;
                         var bomb = setInterval(function () {
@@ -788,7 +788,7 @@ $(function () {
                                 str = str + 1;
                             }
                             $(".explode_gif").attr("src", "img/explode/" + str + ".png");
-                        }, 60);
+                        }, 40);
                         setTimeout(() => {
                             if (str = 20) {
                                 // show_elf();
