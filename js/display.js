@@ -208,13 +208,13 @@ $(function () {
                 var wishText = new Array();
                 var ajax = $.ajax(prepare(3));
                 ajax.done(function (data) {
+                    if(Object.keys(data)==0){
+                        allatt("暂时还没有愿望,请稍后再来叭");
+                        return;
+                    }
                     console.log(data);
                     $('.helpbox').remove();
                     for (var i = 0; i <data.length; i++) {
-                        if(data.length==0){
-                            allatt("暂时还没有愿望,请稍后再来叭");
-                            return;
-                        }
                         wishes[i] = data[i].id;
                         wishText[i] = data[i].wish_content;
                         // wisher_id[i]=data[i].wisher_id;//愿望id 愿望文本 许愿人
