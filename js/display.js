@@ -208,7 +208,7 @@ $(function () {
                 var wishText = new Array();
                 var ajax = $.ajax(prepare(3));
                 ajax.done(function (data) {
-                    if(Object.keys(data)==0){
+                    if(Object.keys(data)==0||data.length==0){
                         allatt("暂时还没有愿望,请稍后再来叭");
                         return;
                     }
@@ -614,7 +614,7 @@ $(function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
                                 },
                                  419:function () {
-                                     window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
+                                     window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon/api/Check_login&state=gsudndu13Sd";
                                     }
                             },
 
@@ -644,7 +644,7 @@ $(function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
                                 },
                                 419:function (){
-                                    window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon-test/api/Check_login&state=gsudndu13Sd";
+                                    window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon/api/Check_login&state=gsudndu13Sd";
                                 }
                             },
                         };

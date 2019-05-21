@@ -13,11 +13,8 @@ $(function(){
     }
     if(nowpage.indexOf("index")==0){
         if(localStorage.getItem("first")==1){
-            // loading();
+            loading();
             console.log("隐藏loading");
-            setTimeout(function(){
-                anime(1);
-            },1200);
             $("#index").show();
             return;
         }
@@ -32,7 +29,7 @@ $(function(){
         var backgroundownload = new createjs.LoadQueue(true);
         backgroundownload.loadManifest([
             "img/background.png",
-            "attentionbk.png"
+            "img/attentionbk.png"
         ]);
         backgroundownload.load();
     }
@@ -131,14 +128,48 @@ function loading(){
     }
     imgdownload.on("complete", handleComplete, this);
     imgdownload.loadManifest([
-        "img/iknow.png",
-        "img/smallback.jpg",
-        "img/background.png",
-        "img/title.png",
-        "img/41.png",
-        "img/welcome.png",
-        "img/cunstom.png",
-    ]);
+        "img/rotate/1.png",
+        "img/rotate/2.png",
+        "img/rotate/3.png",
+        "img/rotate/4.png",
+        "img/rotate/5.png",
+        "img/rotate/6.png",
+        "img/rotate/7.png",
+        "img/rotate/8.png",
+        "img/rotate/9.png",
+        "img/rotate/10.png",
+        "img/rotate/11.png",
+        "img/rotate/12.png",
+        "img/rotate/13.png",
+        "img/rotate/14.png",
+        "img/rotate/15.png",
+        "img/rotate/16.png",
+        "img/rotate/17.png",
+        "img/rotate/18.png",
+        "img/rotate/19.png",
+        "img/rotate/20.png",
+        "img/rotate/21.png",//http://182.254.161.178/laravel/public/
+        "img/explode/1.png",
+        "img/explode/2.png",
+        "img/explode/3.png",
+        "img/explode/4.png",
+        "img/explode/5.png",
+        "img/explode/6.png",
+        "img/explode/7.png",
+        "img/explode/8.png",
+        "img/explode/9.png",
+        "img/explode/10.png",
+        "img/explode/11.png",
+        "img/explode/12.png",
+        "img/explode/13.png",
+        "img/explode/14.png",
+        "img/explode/15.png",
+        "img/explode/16.png",
+        "img/explode/17.png",
+        "img/explode/18.png",
+        "img/explode/19.png",
+        "img/explode/20.png",
+]);
 imgdownload.load();
 }
 

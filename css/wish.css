@@ -217,7 +217,7 @@ li{
     bottom: 0;
     width:128px;
     height: 58px;
-    margin-top: 12px;
+    margin-top: 8px;
     transform: scale(0.8);
 }
 #cancel{
@@ -550,7 +550,7 @@ img#middle{
     background-repeat: no-repeat;
     background-attachment: local;
     background-size: cover;
-    border-radius: 0.9em;
+    border-radius: 0.3em;
     position: absolute;
     top: 0;
     left: 0;
