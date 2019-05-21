@@ -588,6 +588,12 @@ $(function () {
                             },
                             "async":async,
                             "statusCode": {
+                                430: function () {
+                                    allatt("活动还没开始哦, 敬请期待~");
+                                },
+                                431: function () {
+                                    allatt("活动已经结束啦, 感谢关注~");
+                                },
                                 404: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
                                 },
@@ -612,6 +618,12 @@ $(function () {
                                 "cache-control": "no-cache"
                             },
                             "statusCode": {
+                                430: function () {
+                                    allatt("活动还没开始哦, 敬请期待~");
+                                },
+                                431: function () {
+                                    allatt("活动已经结束啦, 感谢关注~");
+                                },
                                 404: function () {
                                     allatt("网络好像出了点问题，稍后再来尝试叭");
                                 },
