@@ -683,15 +683,13 @@ $(function () {
                 }
                 function cleanctx(){
                     console.log("清除画板");
-                    var canvas = document.getElementById("canvas");
-                    var ctx = canvas.getContext("2d");
-                    ctx.clip();
+                    $("canvas").remove();
+                    $(".getpic").append("<canvas width='200px' height=2'00px' id='canvas'></canvas>")
                 }
                 //成功页画精灵
                 function show_elf() {
                     var canvas = document.getElementById("canvas");
                     var ctx = canvas.getContext("2d");
-                    //暂时写死
                     var Img = new Image();
                     var src = sessionStorage.getItem("open_ball");
                     Img.src = src;
@@ -699,9 +697,8 @@ $(function () {
                     Img.onload = function () {
                         console.log("开始画了")
                         ctx.drawImage(Img, 0, 0, 200, 200);
-                        // ctx.shadowColor = "white";
-                        // ctx.shadowBlur = 0;
                         ctx.save();
+                        ctx.clip();
                     }
                 }
                 $("#middle").click(function () {
@@ -715,7 +712,7 @@ $(function () {
                             "-moz-animation": "a 1.2s linear infinite",
                             "-o-animation": "a 1.2s linear infinite",
                         })
-                    }, 800);
+                    }, 730);
                     console.log("第" + click + "次愿望");
                     click = click + 1;
                     if (click <= 5) {

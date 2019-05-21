@@ -17,7 +17,9 @@ $(function(){
         if(localStorage.getItem("first")==1){
             loading();
             console.log("隐藏loading");
-            // $("#loading").hide();
+            setTimeout(function(){
+                $("#loading").hide()
+            },500);
             $("#index").show();
             return;
         }
@@ -143,14 +145,9 @@ $(function(){
 function loading(){
     var imgdownload = new createjs.LoadQueue(true);
     function handleComplete(){
-        var src=$("#rotate").attr("src");
-        src=src.replace("img/rotate/","");
-        src=src.replace(".png","");
         console.log("completed");
         complete();
-        console.log(src);
-        anime(src);
-
+        anime(1);
     }
     imgdownload.on("complete", handleComplete, this);
     imgdownload.loadManifest([
