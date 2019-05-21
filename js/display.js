@@ -73,6 +73,7 @@ $(function () {
                 show_rule();
             }) //点击规则
             $(".return").click(function () {
+                cleanctx();
                 clear();
                 $("#rule_page").hide();
                 goback();
@@ -125,6 +126,7 @@ $(function () {
                 }
             }) //查看精灵
             $("#btn2").click(function () {
+                cleanctx();
                 $("#balls").css({
                     "animation": "a 1s",
                     "-webkit-animation": "a 1s",
@@ -274,7 +276,7 @@ $(function () {
                 $(".show").hide();
                 $("#hope_page").show();
                 show1("#sign_page");
-                if(get_you()==false){
+                if(get_you()==false||sessionStorage.getItem("you")==null){
                     allatt("提示：信息一经填写就不可修改哦，请勿填错~");
                 }
                 console.log("into form_page");
@@ -340,12 +342,13 @@ $(function () {
                     return false;
                 }
                 if (/^\s*$/.test(tel) == false && checkPhone(tel) == true) {
+                    $("#ok").removeAttr("disabled");
                     $("#telalert").text("");
                     return true;
                 } else {
                     if(tel.length>=4){
                     $("#telalert").text("请输入手机号");}
-                    // $("#ok").attr("disabled","disabled");
+                    $("#ok").attr("disabled","disabled");
                     return false;
                 }
 
@@ -366,11 +369,12 @@ $(function () {
             function vx_check() {
                 var vx = $("#wechat").val();
                 if (/^\s*$/.test(vx) == false && vx.length <= 20) {
+                    $("#ok").removeAttr("disabled");
                     $("#vxalert").text("");
                     return true;
                 } else {
                     $("#vxalert").text("请输入微信号");
-                    // $("#ok").attr("disabled","disabled");
+                    $("#ok").attr("disabled","disabled");
                     return false;
                 }
             }
@@ -407,12 +411,7 @@ $(function () {
                     hoping();
                 })
                 function commit_wish(info){
-                    // info=info.split("/");
-                    // var pack=JSON.stringify({
-                    //     "name":info[0].replace("name:",""),
-                    //     "tel":info[1].replace("tel:",""),
-                    //     "weixin":info[2].replace("wechat:","")
-                    // })
+                    $("#next").attr("disabled","disabled");
                     var commit_info = $.ajax(prepare(2, info));
                     commit_info.done(function (data) {
                             if (data.errcode == 0 || data.errcode == 1) {
@@ -451,6 +450,7 @@ $(function () {
                                     $.ajax(prepare(1, pack_wish)).done(function (data) {
                                         if (data.errcode == 0) {
                                             console.log("愿望发送给后台了！");
+                                            $("#ok").attr("disabled","disabled");
                                             $("#hope_page").hide();
                                             console.log("into success");
                                             $(".success").show();
@@ -458,23 +458,30 @@ $(function () {
                                             return;
                                         } else if (data.errcode == 1 | data.errcode == 2) {
                                             allatt(data.errmsg);
+                                            $("#ok").attr("disabled","disabled");
                                             return;
                                         } else if (typeof (data) === "undefined" || typeof (data.errmsg) === "undefined") {
                                             allatt("网络好像出了点问题，稍后再来尝试叭");
+                                            $("#ok").attr("disabled","disabled");
+                                        }else{
+                                            allatt(data.errmsg);
+                                            $("#ok").attr("disabled","disabled");
                                         }
                                     });
                                     return;
                                 } 
                             }else {
-                                    $("#vxalert").text(data.errmsg);
+                                    allatt(data.errmsg);
                             };
                             commit_info.fail(function (textStatus) {
                             console.log(textStatus);
+                            $("#ok").attr("disabled","disabled");
                             allatt("网络好像出了点问题，稍后再来尝试叭");
                         })
                     });
                 }
                 function hoping(){
+                    $("#ok").attr("disabled","disabled");
                     var result=get_you();//先看有没有这个人 返回true 有人 可以调用session
                     if(result!=true){
                         user = $("#name").val();
@@ -500,9 +507,11 @@ $(function () {
                             $("#vxalert").text("请输入正确信息！");
                             return;
                         }
+                        $("#ok").removeAttr("disabled","disabled");
                         commit_wish(info);
                     }else{
                         //从sessionstorage里拿 
+                        $("#ok").removeAttr("disabled","disabled");
                         var info=sessionStorage.getItem("you");
                         commit_wish(info);
                     }
@@ -668,6 +677,12 @@ $(function () {
                         sessionStorage.setItem("ball_num", ball);
                     });
                 }
+                function cleanctx(){
+                    console.log("清除画板");
+                    var canvas = document.getElementById("canvas");
+                    var ctx = canvas.getContext("2d");
+                    ctx.clip();
+                }
                 //成功页画精灵
                 function show_elf() {
                     var canvas = document.getElementById("canvas");
@@ -683,10 +698,6 @@ $(function () {
                         // ctx.shadowColor = "white";
                         // ctx.shadowBlur = 0;
                         ctx.save();
-                        setTimeout(function () {
-                            ctx.clip();
-                            console.log("清除画板");
-                        }, 1000 * 4);
                     }
                 }
                 $("#middle").click(function () {
