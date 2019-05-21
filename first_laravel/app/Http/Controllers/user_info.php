@@ -15,7 +15,7 @@ class user_info extends Controller
         $telephone=htmlspecialchars($request->telephone);
         $weixin=htmlspecialchars($request->weixin);
         $validator = Validator::make($request->all(), [
-            'name' => 'required|alpha|min:2',
+            'name' => 'required|alpha|min:1',
             'telephone' => 'required|digits:11', 
             'weixin' => 'alpha_dash',
           ]);
