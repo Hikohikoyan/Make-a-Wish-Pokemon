@@ -511,7 +511,7 @@ $(function () {
                         commit_wish(info);
                     }else{
                         //从sessionstorage里拿 
-                        $("#ok").removeAttr("disabled","disabled");
+                        // $("#ok").removeAttr("disabled","disabled");
                         var info=sessionStorage.getItem("you");
                         commit_wish(info);
                     }
