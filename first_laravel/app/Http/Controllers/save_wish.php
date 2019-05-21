@@ -14,13 +14,14 @@ class save_wish extends Controller
         $random_photo_order=mt_rand(1,10);
         $path="img/"."fairy/"."$random_photo_order".".png";
         $wish_content=$request->wish_content;
+        $wish_content=htmlspecialchars($wish_content);
         $openid=$request->session()->get('openid');
         $wish_times=$request->get('wish_times');
         $validator = Validator::make($request->all(), [
             'wish_content' => 'required', 
           ]);
         if ($validator->fails()) {
-            return response()->json(['errcode'=>2,'errmsg'=>"请再检查一下你输入的内容"]);
+            return response()->json(['errcode'=>2,'errmsg'=>"请再检查一下你输入的内容"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
         }
         $exist_code=$request->session()->get('exist_code');
         if($exist_code==0){
@@ -40,7 +41,7 @@ class save_wish extends Controller
             $aa=DB::table('custom_wish')->insert(['wish_content'=>$wish_content,'wisher_id'=>$openid,'helper_id'=>"NULL",'situation'=>"未领取",'wisher_open'=>0,'helper_open'=>0,'fairy_path'=>$path,'time1'=>$time,'time2'=>"0"]); 
             return response()->json(['errcode'=>0,'errmsg'=>"success",'path'=>$path,'name'=>$name,'telephone'=>$telephone,'weixin'=>$weixin]);
         }else{
-                return response()->json(['errcode'=>1,'errmsg'=>"今天的许愿次数已用完，明天再来"]);
+                return response()->json(['errcode'=>1,'errmsg'=>"今天的许愿次数已用完，明天再来吧"])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
         
         }
     }

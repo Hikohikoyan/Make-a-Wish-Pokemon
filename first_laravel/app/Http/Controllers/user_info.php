@@ -11,9 +11,9 @@ class user_info extends Controller
 {
     public function commit_info(Request $request){
         $exist_code=$request->session()->get('exist_code');
-        $name=$request->name;
-        $telephone=$request->telephone;
-        $weixin=$request->weixin;
+        $name=htmlspecialchars($request->name);
+        $telephone=htmlspeicalchars($request->telephone);
+        $weixin=htmlspecialchars($request->weixin);
         $validator = Validator::make($request->all(), [
             'name' => 'required|alpha|min:2',
             'telephone' => 'required|digits:11', 

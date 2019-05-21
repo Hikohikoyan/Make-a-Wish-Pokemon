@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'user_exist'=>\App\Http\Middleware\user_exist::class,
         'judge_wishorhelp_times'=>\App\Http\Middleware\judge_wishorhelp_times::class,
         'caculate_ball'=>\App\Http\Middleware\caculate_ball::class,
+        'Start_finish_game'=>\App\Http\Middleware\Start_finish_game::class,
         
     ];
 

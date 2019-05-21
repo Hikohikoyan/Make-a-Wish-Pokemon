@@ -20,11 +20,11 @@ class show_list extends Controller
         $path_array=array();
         $openid=$request->session()->get('openid');
         $fairy_photo_path1=DB::table('custom_wish')
-        ->where('wisher_id',"$openid")
+        ->where('wisher_id',$openid)
         ->where('wisher_open','已打开')
         ->pluck('fairy_path');
         $fairy_photo_path2=DB::table('custom_wish')
-        ->where('helper_id',"$openid")
+        ->where('helper_id',$openid)
         ->where('helper_open','已打开')
         ->pluck('fairy_path');
         $collection=collect([$fairy_photo_path1,$fairy_photo_path2]);
