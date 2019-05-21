@@ -73,6 +73,7 @@ $(function () {
                 show_rule();
             }) //点击规则
             $(".return").click(function () {
+                cleanctx();
                 clear();
                 $("#rule_page").hide();
                 goback();
@@ -125,6 +126,7 @@ $(function () {
                 }
             }) //查看精灵
             $("#btn2").click(function () {
+                cleanctx();
                 $("#balls").css({
                     "animation": "a 1s",
                     "-webkit-animation": "a 1s",
@@ -675,6 +677,12 @@ $(function () {
                         sessionStorage.setItem("ball_num", ball);
                     });
                 }
+                function cleanctx(){
+                    console.log("清除画板");
+                    var canvas = document.getElementById("canvas");
+                    var ctx = canvas.getContext("2d");
+                    ctx.clip();
+                }
                 //成功页画精灵
                 function show_elf() {
                     var canvas = document.getElementById("canvas");
@@ -690,10 +698,6 @@ $(function () {
                         // ctx.shadowColor = "white";
                         // ctx.shadowBlur = 0;
                         ctx.save();
-                        setTimeout(function () {
-                            ctx.clip();
-                            console.log("清除画板");
-                        }, 1000 * 4);
                     }
                 }
                 $("#middle").click(function () {
