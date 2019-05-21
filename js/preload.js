@@ -1,7 +1,5 @@
 $(function(){
     var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
-    let nowtimes=1;
-
     if(nowpage.indexOf("wish")==0){
         // $("#hope_page").hide();
         onepic();
@@ -15,8 +13,9 @@ $(function(){
     }
     if(nowpage.indexOf("index")==0){
         if(localStorage.getItem("first")==1){
+            loading();
             console.log("隐藏loading");
-            $("#loading").hide();
+            // $("#loading").hide();
             $("#index").show();
             simpleload();
             return;
@@ -152,6 +151,51 @@ $(function(){
         ]);
     imgdownload.load();
 }
+function loading(){
+    var imgdownload = new createjs.LoadQueue(true);
+    function handleComplete(){
+        var src=$("#rotate").attr("src");
+        src=src.replace("img/rotate/","");
+        src=src.replace(".png","");
+        console.log("completed");
+        complete();
+        console.log(src);
+        anime(src);
+
+    }
+    imgdownload.on("complete", handleComplete, this);
+    imgdownload.loadManifest([
+        "img/iknow.png",
+        "img/smallback.jpg",
+        "img/background.png",
+        "img/title.png",
+        "img/41.png",
+        "img/welcome.png",
+        "img/cunstom.png",
+        "img/rotate/2.png",
+        "img/rotate/3.png",
+        "img/rotate/4.png",
+        "img/rotate/5.png",
+        "img/rotate/6.png",
+        "img/rotate/7.png",
+        "img/rotate/8.png",
+        "img/rotate/9.png",
+        "img/rotate/10.png",
+        "img/rotate/11.png",
+        "img/rotate/12.png",
+        "img/rotate/13.png",
+        "img/rotate/14.png",
+        "img/rotate/15.png",
+        "img/rotate/16.png",
+        "img/rotate/17.png",
+        "img/rotate/18.png",
+        "img/rotate/19.png",
+        "img/rotate/20.png",
+        "img/rotate/21.png",
+    ]);
+imgdownload.load();
+}
+
     function anime(str){
         var interval=setInterval(function(){
                 $("#rotate").css({
