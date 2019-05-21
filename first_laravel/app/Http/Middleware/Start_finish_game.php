@@ -15,7 +15,7 @@ class Start_finish_game
      * @return mixed
      */
     public function handle($request, Closure $next){
-        $nowTime=date("Y-m-d H:i:s");
+        $nowTime=date("Y-m-d H:i:sa");
         $closeTime = '2019-05-30 00:00:00';
         $startTime = '2019-05-21 20:00:00';
         if($nowTime<$startTime){
