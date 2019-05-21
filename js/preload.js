@@ -17,7 +17,7 @@ $(function(){
             console.log("隐藏loading");
             setTimeout(function(){
                 $("#loading").hide()
-            },800);
+            },1200);
             $("#index").show();
             return;
         }
