@@ -17,7 +17,7 @@ $(function(){
             console.log("隐藏loading");
             setTimeout(function(){
                 $("#loading").hide()
-            },500);
+            },800);
             $("#index").show();
             return;
         }
@@ -138,26 +138,6 @@ function loading(){
         "img/41.png",
         "img/welcome.png",
         "img/cunstom.png",
-        "img/rotate/2.png",
-        "img/rotate/3.png",
-        "img/rotate/4.png",
-        "img/rotate/5.png",
-        "img/rotate/6.png",
-        "img/rotate/7.png",
-        "img/rotate/8.png",
-        "img/rotate/9.png",
-        "img/rotate/10.png",
-        "img/rotate/11.png",
-        "img/rotate/12.png",
-        "img/rotate/13.png",
-        "img/rotate/14.png",
-        "img/rotate/15.png",
-        "img/rotate/16.png",
-        "img/rotate/17.png",
-        "img/rotate/18.png",
-        "img/rotate/19.png",
-        "img/rotate/20.png",
-        "img/rotate/21.png",
     ]);
 imgdownload.load();
 }

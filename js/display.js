@@ -779,16 +779,17 @@ $(function () {
                     $("#balls").append("<img class='explode_gif' src='img/explode/1.png'>");
                     setTimeout(() => {
                         changepic();
-                    }, 100);
+                    }, 1000);
                     function changepic() {
                         var str = 1;
                         var bomb = setInterval(function () {
                             if (str < 20) {
                                 str = Number(str)
                                 str = str + 1;
+                                src="img/explode/"+str+".png";
                             }
-                            $(".explode_gif").attr("src", "img/explode/" + str + ".png");
-                        }, 67);
+                            $(".explode_gif").attr("src", src);
+                        }, 72);
                         setTimeout(() => {
                             if (str = 20) {
                                 // show_elf();
@@ -806,7 +807,7 @@ $(function () {
                                 $("#balls").hide();
                                 show1(".success");
                             }
-                        }, 3000);
+                        }, 3200);
                     }
                 }
                 function show_rule() {
