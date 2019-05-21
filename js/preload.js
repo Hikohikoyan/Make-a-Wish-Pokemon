@@ -3,12 +3,14 @@ $(function(){
     if(nowpage.indexOf("wish")==0){
         // $("#hope_page").hide();
         onepic();
+        simpleload();
         console.log("wish page");
     }
     if(nowpage.indexOf("help")==0){
         // $(".major").hide();
         // $("#selected").hide();
         onepic();
+        simpleload();
         console.log("help page");
     }
     if(nowpage.indexOf("index")==0){
@@ -17,7 +19,6 @@ $(function(){
             console.log("隐藏loading");
             // $("#loading").hide();
             $("#index").show();
-            simpleload();
             return;
         }
         allload();
@@ -42,26 +43,14 @@ $(function(){
         }
         explodeimg.on("complete",handleComplete,this);
         explodeimg.loadManifest([
-            "img/explode/1.png",
-            "img/explode/2.png",
-            "img/explode/3.png",
-            "img/explode/4.png",
-            "img/explode/5.png",
-            "img/explode/6.png",
-            "img/explode/7.png",
-            "img/explode/8.png",
-            "img/explode/9.png",
-            "img/explode/10.png",
-            "img/explode/11.png",
-            "img/explode/12.png",
-            "img/explode/13.png",
-            "img/explode/14.png",
-            "img/explode/15.png",
-            "img/explode/16.png",
-            "img/explode/17.png",
-            "img/explode/18.png",
-            "img/explode/19.png",
-            "img/explode/20.png",
+            "img/next.png",
+            "img/again.png",
+            "img/gohelp.png",
+            "img/change.png",
+            "img/wagada.png",
+            "img/cancel.png",//new
+            "img/back.png",
+            "img/return.png",
         ]);
         explodeimg.load();
     }

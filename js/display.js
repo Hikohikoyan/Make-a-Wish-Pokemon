@@ -264,10 +264,15 @@ $(function () {
             });
             //custom
             $("#customtext").bind('input propertychange', function () {
+                $("#next").removeAttr("disabled");
                 var text=$("#customtext").val();
                 if(text.length>=45){
                     allatt("不可以太贪心哦~");
                     // text.
+                }
+                if(check(text)==true){
+                    $("#next").attr("disabled", "disabled");
+                    $("#attention0").text("许个愿吧~");
                 }
             })
             //wish.html 许愿页
@@ -279,6 +284,7 @@ $(function () {
                 if(get_you()==false||sessionStorage.getItem("you")==null){
                     allatt("提示：信息一经填写就不可修改哦，请勿填错~");
                 }
+                $("#ok").removeAttr("disabled");
                 console.log("into form_page");
             }) //点击下一步填写信息
             $("#name").bind('input propertychange', function () {
@@ -308,15 +314,19 @@ $(function () {
             })
             function check(str){
                 str=String(str);
-                if(str.indexOf("<script>")){
-                    str.replace("<script>","");
-                }
+                str.replace("<script>","");
+                str.replace("alert","");
+                str.replace("</>","");
                 if((/(\w+.html)$/).test(str)==true){
-                    allatt("请输入内容");
+                    $("#attention0").text("请输入内容");
                     return true;
                 }
                 var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
-                return patt_illegal.test(str);
+                if(patt_illegal.test(str)==true){
+                    return false;
+                }else{
+                    return true;
+                }
             }
             function prevent() {
                 if (name_check() == true && tel_check() == true && vx_check() == true) {
@@ -328,7 +338,7 @@ $(function () {
                 var name = $("#name").val();
                 if (/^\s*$/.test(name) == true && name != "") {
                     $("#namealert").text("请输入昵称");
-                    // $("#ok").attr("disabled","disabled");
+                    $("#ok").attr("disabled","disabled");
                     return false;
                 } else {
                     $("#namealert").text("");
@@ -342,7 +352,6 @@ $(function () {
                     return false;
                 }
                 if (/^\s*$/.test(tel) == false && checkPhone(tel) == true) {
-                    $("#ok").removeAttr("disabled");
                     $("#telalert").text("");
                     return true;
                 } else {
@@ -369,7 +378,6 @@ $(function () {
             function vx_check() {
                 var vx = $("#wechat").val();
                 if (/^\s*$/.test(vx) == false && vx.length <= 20) {
-                    $("#ok").removeAttr("disabled");
                     $("#vxalert").text("");
                     return true;
                 } else {
@@ -411,8 +419,8 @@ $(function () {
                     hoping();
                 })
                 function commit_wish(info){
-                    $("#next").attr("disabled","disabled");
                     var commit_info = $.ajax(prepare(2, info));
+                    $("#ok").attr("disabled","disabled");
                     commit_info.done(function (data) {
                             if (data.errcode == 0 || data.errcode == 1) {
                                 if (clicktime == 666) { //自定义愿望
@@ -430,17 +438,17 @@ $(function () {
                                                 console.log("into success");
                                                 $(".success").show();
                                                 show1(".success");    
-                                            } else if (data.errcode == 1 | data.errcode == 2 || typeof (data.errcode) === "undefined") {
+                                            } else{
                                                 allatt(data.errmsg);
-                                            }
+                                                }
                                         });
                                         return;
                                     } else {
-                                        $("#next").attr("disabled", "disabled");
-                                        $("#attention0").text("许个愿吧~");
+                                        allatt(data.errmsg);
                                         return;
                                     }
                                 } else if (clicktime == 0) {
+                                    $("#ok").attr("disabled","disabled");
                                     console.log("预定义"); //预定义
                                     var wishText = $("#wishtext").text();
                                     console.log("许愿：" + wishText);
@@ -458,24 +466,20 @@ $(function () {
                                             return;
                                         } else if (data.errcode == 1 | data.errcode == 2) {
                                             allatt(data.errmsg);
-                                            $("#ok").attr("disabled","disabled");
                                             return;
                                         } else if (typeof (data) === "undefined" || typeof (data.errmsg) === "undefined") {
                                             allatt("网络好像出了点问题，稍后再来尝试叭");
-                                            $("#ok").attr("disabled","disabled");
                                         }else{
                                             allatt(data.errmsg);
-                                            $("#ok").attr("disabled","disabled");
                                         }
                                     });
                                     return;
                                 } 
                             }else {
-                                    allatt(data.errmsg);
+                                allatt(data.errmsg);
                             };
                             commit_info.fail(function (textStatus) {
                             console.log(textStatus);
-                            $("#ok").attr("disabled","disabled");
                             allatt("网络好像出了点问题，稍后再来尝试叭");
                         })
                     });
@@ -507,11 +511,11 @@ $(function () {
                             $("#vxalert").text("请输入正确信息！");
                             return;
                         }
-                        $("#ok").removeAttr("disabled","disabled");
+                        $("#ok").removeAttr("disabled");
                         commit_wish(info);
                     }else{
                         //从sessionstorage里拿 
-                        // $("#ok").removeAttr("disabled","disabled");
+                        $("#ok").removeAttr("disabled","disabled");
                         var info=sessionStorage.getItem("you");
                         commit_wish(info);
                     }
