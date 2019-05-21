@@ -764,7 +764,7 @@ $(function () {
                     $.ajax(prepare(8)).done(function (data) {
                         //存src session|
                         var src = data.fairy_path;
-                        src = src.replace("\"", "");
+                        // src = src.replace("\", "");
                         sessionStorage.setItem("open_ball", src);
                     })
                     var id = "#" + $(this).attr("id")
@@ -807,7 +807,7 @@ $(function () {
                                 $("#balls").hide();
                                 show1(".success");
                             }
-                        }, 3200);
+                        }, 1800);
                     }
                 }
                 function show_rule() {
