@@ -264,16 +264,19 @@ $(function () {
             });
             //custom
             $("#customtext").bind('input propertychange', function () {
-                $("#next").removeAttr("disabled");
                 var text=$("#customtext").val();
                 if(text.length>=45){
                     allatt("不可以太贪心哦~");
-                    // text.
+                    $("#next").attr("disabled","disabled");
+                    return;
                 }
-                if(check(text)==true){
-                    $("#next").attr("disabled", "disabled");
-                    $("#attention0").text("许个愿吧~");
+                var res=/^\s*$/.test(wishText);
+                if (res==false&&check(wishText)==true) {
+                    ("#attention0").text("许个愿吧~");
+                    $("#next").attr("disabled","disabled");
+                    return;
                 }
+                $("#next").removeAttr("disabled");
             })
             //wish.html 许愿页
             $("#next").click(function () {
@@ -319,7 +322,7 @@ $(function () {
                 str.replace("</>","");
                 if((/(\w+.html)$/).test(str)==true){
                     $("#attention0").text("请输入内容");
-                    return true;
+                    return false;
                 }
                 var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
                 if(patt_illegal.test(str)==true){
@@ -425,8 +428,6 @@ $(function () {
                             if (data.errcode == 0 || data.errcode == 1) {
                                 if (clicktime == 666) { //自定义愿望
                                     var wishText = $("#customtext").val();
-                                    var res=/^\s*$/.test(wishText);
-                                    if (res==false&&check(wishText)==false) { //自定义文本不为空
                                         console.log(clicktime + "许愿：" + wishText);
                                         var pack_wish = JSON.stringify({
                                             'wish_content': wishText
@@ -443,10 +444,6 @@ $(function () {
                                                 }
                                         });
                                         return;
-                                    } else {
-                                        allatt(data.errmsg);
-                                        return;
-                                    }
                                 } else if (clicktime == 0) {
                                     $("#ok").attr("disabled","disabled");
                                     console.log("预定义"); //预定义
@@ -742,11 +739,12 @@ $(function () {
                             $("#middle").removeAttr("disabled");
                             $("#attention0").text("");
                             click = 0;
-                        }, 3000);
+                        }, 1000);
                     }
                 })
                 //许愿页定制
                 $("#custom").click(function () {
+                    $("#next").removeAttr("disabled");
                     $("#wishtext").hide();
                     $("#customtext").show();
                     $("#custom").hide();
@@ -815,7 +813,7 @@ $(function () {
                     allhide();
                     $(".main_contain").hide();
                     $("#back").hide();
-                    $("#back_index").show();
+                    $(".return").show();
                     show1("#rule_page");
                     console.log("into rule_page");
                 }
