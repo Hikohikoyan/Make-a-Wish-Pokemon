@@ -271,8 +271,8 @@ $(function () {
                     return;
                 }
                 var res=/^\s*$/.test(wishText);
-                if (res==false&&check(wishText)==true) {
-                    ("#attention0").text("许个愿吧~");
+                if (res==true&&check(wishText)==false) {
+                    $("#attention0").text("许个愿吧~");
                     $("#next").attr("disabled","disabled");
                     return;
                 }
