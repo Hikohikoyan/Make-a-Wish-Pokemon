@@ -788,7 +788,7 @@ $(function () {
                                 str = str + 1;
                             }
                             $(".explode_gif").attr("src", "img/explode/" + str + ".png");
-                        }, 40);
+                        }, 67);
                         setTimeout(() => {
                             if (str = 20) {
                                 // show_elf();
