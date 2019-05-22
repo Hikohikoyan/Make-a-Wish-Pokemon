@@ -595,7 +595,7 @@ $(function () {
                     "data": some,
                     "headers": {
                         "Content-Type": "application/json",
-                        // "cache-control": "no-cache"
+                        "cache-control": "no-cache"
                     },
                     "async":async,
                     "statusCode": {
@@ -614,7 +614,7 @@ $(function () {
                         402: function () {
                             allatt("网络好像出了点问题，稍后再来尝试叭");
                         },
-                         419:function () {
+                        419:function () {
                              window.location.href="https://hemc.100steps.net/2018/fireman/auth.php?redirect=https://hemc.100steps.net/2019/wish-pokemon/api/Check_login&state=gsudndu13Sd";
                             }
                     },
@@ -626,7 +626,7 @@ $(function () {
                     "method": method,
                     "headers": {
                         "Content-Type": "application/json",
-                        // "cache-control": "no-cache"
+                        "cache-control": "no-cache"
                     },
                     "statusCode": {
                         430: function () {
