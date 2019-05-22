@@ -199,10 +199,10 @@ $(function () {
         $("#change").attr("disabled", "disabled");
         get_help_wishes();
         $(".select").hide();
-        setTimeout(() => {
-            console.log("换一批 解除");
-            $("#change").removeAttr("disabled")
-        }, 400);
+        sessionStorage.removeItem('chooseid');
+        // setTimeout(() => {
+        //     console.log("换一批 解除");
+        // }, 400);
     }) //换一批
     function get_help_wishes() {
         var wishText = new Array();
@@ -212,6 +212,7 @@ $(function () {
             if(data.length==0){
                 allatt("暂时还没有愿望,请稍后再来叭");
                 $("#selected").attr("disabled","disabled");
+                $("#change").removeAttr("disabled")
                 return;
             }
             console.log(data);
@@ -224,6 +225,7 @@ $(function () {
                 sessionStorage.setItem(str1, str2);
                 $("#others").append("<div class='helpbox' id='"+str1+"'>" + wishText[i] + "</div>");
             }
+            $("#change").removeAttr("disabled")
         });
         ajax.fail(function (textStatus) {
             allatt(String(textStatus));
