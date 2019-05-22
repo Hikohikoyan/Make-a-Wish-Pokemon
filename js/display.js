@@ -26,7 +26,7 @@ $(function () {
         $("#loading").remove();
         $("#index").show();
         if(localStorage.getItem("first")===null||localStorage.getItem("first")!=1){
-            $("#rule").click();
+            show_rule();
             localStorage.setItem("first","1");
         }
     })
