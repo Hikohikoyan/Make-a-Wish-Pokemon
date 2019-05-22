@@ -429,6 +429,8 @@ $(function () {
                     if (data.errcode == 0 || data.errcode == 1) {
                         if (clicktime == 666) { //自定义愿望
                             var wishText = $("#customtext").val();
+                            check(wishText);
+                            wishText.replace("/","");
                                 console.log(clicktime + "许愿：" + wishText);
                                 var pack_wish = JSON.stringify({
                                     'wish_content': wishText
