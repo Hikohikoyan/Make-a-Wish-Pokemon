@@ -695,7 +695,7 @@ h5{
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke: rgb(62,99,164);
     -webkit-text-stroke-width: 1.3px;
-    margin-top: 10%;
+    margin-top: 5%;
     white-space: nowrap;
     /* height: 0px; */
     font-size: 35px;
@@ -756,7 +756,7 @@ h5{
 .p{
     margin: 0;
     margin-top: 20px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     padding: 10px;
     /* padding-bottom: 95px; */
     white-space: normal;
@@ -772,7 +772,7 @@ h5{
     margin-right: 30px;
     /* width: 80%; */
     border-radius: 0.4em;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
 }
 div#btn1::before,div#btn2::before{
     content: "";

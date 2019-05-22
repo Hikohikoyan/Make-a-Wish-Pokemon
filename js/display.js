@@ -701,8 +701,7 @@ $(function () {
             }
         }
         $("#middle").click(function () {
-            $("#customtext").hide();
-            //发送请求换愿望
+            $("#cancel").click();//发送请求换愿望
             setTimeout(() => {
                 $("#middle:hover").css({
                     "width": "54.6px",
