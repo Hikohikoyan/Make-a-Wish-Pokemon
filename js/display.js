@@ -21,9 +21,8 @@ $(function () {
             passive: false
         })
         }
-        var flag2=true;//提示框隐藏 开启是true
     $("#img41").click(function () { //开头的GO
-        $("#loading").remove();
+        $("#loading").hide();
         $("#index").show();
         if(localStorage.getItem("first")===null||localStorage.getItem("first")!=1){
             show_rule();
