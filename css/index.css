@@ -2,8 +2,8 @@
     background: none;
     outline: none;
     pointer-events: auto;
-    user-select: none;
-    -webkit-user-select: none;
+    /* user-select: none;
+    -webkit-user-select: none; */
 }
 #loading{
     background-image: url(../img/smallback.jpg);
