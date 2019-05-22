@@ -332,6 +332,17 @@ $(function () {
             return true;
         }
     }
+    function smallcheck(str){
+        str=String(str);
+        str.replace("<script>","");
+        str.replace("alert","");
+        str.replace("</>","");
+        var  check1=new RegExp(/“|&|’|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g);
+        var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
+        str.replace(check1,"");
+        str.replace(patt_illegal,"");
+        return str;
+    }
     function prevent() {
         if (name_check() == true && tel_check() == true && vx_check() == true) {
             $("#ok").removeAttr("disabled");
@@ -429,7 +440,7 @@ $(function () {
                     if (data.errcode == 0 || data.errcode == 1) {
                         if (clicktime == 666) { //自定义愿望
                             var wishText = $("#customtext").val();
-                            check(wishText);
+                            wishText=smallcheck(wishText);
                             wishText.replace("/","");
                                 console.log(clicktime + "许愿：" + wishText);
                                 var pack_wish = JSON.stringify({
